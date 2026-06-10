@@ -1,0 +1,40 @@
+# demo_app35 更新用マニフェスト
+# 適用: https://api.slack.com/apps → demo_app35 → App Manifest に貼り付け → Save
+# 保存後に「Reinstall to Workspace」→ 管理者承認リクエストが飛ぶ
+# 承認後: Basic Information → App-Level Tokens で connections:write の xapp- トークンを発行 (承認不要)
+display_information:
+  name: demo_app35
+features:
+  bot_user:
+    display_name: demo_app35
+    always_online: true
+  slash_commands:
+    - command: /yosou
+      description: W杯優勝予想を入力・変更する (いつでも上書きOK)
+      usage_hint: 引数なしで実行するとモーダルが開きます
+      should_escape: false
+    - command: /ranking
+      description: W杯優勝予想ランキングを表示する
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - incoming-webhook
+      - chat:write
+      - chat:write.public
+      - chat:write.customize
+      - files:write
+      - commands
+      - channels:read
+      - channels:history
+      - users:read
+      - im:write
+      - reactions:read
+      - reactions:write
+      - emoji:read
+settings:
+  interactivity:
+    is_enabled: true
+  socket_mode_enabled: true
+  org_deploy_enabled: false
+  token_rotation_enabled: false

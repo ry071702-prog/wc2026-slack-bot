@@ -1,0 +1,2 @@
+slack-bolt>=1.20
+requests>=2.31
