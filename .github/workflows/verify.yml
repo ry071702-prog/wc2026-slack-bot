@@ -31,12 +31,19 @@ jobs:
           from src.providers.football_data import FootballDataProvider
           import os
 
+          from src.messages import TEAM_NAMES
+
           provider = FootballDataProvider(os.environ["FOOTBALL_DATA_API_KEY"])
-          matches = provider.fetch_matches(date(2026, 6, 11), date(2026, 6, 13))
+          matches = provider.fetch_matches(date(2026, 6, 11), date(2026, 7, 20))
           print(f"matches: {len(matches)}")
           for match in matches[:5]:
               print(f"  {match.kickoff_jst:%m/%d} {digest_match_line(match)} [{match.status}]")
           if not matches:
               raise SystemExit("NG: 2026大会の試合が返りません。API-FOOTBALLへの差し替えを検討してください")
+          teams = {name for m in matches for name in (m.home, m.away)}
+          unmapped = sorted(t for t in teams if t not in TEAM_NAMES and t != "TBD")
+          print(f"teams: {len(teams)}, unmapped: {len(unmapped)}")
+          for name in unmapped:
+              print(f"  unmapped: {name}")
           print("OK: football-data.org free tier returns 2026 World Cup data")
           EOF
