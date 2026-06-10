@@ -72,31 +72,25 @@ jobs:
               print(f"{path}: results={data.get('results')} (quota残 {remaining})")
               return data["response"]
 
-          leagues = get("leagues", id=1, season=2026)
-          if not leagues:
-              raise SystemExit("NG: league=1 season=2026 が見つかりません")
-          season = next(
-              s for s in leagues[0]["seasons"] if s["year"] == 2026
-          )
-          cov = season["coverage"]
-          print(f"coverage: lineups={cov['fixtures']['lineups']}, "
-                f"players={cov['players']}, "
-                f"top_scorers={cov['top_scorers']}")
-
-          teams = get("teams", league=1, season=2026)
-          japan = [t["team"] for t in teams if t["team"]["name"] == "Japan"]
+          # 無料プランは season 2026 不可 → season 非依存のエンドポイントだけ検証する
+          teams = get("teams", name="Japan")
+          japan = [
+              t["team"]
+              for t in teams
+              if t["team"]["name"] == "Japan" and t["team"].get("national")
+          ]
           if not japan:
-              raise SystemExit("NG: Japan が teams に見つかりません")
-          print(f"Japan team id: {japan[0]['id']}")
+              raise SystemExit("NG: 日本代表が teams 検索で見つかりません")
+          print(f"Japan national team id: {japan[0]['id']}")
 
           squad = get("players/squads", team=japan[0]["id"])
           players = squad[0]["players"] if squad else []
           print(f"Japan squad: {len(players)}人")
-          for p in players[:3]:
+          for p in players[:5]:
               print(f"  #{p.get('number')} {p.get('position')} {p.get('name')}")
-          if not cov["fixtures"]["lineups"]:
-              print("WARN: lineups coverage=false → スタメン図は手動フォールバック")
-          print("OK: API-FOOTBALL is usable for WC2026")
+          if not players:
+              raise SystemExit("NG: squads も無料プランでは取得不可")
+          print("OK: squads endpoint works on free plan")
           EOF
 
       - name: Verify Slack bot token and channel
