@@ -47,3 +47,50 @@ jobs:
               print(f"  unmapped: {name}")
           print("OK: football-data.org free tier returns 2026 World Cup data")
           EOF
+
+      - name: Verify Slack bot token and channel
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          python - <<'EOF'
+          import os
+
+          import requests
+
+          token = os.environ["SLACK_BOT_TOKEN"]
+          channel = os.environ["SLACK_CHANNEL_ID"]
+          headers = {"Authorization": f"Bearer {token}"}
+
+          resp = requests.post(
+              "https://slack.com/api/auth.test", headers=headers, timeout=10
+          )
+          data = resp.json()
+          if not data.get("ok"):
+              raise SystemExit(f"NG: auth.test failed: {data.get('error')}")
+          print(f"auth.test OK: team={data['team']}, bot={data['user']}")
+          print(f"scopes: {resp.headers.get('x-oauth-scopes')}")
+
+          required = {"chat:write", "files:write", "commands"}
+          granted = set((resp.headers.get("x-oauth-scopes") or "").split(","))
+          missing = required - granted
+          if missing:
+              raise SystemExit(f"NG: missing scopes: {sorted(missing)}")
+
+          post = requests.post(
+              "https://slack.com/api/chat.postMessage",
+              headers=headers,
+              json={
+                  "channel": channel,
+                  "text": "🧪 Bot Token テスト投稿 — chat.postMessage 疎通OK",
+              },
+              timeout=10,
+          ).json()
+          if not post.get("ok"):
+              raise SystemExit(
+                  f"NG: chat.postMessage failed: {post.get('error')} "
+                  "(not_in_channel の場合はチャンネルに /invite @WCUP2026)"
+              )
+          print(f"chat.postMessage OK: channel={post['channel']}")
+          print("OK: Slack bot token is ready")
+          EOF
