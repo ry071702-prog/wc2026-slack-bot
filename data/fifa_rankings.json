@@ -21,10 +21,8 @@
     "Japan": 18,
     "Switzerland": 19,
     "Iran": 21,
-    "Türkiye": 22,
     "Ecuador": 23,
     "Austria": 24,
-    "Korea Republic": 25,
     "Australia": 27,
     "Algeria": 28,
     "Egypt": 29,
@@ -49,6 +47,8 @@
     "Ghana": 74,
     "Curaçao": 82,
     "Haiti": 83,
-    "New Zealand": 85
+    "New Zealand": 85,
+    "South Korea": 25,
+    "Turkey": 22
   }
 }
