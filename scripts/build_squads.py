@@ -33,6 +33,7 @@ SEARCH_ALIASES = {
     "Congo DR": "Congo DR",
     "United States": "USA",
     "Ivory Coast": "Ivory Coast",
+    "Curaçao": "Curacao",
 }
 
 POSITION_JA = {
@@ -135,15 +136,20 @@ def main() -> None:
         for name in names:
             if name in squads and squads[name]:
                 continue
-            if name not in team_ids:
-                team_id = resolve_team_id(client, name)
-                if team_id is None:
-                    unresolved.append(name)
-                    print(f"  ID未解決: {name}")
-                    continue
-                team_ids[name] = team_id
-                save_json(TEAM_IDS_PATH, team_ids)
-            squad = fetch_squad(client, team_ids[name])
+            try:
+                if name not in team_ids:
+                    team_id = resolve_team_id(client, name)
+                    if team_id is None:
+                        unresolved.append(name)
+                        print(f"  ID未解決: {name}")
+                        continue
+                    team_ids[name] = team_id
+                    save_json(TEAM_IDS_PATH, team_ids)
+                squad = fetch_squad(client, team_ids[name])
+            except RuntimeError as exc:
+                unresolved.append(name)
+                print(f"  取得失敗: {name}: {exc}")
+                continue
             squads[name] = squad
             save_json(SQUADS_PATH, squads)
             print(f"  {name}: {len(squad)}人 (quota残 {client.remaining})")
