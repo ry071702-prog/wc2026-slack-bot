@@ -48,6 +48,57 @@ jobs:
           print("OK: football-data.org free tier returns 2026 World Cup data")
           EOF
 
+      - name: Verify API-FOOTBALL coverage (WC2026)
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: |
+          python - <<'EOF'
+          import os
+
+          import requests
+
+          BASE = "https://v3.football.api-sports.io"
+          headers = {"x-apisports-key": os.environ["API_FOOTBALL_KEY"]}
+
+          def get(path, **params):
+              resp = requests.get(
+                  f"{BASE}/{path}", headers=headers, params=params, timeout=10
+              )
+              resp.raise_for_status()
+              data = resp.json()
+              if data.get("errors"):
+                  raise SystemExit(f"NG: {path}: {data['errors']}")
+              remaining = resp.headers.get("x-ratelimit-requests-remaining")
+              print(f"{path}: results={data.get('results')} (quota残 {remaining})")
+              return data["response"]
+
+          leagues = get("leagues", id=1, season=2026)
+          if not leagues:
+              raise SystemExit("NG: league=1 season=2026 が見つかりません")
+          season = next(
+              s for s in leagues[0]["seasons"] if s["year"] == 2026
+          )
+          cov = season["coverage"]
+          print(f"coverage: lineups={cov['fixtures']['lineups']}, "
+                f"players={cov['players']}, "
+                f"top_scorers={cov['top_scorers']}")
+
+          teams = get("teams", league=1, season=2026)
+          japan = [t["team"] for t in teams if t["team"]["name"] == "Japan"]
+          if not japan:
+              raise SystemExit("NG: Japan が teams に見つかりません")
+          print(f"Japan team id: {japan[0]['id']}")
+
+          squad = get("players/squads", team=japan[0]["id"])
+          players = squad[0]["players"] if squad else []
+          print(f"Japan squad: {len(players)}人")
+          for p in players[:3]:
+              print(f"  #{p.get('number')} {p.get('position')} {p.get('name')}")
+          if not cov["fixtures"]["lineups"]:
+              print("WARN: lineups coverage=false → スタメン図は手動フォールバック")
+          print("OK: API-FOOTBALL is usable for WC2026")
+          EOF
+
       - name: Verify Slack bot token and channel
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
