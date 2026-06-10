@@ -52,11 +52,18 @@ def test_result_japan_win(japan_match: Match) -> None:
         score=MatchScore(home=1, away=2, duration="REGULAR"),
     )
 
-    assert result_text(finished) == (
+    text = result_text(finished)
+
+    assert text.startswith(
         "🏁 *試合終了*\n"
         "🇯🇵 チュニジア *1 - 2* 日本\n"
         "🎉 *日本、勝利！* グループF"
     )
+    assert (
+        "▶️ <https://www.youtube.com/results?search_query="
+        in text
+    )
+    assert "|ハイライトを探す (YouTube)>" in text
 
 
 def test_result_extra_time(regular_match: Match) -> None:
