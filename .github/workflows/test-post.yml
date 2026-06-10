@@ -22,6 +22,8 @@ jobs:
 
       - name: Post sample notifications
         env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: |
@@ -29,16 +31,16 @@ jobs:
           import os
           from datetime import date, datetime, timezone
 
+          from src.main import create_slack_client
           from src.providers.base import Match, MatchScore
           from src.providers.football_data import FootballDataProvider
           from src.slack import (
-              SlackWebhookClient,
               build_digest_payload,
               build_prematch_payload,
               build_result_payload,
           )
 
-          client = SlackWebhookClient(os.environ["SLACK_WEBHOOK_URL"])
+          client = create_slack_client(dry_run=False)
 
           def mark(payload):
               payload["blocks"].insert(0, {

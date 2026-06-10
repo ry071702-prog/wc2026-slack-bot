@@ -9,6 +9,7 @@ from typing import Optional, Sequence
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
 from src.slack import (
+    SlackBotClient,
     SlackSender,
     SlackWebhookClient,
     build_digest_payload,
@@ -157,6 +158,20 @@ def parse_bool(value: Optional[str], default: bool = False) -> bool:
     raise ValueError(f"invalid boolean value: {value}")
 
 
+def create_slack_client(dry_run: bool) -> SlackSender:
+    """Bot Token があれば chat.postMessage、なければ Incoming Webhook で送る。"""
+    token = os.getenv("SLACK_BOT_TOKEN")
+    channel = os.getenv("SLACK_CHANNEL_ID")
+    if token and channel:
+        print("slack: using bot token (chat.postMessage)")
+        return SlackBotClient(token=token, channel=channel, dry_run=dry_run)
+    print("slack: using incoming webhook")
+    return SlackWebhookClient(
+        webhook_url=os.getenv("SLACK_WEBHOOK_URL"),
+        dry_run=dry_run,
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Post 2026 FIFA World Cup notifications to Slack."
@@ -188,10 +203,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     provider = FootballDataProvider(
         api_key=os.getenv("FOOTBALL_DATA_API_KEY", "")
     )
-    slack = SlackWebhookClient(
-        webhook_url=os.getenv("SLACK_WEBHOOK_URL"),
-        dry_run=dry_run,
-    )
+    slack = create_slack_client(dry_run)
     state_store = StateStore(DEFAULT_STATE_PATH)
 
     if args.mode == "notify":
