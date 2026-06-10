@@ -1,0 +1,214 @@
+from __future__ import annotations
+
+import argparse
+import os
+from datetime import date, datetime, time, timedelta, timezone
+from pathlib import Path
+from typing import Optional, Sequence
+
+from src.providers.base import JST, Match, Provider
+from src.providers.football_data import FootballDataProvider
+from src.slack import (
+    SlackSender,
+    SlackWebhookClient,
+    build_digest_payload,
+    build_prematch_payload,
+    build_result_payload,
+)
+from src.state import NotificationState, StateStore
+
+TOURNAMENT_START_UTC = datetime(2026, 6, 11, tzinfo=timezone.utc)
+TOURNAMENT_END_UTC = datetime(2026, 7, 21, tzinfo=timezone.utc)
+DEFAULT_STATE_PATH = Path("state/notified.json")
+MAX_RESULTS_PER_RUN = 10
+
+
+def should_send_prematch(
+    match: Match,
+    now: datetime,
+    notify_minutes_before: int,
+    state: NotificationState,
+) -> bool:
+    if match.status not in {"SCHEDULED", "TIMED"}:
+        return False
+    if match.id in state["prematch"]:
+        return False
+    delta = match.utc_kickoff - now.astimezone(timezone.utc)
+    return timedelta(0) < delta <= timedelta(minutes=notify_minutes_before)
+
+
+def should_send_result(match: Match, state: NotificationState) -> bool:
+    return match.status == "FINISHED" and match.id not in state["result"]
+
+
+def is_notify_period(now: datetime) -> bool:
+    now_utc = now.astimezone(timezone.utc)
+    return TOURNAMENT_START_UTC <= now_utc < TOURNAMENT_END_UTC
+
+
+def is_digest_period(now: datetime) -> bool:
+    current_jst_date = now.astimezone(JST).date()
+    return date(2026, 6, 11) <= current_jst_date <= date(2026, 7, 20)
+
+
+def utc_query_dates_for_jst_day(day: date) -> tuple[date, date]:
+    start_jst = datetime.combine(day, time.min, tzinfo=JST)
+    end_jst = start_jst + timedelta(days=1) - timedelta(microseconds=1)
+    return (
+        start_jst.astimezone(timezone.utc).date(),
+        end_jst.astimezone(timezone.utc).date(),
+    )
+
+
+def run_notify(
+    provider: Provider,
+    slack: SlackSender,
+    state_store: StateStore,
+    now: Optional[datetime] = None,
+    notify_minutes_before: int = 15,
+    mention_japan: bool = False,
+) -> None:
+    current_time = now or datetime.now(timezone.utc)
+    if not is_notify_period(current_time):
+        print("notify: outside tournament period; exiting")
+        return
+
+    state = state_store.load()
+    today_jst = current_time.astimezone(JST).date()
+    matches = provider.fetch_matches(
+        today_jst - timedelta(days=1),
+        today_jst + timedelta(days=1),
+    )
+
+    prematch_matches = sorted(
+        (
+            match
+            for match in matches
+            if should_send_prematch(
+                match, current_time, notify_minutes_before, state
+            )
+        ),
+        key=lambda match: match.utc_kickoff,
+    )
+    result_matches = sorted(
+        (match for match in matches if should_send_result(match, state)),
+        key=lambda match: match.utc_kickoff,
+    )[:MAX_RESULTS_PER_RUN]
+    print(
+        "notify: "
+        f"prematch={len(prematch_matches)}, result={len(result_matches)}"
+    )
+
+    for match in prematch_matches:
+        sent = slack.send(build_prematch_payload(match, mention_japan))
+        if sent and not slack.dry_run:
+            state["prematch"].append(match.id)
+            state_store.save(state)
+
+    for match in result_matches:
+        sent = slack.send(build_result_payload(match))
+        if sent and not slack.dry_run:
+            state["result"].append(match.id)
+            state_store.save(state)
+
+
+def run_digest(
+    provider: Provider,
+    slack: SlackSender,
+    state_store: StateStore,
+    now: Optional[datetime] = None,
+) -> None:
+    current_time = now or datetime.now(timezone.utc)
+    if not is_digest_period(current_time):
+        print("digest: outside tournament period; exiting")
+        return
+
+    state = state_store.load()
+    today_jst = current_time.astimezone(JST).date()
+    date_key = today_jst.isoformat()
+    if date_key in state["digest_dates"] and not slack.dry_run:
+        print(f"digest: already sent for {date_key}; exiting")
+        return
+
+    date_from, date_to = utc_query_dates_for_jst_day(today_jst)
+    fetched_matches = provider.fetch_matches(date_from, date_to)
+    matches = [
+        match
+        for match in fetched_matches
+        if match.kickoff_jst.date() == today_jst
+    ]
+    sent = slack.send(build_digest_payload(matches, today_jst))
+    if sent and not slack.dry_run:
+        state["digest_dates"].append(date_key)
+        state_store.save(state)
+
+
+def parse_bool(value: Optional[str], default: bool = False) -> bool:
+    if value is None or value == "":
+        return default
+    normalized = value.strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"invalid boolean value: {value}")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Post 2026 FIFA World Cup notifications to Slack."
+    )
+    parser.add_argument(
+        "--mode",
+        choices=("notify", "digest"),
+        default=os.getenv("MODE", "notify"),
+    )
+    return parser
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    args = build_parser().parse_args(argv)
+    now = datetime.now(timezone.utc)
+    if args.mode == "notify" and not is_notify_period(now):
+        print("notify: outside tournament period; exiting before API setup")
+        return 0
+    if args.mode == "digest" and not is_digest_period(now):
+        print("digest: outside tournament period; exiting before API setup")
+        return 0
+
+    dry_run = parse_bool(os.getenv("DRY_RUN"), default=False)
+    mention_japan = parse_bool(os.getenv("MENTION_JAPAN"), default=False)
+    notify_minutes = int(os.getenv("NOTIFY_MINUTES_BEFORE", "15"))
+    if notify_minutes <= 0:
+        raise ValueError("NOTIFY_MINUTES_BEFORE must be greater than zero")
+
+    provider = FootballDataProvider(
+        api_key=os.getenv("FOOTBALL_DATA_API_KEY", "")
+    )
+    slack = SlackWebhookClient(
+        webhook_url=os.getenv("SLACK_WEBHOOK_URL"),
+        dry_run=dry_run,
+    )
+    state_store = StateStore(DEFAULT_STATE_PATH)
+
+    if args.mode == "notify":
+        run_notify(
+            provider=provider,
+            slack=slack,
+            state_store=state_store,
+            now=now,
+            notify_minutes_before=notify_minutes,
+            mention_japan=mention_japan,
+        )
+    else:
+        run_digest(
+            provider=provider,
+            slack=slack,
+            state_store=state_store,
+            now=now,
+        )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

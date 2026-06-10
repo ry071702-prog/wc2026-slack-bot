@@ -1,0 +1,49 @@
+{
+  "matches": [
+    {
+      "id": 1001,
+      "utcDate": "2026-06-21T04:00:00Z",
+      "status": "TIMED",
+      "stage": "GROUP_STAGE",
+      "group": "GROUP_F",
+      "matchday": 2,
+      "homeTeam": {"name": "Tunisia"},
+      "awayTeam": {"name": "Japan"},
+      "score": {
+        "duration": "REGULAR",
+        "fullTime": {"home": null, "away": null},
+        "penalties": {"home": null, "away": null}
+      }
+    },
+    {
+      "id": 1002,
+      "utcDate": "2026-06-21T03:00:00Z",
+      "status": "TIMED",
+      "stage": "GROUP_STAGE",
+      "group": "GROUP_H",
+      "matchday": 2,
+      "homeTeam": {"name": "Spain"},
+      "awayTeam": {"name": "Saudi Arabia"},
+      "score": {
+        "duration": "REGULAR",
+        "fullTime": {"home": null, "away": null},
+        "penalties": {"home": null, "away": null}
+      }
+    },
+    {
+      "id": 1003,
+      "utcDate": "2026-06-20T20:00:00Z",
+      "status": "FINISHED",
+      "stage": "GROUP_STAGE",
+      "group": "GROUP_F",
+      "matchday": 2,
+      "homeTeam": {"name": "Tunisia"},
+      "awayTeam": {"name": "Japan"},
+      "score": {
+        "duration": "REGULAR",
+        "fullTime": {"home": 1, "away": 2},
+        "penalties": {"home": null, "away": null}
+      }
+    }
+  ]
+}

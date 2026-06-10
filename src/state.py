@@ -1,0 +1,55 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, TypedDict
+
+
+class NotificationState(TypedDict):
+    digest_dates: list[str]
+    prematch: list[int]
+    result: list[int]
+
+
+def empty_state() -> NotificationState:
+    return {"digest_dates": [], "prematch": [], "result": []}
+
+
+class StateStore:
+    def __init__(self, path: Path) -> None:
+        self.path = path
+
+    def load(self) -> NotificationState:
+        try:
+            raw = json.loads(self.path.read_text(encoding="utf-8"))
+            return self._normalize(raw)
+        except (FileNotFoundError, json.JSONDecodeError, OSError, TypeError, ValueError):
+            print(f"State is missing or invalid; using empty state: {self.path}")
+            state = empty_state()
+            self.save(state)
+            return state
+
+    def save(self, state: NotificationState) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        temporary_path = self.path.with_suffix(f"{self.path.suffix}.tmp")
+        temporary_path.write_text(
+            json.dumps(state, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        temporary_path.replace(self.path)
+        print(f"State saved: {self.path}")
+
+    @staticmethod
+    def _normalize(raw: Any) -> NotificationState:
+        if not isinstance(raw, dict):
+            raise TypeError("state must be an object")
+        digest_dates = raw.get("digest_dates", [])
+        prematch = raw.get("prematch", [])
+        result = raw.get("result", [])
+        if not all(isinstance(value, list) for value in (digest_dates, prematch, result)):
+            raise TypeError("state values must be arrays")
+        return {
+            "digest_dates": [str(value) for value in digest_dates],
+            "prematch": [int(value) for value in prematch],
+            "result": [int(value) for value in result],
+        }
