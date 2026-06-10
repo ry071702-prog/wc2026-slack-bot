@@ -137,6 +137,9 @@ def run_digest(
         for match in fetched_matches
         if match.kickoff_jst.date() == today_jst
     ]
+    if not matches:
+        print(f"digest: no matches on {date_key}; skipping")
+        return
     sent = slack.send(build_digest_payload(matches, today_jst))
     if sent and not slack.dry_run:
         state["digest_dates"].append(date_key)
