@@ -30,6 +30,8 @@ jobs:
 
       - name: Send notifications
         env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           NOTIFY_MINUTES_BEFORE: ${{ vars.NOTIFY_MINUTES_BEFORE || '15' }}
