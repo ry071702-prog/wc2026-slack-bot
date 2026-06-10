@@ -22,6 +22,7 @@ from src.providers.football_data import FootballDataProvider
 BASE_URL = "https://v3.football.api-sports.io"
 SQUADS_PATH = ROOT_DIR / "data" / "squads.json"
 TEAM_IDS_PATH = ROOT_DIR / "data" / "api_football_team_ids.json"
+JAPAN_NAMES_PATH = ROOT_DIR / "data" / "japan_names_ja.json"
 QUOTA_RESERVE = 4
 
 # football-data 表記 → API-FOOTBALL 検索語 (表記が異なる国のみ)
@@ -124,6 +125,16 @@ def fetch_squad(client: ApiFootballClient, team_id: int) -> list[dict]:
     ]
 
 
+def apply_japan_names(squads: dict) -> None:
+    """日本代表のみ、JFA公式で裏取りした日本語名・背番号を上書きする。"""
+    mapping = load_json(JAPAN_NAMES_PATH).get("players", {})
+    for player in squads.get("Japan", []):
+        verified = mapping.get(player["name"])
+        if verified:
+            player["name_ja"] = verified["name_ja"]
+            player["number"] = verified["number"]
+
+
 def main() -> None:
     client = ApiFootballClient(os.environ["API_FOOTBALL_KEY"])
     squads = load_json(SQUADS_PATH)
@@ -155,6 +166,9 @@ def main() -> None:
             print(f"  {name}: {len(squad)}人 (quota残 {client.remaining})")
     except QuotaExhausted as exc:
         print(f"クォータ上限のため中断 (続きは翌日再実行): {exc}")
+
+    apply_japan_names(squads)
+    save_json(SQUADS_PATH, squads)
 
     done = sum(1 for s in squads.values() if s)
     print(f"完了 {done}/{len(names)}, ID未解決: {unresolved or 'なし'}")

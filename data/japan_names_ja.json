@@ -1,0 +1,31 @@
+{
+  "source": "https://www.jfa.jp/samuraiblue/worldcup_2026/member.html",
+  "players": {
+    "T. Hayakawa": {"name_ja": "早川友基", "number": 23},
+    "K. Osako": {"name_ja": "大迫敬介", "number": 12},
+    "Z. Suzuki": {"name_ja": "鈴木彩艶", "number": 1},
+    "K. Itakura": {"name_ja": "板倉滉", "number": 4},
+    "H. Ito": {"name_ja": "伊藤洋輝", "number": 21},
+    "Y. Nagatomo": {"name_ja": "長友佑都", "number": 5},
+    "A. Seko": {"name_ja": "瀬古歩夢", "number": 20},
+    "Y. Sugawara": {"name_ja": "菅原由勢", "number": 2},
+    "J. Suzuki": {"name_ja": "鈴木淳之介", "number": 25},
+    "S. Taniguchi": {"name_ja": "谷口彰悟", "number": 3},
+    "T. Tomiyasu": {"name_ja": "冨安健洋", "number": 22},
+    "T. Watanabe": {"name_ja": "渡辺剛", "number": 16},
+    "R. Doan": {"name_ja": "堂安律", "number": 10},
+    "W. Endo": {"name_ja": "遠藤航", "number": 6},
+    "D. Kamada": {"name_ja": "鎌田大地", "number": 15},
+    "K. Sano": {"name_ja": "佐野海舟", "number": 24},
+    "A. Tanaka": {"name_ja": "田中碧", "number": 7},
+    "J. Ito": {"name_ja": "伊東純也", "number": 14},
+    "T. Kubo": {"name_ja": "久保建英", "number": 8},
+    "D. Maeda": {"name_ja": "前田大然", "number": 11},
+    "Keito Nakamura": {"name_ja": "中村敬斗", "number": 13},
+    "Y. Suzuki": {"name_ja": "鈴木唯人", "number": 17},
+    "K. Goto": {"name_ja": "後藤啓介", "number": 9},
+    "Koki Ogawa": {"name_ja": "小川航基", "number": 19},
+    "K. Shiogai": {"name_ja": "塩貝健人", "number": 26},
+    "A. Ueda": {"name_ja": "上田綺世", "number": 18}
+  }
+}
