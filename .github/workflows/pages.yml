@@ -8,6 +8,7 @@ on:
       - "site/**"
       - "scripts/**"
       - "src/**"
+      - "data/**"
   schedule:
     - cron: "0 21 * * *"
     - cron: "0 9 * * *"
