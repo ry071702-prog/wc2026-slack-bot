@@ -1,0 +1,42 @@
+name: Verify data source (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch 2026 WC matches (2026-06-11..13)
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: |
+          python - <<'EOF'
+          from datetime import date
+
+          from src.messages import digest_match_line
+          from src.providers.football_data import FootballDataProvider
+          import os
+
+          provider = FootballDataProvider(os.environ["FOOTBALL_DATA_API_KEY"])
+          matches = provider.fetch_matches(date(2026, 6, 11), date(2026, 6, 13))
+          print(f"matches: {len(matches)}")
+          for match in matches[:5]:
+              print(f"  {match.kickoff_jst:%m/%d} {digest_match_line(match)} [{match.status}]")
+          if not matches:
+              raise SystemExit("NG: 2026大会の試合が返りません。API-FOOTBALLへの差し替えを検討してください")
+          print("OK: football-data.org free tier returns 2026 World Cup data")
+          EOF
