@@ -2,6 +2,8 @@ name: Build squads (manual)
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "10 0 11 6 *"  # 2026-06-11 9:10 JST 残り10カ国の再取得 (クォータリセット後)
 
 permissions:
   contents: write
