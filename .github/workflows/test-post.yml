@@ -1,0 +1,87 @@
+name: Test post to Slack (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post sample notifications
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: |
+          python - <<'EOF'
+          import os
+          from datetime import date, datetime, timezone
+
+          from src.providers.base import Match, MatchScore
+          from src.providers.football_data import FootballDataProvider
+          from src.slack import (
+              SlackWebhookClient,
+              build_digest_payload,
+              build_prematch_payload,
+              build_result_payload,
+          )
+
+          client = SlackWebhookClient(os.environ["SLACK_WEBHOOK_URL"])
+
+          def mark(payload):
+              payload["blocks"].insert(0, {
+                  "type": "context",
+                  "elements": [{
+                      "type": "mrkdwn",
+                      "text": "🧪 *テスト配信* — 本番は大会期間中に自動投稿されます",
+                  }],
+              })
+              return payload
+
+          # 1. デイリーダイジェスト (開幕日 6/12 の実データ)
+          provider = FootballDataProvider(os.environ["FOOTBALL_DATA_API_KEY"])
+          day = date(2026, 6, 12)
+          matches = [
+              m
+              for m in provider.fetch_matches(date(2026, 6, 11), date(2026, 6, 12))
+              if m.kickoff_jst.date() == day
+          ]
+          assert client.send(mark(build_digest_payload(matches, day)))
+
+          # 2. 開始前アナウンス (日本戦サンプル)
+          japan = Match(
+              id=0,
+              utc_kickoff=datetime(2026, 6, 21, 4, 0, tzinfo=timezone.utc),
+              home="Tunisia",
+              away="Japan",
+              stage="GROUP_STAGE",
+              group="GROUP_F",
+              matchday=2,
+              status="TIMED",
+              score=MatchScore(),
+          )
+          assert client.send(mark(build_prematch_payload(japan)))
+
+          # 3. 試合結果 (日本戦サンプル)
+          from dataclasses import replace
+          finished = replace(
+              japan,
+              status="FINISHED",
+              score=MatchScore(home=1, away=2, duration="REGULAR"),
+          )
+          assert client.send(mark(build_result_payload(finished)))
+
+          print("OK: 3 test messages posted")
+          EOF
