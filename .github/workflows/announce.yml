@@ -1,0 +1,96 @@
+name: Site announcement (one-shot 2026-06-11 10:00 JST)
+
+on:
+  schedule:
+    - cron: "45 0 11 6 *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Wait until 01:00 UTC then post
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          python - <<'EOF'
+          import time
+          from datetime import datetime, timezone
+
+          from src.main import create_slack_client
+
+          now = datetime.now(timezone.utc)
+          if now.year != 2026:
+              raise SystemExit("one-shot guard: not 2026, skipping")
+          target = datetime(2026, 6, 11, 1, 0, tzinfo=timezone.utc)
+          wait = (target - now).total_seconds()
+          if wait > 0:
+              print(f"waiting {int(wait)}s until 10:00 JST")
+              time.sleep(min(wait, 1500))
+
+          payload = {
+              "blocks": [
+                  {
+                      "type": "header",
+                      "text": {
+                          "type": "plain_text",
+                          "text": "⚽ W杯2026 いよいよ明日開幕！特設サイトもオープン🎉",
+                      },
+                  },
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "開幕戦は *明日 6/12(金) 4:00* メキシコ vs 南アフリカ🇲🇽🇿🇦\n"
+                              "このチャンネルで Bot が自動配信します:\n"
+                              "• 毎朝 7:30 その日の全試合ダイジェスト\n"
+                              "• キックオフ15分前の開始前アナウンス\n"
+                              "• 試合結果速報（ハイライトリンク付き）"
+                          ),
+                      },
+                  },
+                  {"type": "divider"},
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "📱 *特設サイト*（スマホ推奨）\n"
+                              "<https://ry071702-prog.github.io/wc2026-slack-bot/|wc2026 特設サイト>\n"
+                              "• 全104試合の日程（日本時間）\n"
+                              "• 🇯🇵 日本戦カウントダウン — 初戦は *6/15(月) 5:00 vs オランダ*\n"
+                              "• 出場48カ国の最新FIFAランキング"
+                          ),
+                      },
+                  },
+                  {
+                      "type": "context",
+                      "elements": [
+                          {
+                              "type": "mrkdwn",
+                              "text": "🔮 優勝予想企画も近日スタート予定。お楽しみに！｜📺 ABEMA de DAZN / DAZN（全試合）",
+                          }
+                      ],
+                  },
+              ]
+          }
+          client = create_slack_client(dry_run=False)
+          if not client.send(payload):
+              raise SystemExit("announcement post failed")
+          print("announcement posted")
+          EOF
