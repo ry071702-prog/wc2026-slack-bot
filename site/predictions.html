@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050506">
+    <title>優勝予想 | WORLD CUP 2026</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/app.js" defer></script>
+    <script src="assets/predictions.js" defer></script>
+  </head>
+  <body data-page="predictions">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">26</div>
+        <div>
+          <p class="brand-title">WORLD CUP 2026</p>
+          <p class="brand-subtitle">試合日程・結果・日本代表情報</p>
+        </div>
+      </div>
+      <nav class="tab-nav" aria-label="メインナビゲーション">
+        <a href="index.html" data-nav="home">トップ</a>
+        <a href="schedule.html" data-nav="schedule">日程</a>
+        <a href="teams.html" data-nav="teams">出場国</a>
+        <a href="predictions.html" data-nav="predictions">優勝予想</a>
+      </nav>
+    </header>
+
+    <main class="page-content">
+      <section class="prediction-hero">
+        <p class="prediction-hero-title">優勝予想 受付中！</p>
+        <p>あなたの予想をSlackから投票してください。</p>
+        <span class="prediction-command">Slackで /yosou</span>
+      </section>
+
+      <section class="section">
+        <div class="section-title-row">
+          <h1 class="section-title">みんなの優勝予想</h1>
+          <span id="prediction-total" class="section-note"></span>
+        </div>
+        <div id="prediction-chart" class="chart">
+          <p class="loading">データ取得中…</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      データ:
+      <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a>
+    </footer>
+  </body>
+</html>
