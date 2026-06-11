@@ -99,15 +99,17 @@
   }
 
   function createMatchCard(match) {
-    const card = element(
-      "article",
-      `match-card${match.is_japan ? " is-japan" : ""}`,
-    );
-    const meta = element("div", "match-meta");
-    meta.append(
-      element("span", "match-stage", match.stage_ja || "ステージ未定"),
-      element("time", "match-time", formatKickoff(match.kickoff_jst)),
-    );
+    const classNames = ["match-card"];
+    if (match.is_japan) {
+      classNames.push("is-japan");
+    }
+    if (match.status === "FINISHED") {
+      classNames.push("is-finished");
+    }
+    if (match.status === "IN_PLAY" || match.status === "PAUSED") {
+      classNames.push("is-live");
+    }
+    const card = element("article", classNames.join(" "));
 
     const matchup = element("div", "matchup");
     matchup.append(
@@ -115,11 +117,18 @@
       element("span", "match-score", scoreText(match)),
       element("span", "team-name", match.away_ja || match.away),
     );
-    card.append(meta, matchup);
 
-    const status = element("div", "match-status", statusText(match));
-    status.style.marginTop = "8px";
-    card.append(status);
+    const side = element("div", "match-side");
+    side.append(
+      element("span", "match-stage", match.stage_ja || "ステージ未定"),
+      element("span", "match-status", statusText(match)),
+    );
+
+    card.append(
+      element("time", "match-time", formatKickoff(match.kickoff_jst)),
+      matchup,
+      side,
+    );
     if (match.is_japan) {
       card.append(element("div", "japan-label", "🇯🇵 日本戦"));
     }
