@@ -77,7 +77,7 @@ class LocalStore:
 
 
 def create_store():
-    token = os.environ.get("GH_TOKEN")
+    token = os.environ.get("GH_TOKEN", "").strip()
     if token:
         print(f"predictions store: GitHub ({REPO}/{FILE_PATH})")
         return GitHubStore(token)

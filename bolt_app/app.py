@@ -33,7 +33,12 @@ JAPAN_RESULTS = [
     "優勝",
 ]
 
-app = App(token=os.environ["SLACK_BOT_TOKEN"])
+def env_token(name: str) -> str:
+    """secrets UI からの貼り付けで混入しがちな前後の空白・改行を除去する。"""
+    return os.environ.get(name, "").strip()
+
+
+app = App(token=env_token("SLACK_BOT_TOKEN"))
 store = create_store()
 
 
@@ -213,4 +218,4 @@ def show_ranking(ack, respond):
 
 if __name__ == "__main__":
     start_health_server()
-    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
+    SocketModeHandler(app, env_token("SLACK_APP_TOKEN")).start()
