@@ -42,7 +42,8 @@ class GitHubStore:
 
     def save(self, predictions: dict) -> None:
         body = {
-            "message": "chore: update predictions [skip ci]",
+            # [skip ci] を付けない: data/** への push で pages.yml が走り、サイトの予想分布が自動更新される
+            "message": "chore: update predictions",
             "content": base64.b64encode(
                 (
                     json.dumps(predictions, ensure_ascii=False, indent=2) + "\n"
