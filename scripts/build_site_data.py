@@ -20,6 +20,7 @@ TOURNAMENT_END = date(2026, 7, 20)
 SITE_DATA_DIR = ROOT_DIR / "site" / "data"
 RANKINGS_PATH = ROOT_DIR / "data" / "fifa_rankings.json"
 SQUADS_PATH = ROOT_DIR / "data" / "squads.json"
+PREDICTIONS_RAW_PATH = ROOT_DIR / "data" / "predictions.json"
 
 
 def fetch_matches(api_key: str) -> list[Match]:
@@ -82,6 +83,19 @@ def build_teams(
     ]
 
 
+def build_predictions_summary(raw: dict[str, Any]) -> dict[str, Any]:
+    """/yosou の生データ (user_id キー) を優勝予想の分布に集計する。"""
+    champions: dict[str, int] = {}
+    for entry in raw.values():
+        champion = entry.get("champion")
+        if champion:
+            champions[champion] = champions.get(champion, 0) + 1
+    distribution = dict(
+        sorted(champions.items(), key=lambda item: (-item[1], item[0]))
+    )
+    return {"total": len(raw), "distribution": distribution}
+
+
 def load_rankings(path: Path = RANKINGS_PATH) -> dict[str, int]:
     payload = load_optional_json(path, {})
     ranks = payload.get("ranks", {})
@@ -126,6 +140,10 @@ def generate_site_data(
     )
     write_json(output_dir / "schedule.json", schedule)
     write_json(output_dir / "teams.json", teams)
+    predictions = build_predictions_summary(
+        load_optional_json(PREDICTIONS_RAW_PATH, {})
+    )
+    write_json(output_dir / "predictions.json", predictions)
     return schedule, teams
 
 
