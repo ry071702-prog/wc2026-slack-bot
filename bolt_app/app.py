@@ -9,20 +9,20 @@
 """
 from __future__ import annotations
 
-import json
 import os
 import sys
+import threading
 from collections import Counter
 from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from bolt_app.storage import create_store  # noqa: E402
 from src.messages import TEAM_NAMES  # noqa: E402
-
-DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "predictions.json"
 JAPAN_RESULTS = [
     "GL敗退",
     "ラウンド32",
@@ -34,21 +34,35 @@ JAPAN_RESULTS = [
 ]
 
 app = App(token=os.environ["SLACK_BOT_TOKEN"])
+store = create_store()
 
 
 def load_predictions() -> dict:
-    try:
-        return json.loads(DATA_PATH.read_text(encoding="utf-8"))
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+    return store.load()
 
 
 def save_predictions(predictions: dict) -> None:
-    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    DATA_PATH.write_text(
-        json.dumps(predictions, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    store.save(predictions)
+
+
+class HealthHandler(BaseHTTPRequestHandler):
+    """HF Spaces のスリープ防止用 (cron-job.org が定期ping)。"""
+
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"wc2026 bolt: ok")
+
+    def log_message(self, *args):
+        pass
+
+
+def start_health_server() -> None:
+    port = int(os.environ.get("PORT", "7860"))
+    server = HTTPServer(("0.0.0.0", port), HealthHandler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    print(f"health server: 0.0.0.0:{port}")
 
 
 def team_options() -> list[dict]:
@@ -198,4 +212,5 @@ def show_ranking(ack, respond):
 
 
 if __name__ == "__main__":
+    start_health_server()
     SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
