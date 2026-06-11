@@ -3,41 +3,89 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0c0d0f">
+    <meta name="theme-color" content="#050506">
     <title>出場国 | WORLD CUP 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/app.js" defer></script>
     <script src="assets/teams.js" defer></script>
   </head>
   <body data-page="teams">
     <header class="site-header">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">26</div>
-        <div>
-          <p class="brand-title">WORLD CUP 2026</p>
-          <p class="brand-subtitle">試合日程・結果・日本代表情報</p>
-        </div>
+      <div class="header-inner container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 8l3.8 2.8-1.45 4.4h-4.7L8.2 10.8z"/>
+              <path d="M12 8V3.5M15.8 10.8l4.3-1.4M14.35 15.2l2.7 3.6M9.65 15.2l-2.7 3.6M8.2 10.8L3.9 9.4"/>
+            </svg>
+          </span>
+          <span class="brand-title">WORLD CUP <em>2026</em></span>
+        </a>
+        <nav class="main-nav" aria-label="メインナビゲーション">
+          <a href="index.html" data-nav="home">トップ</a>
+          <a href="schedule.html" data-nav="schedule">日程</a>
+          <a href="teams.html" data-nav="teams">出場国</a>
+          <a href="predictions.html" data-nav="predictions">優勝予想</a>
+        </nav>
+        <a class="neon-btn neon-btn-primary header-cta" href="index.html#today-section">今日の試合</a>
       </div>
-      <nav class="tab-nav" aria-label="メインナビゲーション">
-        <a href="index.html" data-nav="home">トップ</a>
-        <a href="schedule.html" data-nav="schedule">日程</a>
-        <a href="teams.html" data-nav="teams">出場国</a>
-        <a href="predictions.html" data-nav="predictions">優勝予想</a>
-      </nav>
     </header>
 
-    <main class="page-content">
-      <p class="page-kicker">TEAMS</p>
-      <h1 class="page-heading">出場国</h1>
-      <p class="page-lead">国をタップすると登録選手を確認できます。</p>
-      <div id="teams" class="team-grid">
-        <p class="loading">データ取得中…</p>
+    <main>
+      <div class="container page-top">
+        <p class="page-kicker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          TEAMS
+        </p>
+        <h1 class="page-heading">出場国</h1>
+        <p class="page-lead">48カ国のFIFAランクやメンバー情報を確認できます。国をタップすると登録選手を確認できます。</p>
+
+        <div class="team-controls">
+          <label class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="team-search" type="search" placeholder="国名で検索" aria-label="国名で検索" autocomplete="off">
+          </label>
+          <label class="sort-select">
+            並び替え
+            <select id="team-sort" aria-label="出場国の並び替え">
+              <option value="rank">FIFAランク順</option>
+              <option value="name">国名順</option>
+              <option value="group">グループ順</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="teams" class="team-grid" aria-busy="true">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+          </div>
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+          </div>
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+          </div>
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+          </div>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer">
-      データ:
-      <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a>
+      <div class="container">
+        <p class="footer-title">WORLD CUP <em>2026</em></p>
+        <p class="footer-tagline">Slack Bot × 特設サイトでW杯観戦をもっと楽しく。</p>
+        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a></p>
+      </div>
     </footer>
   </body>
 </html>
