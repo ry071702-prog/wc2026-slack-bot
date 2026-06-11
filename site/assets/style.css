@@ -12,6 +12,11 @@
   --danger: #ff6b6b;
   --radius: 8px;
   --nav-height: 48px;
+  /* Liquid Glass tokens (used inside @supports backdrop-filter) */
+  --glass-bg: rgba(23, 26, 31, 0.55);
+  --glass-bg-raised: rgba(38, 42, 49, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 * {
@@ -30,7 +35,71 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: var(--background);
+  /* keep transparent: html paints the base color, body::before draws the pitch */
+  background: transparent;
+}
+
+/*
+ * Soccer pitch + stadium lighting, drawn with CSS gradients only.
+ * One fixed layer (cheap to composite); sits behind all content.
+ */
+body::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background:
+    /* stadium floodlights (accent neon, 3-5% alpha) */
+    radial-gradient(
+      55% 42% at 18% -6%,
+      rgba(215, 255, 0, 0.05),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 42% at 82% -6%,
+      rgba(215, 255, 0, 0.04),
+      transparent 70%
+    ),
+    radial-gradient(
+      90% 34% at 50% -8%,
+      rgba(255, 255, 255, 0.04),
+      transparent 70%
+    ),
+    /* centre spot */
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(255, 255, 255, 0.06) 0 3px,
+      transparent 4px
+    ),
+    /* centre circle (thin ring) */
+    radial-gradient(
+      circle at 50% 46%,
+      transparent calc(min(34vw, 220px) - 1px),
+      rgba(255, 255, 255, 0.055) min(34vw, 220px),
+      rgba(255, 255, 255, 0.055) calc(min(34vw, 220px) + 1.5px),
+      transparent calc(min(34vw, 220px) + 2.5px)
+    ),
+    /* halfway line */
+    linear-gradient(
+      to bottom,
+      transparent calc(46% - 1px),
+      rgba(255, 255, 255, 0.05) calc(46% - 1px),
+      rgba(255, 255, 255, 0.05) calc(46% + 1px),
+      transparent calc(46% + 1px)
+    ),
+    /* touchlines */
+    linear-gradient(
+      to right,
+      transparent 14px,
+      rgba(255, 255, 255, 0.045) 14px,
+      rgba(255, 255, 255, 0.045) calc(14px + 1.5px),
+      transparent calc(14px + 1.5px),
+      transparent calc(100% - 14px - 1.5px),
+      rgba(255, 255, 255, 0.045) calc(100% - 14px - 1.5px),
+      rgba(255, 255, 255, 0.045) calc(100% - 14px),
+      transparent calc(100% - 14px)
+    );
+  pointer-events: none;
 }
 
 a {
@@ -140,6 +209,14 @@ input {
   text-transform: uppercase;
 }
 
+.page-kicker::before,
+.section-kicker::before {
+  content: "⚽";
+  margin-right: 6px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
 .page-heading {
   margin: 0 0 4px;
   font-size: clamp(26px, 7vw, 38px);
@@ -225,6 +302,12 @@ input {
 }
 
 .match-card.is-japan {
+  /* faint mowed-grass stripes (2-3% white difference) */
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.022) 0 26px,
+    rgba(255, 255, 255, 0) 26px 52px
+  );
   box-shadow: inset 3px 0 0 var(--accent);
 }
 
@@ -382,6 +465,13 @@ input {
   font-weight: 900;
   letter-spacing: 0.02em;
   backdrop-filter: blur(8px);
+}
+
+.date-heading::before {
+  content: "⚽";
+  margin-right: 7px;
+  font-size: 12px;
+  opacity: 0.55;
 }
 
 .filter-row {
@@ -654,9 +744,94 @@ input {
 }
 
 .match-card:hover {
-  background: var(--surface-raised);
+  background-color: var(--surface-raised);
 }
 
 .team-card:hover {
   border-color: #3a3d42;
+}
+
+/*
+ * Liquid Glass layer — only where backdrop-filter is supported.
+ * Without support, the opaque DAZN-dark fallback above stays as-is.
+ * Blur is kept to a small number of container surfaces for performance.
+ */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .tab-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(12, 13, 15, 0.6);
+    box-shadow: 0 1px 0 rgba(215, 255, 0, 0.08);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+  }
+
+  .tab-nav a:hover,
+  .tab-nav a:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .match-list,
+  .countdown-card,
+  .team-card,
+  .prediction-hero,
+  .toggle {
+    border-color: var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: var(--glass-highlight);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
+  }
+
+  .countdown-card,
+  .prediction-hero {
+    border-left: 4px solid var(--accent);
+  }
+
+  /* rows live inside the already-blurred .match-list: no extra blur */
+  .match-card {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    background-color: transparent;
+  }
+
+  .match-card:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .team-card[open] {
+    border-color: var(--accent);
+  }
+
+  .team-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: var(--glass-bg-raised);
+  }
+
+  .toggle:hover {
+    background: var(--glass-bg-raised);
+  }
+
+  .countdown-unit {
+    border-color: rgba(255, 255, 255, 0.07);
+    background: rgba(10, 11, 13, 0.5);
+    box-shadow: var(--glass-highlight);
+  }
+
+  .player-row {
+    background: rgba(12, 13, 15, 0.55);
+  }
+
+  .squad {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .date-heading {
+    background: rgba(12, 13, 15, 0.55);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(16px) saturate(150%);
+  }
+
+  .chart-track {
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
