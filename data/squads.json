@@ -6002,5 +6002,1585 @@
       "number": 18,
       "position": "FW"
     }
+  ],
+  "South Africa": [
+    {
+      "name": "S. Chaine",
+      "name_ja": "S. Chaine",
+      "number": 16,
+      "position": "GK"
+    },
+    {
+      "name": "R. Goss",
+      "name_ja": "R. Goss",
+      "number": 22,
+      "position": "GK"
+    },
+    {
+      "name": "R. Williams",
+      "name_ja": "R. Williams",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "B. Cross",
+      "name_ja": "B. Cross",
+      "number": 26,
+      "position": "DF"
+    },
+    {
+      "name": "S. Kabini",
+      "name_ja": "S. Kabini",
+      "number": 18,
+      "position": "DF"
+    },
+    {
+      "name": "O. Makhanya",
+      "name_ja": "O. Makhanya",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "M. Mbokazi",
+      "name_ja": "M. Mbokazi",
+      "number": 14,
+      "position": "DF"
+    },
+    {
+      "name": "A. Modiba",
+      "name_ja": "A. Modiba",
+      "number": 6,
+      "position": "DF"
+    },
+    {
+      "name": "K. Mudau",
+      "name_ja": "K. Mudau",
+      "number": 20,
+      "position": "DF"
+    },
+    {
+      "name": "K. Ndamane",
+      "name_ja": "K. Ndamane",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "I. Okon",
+      "name_ja": "I. Okon",
+      "number": 21,
+      "position": "DF"
+    },
+    {
+      "name": "N. Sibisi",
+      "name_ja": "N. Sibisi",
+      "number": 19,
+      "position": "DF"
+    },
+    {
+      "name": "T. Matuludi",
+      "name_ja": "T. Matuludi",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "J. Adams",
+      "name_ja": "J. Adams",
+      "number": 23,
+      "position": "MF"
+    },
+    {
+      "name": "T. Mbatha",
+      "name_ja": "T. Mbatha",
+      "number": 5,
+      "position": "MF"
+    },
+    {
+      "name": "T. Mokoena",
+      "name_ja": "T. Mokoena",
+      "number": 4,
+      "position": "MF"
+    },
+    {
+      "name": "S. Sithole",
+      "name_ja": "S. Sithole",
+      "number": 13,
+      "position": "MF"
+    },
+    {
+      "name": "T. Zwane",
+      "name_ja": "T. Zwane",
+      "number": 11,
+      "position": "MF"
+    },
+    {
+      "name": "O. Appollis",
+      "name_ja": "O. Appollis",
+      "number": 7,
+      "position": "FW"
+    },
+    {
+      "name": "L. Foster",
+      "name_ja": "L. Foster",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "E. Makgopa",
+      "name_ja": "E. Makgopa",
+      "number": 99,
+      "position": "FW"
+    },
+    {
+      "name": "T. Maseko",
+      "name_ja": "T. Maseko",
+      "number": 12,
+      "position": "FW"
+    },
+    {
+      "name": "R. Mofokeng",
+      "name_ja": "R. Mofokeng",
+      "number": 10,
+      "position": "FW"
+    },
+    {
+      "name": "T. Moremi",
+      "name_ja": "T. Moremi",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "I. Rayners",
+      "name_ja": "I. Rayners",
+      "number": 15,
+      "position": "FW"
+    },
+    {
+      "name": "K. Sebelebele",
+      "name_ja": "K. Sebelebele",
+      "number": 25,
+      "position": "MF"
+    }
+  ],
+  "South Korea": [
+    {
+      "name": "Jo Hyeon-Woo",
+      "name_ja": "Jo Hyeon-Woo",
+      "number": 21,
+      "position": "GK"
+    },
+    {
+      "name": "Kim Seung-Gyu",
+      "name_ja": "Kim Seung-Gyu",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "Song Bum-Keun",
+      "name_ja": "Song Bum-Keun",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "Cho Wi-Je",
+      "name_ja": "Cho Wi-Je",
+      "number": 5,
+      "position": "DF"
+    },
+    {
+      "name": "Kim Min-Jae",
+      "name_ja": "Kim Min-Jae",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "Kim Moon-Hwan",
+      "name_ja": "Kim Moon-Hwan",
+      "number": 15,
+      "position": "DF"
+    },
+    {
+      "name": "Kim Tae-Hyeon",
+      "name_ja": "Kim Tae-Hyeon",
+      "number": 9,
+      "position": "DF"
+    },
+    {
+      "name": "Lee Han-Beom",
+      "name_ja": "Lee Han-Beom",
+      "number": 18,
+      "position": "DF"
+    },
+    {
+      "name": "Park Jin-Seop",
+      "name_ja": "Park Jin-Seop",
+      "number": 22,
+      "position": "MF"
+    },
+    {
+      "name": "Lee Tae-Seok",
+      "name_ja": "Lee Tae-Seok",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "Seol Young-Woo",
+      "name_ja": "Seol Young-Woo",
+      "number": 16,
+      "position": "MF"
+    },
+    {
+      "name": "J. Castrop",
+      "name_ja": "J. Castrop",
+      "number": 19,
+      "position": "MF"
+    },
+    {
+      "name": "Lee Gi-Hyuk",
+      "name_ja": "Lee Gi-Hyuk",
+      "number": 10,
+      "position": "DF"
+    },
+    {
+      "name": "Bae Jun-Ho",
+      "name_ja": "Bae Jun-Ho",
+      "number": 25,
+      "position": "FW"
+    },
+    {
+      "name": "Eom Ji-Sung",
+      "name_ja": "Eom Ji-Sung",
+      "number": 23,
+      "position": "FW"
+    },
+    {
+      "name": "Hwang In-Beom",
+      "name_ja": "Hwang In-Beom",
+      "number": 24,
+      "position": "MF"
+    },
+    {
+      "name": "Kim Jin-Gyu",
+      "name_ja": "Kim Jin-Gyu",
+      "number": 25,
+      "position": "MF"
+    },
+    {
+      "name": "Lee Dong-Gyeong",
+      "name_ja": "Lee Dong-Gyeong",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "Lee Jae-Sung",
+      "name_ja": "Lee Jae-Sung",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "Lee Kang-In",
+      "name_ja": "Lee Kang-In",
+      "number": 17,
+      "position": "MF"
+    },
+    {
+      "name": "Paik Seung-Ho",
+      "name_ja": "Paik Seung-Ho",
+      "number": 4,
+      "position": "MF"
+    },
+    {
+      "name": "Yang Hyun-Jun",
+      "name_ja": "Yang Hyun-Jun",
+      "number": 26,
+      "position": "FW"
+    },
+    {
+      "name": "Hwang Hee-Chan",
+      "name_ja": "Hwang Hee-Chan",
+      "number": 20,
+      "position": "FW"
+    },
+    {
+      "name": "Cho Gue-Sung",
+      "name_ja": "Cho Gue-Sung",
+      "number": 14,
+      "position": "FW"
+    },
+    {
+      "name": "Oh Hyeon-Gyu",
+      "name_ja": "Oh Hyeon-Gyu",
+      "number": 3,
+      "position": "FW"
+    },
+    {
+      "name": "Son Heung-Min",
+      "name_ja": "Son Heung-Min",
+      "number": 13,
+      "position": "FW"
+    }
+  ],
+  "Spain": [
+    {
+      "name": "Joan García",
+      "name_ja": "Joan García",
+      "number": 13,
+      "position": "GK"
+    },
+    {
+      "name": "David Raya",
+      "name_ja": "David Raya",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "Unai Simón",
+      "name_ja": "Unai Simón",
+      "number": 23,
+      "position": "GK"
+    },
+    {
+      "name": "Pau Cubarsí Paredes",
+      "name_ja": "Pau Cubarsí Paredes",
+      "number": 22,
+      "position": "DF"
+    },
+    {
+      "name": "Marc Cucurella",
+      "name_ja": "Marc Cucurella",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "Eric García",
+      "name_ja": "Eric García",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "Álex Grimaldo",
+      "name_ja": "Álex Grimaldo",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "Aymeric Laporte",
+      "name_ja": "Aymeric Laporte",
+      "number": 14,
+      "position": "DF"
+    },
+    {
+      "name": "Marcos Llorente",
+      "name_ja": "Marcos Llorente",
+      "number": 5,
+      "position": "MF"
+    },
+    {
+      "name": "Pedro Porro",
+      "name_ja": "Pedro Porro",
+      "number": 12,
+      "position": "DF"
+    },
+    {
+      "name": "Marc Pubill",
+      "name_ja": "Marc Pubill",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "Gavi",
+      "name_ja": "Gavi",
+      "number": 9,
+      "position": "MF"
+    },
+    {
+      "name": "Mikel Merino",
+      "name_ja": "Mikel Merino",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "Pedri",
+      "name_ja": "Pedri",
+      "number": 20,
+      "position": "MF"
+    },
+    {
+      "name": "Rodri",
+      "name_ja": "Rodri",
+      "number": 16,
+      "position": "MF"
+    },
+    {
+      "name": "Fabián Ruiz",
+      "name_ja": "Fabián Ruiz",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "Martín Zubimendi",
+      "name_ja": "Martín Zubimendi",
+      "number": 18,
+      "position": "MF"
+    },
+    {
+      "name": "Álex Baena",
+      "name_ja": "Álex Baena",
+      "number": 15,
+      "position": "MF"
+    },
+    {
+      "name": "Dani Olmo",
+      "name_ja": "Dani Olmo",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "Borja Iglesias",
+      "name_ja": "Borja Iglesias",
+      "number": 26,
+      "position": "FW"
+    },
+    {
+      "name": "Lamine Yamal",
+      "name_ja": "Lamine Yamal",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "Víctor Muñoz",
+      "name_ja": "Víctor Muñoz",
+      "number": 25,
+      "position": "FW"
+    },
+    {
+      "name": "Mikel Oyarzabal",
+      "name_ja": "Mikel Oyarzabal",
+      "number": 21,
+      "position": "FW"
+    },
+    {
+      "name": "Yeremy Pino",
+      "name_ja": "Yeremy Pino",
+      "number": 11,
+      "position": "MF"
+    },
+    {
+      "name": "Ferran Torres",
+      "name_ja": "Ferran Torres",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "Nico Williams",
+      "name_ja": "Nico Williams",
+      "number": 17,
+      "position": "FW"
+    }
+  ],
+  "Sweden": [
+    {
+      "name": "V. Johansson",
+      "name_ja": "V. Johansson",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "K. Nordfeldt",
+      "name_ja": "K. Nordfeldt",
+      "number": 23,
+      "position": "GK"
+    },
+    {
+      "name": "J. Widell Zetterström",
+      "name_ja": "J. Widell Zetterström",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "H. Ekdal",
+      "name_ja": "H. Ekdal",
+      "number": 14,
+      "position": "DF"
+    },
+    {
+      "name": "G. Gudmundsson",
+      "name_ja": "G. Gudmundsson",
+      "number": 5,
+      "position": "MF"
+    },
+    {
+      "name": "I. Hien",
+      "name_ja": "I. Hien",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "G. Lagerbielke",
+      "name_ja": "G. Lagerbielke",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "V. Lindelöf",
+      "name_ja": "V. Lindelöf",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "C. Starfelt",
+      "name_ja": "C. Starfelt",
+      "number": 15,
+      "position": "DF"
+    },
+    {
+      "name": "H. Johansson",
+      "name_ja": "H. Johansson",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "E. Smith",
+      "name_ja": "E. Smith",
+      "number": 20,
+      "position": "DF"
+    },
+    {
+      "name": "E. Stroud",
+      "name_ja": "E. Stroud",
+      "number": 24,
+      "position": "MF"
+    },
+    {
+      "name": "D. Svensson",
+      "name_ja": "D. Svensson",
+      "number": 8,
+      "position": "DF"
+    },
+    {
+      "name": "A. Bernhardsson",
+      "name_ja": "A. Bernhardsson",
+      "number": 21,
+      "position": "MF"
+    },
+    {
+      "name": "Y. Ayari",
+      "name_ja": "Y. Ayari",
+      "number": 18,
+      "position": "MF"
+    },
+    {
+      "name": "L. Bergvall",
+      "name_ja": "L. Bergvall",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "B. Nygren",
+      "name_ja": "B. Nygren",
+      "number": 10,
+      "position": "FW"
+    },
+    {
+      "name": "J. Karlström",
+      "name_ja": "J. Karlström",
+      "number": 16,
+      "position": "MF"
+    },
+    {
+      "name": "K. Sema",
+      "name_ja": "K. Sema",
+      "number": 13,
+      "position": "MF"
+    },
+    {
+      "name": "M. Svanberg",
+      "name_ja": "M. Svanberg",
+      "number": 19,
+      "position": "MF"
+    },
+    {
+      "name": "B. Zeneli",
+      "name_ja": "B. Zeneli",
+      "number": 22,
+      "position": "MF"
+    },
+    {
+      "name": "T. Ali",
+      "name_ja": "T. Ali",
+      "number": 26,
+      "position": "MF"
+    },
+    {
+      "name": "A. Elanga",
+      "name_ja": "A. Elanga",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "V. Gyökeres",
+      "name_ja": "V. Gyökeres",
+      "number": 17,
+      "position": "FW"
+    },
+    {
+      "name": "A. Isak",
+      "name_ja": "A. Isak",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "G. Nilsson",
+      "name_ja": "G. Nilsson",
+      "number": 25,
+      "position": "FW"
+    }
+  ],
+  "Switzerland": [
+    {
+      "name": "M. Keller",
+      "name_ja": "M. Keller",
+      "number": 21,
+      "position": "GK"
+    },
+    {
+      "name": "G. Kobel",
+      "name_ja": "G. Kobel",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "Y. Mvogo",
+      "name_ja": "Y. Mvogo",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "M. Akanji",
+      "name_ja": "M. Akanji",
+      "number": 5,
+      "position": "DF"
+    },
+    {
+      "name": "A. Amenda",
+      "name_ja": "A. Amenda",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "E. Cömert",
+      "name_ja": "E. Cömert",
+      "number": 18,
+      "position": "DF"
+    },
+    {
+      "name": "N. Elvedi",
+      "name_ja": "N. Elvedi",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "L. Jaquez",
+      "name_ja": "L. Jaquez",
+      "number": 25,
+      "position": "DF"
+    },
+    {
+      "name": "M. Muheim",
+      "name_ja": "M. Muheim",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "R. Rodríguez",
+      "name_ja": "R. Rodríguez",
+      "number": 13,
+      "position": "DF"
+    },
+    {
+      "name": "S. Widmer",
+      "name_ja": "S. Widmer",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "M. Aebischer",
+      "name_ja": "M. Aebischer",
+      "number": 20,
+      "position": "MF"
+    },
+    {
+      "name": "R. Freuler",
+      "name_ja": "R. Freuler",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "A. Jashari",
+      "name_ja": "A. Jashari",
+      "number": 14,
+      "position": "MF"
+    },
+    {
+      "name": "D. Sow",
+      "name_ja": "D. Sow",
+      "number": 15,
+      "position": "MF"
+    },
+    {
+      "name": "G. Xhaka",
+      "name_ja": "G. Xhaka",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "D. Zakaria",
+      "name_ja": "D. Zakaria",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "C. Fassnacht",
+      "name_ja": "C. Fassnacht",
+      "number": 16,
+      "position": "MF"
+    },
+    {
+      "name": "C. Itten",
+      "name_ja": "C. Itten",
+      "number": 26,
+      "position": "FW"
+    },
+    {
+      "name": "F. Rieder",
+      "name_ja": "F. Rieder",
+      "number": 22,
+      "position": "MF"
+    },
+    {
+      "name": "R. Vargas",
+      "name_ja": "R. Vargas",
+      "number": 17,
+      "position": "FW"
+    },
+    {
+      "name": "Z. Amdouni",
+      "name_ja": "Z. Amdouni",
+      "number": 23,
+      "position": "FW"
+    },
+    {
+      "name": "B. Embolo",
+      "name_ja": "B. Embolo",
+      "number": 7,
+      "position": "FW"
+    },
+    {
+      "name": "J. Manzambi",
+      "name_ja": "J. Manzambi",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "N. Okafor",
+      "name_ja": "N. Okafor",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "D. Ndoye",
+      "name_ja": "D. Ndoye",
+      "number": 11,
+      "position": "MF"
+    }
+  ],
+  "Tunisia": [
+    {
+      "name": "S. Ben Hsan",
+      "name_ja": "S. Ben Hsan",
+      "number": 22,
+      "position": "GK"
+    },
+    {
+      "name": "C. Abdelmouhib",
+      "name_ja": "C. Abdelmouhib",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "A. Dahmen",
+      "name_ja": "A. Dahmen",
+      "number": 16,
+      "position": "GK"
+    },
+    {
+      "name": "A. Abdi",
+      "name_ja": "A. Abdi",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "A. Arous",
+      "name_ja": "A. Arous",
+      "number": 5,
+      "position": "DF"
+    },
+    {
+      "name": "A. Ben Hmida",
+      "name_ja": "A. Ben Hmida",
+      "number": 21,
+      "position": "DF"
+    },
+    {
+      "name": "D. Bronn",
+      "name_ja": "D. Bronn",
+      "number": 6,
+      "position": "DF"
+    },
+    {
+      "name": "R. Chikhaoui",
+      "name_ja": "R. Chikhaoui",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "M. Neffati",
+      "name_ja": "M. Neffati",
+      "number": 23,
+      "position": "DF"
+    },
+    {
+      "name": "O. Rekik",
+      "name_ja": "O. Rekik",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "M. Talbi",
+      "name_ja": "M. Talbi",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "Y. Valery",
+      "name_ja": "Y. Valery",
+      "number": 20,
+      "position": "DF"
+    },
+    {
+      "name": "M. Ben Ouanes",
+      "name_ja": "M. Ben Ouanes",
+      "number": 12,
+      "position": "MF"
+    },
+    {
+      "name": "K. Ayari",
+      "name_ja": "K. Ayari",
+      "number": 14,
+      "position": "MF"
+    },
+    {
+      "name": "Ismaël Gharbi",
+      "name_ja": "Ismaël Gharbi",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "R. Khedira",
+      "name_ja": "R. Khedira",
+      "number": 13,
+      "position": "MF"
+    },
+    {
+      "name": "H. Mejbri",
+      "name_ja": "H. Mejbri",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "E. Skhiri",
+      "name_ja": "E. Skhiri",
+      "number": 17,
+      "position": "MF"
+    },
+    {
+      "name": "A. Ben Slimane",
+      "name_ja": "A. Ben Slimane",
+      "number": 25,
+      "position": "MF"
+    },
+    {
+      "name": "H. Mahmoud",
+      "name_ja": "H. Mahmoud",
+      "number": 15,
+      "position": "MF"
+    },
+    {
+      "name": "S. Tounekti",
+      "name_ja": "S. Tounekti",
+      "number": 26,
+      "position": "FW"
+    },
+    {
+      "name": "E. Achouri",
+      "name_ja": "E. Achouri",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "F. Chaouat",
+      "name_ja": "F. Chaouat",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "R. Elloumi",
+      "name_ja": "R. Elloumi",
+      "number": 18,
+      "position": "FW"
+    },
+    {
+      "name": "H. Mastouri",
+      "name_ja": "H. Mastouri",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "E. Saad",
+      "name_ja": "E. Saad",
+      "number": 8,
+      "position": "FW"
+    }
+  ],
+  "Turkey": [
+    {
+      "name": "A. Bayindir",
+      "name_ja": "A. Bayindir",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "U. Çakir",
+      "name_ja": "U. Çakir",
+      "number": 23,
+      "position": "GK"
+    },
+    {
+      "name": "M. Günok",
+      "name_ja": "M. Günok",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "S. Akaydin",
+      "name_ja": "S. Akaydin",
+      "number": 25,
+      "position": "DF"
+    },
+    {
+      "name": "A. Bardakci",
+      "name_ja": "A. Bardakci",
+      "number": 14,
+      "position": "DF"
+    },
+    {
+      "name": "Z. Çelik",
+      "name_ja": "Z. Çelik",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "M. Demiral",
+      "name_ja": "M. Demiral",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "E. Elmali",
+      "name_ja": "E. Elmali",
+      "number": 13,
+      "position": "DF"
+    },
+    {
+      "name": "O. Kabak",
+      "name_ja": "O. Kabak",
+      "number": 15,
+      "position": "DF"
+    },
+    {
+      "name": "F. Kadioglu",
+      "name_ja": "F. Kadioglu",
+      "number": 20,
+      "position": "DF"
+    },
+    {
+      "name": "M. Müldür",
+      "name_ja": "M. Müldür",
+      "number": 18,
+      "position": "DF"
+    },
+    {
+      "name": "Ç. Söyüncü",
+      "name_ja": "Ç. Söyüncü",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "H. Çalhanoglu",
+      "name_ja": "H. Çalhanoglu",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "K. Ayhan",
+      "name_ja": "K. Ayhan",
+      "number": 22,
+      "position": "DF"
+    },
+    {
+      "name": "O. Kokçu",
+      "name_ja": "O. Kokçu",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "S. Özcan",
+      "name_ja": "S. Özcan",
+      "number": 5,
+      "position": "MF"
+    },
+    {
+      "name": "I. Yüksek",
+      "name_ja": "I. Yüksek",
+      "number": 16,
+      "position": "MF"
+    },
+    {
+      "name": "C. Uzun",
+      "name_ja": "C. Uzun",
+      "number": 26,
+      "position": "MF"
+    },
+    {
+      "name": "O. Aydin",
+      "name_ja": "O. Aydin",
+      "number": 24,
+      "position": "FW"
+    },
+    {
+      "name": "A. Güler",
+      "name_ja": "A. Güler",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "Y. Akgün",
+      "name_ja": "Y. Akgün",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "K. Aktürkoglu",
+      "name_ja": "K. Aktürkoglu",
+      "number": 7,
+      "position": "FW"
+    },
+    {
+      "name": "D. Gül",
+      "name_ja": "D. Gül",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "I. Kahveci",
+      "name_ja": "I. Kahveci",
+      "number": 17,
+      "position": "MF"
+    },
+    {
+      "name": "K. Yildiz",
+      "name_ja": "K. Yildiz",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "B. Yilmaz",
+      "name_ja": "B. Yilmaz",
+      "number": 21,
+      "position": "MF"
+    }
+  ],
+  "United States": [
+    {
+      "name": "C. Brady",
+      "name_ja": "C. Brady",
+      "number": 25,
+      "position": "GK"
+    },
+    {
+      "name": "M. Freese",
+      "name_ja": "M. Freese",
+      "number": 24,
+      "position": "GK"
+    },
+    {
+      "name": "M. Turner",
+      "name_ja": "M. Turner",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "S. Dest",
+      "name_ja": "S. Dest",
+      "number": 2,
+      "position": "MF"
+    },
+    {
+      "name": "A. Freeman",
+      "name_ja": "A. Freeman",
+      "number": 16,
+      "position": "DF"
+    },
+    {
+      "name": "M. McKenzie",
+      "name_ja": "M. McKenzie",
+      "number": 22,
+      "position": "DF"
+    },
+    {
+      "name": "T. Ream",
+      "name_ja": "T. Ream",
+      "number": 13,
+      "position": "DF"
+    },
+    {
+      "name": "C. Richards",
+      "name_ja": "C. Richards",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "A. Robinson",
+      "name_ja": "A. Robinson",
+      "number": 5,
+      "position": "DF"
+    },
+    {
+      "name": "M. Robinson",
+      "name_ja": "M. Robinson",
+      "number": 12,
+      "position": "DF"
+    },
+    {
+      "name": "J. Scally",
+      "name_ja": "J. Scally",
+      "number": 23,
+      "position": "DF"
+    },
+    {
+      "name": "A. Trusty",
+      "name_ja": "A. Trusty",
+      "number": 6,
+      "position": "DF"
+    },
+    {
+      "name": "M. Arfsten",
+      "name_ja": "M. Arfsten",
+      "number": 18,
+      "position": "MF"
+    },
+    {
+      "name": "S. Berhalter",
+      "name_ja": "S. Berhalter",
+      "number": 14,
+      "position": "MF"
+    },
+    {
+      "name": "W. McKennie",
+      "name_ja": "W. McKennie",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "G. Reyna",
+      "name_ja": "G. Reyna",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "C. Roldan",
+      "name_ja": "C. Roldan",
+      "number": 15,
+      "position": "MF"
+    },
+    {
+      "name": "M. Tillman",
+      "name_ja": "M. Tillman",
+      "number": 17,
+      "position": "MF"
+    },
+    {
+      "name": "T. Adams",
+      "name_ja": "T. Adams",
+      "number": 4,
+      "position": "MF"
+    },
+    {
+      "name": "T. Weah",
+      "name_ja": "T. Weah",
+      "number": 21,
+      "position": "FW"
+    },
+    {
+      "name": "A. Zendejas",
+      "name_ja": "A. Zendejas",
+      "number": 26,
+      "position": "FW"
+    },
+    {
+      "name": "B. Aaronson",
+      "name_ja": "B. Aaronson",
+      "number": 11,
+      "position": "MF"
+    },
+    {
+      "name": "F. Balogun",
+      "name_ja": "F. Balogun",
+      "number": 20,
+      "position": "FW"
+    },
+    {
+      "name": "R. Pepi",
+      "name_ja": "R. Pepi",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "C. Pulisic",
+      "name_ja": "C. Pulisic",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "H. Wright",
+      "name_ja": "H. Wright",
+      "number": 19,
+      "position": "FW"
+    }
+  ],
+  "Uruguay": [
+    {
+      "name": "S. Mele",
+      "name_ja": "S. Mele",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "F. Muslera",
+      "name_ja": "F. Muslera",
+      "number": 23,
+      "position": "GK"
+    },
+    {
+      "name": "S. Rochet",
+      "name_ja": "S. Rochet",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "R. Araújo",
+      "name_ja": "R. Araújo",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "S. Bueno",
+      "name_ja": "S. Bueno",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "S. Cáceres",
+      "name_ja": "S. Cáceres",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "J. Giménez",
+      "name_ja": "J. Giménez",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "M. Olivera",
+      "name_ja": "M. Olivera",
+      "number": 16,
+      "position": "DF"
+    },
+    {
+      "name": "G. Varela",
+      "name_ja": "G. Varela",
+      "number": 13,
+      "position": "DF"
+    },
+    {
+      "name": "M. Viña",
+      "name_ja": "M. Viña",
+      "number": 17,
+      "position": "DF"
+    },
+    {
+      "name": "R. Bentancur",
+      "name_ja": "R. Bentancur",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "E. Martínez",
+      "name_ja": "E. Martínez",
+      "number": 15,
+      "position": "MF"
+    },
+    {
+      "name": "J. Sanabria",
+      "name_ja": "J. Sanabria",
+      "number": 25,
+      "position": "MF"
+    },
+    {
+      "name": "M. Ugarte",
+      "name_ja": "M. Ugarte",
+      "number": 5,
+      "position": "MF"
+    },
+    {
+      "name": "F. Valverde",
+      "name_ja": "F. Valverde",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "R. Zalazar",
+      "name_ja": "R. Zalazar",
+      "number": 26,
+      "position": "MF"
+    },
+    {
+      "name": "G. de Arrascaeta",
+      "name_ja": "G. de Arrascaeta",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "N. de la Cruz",
+      "name_ja": "N. de la Cruz",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "M. Araújo",
+      "name_ja": "M. Araújo",
+      "number": 20,
+      "position": "MF"
+    },
+    {
+      "name": "A. Canobbio",
+      "name_ja": "A. Canobbio",
+      "number": 14,
+      "position": "MF"
+    },
+    {
+      "name": "R. Aguirre",
+      "name_ja": "R. Aguirre",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "J. Piquerez",
+      "name_ja": "J. Piquerez",
+      "number": 22,
+      "position": "FW"
+    },
+    {
+      "name": "D. Núñez",
+      "name_ja": "D. Núñez",
+      "number": 9,
+      "position": "FW"
+    },
+    {
+      "name": "F. Pellistri",
+      "name_ja": "F. Pellistri",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "B. Rodríguez",
+      "name_ja": "B. Rodríguez",
+      "number": 18,
+      "position": "FW"
+    },
+    {
+      "name": "F. Viñas",
+      "name_ja": "F. Viñas",
+      "number": 21,
+      "position": "FW"
+    }
+  ],
+  "Uzbekistan": [
+    {
+      "name": "B. Ergashev",
+      "name_ja": "B. Ergashev",
+      "number": 16,
+      "position": "GK"
+    },
+    {
+      "name": "A. Nematov",
+      "name_ja": "A. Nematov",
+      "number": 12,
+      "position": "GK"
+    },
+    {
+      "name": "U. Yusupov",
+      "name_ja": "U. Yusupov",
+      "number": 1,
+      "position": "GK"
+    },
+    {
+      "name": "K. Alijonov",
+      "name_ja": "K. Alijonov",
+      "number": 3,
+      "position": "DF"
+    },
+    {
+      "name": "R. Ashurmatov",
+      "name_ja": "R. Ashurmatov",
+      "number": 5,
+      "position": "DF"
+    },
+    {
+      "name": "U. Eshmurodov",
+      "name_ja": "U. Eshmurodov",
+      "number": 15,
+      "position": "DF"
+    },
+    {
+      "name": "B. Karimov",
+      "name_ja": "B. Karimov",
+      "number": 24,
+      "position": "DF"
+    },
+    {
+      "name": "A. Khusanov",
+      "name_ja": "A. Khusanov",
+      "number": 2,
+      "position": "DF"
+    },
+    {
+      "name": "S. Nasrullayev",
+      "name_ja": "S. Nasrullayev",
+      "number": 13,
+      "position": "MF"
+    },
+    {
+      "name": "F. Sayfiev",
+      "name_ja": "F. Sayfiev",
+      "number": 4,
+      "position": "DF"
+    },
+    {
+      "name": "J. Urozov",
+      "name_ja": "J. Urozov",
+      "number": 27,
+      "position": "DF"
+    },
+    {
+      "name": "A. Abdullaev",
+      "name_ja": "A. Abdullaev",
+      "number": 18,
+      "position": "DF"
+    },
+    {
+      "name": "A. Ulmasaliev",
+      "name_ja": "A. Ulmasaliev",
+      "number": 25,
+      "position": "DF"
+    },
+    {
+      "name": "J. Masharipov",
+      "name_ja": "J. Masharipov",
+      "number": 10,
+      "position": "MF"
+    },
+    {
+      "name": "A. Ganiyev",
+      "name_ja": "A. Ganiyev",
+      "number": 19,
+      "position": "FW"
+    },
+    {
+      "name": "J. Iskanderov",
+      "name_ja": "J. Iskanderov",
+      "number": 8,
+      "position": "MF"
+    },
+    {
+      "name": "O. Hamrobekov",
+      "name_ja": "O. Hamrobekov",
+      "number": 9,
+      "position": "MF"
+    },
+    {
+      "name": "A. Mozgovoy",
+      "name_ja": "A. Mozgovoy",
+      "number": 6,
+      "position": "MF"
+    },
+    {
+      "name": "O. Shukurov",
+      "name_ja": "O. Shukurov",
+      "number": 7,
+      "position": "MF"
+    },
+    {
+      "name": "A. Fayzullaev",
+      "name_ja": "A. Fayzullaev",
+      "number": 22,
+      "position": "FW"
+    },
+    {
+      "name": "S. Esanov",
+      "name_ja": "S. Esanov",
+      "number": 23,
+      "position": "MF"
+    },
+    {
+      "name": "O. Orunov",
+      "name_ja": "O. Orunov",
+      "number": 11,
+      "position": "FW"
+    },
+    {
+      "name": "D. Khamdamov",
+      "name_ja": "D. Khamdamov",
+      "number": 17,
+      "position": "MF"
+    },
+    {
+      "name": "A. Amonov",
+      "name_ja": "A. Amonov",
+      "number": 28,
+      "position": "FW"
+    },
+    {
+      "name": "I. Sergeev",
+      "name_ja": "I. Sergeev",
+      "number": 21,
+      "position": "FW"
+    },
+    {
+      "name": "E. Shomurodov",
+      "name_ja": "E. Shomurodov",
+      "number": 14,
+      "position": "FW"
+    }
   ]
 }
