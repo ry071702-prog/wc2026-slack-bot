@@ -36,6 +36,7 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           NOTIFY_MINUTES_BEFORE: ${{ vars.NOTIFY_MINUTES_BEFORE || '15' }}
           MENTION_JAPAN: ${{ vars.MENTION_JAPAN || 'false' }}
+          QUIET_HOURS: ${{ vars.QUIET_HOURS || '01:00-06:30' }}
           DRY_RUN: ${{ vars.DRY_RUN || 'false' }}
         run: python -m src.main --mode notify
 

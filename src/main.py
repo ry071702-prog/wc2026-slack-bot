@@ -22,6 +22,33 @@ TOURNAMENT_START_UTC = datetime(2026, 6, 11, tzinfo=timezone.utc)
 TOURNAMENT_END_UTC = datetime(2026, 7, 21, tzinfo=timezone.utc)
 DEFAULT_STATE_PATH = Path("state/notified.json")
 MAX_RESULTS_PER_RUN = 10
+DEFAULT_QUIET_HOURS = "01:00-06:30"
+# 開幕戦 (6/12 4:00 JST) は深夜通知OKのユーザー判断のため、静音は翌朝から有効
+QUIET_ACTIVE_FROM_UTC = datetime(2026, 6, 12, 0, 0, tzinfo=timezone.utc)
+
+
+def parse_quiet_hours(value: Optional[str]) -> Optional[tuple[time, time]]:
+    """"HH:MM-HH:MM" を (start, end) に。空文字なら無効 (None)。"""
+    if value is None:
+        value = DEFAULT_QUIET_HOURS
+    value = value.strip()
+    if not value:
+        return None
+    start_raw, end_raw = value.split("-")
+    return (time.fromisoformat(start_raw), time.fromisoformat(end_raw))
+
+
+def is_quiet_time(
+    now: datetime, quiet_hours: Optional[tuple[time, time]]
+) -> bool:
+    """静音時間帯 (JST) かどうか。日跨ぎ指定 (例 23:00-06:00) にも対応。"""
+    if quiet_hours is None:
+        return False
+    start, end = quiet_hours
+    now_jst = now.astimezone(JST).time()
+    if start <= end:
+        return start <= now_jst < end
+    return now_jst >= start or now_jst < end
 
 
 def should_send_prematch(
@@ -68,11 +95,16 @@ def run_notify(
     now: Optional[datetime] = None,
     notify_minutes_before: int = 15,
     mention_japan: bool = False,
+    quiet_hours: Optional[tuple[time, time]] = None,
 ) -> None:
     current_time = now or datetime.now(timezone.utc)
     if not is_notify_period(current_time):
         print("notify: outside tournament period; exiting")
         return
+
+    quiet = is_quiet_time(current_time, quiet_hours)
+    if quiet:
+        print("notify: quiet hours (日本戦のみ通知)")
 
     state = state_store.load()
     today_jst = current_time.astimezone(JST).date()
@@ -88,11 +120,17 @@ def run_notify(
             if should_send_prematch(
                 match, current_time, notify_minutes_before, state
             )
+            and (not quiet or match.is_japan)
         ),
         key=lambda match: match.utc_kickoff,
     )
     result_matches = sorted(
-        (match for match in matches if should_send_result(match, state)),
+        (
+            match
+            for match in matches
+            if should_send_result(match, state)
+            and (not quiet or match.is_japan)
+        ),
         key=lambda match: match.utc_kickoff,
     )[:MAX_RESULTS_PER_RUN]
     print(
@@ -214,6 +252,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             now=now,
             notify_minutes_before=notify_minutes,
             mention_japan=mention_japan,
+            quiet_hours=(
+                parse_quiet_hours(os.getenv("QUIET_HOURS"))
+                if now >= QUIET_ACTIVE_FROM_UTC
+                else None
+            ),
         )
     else:
         run_digest(
