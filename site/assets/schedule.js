@@ -8,10 +8,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     schedule = await app.fetchJson("data/schedule.json");
+    container.setAttribute("aria-busy", "false");
     render();
     toggle.addEventListener("change", render);
   } catch (error) {
     app.logDataError(error);
+    app.showLoadError(container);
   }
 
   function render() {
@@ -20,7 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       : schedule;
     if (visibleMatches.length === 0) {
       container.replaceChildren(
-        app.element("p", "empty-state", "該当する試合はありません"),
+        app.emptyState(
+          "該当する試合はありません",
+          "フィルタ条件を変えて確認してみてください。",
+        ),
       );
       return;
     }

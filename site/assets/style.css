@@ -1,105 +1,127 @@
+/* ==========================================================================
+   WORLD CUP 2026 — 特設サイト v2
+   スポーツ配信サービス × サッカー中継UI × 社内企画サイト
+   ========================================================================== */
+
+/* --- 1. Design tokens ----------------------------------------------------- */
 :root {
   color-scheme: dark;
-  --background: #0c0d0f;
-  --surface: #16181c;
-  --surface-raised: #1d2025;
-  --border: #26282c;
-  --accent: #d7ff00;
-  --accent-soft: rgba(215, 255, 0, 0.12);
-  --accent-ink: #101200;
-  --text: #ffffff;
-  --muted: #9aa0a6;
-  --danger: #ff6b6b;
-  --radius: 8px;
-  --nav-height: 48px;
-  /* Liquid Glass tokens (used inside @supports backdrop-filter) */
-  --glass-bg: rgba(23, 26, 31, 0.55);
-  --glass-bg-raised: rgba(38, 42, 49, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  --bg-primary: #050506;
+  --bg-secondary: #0c0d0f;
+  --bg-card: #111317;
+  --bg-card-hover: #16191f;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.48);
+
+  --accent-green: #2ee06a;
+  --accent-lime: #c8f03c;
+  --accent-yellow: #d7ff00;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-green: rgba(46, 224, 106, 0.42);
+
+  --live-red: #ff3b5c;
+
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --header-height: 64px;
+  --font-base:
+    Inter,
+    "Noto Sans JP",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
+/* --- 2. Base -------------------------------------------------------------- */
 * {
   box-sizing: border-box;
 }
 
 html {
-  background: var(--background);
-  color: var(--text);
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP",
-    sans-serif;
-  line-height: 1.5;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-base);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 16px);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  /* keep transparent: html paints the base color, body::before draws the pitch */
   background: transparent;
+  overflow-x: hidden;
 }
 
-/*
- * Soccer pitch + stadium lighting, drawn with CSS gradients only.
- * One fixed layer (cheap to composite); sits behind all content.
- */
+/* グロー + ピッチライン背景 (固定1レイヤー) */
 body::before {
   content: "";
   position: fixed;
-  z-index: -1;
   inset: 0;
+  pointer-events: none;
   background:
-    /* stadium floodlights (accent neon, 3-5% alpha) */
+    /* ネオングロー */
+    radial-gradient(circle at 72% 18%, rgba(46, 224, 106, 0.14), transparent 32%),
+    radial-gradient(circle at 18% 82%, rgba(200, 240, 60, 0.07), transparent 30%),
+    /* センターサークル */
     radial-gradient(
-      55% 42% at 18% -6%,
-      rgba(215, 255, 0, 0.05),
-      transparent 70%
+      circle at 50% 38%,
+      transparent calc(min(36vw, 250px) - 1px),
+      rgba(255, 255, 255, 0.05) min(36vw, 250px),
+      rgba(255, 255, 255, 0.05) calc(min(36vw, 250px) + 1.5px),
+      transparent calc(min(36vw, 250px) + 2.5px)
     ),
+    /* センタースポット */
     radial-gradient(
-      55% 42% at 82% -6%,
-      rgba(215, 255, 0, 0.04),
-      transparent 70%
+      circle at 50% 38%,
+      rgba(255, 255, 255, 0.08) 0 2px,
+      transparent 3px
     ),
-    radial-gradient(
-      90% 34% at 50% -8%,
-      rgba(255, 255, 255, 0.04),
-      transparent 70%
-    ),
-    /* centre spot */
-    radial-gradient(
-      circle at 50% 46%,
-      rgba(255, 255, 255, 0.16) 0 3px,
-      transparent 4px
-    ),
-    /* centre circle (thin ring) */
-    radial-gradient(
-      circle at 50% 46%,
-      transparent calc(min(34vw, 220px) - 1px),
-      rgba(255, 255, 255, 0.14) min(34vw, 220px),
-      rgba(255, 255, 255, 0.14) calc(min(34vw, 220px) + 1.5px),
-      transparent calc(min(34vw, 220px) + 2.5px)
-    ),
-    /* halfway line */
+    /* ハーフウェーライン */
     linear-gradient(
       to bottom,
-      transparent calc(46% - 1px),
-      rgba(255, 255, 255, 0.13) calc(46% - 1px),
-      rgba(255, 255, 255, 0.13) calc(46% + 1px),
-      transparent calc(46% + 1px)
+      transparent calc(38% - 1px),
+      rgba(255, 255, 255, 0.045) calc(38% - 1px),
+      rgba(255, 255, 255, 0.045) calc(38% + 1px),
+      transparent calc(38% + 1px)
     ),
-    /* touchlines */
+    /* タッチライン (ゴールエリア風の直線) */
     linear-gradient(
       to right,
-      transparent 14px,
-      rgba(255, 255, 255, 0.12) 14px,
-      rgba(255, 255, 255, 0.12) calc(14px + 1.5px),
-      transparent calc(14px + 1.5px),
-      transparent calc(100% - 14px - 1.5px),
-      rgba(255, 255, 255, 0.12) calc(100% - 14px - 1.5px),
-      rgba(255, 255, 255, 0.12) calc(100% - 14px),
-      transparent calc(100% - 14px)
-    );
+      transparent 18px,
+      rgba(255, 255, 255, 0.04) 18px,
+      rgba(255, 255, 255, 0.04) calc(18px + 1.5px),
+      transparent calc(18px + 1.5px),
+      transparent calc(100% - 18px - 1.5px),
+      rgba(255, 255, 255, 0.04) calc(100% - 18px - 1.5px),
+      rgba(255, 255, 255, 0.04) calc(100% - 18px),
+      transparent calc(100% - 18px)
+    ),
+    linear-gradient(180deg, #050506 0%, #0c0d0f 100%);
+  z-index: -2;
+}
+
+/* ネオングリーンのパーティクル (微細な光の粒) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
   pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 24%, rgba(46, 224, 106, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 84% 12%, rgba(200, 240, 60, 0.45) 0 1px, transparent 2px),
+    radial-gradient(circle at 64% 64%, rgba(46, 224, 106, 0.35) 0 1px, transparent 2px),
+    radial-gradient(circle at 28% 78%, rgba(46, 224, 106, 0.4) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 92% 52%, rgba(215, 255, 0, 0.3) 0 1px, transparent 2px),
+    radial-gradient(circle at 44% 8%, rgba(46, 224, 106, 0.3) 0 1px, transparent 2px);
+  opacity: 0.5;
+  z-index: -1;
 }
 
 a {
@@ -107,377 +129,945 @@ a {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
-.site-header,
-.page-content,
-.site-footer {
-  width: min(100%, 720px);
+img,
+svg {
+  vertical-align: middle;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.container {
+  width: min(100% - 32px, 1200px);
   margin-inline: auto;
 }
 
+/* --- 3. Sticky Header ------------------------------------------------------ */
 .site-header {
-  padding: 20px 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(5, 5, 6, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 20px;
+  min-height: var(--header-height);
+  padding-block: 8px;
 }
 
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  text-decoration: none;
 }
 
 .brand-mark {
   display: grid;
-  width: 44px;
-  height: 44px;
   place-items: center;
-  border-radius: 6px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.04em;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--accent-green);
+  background: rgba(46, 224, 106, 0.1);
+  border: 1px solid rgba(46, 224, 106, 0.32);
+  box-shadow: 0 0 18px rgba(46, 224, 106, 0.22);
+}
+
+.brand-mark svg {
+  width: 21px;
+  height: 21px;
 }
 
 .brand-title {
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-}
-
-.brand-subtitle {
-  margin: 1px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.tab-nav {
-  position: sticky;
-  z-index: 10;
-  top: 0;
-  display: flex;
-  margin-inline: -16px;
-  overflow-x: auto;
-  padding-inline: 8px;
-  border-bottom: 1px solid var(--border);
-  background: var(--background);
-}
-
-.tab-nav a {
-  display: grid;
-  min-height: var(--nav-height);
-  flex: 1 1 auto;
-  place-items: center;
-  padding: 0 12px;
-  border-bottom: 3px solid transparent;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-align: center;
-  text-decoration: none;
   white-space: nowrap;
 }
 
-.tab-nav a:hover,
-.tab-nav a:focus-visible {
-  color: var(--text);
-  background: var(--surface);
+.brand-title em {
+  font-style: normal;
+  color: var(--accent-green);
 }
 
-.tab-nav a[aria-current="page"] {
-  border-bottom-color: var(--accent);
-  color: var(--text);
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  order: 3;
+  flex: 1 1 100%;
+  overflow-x: auto;
+  margin-inline: -4px;
+  padding: 2px 4px 8px;
+  -webkit-overflow-scrolling: touch;
 }
 
-.page-content {
-  padding: 24px 16px 56px;
+.main-nav a {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.18s ease, background-color 0.18s ease;
 }
 
-.page-kicker,
-.section-kicker {
-  margin: 0 0 2px;
-  color: var(--accent);
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--accent-green);
+  background: rgba(46, 224, 106, 0.08);
+}
+
+.main-nav a[aria-current="page"] {
+  color: var(--accent-green);
+  background: rgba(46, 224, 106, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(46, 224, 106, 0.3);
+}
+
+.header-cta {
+  margin-left: auto;
   font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
+  padding: 8px 16px;
+}
+
+@media (min-width: 860px) {
+  .main-nav {
+    order: 0;
+    flex: 0 1 auto;
+    margin-left: auto;
+    padding-bottom: 2px;
+    overflow: visible;
+  }
+
+  .header-cta {
+    margin-left: 0;
+  }
+}
+
+/* --- 4. 共通コンポーネント -------------------------------------------------- */
+
+/* SectionHeader */
+.section-header {
+  margin-bottom: 28px;
+}
+
+.section-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.sh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 6px;
+  color: var(--accent-green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.page-kicker::before,
-.section-kicker::before {
-  content: "⚽";
-  margin-right: 6px;
-  font-size: 11px;
-  opacity: 0.7;
+.sh-eyebrow svg {
+  width: 14px;
+  height: 14px;
 }
 
-.page-heading {
-  margin: 0 0 4px;
-  font-size: clamp(26px, 7vw, 38px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-.page-lead {
-  margin: 0 0 28px;
-  color: var(--muted);
-}
-
-.section {
-  margin-top: 36px;
-}
-
-.section:first-child {
-  margin-top: 0;
-}
-
-.section-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.section-title {
-  margin: 0 0 12px;
-  font-size: 19px;
+.sh-title {
+  margin: 0;
+  font-size: clamp(22px, 4vw, 30px);
   font-weight: 900;
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
-.section-title-row .section-title {
-  margin-bottom: 0;
+.sh-desc {
+  margin: 8px 0 0;
+  max-width: 60ch;
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
-.section-note {
-  color: var(--muted);
+.section-header::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin-top: 16px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-green), transparent);
+}
+
+.sh-cta {
+  flex: 0 0 auto;
+}
+
+/* GlassCard */
+.glass-card {
+  background: rgba(17, 19, 23, 0.86);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  background: rgba(22, 25, 31, 0.92);
+  border-color: rgba(46, 224, 106, 0.36);
+}
+
+/* PillBadge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pill-live {
+  color: #fff;
+  background: rgba(255, 59, 92, 0.16);
+  border-color: rgba(255, 59, 92, 0.5);
+}
+
+.pill-live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--live-red);
+  animation: live-blink 1.4s ease-in-out infinite;
+}
+
+.pill-next,
+.pill-today {
+  color: var(--accent-green);
+  background: rgba(46, 224, 106, 0.1);
+  border-color: rgba(46, 224, 106, 0.32);
+}
+
+.pill-finished {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pill-japan {
+  color: var(--accent-lime);
+  background: rgba(200, 240, 60, 0.1);
+  border-color: rgba(200, 240, 60, 0.38);
+}
+
+.pill-stage {
+  color: var(--text-secondary);
+}
+
+/* NeonButton */
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    filter 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.neon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.neon-btn-primary {
+  background: var(--accent-green);
+  color: #04140a;
+  box-shadow: 0 6px 28px rgba(46, 224, 106, 0.32);
+}
+
+.neon-btn-primary:hover,
+.neon-btn-primary:focus-visible {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 34px rgba(46, 224, 106, 0.45);
+}
+
+.neon-btn-secondary {
+  background: rgba(46, 224, 106, 0.06);
+  color: var(--accent-green);
+  border-color: rgba(46, 224, 106, 0.45);
+}
+
+.neon-btn-secondary:hover,
+.neon-btn-secondary:focus-visible {
+  background: rgba(46, 224, 106, 0.14);
+  transform: translateY(-1px);
+}
+
+/* Skeleton loading */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-card {
+  padding: 28px;
+  display: grid;
+  gap: 14px;
+}
+
+.skeleton-pill {
+  width: 96px;
+  height: 22px;
+  border-radius: var(--radius-pill);
+}
+
+.skeleton-line {
+  height: 16px;
+}
+
+.skeleton-line.w-70 {
+  width: 70%;
+}
+
+.skeleton-line.w-45 {
+  width: 45%;
+}
+
+.skeleton-line.w-30 {
+  width: 30%;
+}
+
+.skeleton-note {
+  margin: 4px 0 0;
+  color: var(--text-muted);
   font-size: 12px;
 }
 
-.loading,
+/* Empty state */
 .empty-state {
-  margin: 0;
-  padding: 24px 16px;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  color: var(--muted);
+  padding: 36px 24px;
   text-align: center;
 }
 
-.match-list > .loading,
-.match-list > .empty-state {
-  border: 0;
+.empty-state:hover {
+  transform: none;
 }
 
-/* DAZN-style match list: joined rows separated by thin borders */
+.empty-state-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+
+.empty-state-note {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Reveal (fade-up) — JS が有効なときだけ初期非表示にする */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- 5. Hero ---------------------------------------------------------------- */
+.hero {
+  position: relative;
+  padding: clamp(48px, 8vw, 96px) 0 clamp(36px, 5vw, 64px);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 6px 14px;
+  border: 1px solid rgba(46, 224, 106, 0.32);
+  border-radius: var(--radius-pill);
+  color: var(--accent-green);
+  background: rgba(46, 224, 106, 0.07);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.hero-eyebrow svg {
+  width: 13px;
+  height: 13px;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(44px, 8.5vw, 88px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.hero-title .hero-year {
+  display: block;
+  color: var(--accent-green);
+  text-shadow: 0 0 42px rgba(46, 224, 106, 0.45);
+}
+
+.hero-sub {
+  margin: 18px 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hero-catch {
+  margin: 14px 0 0;
+  font-size: clamp(19px, 3vw, 26px);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.hero-desc {
+  margin: 14px 0 0;
+  max-width: 54ch;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+/* スマホでは CTA を横幅いっぱいに */
+@media (max-width: 559px) {
+  .hero-cta .neon-btn,
+  .prediction-cta .neon-btn {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+/* Hero 右側ビジュアル */
+.hero-side {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
+.hero-visual {
+  position: relative;
+  width: min(74vw, 320px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(46, 224, 106, 0.2) 0%,
+    rgba(46, 224, 106, 0.05) 46%,
+    transparent 70%
+  );
+  animation: glow-breathe 5s ease-in-out infinite;
+}
+
+.hero-visual svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-mini-card {
+  width: 100%;
+  max-width: 340px;
+  padding: 18px 22px;
+  text-align: center;
+}
+
+.hero-mini-label {
+  margin: 0 0 8px;
+  color: var(--accent-green);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.hero-mini-match {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.hero-mini-kickoff {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 920px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+  }
+}
+
+/* --- 6. Quick Stats ---------------------------------------------------------- */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+.stat-card {
+  display: grid;
+  gap: 2px;
+  padding: 20px 22px;
+  border-radius: 18px;
+}
+
+.stat-icon {
+  color: var(--accent-green);
+  margin-bottom: 8px;
+}
+
+.stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stat-value {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--accent-lime);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (min-width: 720px) {
+  .quick-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* --- 7. Sections ------------------------------------------------------------- */
+.section {
+  margin-top: clamp(56px, 8vw, 88px);
+}
+
+main {
+  padding-bottom: clamp(64px, 9vw, 110px);
+}
+
+.page-top {
+  padding-top: clamp(36px, 6vw, 64px);
+}
+
+/* --- 8. 次の日本戦 (大型カード) ------------------------------------------------- */
+.hero-match-card {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  padding: clamp(24px, 4vw, 40px);
+  border-color: var(--border-green);
+  overflow: hidden;
+}
+
+.hero-match-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-green),
+    var(--accent-lime),
+    transparent
+  );
+}
+
+.hero-match-card:hover {
+  transform: none;
+}
+
+.hmc-info {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  align-content: start;
+}
+
+.hmc-stage {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hmc-kickoff {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.hmc-kickoff strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.hmc-versus {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.hmc-team {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  text-align: center;
+}
+
+.hmc-team-flag {
+  font-size: clamp(34px, 6vw, 48px);
+  line-height: 1;
+}
+
+.hmc-team-name {
+  font-size: clamp(16px, 2.6vw, 21px);
+  font-weight: 900;
+}
+
+.hmc-vs {
+  color: var(--text-muted);
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.hmc-countdown {
+  display: grid;
+  gap: 10px;
+  align-content: center;
+}
+
+.hmc-countdown-label {
+  margin: 0;
+  color: var(--accent-green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.countdown-clock {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.countdown-unit {
+  display: grid;
+  gap: 2px;
+  padding: 12px 4px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  background: rgba(5, 5, 6, 0.6);
+  text-align: center;
+}
+
+.countdown-value {
+  color: var(--accent-lime);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.countdown-name {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+@media (min-width: 920px) {
+  .hero-match-card {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 1.1fr);
+    align-items: center;
+  }
+}
+
+/* --- 9. 試合カード (今日の試合 / 結果 / 日程) ------------------------------------ */
 .match-list {
   display: grid;
-  gap: 0;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .match-list {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
 }
 
 .match-card {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 4px 8px;
-  padding: 13px 12px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.match-card:last-child {
-  border-bottom: 0;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px 22px;
+  border-radius: 20px;
 }
 
 .match-card.is-japan {
-  /* faint mowed-grass stripes (2-3% white difference) */
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.022) 0 26px,
-    rgba(255, 255, 255, 0) 26px 52px
-  );
-  box-shadow: inset 3px 0 0 var(--accent);
+  border-color: rgba(200, 240, 60, 0.35);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(200, 240, 60, 0.18);
+}
+
+.match-card.is-live {
+  border-color: rgba(255, 59, 92, 0.4);
+}
+
+.match-card.is-finished {
+  background: rgba(13, 14, 17, 0.82);
+}
+
+.match-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .match-time {
-  color: var(--text);
-  font-size: 12px;
+  font-size: 18px;
+  font-weight: 900;
   font-variant-numeric: tabular-nums;
-  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.match-card.is-finished .match-time {
+  color: var(--text-muted);
 }
 
 .matchup {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .team-name {
-  overflow: hidden;
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: -0.01em;
+}
+
+.team-name .team-label {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.team-name:last-child {
+.matchup .team-name:last-child {
+  justify-self: end;
+  flex-direction: row-reverse;
   text-align: right;
+}
+
+.team-flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.team-name.is-winner {
+  color: var(--accent-green);
 }
 
 .match-score {
-  min-width: 32px;
-  color: var(--muted);
-  font-size: 13px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 900;
+  min-width: 56px;
   text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
 }
 
-.match-card.is-finished .match-score {
-  color: var(--text);
-  font-size: 16px;
+.match-card.is-finished .match-score,
+.match-card.is-live .match-score {
+  color: var(--text-primary);
+  font-size: 22px;
+  letter-spacing: 0.02em;
 }
 
-.match-side {
-  display: grid;
-  justify-items: end;
-  max-width: 88px;
-  text-align: right;
+.match-card-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
 }
 
 .match-stage {
-  overflow: hidden;
-  max-width: 100%;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.match-status {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.match-card.is-live .match-status {
-  color: var(--accent);
-}
-
-.japan-label {
-  display: inline-flex;
-  grid-column: 2 / -1;
-  align-items: center;
-  gap: 4px;
-  color: var(--accent);
+  margin-right: auto;
+  color: var(--text-muted);
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-weight: 700;
 }
 
-.countdown-card {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius);
-  background: var(--surface);
+.match-extra {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.countdown-label {
-  margin: 0 0 5px;
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.countdown-match {
-  margin: 0;
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.countdown-kickoff {
-  margin: 4px 0 18px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.countdown-clock {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.countdown-unit {
-  padding: 11px 4px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--background);
-  text-align: center;
-}
-
-.countdown-value {
-  display: block;
-  color: var(--accent);
-  font-size: 25px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.countdown-name {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-}
-
+/* --- 10. 日程ページ ------------------------------------------------------------ */
 .date-group {
-  margin-top: 28px;
+  margin-top: 36px;
 }
 
 .date-heading {
   position: sticky;
-  z-index: 2;
-  top: var(--nav-height);
-  margin: 0 0 8px;
-  padding: 9px 4px;
-  background: rgba(12, 13, 15, 0.96);
+  z-index: 5;
+  top: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  padding: 10px 4px;
+  background: rgba(5, 5, 6, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   font-size: 15px;
   font-weight: 900;
-  letter-spacing: 0.02em;
-  backdrop-filter: blur(8px);
+  letter-spacing: 0.03em;
 }
 
 .date-heading::before {
-  content: "⚽";
-  margin-right: 7px;
-  font-size: 12px;
-  opacity: 0.55;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 12px rgba(46, 224, 106, 0.6);
 }
 
 .filter-row {
   display: flex;
   justify-content: flex-end;
-  margin: 18px 0;
+  margin: 0 0 24px;
 }
 
 .toggle {
@@ -485,48 +1075,139 @@ input {
   min-height: 44px;
   align-items: center;
   gap: 10px;
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
+  padding: 8px 18px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: rgba(17, 19, 23, 0.86);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
 }
 
 .toggle:hover {
-  background: var(--surface-raised);
+  border-color: var(--border-green);
+  background: var(--bg-card-hover);
 }
 
 .toggle input {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin: 0;
-  accent-color: var(--accent);
+  accent-color: var(--accent-green);
+}
+
+/* --- 11. 出場国ギャラリー -------------------------------------------------------- */
+.team-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1 1 240px;
+  display: flex;
+  align-items: center;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 16px 10px 44px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: rgba(5, 5, 6, 0.7);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(46, 224, 106, 0.18);
+}
+
+.sort-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sort-select select {
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: rgba(5, 5, 6, 0.7);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.sort-select select:hover,
+.sort-select select:focus-visible {
+  border-color: var(--accent-green);
 }
 
 .team-grid {
   display: grid;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 600px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 920px) {
+  .team-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .team-card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  min-width: 0;
+  border-radius: 20px;
 }
 
 .team-card[open] {
-  border-color: var(--accent);
+  grid-column: 1 / -1;
+  border-color: var(--border-green);
+}
+
+.team-card[open]:hover {
+  transform: none;
 }
 
 .team-summary {
   display: flex;
-  min-height: 72px;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: 14px;
+  min-height: 84px;
+  padding: 18px 20px;
   cursor: pointer;
   list-style: none;
 }
@@ -535,9 +1216,49 @@ input {
   display: none;
 }
 
+.team-flag-lg {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.team-heading {
+  min-width: 0;
+  flex: 1;
+}
+
+.team-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-english {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-badges {
+  display: grid;
+  gap: 5px;
+  justify-items: end;
+}
+
 .team-summary::after {
   content: "+";
-  color: var(--accent);
+  margin-left: 2px;
+  color: var(--accent-green);
   font-size: 22px;
   font-weight: 400;
 }
@@ -546,292 +1267,421 @@ input {
   content: "−";
 }
 
-.team-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-}
-
-.team-english {
-  display: block;
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .rank-badge {
   flex: 0 0 auto;
-  padding: 5px 9px;
-  border-radius: 4px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(46, 224, 106, 0.3);
+  background: rgba(46, 224, 106, 0.08);
+  color: var(--accent-green);
+  font-size: 10px;
   font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.group-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .squad {
   display: grid;
-  gap: 1px;
-  margin: 0 12px 12px;
-  overflow: hidden;
-  border-radius: 6px;
-  background: var(--border);
+  gap: 2px;
+  margin: 0 18px 18px;
+  max-height: 380px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+@media (min-width: 720px) {
+  .squad {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .squad {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .player-row {
   display: grid;
-  grid-template-columns: 28px 34px minmax(0, 1fr);
-  gap: 7px;
-  padding: 9px 10px;
-  background: var(--background);
+  grid-template-columns: 30px 38px minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: rgba(5, 5, 6, 0.55);
   font-size: 13px;
 }
 
 .player-number,
 .player-position {
-  color: var(--muted);
+  color: var(--text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+.player-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .squad-empty {
   margin: 0;
-  padding: 0 16px 18px;
-  color: var(--muted);
+  padding: 0 20px 20px;
+  color: var(--text-muted);
   font-size: 13px;
 }
 
-.prediction-hero {
-  padding: 28px 20px;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius);
-  background: var(--surface);
+/* トップページの出場国プレビュー */
+.team-preview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
 }
 
-.prediction-hero p {
+@media (min-width: 600px) {
+  .team-preview-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 920px) {
+  .team-preview-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.team-preview-card {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  padding: 22px 14px;
+  border-radius: 18px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.team-preview-flag {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.team-preview-name {
   margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* --- 12. 優勝予想バトル ----------------------------------------------------------- */
+.steps-grid {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 760px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.step-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 26px 24px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.step-num svg {
+  width: 16px;
+  height: 16px;
+}
+
+.step-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.step-desc {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.cmd {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(46, 224, 106, 0.35);
+  background: rgba(5, 5, 6, 0.8);
+  color: var(--accent-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  font-weight: 700;
+}
+
+.prediction-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+/* 優勝予想ページ */
+.prediction-hero {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: clamp(28px, 5vw, 44px);
+  border-color: var(--border-green);
+  overflow: hidden;
+}
+
+.prediction-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-lime), transparent);
+}
+
+.prediction-hero:hover {
+  transform: none;
 }
 
 .prediction-hero-title {
-  font-size: clamp(24px, 7vw, 34px);
+  margin: 0;
+  font-size: clamp(26px, 5vw, 38px);
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
+.prediction-hero-desc {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  max-width: 56ch;
+}
+
 .prediction-command {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 9px 14px;
-  border-radius: 4px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(46, 224, 106, 0.4);
+  background: rgba(5, 5, 6, 0.85);
+  color: var(--accent-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.prediction-command::before {
+  content: ">";
+  color: var(--text-muted);
+}
+
+/* 予想分布チャート */
+.section-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .chart {
   display: grid;
-  gap: 15px;
+  gap: 18px;
+  padding: clamp(20px, 4vw, 32px);
+}
+
+.chart:hover {
+  transform: none;
+}
+
+.chart > .empty-state {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .chart-row {
   display: grid;
-  gap: 6px;
+  gap: 7px;
 }
 
 .chart-label {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 12px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
+}
+
+.chart-label span:last-child {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 .chart-track {
   height: 12px;
   overflow: hidden;
-  border-radius: 3px;
-  background: var(--surface-raised);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .chart-bar {
   width: var(--bar-width);
-  min-width: 4px;
+  min-width: 6px;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #9dbd00, var(--accent));
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
+  box-shadow: 0 0 14px rgba(46, 224, 106, 0.35);
 }
 
-.site-footer {
-  padding: 0 16px 32px;
-  color: #6f7378;
+/* --- 13. サブページ見出し --------------------------------------------------------- */
+.page-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  color: var(--accent-green);
   font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.page-kicker svg {
+  width: 14px;
+  height: 14px;
+}
+
+.page-heading {
+  margin: 0 0 8px;
+  font-size: clamp(30px, 6vw, 48px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.page-lead {
+  margin: 0 0 32px;
+  max-width: 60ch;
+  color: var(--text-secondary);
+}
+
+/* --- 14. フッター ------------------------------------------------------------------ */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(5, 5, 6, 0.85);
+  padding: 40px 0 48px;
   text-align: center;
 }
 
-.site-footer a:hover,
-.site-footer a:focus-visible {
-  color: var(--accent);
+.footer-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-[hidden] {
-  display: none !important;
+.footer-title em {
+  font-style: normal;
+  color: var(--accent-green);
 }
 
-@media (min-width: 560px) {
-  .site-header {
-    padding-top: 28px;
-  }
+.footer-tagline {
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
 
-  .page-content {
-    padding-top: 32px;
-  }
+.footer-credit {
+  margin: 18px 0 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
 
-  .tab-nav a {
-    font-size: 14px;
-  }
+.footer-credit a {
+  color: var(--text-muted);
+  transition: color 0.18s ease;
+}
 
-  .match-card {
-    grid-template-columns: 52px minmax(0, 1fr) auto;
-    gap: 4px 12px;
-    padding: 13px 14px;
-  }
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--accent-green);
+}
 
-  .match-time {
-    font-size: 13px;
+/* --- 15. アニメーション ------------------------------------------------------------- */
+@keyframes live-blink {
+  0%,
+  100% {
+    opacity: 1;
   }
-
-  .team-name {
-    font-size: 15px;
-  }
-
-  .match-score {
-    min-width: 46px;
-    font-size: 15px;
-  }
-
-  .match-card.is-finished .match-score {
-    font-size: 17px;
-  }
-
-  .match-side {
-    max-width: 160px;
-  }
-
-  .match-stage,
-  .match-status {
-    font-size: 11px;
-  }
-
-  .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  50% {
+    opacity: 0.35;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .match-card,
-  .team-card,
-  .toggle,
-  .tab-nav a {
-    transition:
-      border-color 160ms ease,
-      background-color 160ms ease,
-      color 160ms ease;
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
   }
 }
 
-.match-card:hover {
-  background-color: var(--surface-raised);
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
-.team-card:hover {
-  border-color: #3a3d42;
-}
-
-/*
- * Liquid Glass layer — only where backdrop-filter is supported.
- * Without support, the opaque DAZN-dark fallback above stays as-is.
- * Blur is kept to a small number of container surfaces for performance.
- */
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .tab-nav {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(12, 13, 15, 0.6);
-    box-shadow: 0 1px 0 rgba(215, 255, 0, 0.08);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 
-  .tab-nav a:hover,
-  .tab-nav a:focus-visible {
-    background: rgba(255, 255, 255, 0.06);
+  html {
+    scroll-behavior: auto;
   }
 
-  .match-list,
-  .countdown-card,
-  .team-card,
-  .prediction-hero,
-  .toggle {
-    border-color: var(--glass-border);
-    background: var(--glass-bg);
-    box-shadow: var(--glass-highlight);
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    backdrop-filter: blur(14px) saturate(150%);
-  }
-
-  .countdown-card,
-  .prediction-hero {
-    border-left: 4px solid var(--accent);
-  }
-
-  /* rows live inside the already-blurred .match-list: no extra blur */
-  .match-card {
-    border-bottom-color: rgba(255, 255, 255, 0.06);
-    background-color: transparent;
-  }
-
-  .match-card:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  .team-card[open] {
-    border-color: var(--accent);
-  }
-
-  .team-card:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-    background: var(--glass-bg-raised);
-  }
-
-  .toggle:hover {
-    background: var(--glass-bg-raised);
-  }
-
-  .countdown-unit {
-    border-color: rgba(255, 255, 255, 0.07);
-    background: rgba(10, 11, 13, 0.5);
-    box-shadow: var(--glass-highlight);
-  }
-
-  .player-row {
-    background: rgba(12, 13, 15, 0.55);
-  }
-
-  .squad {
-    background: rgba(255, 255, 255, 0.07);
-  }
-
-  .date-heading {
-    background: rgba(12, 13, 15, 0.55);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    backdrop-filter: blur(16px) saturate(150%);
-  }
-
-  .chart-track {
-    background: rgba(255, 255, 255, 0.08);
+  .js .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
