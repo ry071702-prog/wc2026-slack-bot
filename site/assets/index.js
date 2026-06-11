@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       clock.append(unit);
     });
     card.append(clock);
+    container.classList.remove("loading");
     container.replaceChildren(card);
 
     const update = () => {
