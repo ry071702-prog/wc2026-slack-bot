@@ -48,6 +48,33 @@ jobs:
           print("OK: football-data.org free tier returns 2026 World Cup data")
           EOF
 
+      - name: Verify match detail (goals) on free tier
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: |
+          python - <<'EOF'
+          import json
+          import os
+
+          import requests
+
+          # 開幕戦 (FINISHED) の詳細に goals が含まれるか確認
+          response = requests.get(
+              "https://api.football-data.org/v4/matches/537327",
+              headers={"X-Auth-Token": os.environ["FOOTBALL_DATA_API_KEY"]},
+              timeout=10,
+          )
+          response.raise_for_status()
+          data = response.json()
+          print("top-level keys:", sorted(data.keys()))
+          goals = data.get("goals")
+          print(f"goals: {json.dumps(goals, ensure_ascii=False) if goals is not None else 'フィールド無し'}")
+          for key in ("bookings", "lineups", "substitutions", "referees"):
+              value = data.get(key)
+              size = len(value) if isinstance(value, list) else value
+              print(f"{key}: {size}")
+          EOF
+
       - name: Verify API-FOOTBALL coverage (WC2026)
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
