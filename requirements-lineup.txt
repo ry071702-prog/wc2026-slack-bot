@@ -1,0 +1,4 @@
+# スタメン図描画用 (lineup.yml でのみ使用)。
+# 5分毎cron (notify.yml) のインストールを重くしないため requirements.txt には入れない
+matplotlib>=3.5,<4
+mplsoccer>=1.2  # ローカル (py3.9) は mplsoccer==1.4.0 まで (1.6+ は py3.10 必須)
