@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+  <channel>
+    <generator>NFE/5.0</generator>
+    <title>"FIFA World Cup 2026" - Google News</title>
+    <link>https://news.google.com/search?q=FIFA+World+Cup+2026</link>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 11 Jun 2026 12:45:00 GMT</lastBuildDate>
+    <item>
+      <title>Opening match preview: hosts ready for kickoff - Reuters</title>
+      <link>https://news.google.com/rss/articles/sample-reuters</link>
+      <guid isPermaLink="false">sample-reuters</guid>
+      <pubDate>Wed, 10 Jun 2026 09:00:00 GMT</pubDate>
+      <source url="https://www.reuters.com">Reuters</source>
+    </item>
+    <item>
+      <title>Japan name final 26-man squad - ESPN</title>
+      <link>https://news.google.com/rss/articles/sample-espn</link>
+      <guid isPermaLink="false">sample-espn</guid>
+      <pubDate>Thu, 11 Jun 2026 12:30:00 GMT</pubDate>
+      <source url="https://www.espn.com">ESPN</source>
+    </item>
+    <item>
+      <title>Headline without date or source</title>
+      <link>https://news.google.com/rss/articles/sample-nodate</link>
+      <guid isPermaLink="false">sample-nodate</guid>
+    </item>
+    <item>
+      <title>Item without link is skipped - AP News</title>
+      <guid isPermaLink="false">sample-nolink</guid>
+      <pubDate>Thu, 11 Jun 2026 10:00:00 GMT</pubDate>
+      <source url="https://apnews.com">AP News</source>
+    </item>
+  </channel>
+</rss>
