@@ -3,6 +3,10 @@
 API-FOOTBALL 無料プランは 2026 の lineups にアクセス不可のため、
 スタメンは data/lineups/*.json への手動入力方式 (sample.json 参照)。
 
+選手は data/squads.json ("team" フィールド、省略時 Japan) と背番号で照合し
+(不一致時は name_ja でフォールバック)、photo URL をダウンロードして円形の
+顔写真 + 緑縁 + 背番号バッジで描画する。照合/DL失敗時は従来の緑丸に戻る。
+
 描画は mplsoccer + matplotlib (requirements-lineup.txt のみで管理。
 5分毎 cron のインストールを重くしないため requirements.txt には入れない)。
 そのため matplotlib / mplsoccer の import は render_lineup() 内に置き、
@@ -23,6 +27,16 @@ PITCH_COLOR = "#050506"
 LINE_COLOR = "#2EE06A"
 MARKER_COLOR = "#2EE06A"
 TEXT_COLOR = "#FFFFFF"
+
+# 顔写真の照合に使う squads.json と既定チーム
+SQUADS_PATH = Path(__file__).resolve().parents[1] / "data" / "squads.json"
+DEFAULT_TEAM = "Japan"
+
+# 顔写真円の描画パラメータ
+# OffsetImage の表示サイズは「画像px × zoom」が points になる (dpi に応じ拡大)。
+PHOTO_DIAMETER_PT = 41.0  # 緑丸 (s=1150 ≒ 直径38pt) よりやや大きめ
+PHOTO_RING_FRAC = 0.045  # 円縁 (#2EE06A) の太さ: 画像辺に対する比率 (表示2-3px相当)
+PHOTO_DL_TIMEOUT = 10.0
 
 # GK の縦位置と、フィールドプレイヤーのラインが占める縦範囲 (0=自陣ゴール, 100=敵陣ゴール)
 GK_X = 7.0
@@ -83,6 +97,42 @@ def load_lineup(path: Path) -> dict[str, Any]:
     return lineup
 
 
+def load_squad(team: str, squads_path: Path = SQUADS_PATH) -> list[dict[str, Any]]:
+    """squads.json から team のスカッドを返す。読めない/無いときは [] (落とさない)。"""
+    try:
+        squads = json.loads(Path(squads_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, ValueError):
+        return []
+    members = squads.get(team)
+    return members if isinstance(members, list) else []
+
+
+def squad_for_lineup(
+    lineup: dict[str, Any], squads_path: Path = SQUADS_PATH
+) -> list[dict[str, Any]]:
+    """lineup の "team" (省略時 Japan) に対応するスカッドを返す。"""
+    return load_squad(lineup.get("team", DEFAULT_TEAM), squads_path)
+
+
+def resolve_photo_url(player: dict[str, Any], squad: list[dict[str, Any]]) -> str | None:
+    """選手の顔写真URLを解決する。
+
+    背番号一致を優先し、無ければ name_ja 一致でフォールバック。
+    photo を持たないメンバーは照合対象外。どちらも無ければ None。
+    """
+    number = player.get("number")
+    if number is not None:
+        for member in squad:
+            if member.get("number") == number and member.get("photo"):
+                return member["photo"]
+    name = player.get("name")
+    if name:
+        for member in squad:
+            if member.get("name_ja") == name and member.get("photo"):
+                return member["photo"]
+    return None
+
+
 def kickoff_label(kickoff_jst: str) -> str:
     """ISO形式の kickoff_jst を "6/15 5:00" 形式にする。"""
     dt = datetime.fromisoformat(kickoff_jst)
@@ -104,12 +154,64 @@ def resolve_font() -> str:
     )
 
 
+def _fetch_photo(url: str) -> "Any":
+    """photo URL をダウンロードして画像配列 (numpy) を返す (matplotlib が必要)。"""
+    from io import BytesIO
+
+    import matplotlib.pyplot as plt
+    import requests
+
+    resp = requests.get(url, timeout=PHOTO_DL_TIMEOUT)
+    resp.raise_for_status()
+    return plt.imread(BytesIO(resp.content), format="png")
+
+
+def _circular_photo(img: "Any") -> "Any":
+    """正方形クリップ + 円形アルファマスク + #2EE06A の縁を付けた RGBA を返す。
+
+    API-Sports の写真は背景透過とは限らないため、中央正方形を
+    そのまま円形に切り抜く (numpy のみで処理)。
+    """
+    import numpy as np
+    from matplotlib.colors import to_rgb
+
+    img = np.asarray(img)
+    if img.dtype.kind in ("u", "i"):
+        img = img.astype(np.float64) / 255.0
+    if img.ndim == 2:  # グレースケール → RGB
+        img = np.stack([img] * 3, axis=-1)
+
+    # 中央正方形にクロップ
+    h, w = img.shape[:2]
+    side = min(h, w)
+    top = (h - side) // 2
+    left = (w - side) // 2
+    img = img[top : top + side, left : left + side]
+
+    rgba = np.ones((side, side, 4), dtype=np.float64)
+    rgba[..., :3] = img[..., :3]
+
+    # 円形マスク (縁1px分アンチエイリアス)
+    center = (side - 1) / 2.0
+    radius = side / 2.0
+    yy, xx = np.ogrid[:side, :side]
+    dist = np.sqrt((xx - center) ** 2 + (yy - center) ** 2)
+    rgba[..., 3] = np.clip(radius - dist, 0.0, 1.0)
+
+    # 縁: 外周の環状部分をテーマ色で塗る
+    ring_width = max(3.0, side * PHOTO_RING_FRAC)
+    ring = dist >= radius - ring_width
+    rgba[ring, :3] = to_rgb(LINE_COLOR)
+    return rgba
+
+
 def render_lineup(lineup: dict[str, Any], output: Path) -> Path:
     """lineup dict からフォーメーション図 PNG を生成する。"""
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    from matplotlib.offsetbox import AnnotationBbox, OffsetImage
     from mplsoccer import VerticalPitch
 
     font = resolve_font()
@@ -117,6 +219,7 @@ def render_lineup(lineup: dict[str, Any], output: Path) -> Path:
 
     coords = compute_coordinates(lineup["formation"])
     players = lineup["players"]
+    squad = squad_for_lineup(lineup)
 
     pitch = VerticalPitch(
         pitch_type="opta",
@@ -133,30 +236,74 @@ def render_lineup(lineup: dict[str, Any], output: Path) -> Path:
         # opta 座標は y=0 が攻撃方向に向かって左。VerticalPitch (攻撃方向=上)
         # では y が大きいほど画面左に描かれるため、画面左→右にしたい y_left を反転する
         y = 100.0 - y_left
-        pitch.scatter(
-            x,
-            y,
-            s=1150,
-            color=MARKER_COLOR,
-            edgecolors=PITCH_COLOR,
-            linewidth=1.2,
-            zorder=3,
-            ax=ax,
-        )
-        pitch.annotate(
-            str(player["number"]),
-            xy=(x, y),
-            ax=ax,
-            ha="center",
-            va="center",
-            fontsize=13,
-            fontweight="bold",
-            color=TEXT_COLOR,
-            zorder=4,
-        )
+
+        # 顔写真の取得 (照合失敗/DL失敗/デコード失敗は緑丸にフォールバック)
+        photo = None
+        photo_url = resolve_photo_url(player, squad)
+        if photo_url:
+            try:
+                photo = _circular_photo(_fetch_photo(photo_url))
+            except Exception:
+                photo = None
+
+        if photo is not None:
+            # VerticalPitch の ax データ座標は (y, x) (mplsoccer が縦横を入替)
+            box = OffsetImage(photo, zoom=PHOTO_DIAMETER_PT / photo.shape[0])
+            artist = AnnotationBbox(
+                box, (y, x), frameon=False, pad=0.0, zorder=3
+            )
+            ax.add_artist(artist)
+            # 背番号バッジ: 写真円の右下 (画面右=y小, 画面下=x小) に小さな緑丸+白字
+            badge_x, badge_y = x - 2.6, y - 3.0
+            pitch.scatter(
+                badge_x,
+                badge_y,
+                s=210,
+                color=MARKER_COLOR,
+                edgecolors=PITCH_COLOR,
+                linewidth=0.8,
+                zorder=5,
+                ax=ax,
+            )
+            pitch.annotate(
+                str(player["number"]),
+                xy=(badge_x, badge_y),
+                ax=ax,
+                ha="center",
+                va="center",
+                fontsize=7.5,
+                fontweight="bold",
+                color=TEXT_COLOR,
+                zorder=6,
+            )
+        else:
+            # フォールバック: 従来どおり緑丸+白背番号
+            pitch.scatter(
+                x,
+                y,
+                s=1150,
+                color=MARKER_COLOR,
+                edgecolors=PITCH_COLOR,
+                linewidth=1.2,
+                zorder=3,
+                ax=ax,
+            )
+            pitch.annotate(
+                str(player["number"]),
+                xy=(x, y),
+                ax=ax,
+                ha="center",
+                va="center",
+                fontsize=13,
+                fontweight="bold",
+                color=TEXT_COLOR,
+                zorder=4,
+            )
+        # 選手名: 円の下 (写真円はやや大きいぶん少し下げる)
+        name_offset = 5.0 if photo is not None else 4.6
         pitch.annotate(
             player["name"],
-            xy=(x - 4.6, y),
+            xy=(x - name_offset, y),
             ax=ax,
             ha="center",
             va="center",
