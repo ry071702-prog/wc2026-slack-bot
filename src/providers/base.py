@@ -29,6 +29,7 @@ class Match:
     matchday: Optional[int]
     status: str
     score: MatchScore
+    venue: Optional[str] = None
 
     @property
     def kickoff_jst(self) -> datetime:

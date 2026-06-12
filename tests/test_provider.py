@@ -44,7 +44,9 @@ def test_provider_parses_fixture_and_converts_to_jst() -> None:
 
     assert matches[0].kickoff_jst.isoformat() == "2026-06-21T13:00:00+09:00"
     assert matches[0].home == "Tunisia"
+    assert matches[0].venue is None
     assert matches[2].score.away == 2
+    assert matches[2].venue == "Estadio Azteca"
     call = session.calls[0]
     assert call["headers"] == {"X-Auth-Token": "test-key"}
     assert call["params"] == {

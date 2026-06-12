@@ -49,6 +49,7 @@ def test_match_to_schedule_entry_converts_to_jst() -> None:
         "group": "GROUP_F",
         "matchday": 2,
         "status": "FINISHED",
+        "venue": None,
         "score": {
             "home": 1,
             "away": 2,
@@ -105,6 +106,39 @@ def test_generate_site_data_joins_rankings_and_squads(
     assert json.loads(
         (output_dir / "teams.json").read_text(encoding="utf-8")
     ) == teams
+
+
+def test_generate_site_data_copies_highlights_and_match_facts(
+    tmp_path: Path,
+) -> None:
+    highlights_path = tmp_path / "highlights.json"
+    highlights = {
+        "1001": {
+            "url": "https://www.youtube.com/watch?v=HxHaup6d_wM",
+            "title": "ハイライト動画",
+        }
+    }
+    highlights_path.write_text(
+        json.dumps(highlights, ensure_ascii=False), encoding="utf-8"
+    )
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        highlights_path=highlights_path,
+        match_facts_path=tmp_path / "missing-match-facts.json",
+    )
+
+    assert json.loads(
+        (output_dir / "highlights.json").read_text(encoding="utf-8")
+    ) == highlights
+    # 元データが無い場合は空オブジェクトを配信する
+    assert json.loads(
+        (output_dir / "match_facts.json").read_text(encoding="utf-8")
+    ) == {}
 
 
 def test_build_teams_excludes_tbd() -> None:

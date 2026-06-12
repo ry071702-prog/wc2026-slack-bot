@@ -37,6 +37,7 @@
       "stage": "GROUP_STAGE",
       "group": "GROUP_F",
       "matchday": 2,
+      "venue": "Estadio Azteca",
       "homeTeam": {"name": "Tunisia"},
       "awayTeam": {"name": "Japan"},
       "score": {

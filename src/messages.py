@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import date
-from urllib.parse import quote_plus
 
 from src.providers.base import Match
 
@@ -83,6 +82,7 @@ KNOCKOUT_STAGE_NAMES = {
     "FINAL": "決勝",
 }
 
+SITE_BASE_URL = "https://ry071702-prog.github.io/wc2026-slack-bot"
 VIEWING_TEXT_JAPAN = "📺 ABEMA de DAZN / DAZN ／ 地上波（NHK・日テレ）"
 VIEWING_TEXT = "📺 ABEMA de DAZN / DAZN"
 DIGEST_CONTEXT = (
@@ -166,15 +166,12 @@ def result_text(match: Match) -> str:
         f"{flag}{team_name(match.home)} *{home_score} - {away_score}* "
         f"{team_name(match.away)}{score_suffix}\n"
         f"{outcome} {stage}\n"
-        f"▶️ <{highlight_search_url(match)}|ハイライトを探す (YouTube)>"
+        f"▶️ <{match_detail_url(match)}|試合詳細・ハイライト>"
     )
 
 
-def highlight_search_url(match: Match) -> str:
-    query = (
-        f"{team_name(match.home)} vs {team_name(match.away)} ハイライト W杯"
-    )
-    return f"https://www.youtube.com/results?search_query={quote_plus(query)}"
+def match_detail_url(match: Match) -> str:
+    return f"{SITE_BASE_URL}/match.html?id={match.id}"
 
 
 def _group_letter(group: str | None) -> str:
