@@ -28,6 +28,7 @@ TOURNAMENT_START = date(2026, 6, 11)
 TOURNAMENT_END = date(2026, 7, 20)
 HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
 SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+PLAYLIST_ITEMS_URL = "https://www.googleapis.com/youtube/v3/playlistItems"
 CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels"
 CHANNEL_HANDLE = "DAZNJapan"
 CHANNEL_QUERY = "DAZN Japan"
@@ -63,15 +64,24 @@ def title_matches(title: str, home: str, away: str) -> bool:
 
 
 def pick_video(
-    items: list[dict[str, Any]], home: str, away: str
+    uploads: list[dict[str, str]], match: Match
 ) -> Optional[dict[str, str]]:
-    """検索結果からタイトルに両チーム名が入る最初の動画を採用する。"""
-    for item in items:
-        video_id = (item.get("id") or {}).get("videoId")
-        title = (item.get("snippet") or {}).get("title", "")
-        if video_id and title_matches(title, home, away):
+    """アップロード一覧から、KO以降公開かつ両チーム名+「ハイライト」を含む動画を選ぶ。"""
+    kickoff_iso = (
+        match.utc_kickoff.astimezone(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
+    for upload in uploads:
+        title = upload.get("title", "")
+        if (
+            upload.get("publishedAt", "") >= kickoff_iso
+            and "ハイライト" in title
+            and title_matches(title, match.home, match.away)
+        ):
             return {
-                "url": f"https://www.youtube.com/watch?v={video_id}",
+                "url": f"https://www.youtube.com/watch?v={upload['videoId']}",
                 "title": title,
             }
     return None
@@ -113,31 +123,51 @@ def resolve_channel_id(
     return None
 
 
-def search_match_videos(
+def fetch_recent_uploads(
     session: requests.Session,
     api_key: str,
     channel_id: str,
-    match: Match,
-) -> list[dict[str, Any]]:
-    published_after = (
-        match.utc_kickoff.astimezone(timezone.utc)
-        .replace(microsecond=0)
-        .isoformat()
-        .replace("+00:00", "Z")
+    pages: int = 2,
+) -> list[dict[str, str]]:
+    """チャンネルのアップロード一覧 (最新最大100件)。
+
+    search.list は新着のインデックス反映が数時間遅れるため使わない。
+    playlistItems はほぼリアルタイム + 1unit/コール。
+    """
+    playlist_id = (
+        "UU" + channel_id[2:] if channel_id.startswith("UC") else channel_id
     )
-    return _search(
-        session,
-        api_key,
-        {
-            "type": "video",
-            "channelId": channel_id,
-            # DAZN Japan のタイトルは日本語 (例:【メキシコ×南アフリカ｜ハイライト…】)
-            "q": f"{team_name(match.home)} {team_name(match.away)} ハイライト",
-            "order": "date",
-            "publishedAfter": published_after,
-            "maxResults": 5,
-        },
-    )
+    uploads: list[dict[str, str]] = []
+    page_token = None
+    for _ in range(pages):
+        params: dict[str, Any] = {
+            "part": "snippet",
+            "playlistId": playlist_id,
+            "maxResults": 50,
+            "key": api_key,
+        }
+        if page_token:
+            params["pageToken"] = page_token
+        response = session.get(
+            PLAYLIST_ITEMS_URL, params=params, timeout=15
+        )
+        response.raise_for_status()
+        payload = response.json()
+        for item in payload.get("items", []):
+            snippet = item.get("snippet") or {}
+            video_id = (snippet.get("resourceId") or {}).get("videoId")
+            if video_id:
+                uploads.append(
+                    {
+                        "videoId": video_id,
+                        "title": snippet.get("title", ""),
+                        "publishedAt": snippet.get("publishedAt", ""),
+                    }
+                )
+        page_token = payload.get("nextPageToken")
+        if not page_token:
+            break
+    return uploads
 
 
 def update_highlights(
@@ -154,19 +184,19 @@ def update_highlights(
         print("DAZN Japan channel could not be resolved; abort")
         return 0
 
-    updated = 0
-    searched = 0
     finished = [m for m in matches if m.status == "FINISHED"]
-    for match in sorted(finished, key=lambda m: m.utc_kickoff):
+    pending = [m for m in finished if str(m.id) not in data]
+    if not pending:
+        print("no pending matches")
+        return 0
+
+    uploads = fetch_recent_uploads(session, api_key, channel_id)
+    print(f"recent uploads: {len(uploads)} (pending matches: {len(pending)})")
+
+    updated = 0
+    for match in sorted(pending, key=lambda m: m.utc_kickoff):
         key = str(match.id)
-        if key in data:
-            continue
-        if searched >= MAX_SEARCHES_PER_RUN:
-            print(f"search limit ({MAX_SEARCHES_PER_RUN}) reached; stop")
-            break
-        searched += 1
-        items = search_match_videos(session, api_key, channel_id, match)
-        picked = pick_video(items, match.home, match.away)
+        picked = pick_video(uploads, match)
         if picked:
             data[key] = picked
             updated += 1
@@ -177,9 +207,6 @@ def update_highlights(
             print(f"not found (>72h, give up): {match.home} vs {match.away}")
         else:
             print(f"not found (retry next run): {match.home} vs {match.away}")
-            for item in items:
-                title = (item.get("snippet") or {}).get("title", "")
-                print(f"  candidate: {title}")
     return updated
 
 
