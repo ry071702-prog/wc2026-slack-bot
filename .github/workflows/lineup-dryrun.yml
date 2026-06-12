@@ -1,0 +1,69 @@
+name: Lineup auto-fetch dry run (manual)
+
+# 本番投稿は一切しない。RSS→Gemini抽出→26人照合 のパイプライン疎通だけを確認する。
+# kickoff を「実行時刻+35分」に偽装した一時configで fetch 窓に入れる。
+
+on:
+  workflow_dispatch:
+    inputs:
+      opponent:
+        description: 検索に使う対戦相手名
+        default: オランダ
+
+permissions:
+  contents: read
+
+jobs:
+  dryrun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build fake config (kickoff = now + 35min)
+        run: |
+          python - <<'EOF'
+          import json
+          from datetime import datetime, timedelta, timezone
+          from zoneinfo import ZoneInfo
+
+          kickoff = datetime.now(timezone.utc).astimezone(
+              ZoneInfo("Asia/Tokyo")
+          ) + timedelta(minutes=35)
+          config = {
+              "matches": [
+                  {
+                      "match_id": 999999,
+                      "kickoff_jst": kickoff.isoformat(timespec="seconds"),
+                      "opponent": "${{ inputs.opponent }}",
+                      "stage": "ドライラン",
+                      "fallback_lineup": "sample",
+                  }
+              ]
+          }
+          with open("/tmp/dryrun_config.json", "w") as f:
+              json.dump(config, f, ensure_ascii=False, indent=2)
+          print("fake kickoff:", kickoff.isoformat())
+          EOF
+
+      - name: Run auto-fetch (no posting)
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          LINEUP_CONFIG_PATH: /tmp/dryrun_config.json
+        run: python scripts/fetch_lineup_auto.py
+
+      - name: Show generated lineup if any
+        run: |
+          if [ -f data/lineups/auto.json ]; then
+            echo "=== 抽出されたスタメン (投稿はしていない) ==="
+            cat data/lineups/auto.json
+          else
+            echo "スタメン抽出なし (記事未発見 or 照合不成立) — パイプライン自体の疎通は上のログで確認"
+          fi
