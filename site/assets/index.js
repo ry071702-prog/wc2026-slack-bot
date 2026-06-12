@@ -89,6 +89,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       app.element("p", "hmc-stage", nextMatch.stage_ja || "ステージ未定"),
       kickoff,
     );
+    // 日本代表特設ページへの導線
+    const japanLink = app.element(
+      "a",
+      "hmc-japan-link",
+      "🇯🇵 日本代表 特設ページ ▸",
+    );
+    japanLink.href = "japan.html";
+    info.append(japanLink);
 
     const versus = app.element("div", "hmc-versus");
     versus.append(

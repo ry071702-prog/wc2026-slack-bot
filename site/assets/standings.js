@@ -125,6 +125,9 @@
     return;
   }
 
+  // 他ページ (日本代表特設ページなど) から再利用できるように公開
+  window.SiteStandings = { computeStandings, rankThirdPlace };
+
   /* ----------------------------------------------------------------------
      以下はブラウザ専用の描画コード
      ---------------------------------------------------------------------- */
@@ -142,6 +145,11 @@
     const app = window.SiteApp;
     const standingsContainer = document.querySelector("#standings");
     const thirdContainer = document.querySelector("#third-place");
+
+    // 順位表ページ以外 (computeStandings の再利用のみ) では描画しない
+    if (!standingsContainer || !thirdContainer) {
+      return;
+    }
 
     let schedule = [];
     try {
