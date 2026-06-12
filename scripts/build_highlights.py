@@ -177,6 +177,9 @@ def update_highlights(
             print(f"not found (>72h, give up): {match.home} vs {match.away}")
         else:
             print(f"not found (retry next run): {match.home} vs {match.away}")
+            for item in items:
+                title = (item.get("snippet") or {}).get("title", "")
+                print(f"  candidate: {title}")
     return updated
 
 
