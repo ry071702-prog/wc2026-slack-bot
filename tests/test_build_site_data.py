@@ -150,6 +150,56 @@ def test_generate_site_data_copies_highlights_and_match_facts(
     ) == {}
 
 
+def test_generate_site_data_copies_japan_opponents(tmp_path: Path) -> None:
+    opponents_path = tmp_path / "japan_opponents.json"
+    opponents = {
+        "opponents": {
+            "Tunisia": {
+                "name_ja": "チュニジア",
+                "match_id": 537360,
+                "blurb": "組織的守備が持ち味の北アフリカ勢。",
+                "key_players": ["ハンニバル・メジブリ (バーンリー)"],
+                "vs_japan": "過去対戦は通算6戦で日本の5勝1敗。",
+            }
+        }
+    }
+    opponents_path.write_text(
+        json.dumps(opponents, ensure_ascii=False), encoding="utf-8"
+    )
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        japan_opponents_path=opponents_path,
+    )
+
+    assert json.loads(
+        (output_dir / "japan_opponents.json").read_text(encoding="utf-8")
+    ) == opponents
+
+
+def test_generate_site_data_japan_opponents_missing_file(
+    tmp_path: Path,
+) -> None:
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        japan_opponents_path=tmp_path / "missing-opponents.json",
+    )
+
+    # 元データが無い場合は空オブジェクトを配信する
+    assert json.loads(
+        (output_dir / "japan_opponents.json").read_text(encoding="utf-8")
+    ) == {}
+
+
 def test_generate_site_data_joins_team_history(tmp_path: Path) -> None:
     history_path = tmp_path / "team_history.json"
     japan_history = {

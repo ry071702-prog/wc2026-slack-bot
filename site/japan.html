@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050506">
+    <meta name="description" content="W杯2026 日本代表 (SAMURAI BLUE) 特設ページ。グループFの日程・対戦相手の解説・順位表・メンバー26人を日本時間でまとめてチェック。">
+    <title>日本代表 SAMURAI BLUE | WORLD CUP 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/app.js" defer></script>
+    <script src="assets/standings.js" defer></script>
+    <script src="assets/japan.js" defer></script>
+  </head>
+  <body data-page="japan">
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 8l3.8 2.8-1.45 4.4h-4.7L8.2 10.8z"/>
+              <path d="M12 8V3.5M15.8 10.8l4.3-1.4M14.35 15.2l2.7 3.6M9.65 15.2l-2.7 3.6M8.2 10.8L3.9 9.4"/>
+            </svg>
+          </span>
+          <span class="brand-title">WORLD CUP <em>2026</em></span>
+        </a>
+        <nav class="main-nav" aria-label="メインナビゲーション">
+          <a href="index.html" data-nav="home">トップ</a>
+          <a href="schedule.html" data-nav="schedule">日程</a>
+          <a href="japan.html" data-nav="japan">日本代表</a>
+          <a href="standings.html" data-nav="standings">順位表</a>
+          <a href="teams.html" data-nav="teams">出場国</a>
+          <a href="predictions.html" data-nav="predictions">優勝予想</a>
+          <a href="news.html" data-nav="news">ニュース</a>
+        </nav>
+        <a class="neon-btn neon-btn-primary header-cta" href="index.html#today-section">今日の試合</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. ヒーロー -->
+      <section class="hero japan-hero" aria-label="日本代表 特設ページ">
+        <div class="hero-inner container">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+              JAPAN NATIONAL TEAM
+            </p>
+            <h1 class="hero-title japan-hero-title">🇯🇵 SAMURAI <span class="hero-year">BLUE</span></h1>
+            <p class="hero-sub">日本代表 特設ページ</p>
+            <p class="hero-catch">グループFを突破して、史上初のベスト8へ。</p>
+            <p class="hero-desc">日本戦の日程・対戦相手の研究・グループFの順位・メンバー26人を、このページでまとめてチェックできます。</p>
+            <div id="japan-hero-chips" class="japan-hero-chips" aria-label="日本代表のW杯戦績"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 次の日本戦カウントダウン -->
+      <section id="next-japan-section" class="section container reveal">
+        <div class="section-header">
+          <p class="sh-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 14 10 13 2"/></svg>
+            NEXT JAPAN MATCH
+          </p>
+          <h2 class="sh-title">次の日本戦</h2>
+          <p class="sh-desc">日本代表の次の試合をカウントダウン付きで確認できます。</p>
+        </div>
+        <div id="next-japan" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <div class="skeleton skeleton-line w-30"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. グループFの戦い -->
+      <section id="group-f-section" class="section container reveal">
+        <div class="section-header">
+          <div class="section-header-row">
+            <div>
+              <p class="sh-eyebrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                GROUP F FIXTURES
+              </p>
+              <h2 class="sh-title">グループFの戦い</h2>
+              <p class="sh-desc">日本戦3試合と、突破争いに関わるグループFの全試合 (日本時間)。</p>
+            </div>
+            <a class="neon-btn neon-btn-secondary sh-cta" href="schedule.html">全日程を見る</a>
+          </div>
+        </div>
+        <div id="japan-matches" class="match-list" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+        </div>
+        <h3 class="japan-sub-title">グループFのその他の試合</h3>
+        <div id="group-f-others" class="jp-mini-list" aria-busy="true" aria-live="polite"></div>
+      </section>
+
+      <!-- 4. 対戦相手を知る -->
+      <section id="opponents-section" class="section container reveal">
+        <div class="section-header">
+          <p class="sh-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            KNOW THE OPPONENTS
+          </p>
+          <h2 class="sh-title">対戦相手を知る</h2>
+          <p class="sh-desc">グループFで対戦する3カ国のチームスタイル・注目選手・日本との過去対戦をチェック。</p>
+        </div>
+        <div id="opponents" class="opponent-grid" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">対戦相手データを取得中...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. グループF順位表 -->
+      <section id="group-f-standings-section" class="section container reveal">
+        <div class="section-header">
+          <div class="section-header-row">
+            <div>
+              <p class="sh-eyebrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+                GROUP F STANDINGS
+              </p>
+              <h2 class="sh-title">グループF順位表</h2>
+              <p class="sh-desc">試合結果から自動集計 (LIVE中の試合は暫定反映)。上位2チームと、3位の上位8チームがラウンド32へ進出します。</p>
+            </div>
+            <a class="neon-btn neon-btn-secondary sh-cta" href="standings.html">全グループを見る</a>
+          </div>
+        </div>
+        <div id="group-f-standings" class="japan-standings" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+        </div>
+        <div class="standings-legend" aria-hidden="true">
+          <span class="legend-item"><span class="legend-line legend-line-green"></span>ラウンド32進出圏 (1-2位)</span>
+          <span class="legend-item"><span class="legend-line legend-line-yellow"></span>3位 (上位8チームが進出)</span>
+        </div>
+      </section>
+
+      <!-- 6. メンバー26人 -->
+      <section id="squad-section" class="section container reveal">
+        <div class="section-header">
+          <p class="sh-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            SQUAD 26
+          </p>
+          <h2 class="sh-title">メンバー26人</h2>
+          <p class="sh-desc">日本代表の登録メンバーをポジション別に確認できます。</p>
+        </div>
+        <div id="japan-squad" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">メンバーデータを取得中...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-title">WORLD CUP <em>2026</em></p>
+        <p class="footer-tagline">Slack Bot × 特設サイトでW杯観戦をもっと楽しく。</p>
+        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
