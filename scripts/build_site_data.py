@@ -25,6 +25,7 @@ PREDICTIONS_RAW_PATH = ROOT_DIR / "data" / "predictions.json"
 HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
 MATCH_FACTS_PATH = ROOT_DIR / "data" / "match_facts.json"
 NEWS_PATH = ROOT_DIR / "data" / "news.json"
+JAPAN_OPPONENTS_PATH = ROOT_DIR / "data" / "japan_opponents.json"
 
 
 def fetch_matches(api_key: str) -> list[Match]:
@@ -151,6 +152,7 @@ def generate_site_data(
     match_facts_path: Path = MATCH_FACTS_PATH,
     news_path: Path = NEWS_PATH,
     team_history_path: Path = TEAM_HISTORY_PATH,
+    japan_opponents_path: Path = JAPAN_OPPONENTS_PATH,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     schedule = build_schedule(matches)
     teams = build_teams(
@@ -178,6 +180,11 @@ def generate_site_data(
     write_json(
         output_dir / "news.json",
         load_optional_json(news_path, {}),
+    )
+    # 日本代表特設ページ用の対戦相手データ — 無ければ空オブジェクトで配信
+    write_json(
+        output_dir / "japan_opponents.json",
+        load_optional_json(japan_opponents_path, {}),
     )
     return schedule, teams
 

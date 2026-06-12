@@ -2647,3 +2647,303 @@ a.match-card {
   justify-content: center;
   margin-top: 18px;
 }
+
+/* --- 20. 日本代表特設ページ (japan.html) ------------------------------------ */
+
+/* ヒーロー: ごく控えめなサムライブルーのグラデーション (基調はネオングリーンのまま) */
+.japan-hero {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(29, 58, 143, 0.4), transparent 46%),
+    radial-gradient(circle at 86% 78%, rgba(29, 58, 143, 0.22), transparent 42%);
+}
+
+.japan-hero-title {
+  font-size: clamp(38px, 8vw, 80px);
+}
+
+.japan-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.japan-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-pill);
+  background: rgba(17, 19, 23, 0.78);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.japan-chip.is-rank {
+  border-color: rgba(46, 224, 106, 0.4);
+  background: rgba(46, 224, 106, 0.1);
+  color: var(--accent-green);
+}
+
+/* 次の日本戦カード内の試合詳細リンク */
+.hmc-detail-link {
+  color: var(--accent-green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.hmc-detail-link:hover,
+.hmc-detail-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* セクション内の小見出し */
+.japan-sub-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 32px 0 14px;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.jp-position-ja {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* グループFのその他の試合 (コンパクト一覧) */
+.jp-mini-list {
+  display: grid;
+  gap: 10px;
+}
+
+.jp-mini-match {
+  display: grid;
+  gap: 6px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  text-decoration: none;
+}
+
+.jp-mini-date {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.jp-mini-center {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.jp-mini-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.jp-mini-team.is-right {
+  justify-self: end;
+  text-align: right;
+}
+
+.jp-mini-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.jp-mini-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jp-mini-score {
+  min-width: 44px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.jp-mini-status {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@media (min-width: 720px) {
+  .jp-mini-match {
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+/* 対戦相手を知る */
+.opponent-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 920px) {
+  .opponent-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.opponent-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-width: 0;
+  padding: 24px 22px;
+  border-radius: 20px;
+}
+
+.opponent-card:hover {
+  transform: none;
+}
+
+.opponent-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.opponent-head .team-heading {
+  flex: 1;
+}
+
+.opponent-blurb {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.opponent-label {
+  margin: 6px 0 0;
+  color: var(--accent-green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.opponent-players {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.opponent-players li {
+  padding: 7px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: rgba(5, 5, 6, 0.55);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.opponent-vs {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.opponent-cta {
+  margin-top: 6px;
+  padding: 10px 18px;
+  font-size: 12px;
+  justify-self: start;
+}
+
+/* グループF順位表 (1枚だけなので幅を絞る) */
+.japan-standings {
+  display: grid;
+}
+
+@media (min-width: 760px) {
+  .japan-standings {
+    max-width: 560px;
+  }
+}
+
+/* メンバー26人 (ポジション別グリッド) */
+.jp-squad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 10px;
+}
+
+.jp-player-card {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  padding: 16px 8px 14px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.jp-player-card:hover {
+  transform: none;
+}
+
+.jp-player-avatar {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 4px;
+}
+
+.jp-player-number {
+  color: var(--accent-green);
+  font-size: 12px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.jp-player-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* トップページ: 次の日本戦カードからの導線 */
+.hmc-japan-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-lime);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.hmc-japan-link:hover,
+.hmc-japan-link:focus-visible {
+  text-decoration: underline;
+}
