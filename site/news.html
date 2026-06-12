@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050506">
+    <meta name="description" content="W杯2026のニュースまとめ。公式情報・速報・日本語ニュース・分析・日程結果のソースをまとめてチェック。">
+    <title>World Cup News | WORLD CUP 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/app.js" defer></script>
+    <script src="assets/news-sources.js" defer></script>
+    <script src="assets/news.js" defer></script>
+  </head>
+  <body data-page="news">
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 8l3.8 2.8-1.45 4.4h-4.7L8.2 10.8z"/>
+              <path d="M12 8V3.5M15.8 10.8l4.3-1.4M14.35 15.2l2.7 3.6M9.65 15.2l-2.7 3.6M8.2 10.8L3.9 9.4"/>
+            </svg>
+          </span>
+          <span class="brand-title">WORLD CUP <em>2026</em></span>
+        </a>
+        <nav class="main-nav" aria-label="メインナビゲーション">
+          <a href="index.html" data-nav="home">トップ</a>
+          <a href="schedule.html" data-nav="schedule">日程</a>
+          <a href="teams.html" data-nav="teams">出場国</a>
+          <a href="predictions.html" data-nav="predictions">優勝予想</a>
+          <a href="news.html" data-nav="news">ニュース</a>
+        </nav>
+        <a class="neon-btn neon-btn-primary header-cta" href="index.html#today-section">今日の試合</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="container page-top">
+        <p class="page-kicker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></svg>
+          WORLD CUP NEWS
+        </p>
+        <h1 class="page-heading">World Cup News</h1>
+        <p class="page-lead">公式情報・速報・日本語ニュースをまとめてチェック。公式と報道を分けて、信頼度の高い順に確認できます。</p>
+
+        <div id="news-tabs" class="news-tabs" role="tablist" aria-label="ニュースカテゴリ">
+          <button type="button" class="news-tab" role="tab" data-category="official" aria-selected="true">公式情報</button>
+          <button type="button" class="news-tab" role="tab" data-category="breaking" aria-selected="false">速報</button>
+          <button type="button" class="news-tab" role="tab" data-category="japan" aria-selected="false">日本語</button>
+          <button type="button" class="news-tab" role="tab" data-category="analysis" aria-selected="false">分析</button>
+          <button type="button" class="news-tab" role="tab" data-category="schedule" aria-selected="false">日程・結果</button>
+        </div>
+
+        <div id="news-feed" class="news-feed" aria-live="polite" hidden></div>
+
+        <div id="news-cards" class="news-grid" role="tabpanel" aria-label="ニュースソース一覧"></div>
+
+        <p class="news-policy-note">記事は外部メディアへのリンクのみを掲載しています。本文・画像は各メディアの公式ページでご確認ください。</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-title">WORLD CUP <em>2026</em></p>
+        <p class="footer-tagline">Slack Bot × 特設サイトでW杯観戦をもっと楽しく。</p>
+        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a> / 記事見出し: <a href="https://news.google.com/" rel="noreferrer">Google News RSS</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -39,6 +39,9 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python scripts/build_match_facts.py
 
+      - name: Build news (Google News RSS)
+        run: python scripts/build_news.py
+
       # data/** の push で pages.yml が走りサイトへ反映されるため [skip ci] は付けない
       - name: Commit enriched data
         if: always()
