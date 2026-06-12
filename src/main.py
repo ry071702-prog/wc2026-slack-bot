@@ -139,9 +139,11 @@ def run_notify(
         ),
         key=lambda match: match.utc_kickoff,
     )[:MAX_RESULTS_PER_RUN]
+    live_now = sum(1 for m in matches if m.status in ("IN_PLAY", "PAUSED"))
     print(
         "notify: "
-        f"prematch={len(prematch_matches)}, result={len(result_matches)}"
+        f"prematch={len(prematch_matches)}, result={len(result_matches)}, "
+        f"live_now={live_now}"
     )
 
     for match in prematch_matches:
