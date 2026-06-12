@@ -60,10 +60,9 @@ def test_result_japan_win(japan_match: Match) -> None:
         "🎉 *日本、勝利！* グループF"
     )
     assert (
-        "▶️ <https://www.youtube.com/results?search_query="
-        in text
-    )
-    assert "|ハイライトを探す (YouTube)>" in text
+        "▶️ <https://ry071702-prog.github.io/wc2026-slack-bot/"
+        f"match.html?id={finished.id}|試合詳細・ハイライト>"
+    ) in text
 
 
 def test_result_extra_time(regular_match: Match) -> None:
