@@ -66,7 +66,13 @@ def should_send_prematch(
 
 
 def should_send_result(match: Match, state: NotificationState) -> bool:
-    return match.status == "FINISHED" and match.id not in state["result"]
+    # 無料APIはFINISHED直後にスコア未反映のことがある → スコアが入るまで次回実行に持ち越す
+    return (
+        match.status == "FINISHED"
+        and match.id not in state["result"]
+        and match.score.home is not None
+        and match.score.away is not None
+    )
 
 
 def is_notify_period(now: datetime) -> bool:

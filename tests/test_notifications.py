@@ -7,7 +7,7 @@ from src.main import (
     should_send_result,
     utc_query_dates_for_jst_day,
 )
-from src.providers.base import Match
+from src.providers.base import Match, MatchScore
 from src.state import empty_state
 
 
@@ -46,6 +46,7 @@ def test_result_duplicate_is_not_sent(japan_match: Match) -> None:
         **{
             **japan_match.__dict__,
             "status": "FINISHED",
+            "score": MatchScore(home=1, away=2),
         }
     )
     state = empty_state()
