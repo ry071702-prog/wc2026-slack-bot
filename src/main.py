@@ -175,17 +175,31 @@ def run_digest(
         print(f"digest: already sent for {date_key}; exiting")
         return
 
-    date_from, date_to = utc_query_dates_for_jst_day(today_jst)
+    tomorrow_jst = today_jst + timedelta(days=1)
+    date_from, _ = utc_query_dates_for_jst_day(today_jst)
+    _, date_to = utc_query_dates_for_jst_day(tomorrow_jst)
     fetched_matches = provider.fetch_matches(date_from, date_to)
     matches = [
         match
         for match in fetched_matches
         if match.kickoff_jst.date() == today_jst
     ]
-    if not matches:
-        print(f"digest: no matches on {date_key}; skipping")
+    tomorrow_matches = [
+        match
+        for match in fetched_matches
+        if match.kickoff_jst.date() == tomorrow_jst
+    ]
+    if not matches and not tomorrow_matches:
+        print(f"digest: no matches on {date_key} nor next day; skipping")
         return
-    sent = slack.send(build_digest_payload(matches, today_jst))
+    sent = slack.send(
+        build_digest_payload(
+            matches,
+            today_jst,
+            tomorrow_matches=tomorrow_matches,
+            tomorrow=tomorrow_jst,
+        )
+    )
     if sent and not slack.dry_run:
         state["digest_dates"].append(date_key)
         state_store.save(state)
