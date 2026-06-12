@@ -44,10 +44,8 @@ class FakeSession:
     def get(self, url: str, **kwargs: Any) -> FakeResponse:
         params = kwargs.get("params", {})
         self.calls.append({"url": url, **kwargs})
-        if params.get("type") == "channel":
-            return FakeResponse(
-                {"items": [{"snippet": {"channelId": self.channel_id}}]}
-            )
+        if url == build_highlights.CHANNELS_URL:
+            return FakeResponse({"items": [{"id": self.channel_id}]})
         return FakeResponse({"items": self.video_items})
 
 
@@ -210,7 +208,7 @@ def test_search_params_use_channel_and_published_after(
     params = session.calls[0]["params"]
     assert params["type"] == "video"
     assert params["channelId"] == "UC-dazn"
-    assert params["q"] == "Tunisia Japan"
+    assert params["q"] == "チュニジア 日本 ハイライト"
     assert params["order"] == "date"
     assert params["publishedAfter"] == "2026-06-21T04:00:00Z"
     assert params["maxResults"] == 5
