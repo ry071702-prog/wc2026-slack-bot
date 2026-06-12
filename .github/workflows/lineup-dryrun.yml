@@ -59,6 +59,34 @@ jobs:
           LINEUP_CONFIG_PATH: /tmp/dryrun_config.json
         run: python scripts/fetch_lineup_auto.py
 
+      - name: Gemini API ping (記事が無いと本流では呼ばれないため疎通だけ確認)
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          python - <<'EOF'
+          import os
+
+          import requests
+
+          key = os.environ["GOOGLE_API_KEY"].strip()
+          resp = None
+          for model in ("gemini-2.5-flash", "gemini-2.0-flash"):
+              resp = requests.post(
+                  f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                  params={"key": key},
+                  json={"contents": [{"parts": [{"text": "「OK」とだけ返して"}]}]},
+                  timeout=20,
+              )
+              print(f"{model}: HTTP {resp.status_code}")
+              if resp.status_code == 200:
+                  text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+                  print(f"reply: {text.strip()[:40]}")
+                  print("OK: Gemini API is reachable")
+                  break
+          else:
+              raise SystemExit(f"NG: Gemini API error: {resp.text[:300]}")
+          EOF
+
       - name: Show generated lineup if any
         run: |
           if [ -f data/lineups/auto.json ]; then
