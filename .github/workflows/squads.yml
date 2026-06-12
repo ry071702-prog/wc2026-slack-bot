@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: wc2026-state
@@ -49,3 +50,7 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
+          # GITHUB_TOKENによるpushはpages.ymlを自動起動しないため明示的にdispatchする
+          gh workflow run pages.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
