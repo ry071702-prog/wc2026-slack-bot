@@ -47,7 +47,13 @@ from src.state import StateStore  # noqa: E402
 
 JST = timezone(timedelta(hours=9))
 
-CONFIG_PATH = ROOT_DIR / "data" / "lineups" / "auto_config.json"
+# LINEUP_CONFIG_PATH はドライラン (lineup-dryrun.yml) 用の上書き口
+CONFIG_PATH = Path(
+    os.environ.get(
+        "LINEUP_CONFIG_PATH",
+        ROOT_DIR / "data" / "lineups" / "auto_config.json",
+    )
+)
 SQUADS_PATH = ROOT_DIR / "data" / "squads.json"
 STATE_PATH = ROOT_DIR / "state" / "notified.json"
 AUTO_LINEUP_PATH = ROOT_DIR / "data" / "lineups" / "auto.json"
