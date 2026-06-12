@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050506">
+    <meta name="description" content="W杯2026の試合詳細。スコア・会場・DAZNハイライト・得点詳細を日本時間で。">
+    <title>試合詳細 | WORLD CUP 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/app.js" defer></script>
+    <script src="assets/match.js" defer></script>
+  </head>
+  <body data-page="match">
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 8l3.8 2.8-1.45 4.4h-4.7L8.2 10.8z"/>
+              <path d="M12 8V3.5M15.8 10.8l4.3-1.4M14.35 15.2l2.7 3.6M9.65 15.2l-2.7 3.6M8.2 10.8L3.9 9.4"/>
+            </svg>
+          </span>
+          <span class="brand-title">WORLD CUP <em>2026</em></span>
+        </a>
+        <nav class="main-nav" aria-label="メインナビゲーション">
+          <a href="index.html" data-nav="home">トップ</a>
+          <a href="schedule.html" data-nav="schedule">日程</a>
+          <a href="teams.html" data-nav="teams">出場国</a>
+          <a href="predictions.html" data-nav="predictions">優勝予想</a>
+        </nav>
+        <a class="neon-btn neon-btn-primary header-cta" href="index.html#today-section">今日の試合</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="container page-top">
+        <p class="page-kicker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          MATCH DETAIL
+        </p>
+        <h1 class="page-heading">試合詳細</h1>
+        <p class="page-lead">スコア・ハイライト・得点詳細を日本時間で確認できます。</p>
+
+        <div id="match-detail" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <div class="skeleton skeleton-line w-30"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+        </div>
+
+        <p class="detail-back">
+          <a class="neon-btn neon-btn-secondary" href="schedule.html">全日程へ戻る</a>
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-title">WORLD CUP <em>2026</em></p>
+        <p class="footer-tagline">Slack Bot × 特設サイトでW杯観戦をもっと楽しく。</p>
+        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a> / <a href="https://www.thesportsdb.com/" rel="noreferrer">TheSportsDB</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

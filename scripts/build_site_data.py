@@ -21,6 +21,8 @@ SITE_DATA_DIR = ROOT_DIR / "site" / "data"
 RANKINGS_PATH = ROOT_DIR / "data" / "fifa_rankings.json"
 SQUADS_PATH = ROOT_DIR / "data" / "squads.json"
 PREDICTIONS_RAW_PATH = ROOT_DIR / "data" / "predictions.json"
+HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
+MATCH_FACTS_PATH = ROOT_DIR / "data" / "match_facts.json"
 
 
 def fetch_matches(api_key: str) -> list[Match]:
@@ -43,6 +45,7 @@ def match_to_schedule_entry(match: Match) -> dict[str, Any]:
         "group": match.group,
         "matchday": match.matchday,
         "status": match.status,
+        "venue": match.venue,
         "score": {
             "home": match.score.home,
             "away": match.score.away,
@@ -131,6 +134,8 @@ def generate_site_data(
     rankings_path: Path = RANKINGS_PATH,
     squads_path: Path = SQUADS_PATH,
     output_dir: Path = SITE_DATA_DIR,
+    highlights_path: Path = HIGHLIGHTS_PATH,
+    match_facts_path: Path = MATCH_FACTS_PATH,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     schedule = build_schedule(matches)
     teams = build_teams(
@@ -144,6 +149,15 @@ def generate_site_data(
         load_optional_json(PREDICTIONS_RAW_PATH, {})
     )
     write_json(output_dir / "predictions.json", predictions)
+    # 試合詳細ページ用の付随データ (無ければ空オブジェクトで配信)
+    write_json(
+        output_dir / "highlights.json",
+        load_optional_json(highlights_path, {}),
+    )
+    write_json(
+        output_dir / "match_facts.json",
+        load_optional_json(match_facts_path, {}),
+    )
     return schedule, teams
 
 
