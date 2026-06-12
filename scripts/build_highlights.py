@@ -28,6 +28,8 @@ TOURNAMENT_START = date(2026, 6, 11)
 TOURNAMENT_END = date(2026, 7, 20)
 HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
 SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels"
+CHANNEL_HANDLE = "DAZNJapan"
 CHANNEL_QUERY = "DAZN Japan"
 CHANNEL_ID_KEY = "channel_id"
 NOT_FOUND_DEADLINE = timedelta(hours=72)
@@ -95,15 +97,16 @@ def resolve_channel_id(
     cached = data.get(CHANNEL_ID_KEY)
     if isinstance(cached, str) and cached:
         return cached
-    items = _search(
-        session,
-        api_key,
-        {"type": "channel", "q": CHANNEL_QUERY, "maxResults": 1},
+    # ハンドル指定 (1unit) で確実に @DAZNJapan を引く
+    response = session.get(
+        CHANNELS_URL,
+        params={"part": "id", "forHandle": CHANNEL_HANDLE, "key": api_key},
+        timeout=15,
     )
+    response.raise_for_status()
+    items = response.json().get("items", [])
     for item in items:
-        channel_id = (item.get("snippet") or {}).get("channelId") or (
-            item.get("id") or {}
-        ).get("channelId")
+        channel_id = item.get("id")
         if channel_id:
             data[CHANNEL_ID_KEY] = channel_id
             return channel_id
@@ -128,7 +131,8 @@ def search_match_videos(
         {
             "type": "video",
             "channelId": channel_id,
-            "q": f"{match.home} {match.away}",
+            # DAZN Japan のタイトルは日本語 (例:【メキシコ×南アフリカ｜ハイライト…】)
+            "q": f"{team_name(match.home)} {team_name(match.away)} ハイライト",
             "order": "date",
             "publishedAfter": published_after,
             "maxResults": 5,
