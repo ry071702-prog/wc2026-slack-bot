@@ -80,6 +80,7 @@ def test_generate_site_data_joins_rankings_and_squads(
                         "name_ja": "サンプル選手",
                         "position": "MF",
                         "number": 10,
+                        "photo": "https://media.api-sports.io/football/players/1.png",
                     }
                 ]
             }
@@ -98,6 +99,10 @@ def test_generate_site_data_joins_rankings_and_squads(
     tunisia = next(team for team in teams if team["name"] == "Tunisia")
     assert japan["rank"] == 18
     assert japan["squad"][0]["number"] == 10
+    # photo (選手顔写真URL) はそのまま通す
+    assert japan["squad"][0]["photo"] == (
+        "https://media.api-sports.io/football/players/1.png"
+    )
     assert tunisia["rank"] is None
     assert tunisia["squad"] == []
     assert json.loads(
@@ -143,6 +148,47 @@ def test_generate_site_data_copies_highlights_and_match_facts(
     assert json.loads(
         (output_dir / "news.json").read_text(encoding="utf-8")
     ) == {}
+
+
+def test_generate_site_data_joins_team_history(tmp_path: Path) -> None:
+    history_path = tmp_path / "team_history.json"
+    japan_history = {
+        "appearances": 8,
+        "titles": 0,
+        "title_years": [],
+        "best": "ベスト16",
+        "last": {"year": 2022, "result": "ベスト16"},
+    }
+    history_path.write_text(
+        json.dumps({"teams": {"Japan": japan_history}}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    _, teams = build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=tmp_path / "site-data",
+        team_history_path=history_path,
+    )
+
+    japan = next(team for team in teams if team["name"] == "Japan")
+    tunisia = next(team for team in teams if team["name"] == "Tunisia")
+    assert japan["history"] == japan_history
+    # 戦績データが無い国は null
+    assert tunisia["history"] is None
+
+
+def test_generate_site_data_history_missing_file(tmp_path: Path) -> None:
+    _, teams = build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=tmp_path / "site-data",
+        team_history_path=tmp_path / "missing-history.json",
+    )
+
+    assert all(team["history"] is None for team in teams)
 
 
 def test_build_teams_excludes_tbd() -> None:

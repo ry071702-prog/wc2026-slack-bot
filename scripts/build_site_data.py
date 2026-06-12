@@ -20,6 +20,7 @@ TOURNAMENT_END = date(2026, 7, 20)
 SITE_DATA_DIR = ROOT_DIR / "site" / "data"
 RANKINGS_PATH = ROOT_DIR / "data" / "fifa_rankings.json"
 SQUADS_PATH = ROOT_DIR / "data" / "squads.json"
+TEAM_HISTORY_PATH = ROOT_DIR / "data" / "team_history.json"
 PREDICTIONS_RAW_PATH = ROOT_DIR / "data" / "predictions.json"
 HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
 MATCH_FACTS_PATH = ROOT_DIR / "data" / "match_facts.json"
@@ -69,6 +70,7 @@ def build_teams(
     schedule: list[dict[str, Any]],
     rankings: dict[str, int],
     squads: dict[str, list[dict[str, Any]]],
+    history: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     team_names = {
         name
@@ -76,12 +78,14 @@ def build_teams(
         for name in (str(match["home"]), str(match["away"]))
         if name and name != "TBD"
     }
+    history = history or {}
     return [
         {
             "name": name,
             "name_ja": team_name(name),
             "rank": rankings.get(name),
             "squad": squads.get(name, []),
+            "history": history.get(name),
         }
         for name in sorted(team_names, key=lambda item: (team_name(item), item))
     ]
@@ -113,6 +117,14 @@ def load_squads(
     return payload if isinstance(payload, dict) else {}
 
 
+def load_team_history(
+    path: Path = TEAM_HISTORY_PATH,
+) -> dict[str, dict[str, Any]]:
+    payload = load_optional_json(path, {})
+    teams = payload.get("teams", {})
+    return teams if isinstance(teams, dict) else {}
+
+
 def load_optional_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
     if not path.exists():
         return default
@@ -138,12 +150,14 @@ def generate_site_data(
     highlights_path: Path = HIGHLIGHTS_PATH,
     match_facts_path: Path = MATCH_FACTS_PATH,
     news_path: Path = NEWS_PATH,
+    team_history_path: Path = TEAM_HISTORY_PATH,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     schedule = build_schedule(matches)
     teams = build_teams(
         schedule,
         load_rankings(rankings_path),
         load_squads(squads_path),
+        load_team_history(team_history_path),
     )
     write_json(output_dir / "schedule.json", schedule)
     write_json(output_dir / "teams.json", teams)

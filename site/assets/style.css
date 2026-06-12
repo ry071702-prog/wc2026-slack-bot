@@ -1551,6 +1551,46 @@ a.match-card {
   justify-items: end;
 }
 
+/* 過去W杯戦績バッジ行 */
+.team-history {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin-top: 7px;
+}
+
+.history-badge {
+  padding: 2px 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.history-badge.is-gold {
+  border-color: rgba(230, 199, 106, 0.42);
+  background: rgba(230, 199, 106, 0.1);
+  color: var(--accent-gold);
+}
+
+.history-badge.is-debut {
+  border-color: var(--border-green);
+  background: rgba(46, 224, 106, 0.1);
+  color: var(--accent-green);
+  font-weight: 800;
+}
+
+.history-note {
+  flex-basis: 100%;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
 .team-summary::after {
   content: "+";
   margin-left: 2px;
@@ -1609,12 +1649,46 @@ a.match-card {
 
 .player-row {
   display: grid;
-  grid-template-columns: 30px 38px minmax(0, 1fr);
+  grid-template-columns: 36px 26px 34px minmax(0, 1fr);
   gap: 8px;
-  padding: 9px 12px;
+  align-items: center;
+  padding: 7px 12px;
   border-radius: 8px;
   background: rgba(5, 5, 6, 0.55);
   font-size: 13px;
+}
+
+/* 選手の顔写真アバター (取得失敗時は背番号入りの円にフォールバック) */
+.player-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: rgba(46, 224, 106, 0.08);
+  flex: 0 0 auto;
+}
+
+.player-avatar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--accent-green);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 .player-number,
@@ -2108,6 +2182,121 @@ a.match-card {
   margin: 28px 0 0;
   color: var(--text-muted);
   font-size: 11px;
+}
+
+/* サムネ付き記事カード (速報 / 日本語タブ + トップのダイジェスト) */
+.news-thumb-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .news-thumb-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .news-thumb-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.news-thumb-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.news-thumb-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(5, 5, 6, 0.6);
+}
+
+.news-thumb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.news-thumb-card:hover .news-thumb-img {
+  transform: scale(1.04);
+}
+
+/* og:image が無い記事: ⚽ 入りの濃緑グラデプレースホルダー */
+.news-thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      120% 140% at 80% 0%,
+      rgba(46, 224, 106, 0.28) 0%,
+      rgba(10, 60, 28, 0.9) 45%,
+      rgba(4, 20, 10, 1) 100%
+    );
+}
+
+.news-thumb-ball {
+  font-size: 38px;
+  line-height: 1;
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5));
+}
+
+.news-thumb-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 14px 16px 16px;
+}
+
+.news-thumb-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.news-thumb-card:hover .news-thumb-title {
+  color: var(--accent-green);
+}
+
+.news-thumb-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-top: auto;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.news-thumb-source {
+  color: var(--text-secondary);
+}
+
+.news-thumb-time {
+  font-variant-numeric: tabular-nums;
 }
 
 /* --- 13. サブページ見出し --------------------------------------------------------- */
