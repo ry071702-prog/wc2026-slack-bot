@@ -130,6 +130,7 @@ def test_generate_site_data_copies_highlights_and_match_facts(
         output_dir=output_dir,
         highlights_path=highlights_path,
         match_facts_path=tmp_path / "missing-match-facts.json",
+        news_path=tmp_path / "missing-news.json",
     )
 
     assert json.loads(
@@ -138,6 +139,9 @@ def test_generate_site_data_copies_highlights_and_match_facts(
     # 元データが無い場合は空オブジェクトを配信する
     assert json.loads(
         (output_dir / "match_facts.json").read_text(encoding="utf-8")
+    ) == {}
+    assert json.loads(
+        (output_dir / "news.json").read_text(encoding="utf-8")
     ) == {}
 
 
