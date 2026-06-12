@@ -120,6 +120,7 @@ def fetch_squad(client: ApiFootballClient, team_id: int) -> list[dict]:
             "name_ja": p.get("name"),
             "position": POSITION_JA.get(p.get("position"), p.get("position")),
             "number": p.get("number"),
+            "photo": p.get("photo"),
         }
         for p in players
     ]
@@ -145,7 +146,12 @@ def main() -> None:
 
     try:
         for name in names:
-            if name in squads and squads[name]:
+            # photo 未取得の既存データは再取得対象にする
+            if (
+                name in squads
+                and squads[name]
+                and all("photo" in p for p in squads[name])
+            ):
                 continue
             try:
                 if name not in team_ids:
