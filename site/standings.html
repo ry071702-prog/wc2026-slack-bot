@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#050506">
-    <title>出場国 | WORLD CUP 2026</title>
+    <title>グループ順位表 | WORLD CUP 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/app.js" defer></script>
-    <script src="assets/teams.js" defer></script>
+    <script src="assets/standings.js" defer></script>
   </head>
-  <body data-page="teams">
+  <body data-page="standings">
     <header class="site-header">
       <div class="header-inner container">
         <a class="brand" href="index.html">
@@ -40,46 +40,51 @@
     <main>
       <div class="container page-top">
         <p class="page-kicker">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-          TEAMS
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          STANDINGS
         </p>
-        <h1 class="page-heading">出場国</h1>
-        <p class="page-lead">48カ国のFIFAランクやメンバー情報を確認できます。国をタップすると登録選手を確認できます。</p>
+        <h1 class="page-heading">グループリーグ順位表</h1>
+        <p class="page-lead">全12組の順位を試合結果から自動集計します (LIVE中の試合は暫定反映)。各組上位2チームと、3位の上位8チームがラウンド32へ進出します。</p>
 
-        <div class="team-controls">
-          <label class="search-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input id="team-search" type="search" placeholder="国名で検索" aria-label="国名で検索" autocomplete="off">
-          </label>
-          <label class="sort-select">
-            並び替え
-            <select id="team-sort" aria-label="出場国の並び替え">
-              <option value="rank">FIFAランク順</option>
-              <option value="name">国名順</option>
-              <option value="group">グループ順</option>
-            </select>
-          </label>
+        <div id="standings" class="standings-grid" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
         </div>
 
-        <div id="teams" class="team-grid" aria-busy="true">
-          <div class="skeleton-card glass-card">
-            <div class="skeleton skeleton-line w-70"></div>
-            <div class="skeleton skeleton-line w-45"></div>
-          </div>
-          <div class="skeleton-card glass-card">
-            <div class="skeleton skeleton-line w-70"></div>
-            <div class="skeleton skeleton-line w-45"></div>
-          </div>
-          <div class="skeleton-card glass-card">
-            <div class="skeleton skeleton-line w-70"></div>
-            <div class="skeleton skeleton-line w-45"></div>
-          </div>
-          <div class="skeleton-card glass-card">
-            <div class="skeleton skeleton-line w-70"></div>
-            <div class="skeleton skeleton-line w-45"></div>
-          </div>
+        <div class="standings-legend" aria-hidden="true">
+          <span class="legend-item"><span class="legend-line legend-line-green"></span>ラウンド32進出圏 (1-2位)</span>
+          <span class="legend-item"><span class="legend-line legend-line-yellow"></span>3位 (上位8チームが進出)</span>
         </div>
       </div>
+
+      <section id="third-place-section" class="section container">
+        <div class="section-header">
+          <p class="sh-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            BEST THIRD PLACE
+          </p>
+          <h2 class="sh-title">3位チーム比較</h2>
+          <p class="sh-desc">12組の3位チームを勝ち点 → 得失点差 → 総得点で比較します。3位の上位8チームがラウンド32へ進出します。</p>
+        </div>
+        <div id="third-place" aria-busy="true" aria-live="polite">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">試合データを取得中...</p>
+          </div>
+        </div>
+        <p class="section-note standings-note">※ 順位は勝ち点・得失点差・総得点による暫定表示です。FIFA公式の完全なタイブレーク (直接対決など) は反映していません。</p>
+      </section>
     </main>
 
     <footer class="site-footer">
