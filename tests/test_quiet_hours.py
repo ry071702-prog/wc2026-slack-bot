@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 import pytest
 
 from src.main import is_quiet_time, parse_quiet_hours, run_notify
-from src.providers.base import Match
+from src.providers.base import Match, MatchScore
 from src.state import StateStore, empty_state
 from tests.test_main import StubProvider, StubSlack
 
@@ -54,7 +54,12 @@ def test_quiet_hours_suppress_non_japan_but_allow_japan(
         utc_kickoff=quiet_now + timedelta(minutes=10),
         status="TIMED",
     )
-    finished_regular = replace(regular_match, id=998, status="FINISHED")
+    finished_regular = replace(
+        regular_match,
+        id=998,
+        status="FINISHED",
+        score=MatchScore(home=2, away=1),
+    )
     store = StateStore(tmp_path / "notified.json")
     store.save(empty_state())
     slack = StubSlack(True)
@@ -75,7 +80,9 @@ def test_quiet_hours_suppress_non_japan_but_allow_japan(
 def test_after_quiet_hours_pending_results_are_sent(
     tmp_path, regular_match: Match
 ) -> None:
-    finished = replace(regular_match, status="FINISHED")
+    finished = replace(
+        regular_match, status="FINISHED", score=MatchScore(home=2, away=1)
+    )
     store = StateStore(tmp_path / "notified.json")
     store.save(empty_state())
     slack = StubSlack(True)
@@ -89,3 +96,21 @@ def test_after_quiet_hours_pending_results_are_sent(
     )
 
     assert store.load()["result"] == [finished.id]
+
+
+def test_result_waits_until_score_is_available(
+    tmp_path, regular_match: Match
+) -> None:
+    from src.providers.base import MatchScore
+
+    scoreless = replace(
+        regular_match, status="FINISHED", score=MatchScore()
+    )
+    store = StateStore(tmp_path / "notified.json")
+    store.save(empty_state())
+    slack = StubSlack(True)
+
+    run_notify(StubProvider([scoreless]), slack, store, now=jst(12, 0))
+
+    assert store.load()["result"] == []  # スコア未反映 → 持ち越し
+    assert slack.payloads == []

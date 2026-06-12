@@ -8,7 +8,7 @@ from typing import Any
 import pytest
 
 from src.main import run_digest, run_notify
-from src.providers.base import Match, Provider
+from src.providers.base import Match, MatchScore, Provider
 from src.state import StateStore, empty_state
 
 
@@ -67,6 +67,7 @@ def test_results_are_limited_to_ten_per_run(
             utc_kickoff=regular_match.utc_kickoff
             + timedelta(minutes=match_id),
             status="FINISHED",
+            score=MatchScore(home=1, away=0),
         )
         for match_id in range(1, 12)
     ]
