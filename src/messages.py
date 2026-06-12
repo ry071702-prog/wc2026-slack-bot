@@ -110,13 +110,35 @@ def digest_title(day: date) -> str:
     return f"⚽ 今日のW杯（{day.month}/{day.day} {weekday}）"
 
 
+def date_label(day: date) -> str:
+    weekday = WEEKDAYS_JA[day.weekday()]
+    return f"{day.month}/{day.day} {weekday}"
+
+
 def digest_match_line(match: Match) -> str:
     kickoff = match.kickoff_jst.strftime("%H:%M")
-    card = f"{team_name(match.home)} vs {team_name(match.away)}"
     stage = stage_name(match)
+    home = team_name(match.home)
+    away = team_name(match.away)
+    has_score = (
+        match.score.home is not None and match.score.away is not None
+    )
+    if match.status == "FINISHED" and has_score:
+        card = f"{home} {match.score.home} - {match.score.away} {away}"
+        suffix = "　🏁終了"
+    elif match.status in ("IN_PLAY", "PAUSED"):
+        card = (
+            f"{home} {match.score.home} - {match.score.away} {away}"
+            if has_score
+            else f"{home} vs {away}"
+        )
+        suffix = "　🔴LIVE"
+    else:
+        card = f"{home} vs {away}"
+        suffix = ""
     if match.is_japan:
-        return f"🇯🇵 *{kickoff}　{card}*（{stage}）← *日本戦！*"
-    return f"{kickoff}　{card}（{stage}）"
+        return f"🇯🇵 *{kickoff}　{card}*（{stage}）{suffix}← *日本戦！*"
+    return f"{kickoff}　{card}（{stage}）{suffix}"
 
 
 def prematch_text(match: Match, mention_japan: bool = False) -> str:

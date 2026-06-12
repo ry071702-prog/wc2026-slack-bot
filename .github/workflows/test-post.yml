@@ -43,6 +43,12 @@ jobs:
           client = create_slack_client(dry_run=False)
 
           def mark(payload):
+              # 最初のテキストブロックの先頭に [テスト] を付ける (2026-06-12 ユーザー指示)
+              for block in payload["blocks"]:
+                  text = block.get("text")
+                  if text and text.get("text"):
+                      text["text"] = "[テスト] " + text["text"]
+                      break
               payload["blocks"].insert(0, {
                   "type": "context",
                   "elements": [{

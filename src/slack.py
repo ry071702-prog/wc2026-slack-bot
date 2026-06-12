@@ -8,6 +8,7 @@ import requests
 
 from src.messages import (
     DIGEST_CONTEXT,
+    date_label,
     digest_match_line,
     digest_title,
     prematch_text,
@@ -25,7 +26,12 @@ class SlackSender(Protocol):
         """Send or print a Slack payload."""
 
 
-def build_digest_payload(matches: list[Match], day: date) -> Payload:
+def build_digest_payload(
+    matches: list[Match],
+    day: date,
+    tomorrow_matches: Optional[list[Match]] = None,
+    tomorrow: Optional[date] = None,
+) -> Payload:
     japan_matches = sorted(
         (match for match in matches if match.is_japan),
         key=lambda match: match.utc_kickoff,
@@ -49,6 +55,18 @@ def build_digest_payload(matches: list[Match], day: date) -> Payload:
         blocks.append(_section("\n".join(map(digest_match_line, other_matches))))
     elif not japan_matches:
         blocks.append(_section("本日の試合はありません。"))
+
+    if tomorrow_matches and tomorrow:
+        ordered = sorted(
+            tomorrow_matches, key=lambda match: match.utc_kickoff
+        )
+        blocks.append({"type": "divider"})
+        blocks.append(
+            _section(
+                f"📅 *明日（{date_label(tomorrow)}）の試合*\n"
+                + "\n".join(map(digest_match_line, ordered))
+            )
+        )
 
     blocks.append(
         {

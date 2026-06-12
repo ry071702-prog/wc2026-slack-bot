@@ -116,3 +116,62 @@ def test_result_japan_draw_and_loss(japan_match: Match) -> None:
 
     assert "🤝 *ドロー*" in result_text(draw)
     assert "😢 *惜敗…次戦に期待！*" in result_text(loss)
+
+
+def test_digest_line_shows_score_for_finished(regular_match: Match) -> None:
+    from src.slack import build_digest_payload
+    from datetime import date
+
+    finished = replace(
+        regular_match,
+        status="FINISHED",
+        score=MatchScore(home=0, away=1),
+    )
+
+    from src.messages import digest_match_line
+
+    assert digest_match_line(finished) == (
+        "12:00　スペイン 0 - 1 サウジアラビア（グループH 第2節）　🏁終了"
+    )
+
+
+def test_digest_line_shows_live(regular_match: Match) -> None:
+    from src.messages import digest_match_line
+
+    live = replace(
+        regular_match,
+        status="IN_PLAY",
+        score=MatchScore(home=2, away=0),
+    )
+
+    assert "スペイン 2 - 0 サウジアラビア" in digest_match_line(live)
+    assert "🔴LIVE" in digest_match_line(live)
+
+
+def test_digest_includes_tomorrow_section(
+    japan_match: Match, regular_match: Match
+) -> None:
+    from datetime import date, timedelta
+
+    tomorrow_match = replace(
+        regular_match,
+        id=777,
+        utc_kickoff=regular_match.utc_kickoff + timedelta(days=1),
+    )
+
+    payload = build_digest_payload(
+        [japan_match],
+        date(2026, 6, 21),
+        tomorrow_matches=[tomorrow_match],
+        tomorrow=date(2026, 6, 22),
+    )
+
+    texts = [
+        b.get("text", {}).get("text", "")
+        for b in payload["blocks"]
+        if b["type"] == "section"
+    ]
+    tomorrow_text = [t for t in texts if "明日" in t]
+    assert tomorrow_text, "明日セクションが無い"
+    assert "📅 *明日（6/22 月）の試合*" in tomorrow_text[0]
+    assert "スペイン vs サウジアラビア" in tomorrow_text[0]
