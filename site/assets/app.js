@@ -214,7 +214,9 @@
     if (liveStatuses.has(match.status)) {
       classNames.push("is-live");
     }
-    const card = element("article", classNames.join(" "));
+    // カード全体を試合詳細ページへのリンクにする
+    const card = element("a", classNames.join(" "));
+    card.href = `match.html?id=${encodeURIComponent(match.id)}`;
 
     const top = element("div", "match-card-top");
     top.append(
@@ -249,6 +251,7 @@
     if (match.is_japan) {
       bottom.append(pill("JAPAN MATCH", "japan"));
     }
+    bottom.append(element("span", "match-cta", "詳細 ▸"));
 
     card.append(top, matchup, bottom);
     return card;

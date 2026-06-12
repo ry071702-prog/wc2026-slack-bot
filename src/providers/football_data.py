@@ -81,6 +81,7 @@ class FootballDataProvider(Provider):
             group=item.get("group"),
             matchday=FootballDataProvider._optional_int(item.get("matchday")),
             status=str(item.get("status") or ""),
+            venue=FootballDataProvider._optional_str(item.get("venue")),
             score=MatchScore(
                 home=FootballDataProvider._optional_int(full_time.get("home")),
                 away=FootballDataProvider._optional_int(full_time.get("away")),
@@ -105,3 +106,10 @@ class FootballDataProvider(Provider):
         if value is None:
             return None
         return int(value)
+
+    @staticmethod
+    def _optional_str(value: Any) -> Optional[str]:
+        if value is None:
+            return None
+        text = str(value).strip()
+        return text or None
