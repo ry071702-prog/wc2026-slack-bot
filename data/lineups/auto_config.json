@@ -1,0 +1,25 @@
+{
+  "matches": [
+    {
+      "match_id": 537357,
+      "kickoff_jst": "2026-06-15T05:00:00+09:00",
+      "opponent": "オランダ",
+      "stage": "グループF 第1節",
+      "fallback_lineup": "sample"
+    },
+    {
+      "match_id": 537360,
+      "kickoff_jst": "2026-06-21T13:00:00+09:00",
+      "opponent": "チュニジア",
+      "stage": "グループF 第2節",
+      "fallback_lineup": "sample"
+    },
+    {
+      "match_id": 537362,
+      "kickoff_jst": "2026-06-26T08:00:00+09:00",
+      "opponent": "スウェーデン",
+      "stage": "グループF 第3節",
+      "fallback_lineup": "sample"
+    }
+  ]
+}

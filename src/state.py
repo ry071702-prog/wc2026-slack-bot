@@ -9,10 +9,11 @@ class NotificationState(TypedDict):
     digest_dates: list[str]
     prematch: list[int]
     result: list[int]
+    lineup: list[int]
 
 
 def empty_state() -> NotificationState:
-    return {"digest_dates": [], "prematch": [], "result": []}
+    return {"digest_dates": [], "prematch": [], "result": [], "lineup": []}
 
 
 class StateStore:
@@ -46,10 +47,15 @@ class StateStore:
         digest_dates = raw.get("digest_dates", [])
         prematch = raw.get("prematch", [])
         result = raw.get("result", [])
-        if not all(isinstance(value, list) for value in (digest_dates, prematch, result)):
+        lineup = raw.get("lineup", [])
+        if not all(
+            isinstance(value, list)
+            for value in (digest_dates, prematch, result, lineup)
+        ):
             raise TypeError("state values must be arrays")
         return {
             "digest_dates": [str(value) for value in digest_dates],
             "prematch": [int(value) for value in prematch],
             "result": [int(value) for value in result],
+            "lineup": [int(value) for value in lineup],
         }
