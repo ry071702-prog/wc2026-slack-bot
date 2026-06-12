@@ -58,15 +58,26 @@ jobs:
               })
               return payload
 
-          # 1. デイリーダイジェスト (開幕日 6/12 の実データ)
+          # 1. デイリーダイジェスト (本番の run_digest と同じ範囲: 今日+明日)
+          from datetime import timedelta
+
+          from src.main import utc_query_dates_for_jst_day
+          from src.providers.base import JST
+
           provider = FootballDataProvider(os.environ["FOOTBALL_DATA_API_KEY"])
-          day = date(2026, 6, 12)
-          matches = [
-              m
-              for m in provider.fetch_matches(date(2026, 6, 11), date(2026, 6, 12))
-              if m.kickoff_jst.date() == day
+          day = datetime.now(timezone.utc).astimezone(JST).date()
+          tomorrow = day + timedelta(days=1)
+          date_from, _ = utc_query_dates_for_jst_day(day)
+          _, date_to = utc_query_dates_for_jst_day(tomorrow)
+          fetched = provider.fetch_matches(date_from, date_to)
+          matches = [m for m in fetched if m.kickoff_jst.date() == day]
+          tomorrow_matches = [
+              m for m in fetched if m.kickoff_jst.date() == tomorrow
           ]
-          assert client.send(mark(build_digest_payload(matches, day)))
+          assert client.send(mark(build_digest_payload(
+              matches, day,
+              tomorrow_matches=tomorrow_matches, tomorrow=tomorrow,
+          )))
 
           # 2. 開始前アナウンス (日本戦サンプル)
           japan = Match(
