@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: wc2026-state
@@ -39,7 +40,21 @@ jobs:
           # 深夜帯もチャンネル全員の許可を得て通知する (2026-06-12)。再制限する場合は Variables の QUIET_HOURS に "01:00-06:30" 等を設定
           QUIET_HOURS: ${{ vars.QUIET_HOURS || '' }}
           DRY_RUN: ${{ vars.DRY_RUN || 'false' }}
-        run: python -m src.main --mode notify
+        run: |
+          set -o pipefail
+          python -m src.main --mode notify | tee notify.log
+
+      # 試合中・結果直後はサイトを再ビルドして「ほぼLIVE」のスコア/順位表にする
+      - name: Trigger site rebuild while matches are live
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if grep -qE "live_now=[1-9]|result=[1-9]" notify.log; then
+            gh workflow run pages.yml
+            echo "pages rebuild dispatched (live/finished matches detected)"
+          else
+            echo "no live matches; skip rebuild"
+          fi
 
       - name: Commit notification state
         run: |
