@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/app.js" defer></script>
+    <script src="assets/news-sources.js" defer></script>
+    <script src="assets/news.js" defer></script>
     <script src="assets/index.js" defer></script>
   </head>
   <body data-page="home">
@@ -31,6 +33,7 @@
           <a href="schedule.html" data-nav="schedule">日程</a>
           <a href="teams.html" data-nav="teams">出場国</a>
           <a href="predictions.html" data-nav="predictions">優勝予想</a>
+          <a href="news.html" data-nav="news">ニュース</a>
         </nav>
         <a class="neon-btn neon-btn-primary header-cta" href="#today-section">今日の試合</a>
       </div>
@@ -196,6 +199,24 @@
             <p class="skeleton-note">試合データを取得中...</p>
           </div>
         </div>
+      </section>
+
+      <!-- World Cup News ダイジェスト -->
+      <section class="section container reveal" aria-label="World Cup News">
+        <div class="section-header">
+          <div class="section-header-row">
+            <div>
+              <p class="sh-eyebrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></svg>
+                WORLD CUP NEWS
+              </p>
+              <h2 class="sh-title">World Cup News</h2>
+              <p class="sh-desc">公式情報・速報・日本語ニュースをまとめてチェック。最重要ソース6選はこちら。</p>
+            </div>
+            <a class="neon-btn neon-btn-secondary sh-cta" href="news.html">もっと見る</a>
+          </div>
+        </div>
+        <div id="news-digest" class="news-grid"></div>
       </section>
 
       <!-- 出場国プレビュー -->
