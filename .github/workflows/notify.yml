@@ -56,6 +56,19 @@ jobs:
             echo "no live matches; skip rebuild"
           fi
 
+      # enrich (ハイライト/ニュース/得点詳細) のGitHub cronは間引かれるため、
+      # 確実に動くこのworkflowから毎時1回dispatchする (分が0-4の実行時のみ)
+      - name: Hourly enrich dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(date -u +%M)" -lt 5 ]; then
+            gh workflow run enrich.yml
+            echo "enrich dispatched (hourly)"
+          else
+            echo "not the hourly slot; skip"
+          fi
+
       # 日本戦キックオフ前のスタメン自動取得 (窓外は "no window" で即終了する超軽量チェック)
       # KO-50〜-20分: ニュース→Gemini抽出→26人照合 / KO-20〜-5分: 予想スタメンで保険投稿
       - name: Auto lineup check
