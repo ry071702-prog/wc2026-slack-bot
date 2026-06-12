@@ -1,0 +1,54 @@
+name: Post lineup (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      lineup:
+        description: "data/lineups/{lineup}.json を使う"
+        default: "sample"
+        required: true
+      target:
+        description: "投稿先 (test=#wctest / prod=本番チャンネル)"
+        type: choice
+        options:
+          - test
+          - prod
+        default: test
+
+permissions:
+  contents: read
+
+jobs:
+  post-lineup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Japanese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-lineup.txt
+
+      - name: Post lineup (test)
+        if: inputs.target == 'test'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          # テスト配信は #wctest 固定 (2026-06-12 ユーザー指示)。本番チャンネルには送らない
+          SLACK_CHANNEL_ID: C0BA5QNQC3W
+          LINEUP_PREFIX: "[テスト] "
+        run: python scripts/post_lineup.py "data/lineups/${{ inputs.lineup }}.json"
+
+      - name: Post lineup (prod)
+        if: inputs.target == 'prod'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: python scripts/post_lineup.py "data/lineups/${{ inputs.lineup }}.json"
