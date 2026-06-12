@@ -2418,3 +2418,232 @@ a.match-card {
     transform: none;
   }
 }
+
+/* --- 19. グループ順位表 (standings.html) ------------------------------------ */
+.standings-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+
+@media (min-width: 760px) {
+  .standings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .standings-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.standings-card {
+  min-width: 0;
+  padding: 18px 16px 12px;
+  border-radius: 20px;
+}
+
+.standings-card:hover {
+  transform: none;
+}
+
+.standings-card.is-japan {
+  border-color: rgba(200, 240, 60, 0.4);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.32),
+    0 0 24px rgba(200, 240, 60, 0.12),
+    inset 0 1px 0 rgba(200, 240, 60, 0.18);
+}
+
+.standings-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.standings-card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.st-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.st-table th,
+.st-table td {
+  padding: 7px 2px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.st-table td:first-child,
+.st-table th:first-child {
+  border-left: 3px solid transparent;
+}
+
+.st-table thead th {
+  padding-top: 0;
+  border-top: 0;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.st-col-rank {
+  width: 30px;
+}
+
+.st-col-group {
+  width: 28px;
+}
+
+.st-col-num {
+  width: 24px;
+}
+
+.st-col-gd {
+  width: 36px;
+}
+
+.st-col-pts {
+  width: 36px;
+}
+
+.st-rank,
+.st-group {
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.st-team-cell {
+  overflow: hidden;
+  text-align: left;
+}
+
+.st-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.st-flag {
+  flex: 0 0 auto;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.st-name {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.st-gd {
+  color: var(--text-secondary);
+}
+
+.st-pts {
+  color: var(--accent-lime);
+  font-weight: 900;
+}
+
+/* 1-2位: 進出ライン (緑) */
+.st-table tr.is-qualify {
+  background: rgba(46, 224, 106, 0.06);
+}
+
+.st-table tr.is-qualify td:first-child {
+  border-left-color: var(--accent-green);
+}
+
+/* 3位: 黄色マーク */
+.st-table tr.is-third td:first-child {
+  border-left-color: rgba(215, 255, 0, 0.65);
+}
+
+.st-badge-third {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid rgba(215, 255, 0, 0.4);
+  border-radius: var(--radius-pill);
+  color: var(--accent-yellow);
+  background: rgba(215, 255, 0, 0.1);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* LIVE中の試合を含む暫定行 */
+.st-live {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 0 5px;
+  border: 1px solid rgba(255, 59, 92, 0.5);
+  border-radius: var(--radius-pill);
+  color: #fff;
+  background: rgba(255, 59, 92, 0.18);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.standings-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend-line {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-line-green {
+  background: var(--accent-green);
+}
+
+.legend-line-yellow {
+  background: rgba(215, 255, 0, 0.65);
+}
+
+.third-place-card {
+  padding: 18px 16px 12px;
+}
+
+.standings-note {
+  margin: 16px 0 0;
+}
+
+/* トップページの順位表導線 */
+.standings-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
