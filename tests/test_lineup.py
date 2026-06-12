@@ -5,7 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from scripts.post_lineup import build_initial_comment, classify_position
+from scripts.post_lineup import (
+    FALLBACK_MARKER,
+    apply_fallback_marker,
+    build_initial_comment,
+    classify_position,
+)
 from scripts.render_lineup import (
     GK_X,
     LINE_X_MAX,
@@ -138,6 +143,14 @@ def test_build_initial_comment_without_bench_note(sample_lineup: dict) -> None:
     comment = build_initial_comment(sample_lineup)
     assert "控えGK" not in comment
     assert len(comment.split("\n")) == 5
+
+
+def test_apply_fallback_marker(sample_lineup: dict) -> None:
+    comment = build_initial_comment(sample_lineup)
+    title, marked = apply_fallback_marker("日本 スタメン", comment)
+    assert title == f"日本 スタメン {FALLBACK_MARKER}"
+    assert marked.split("\n")[0] == FALLBACK_MARKER
+    assert marked.endswith(comment)
 
 
 # --- lineup JSON 読み込み ---

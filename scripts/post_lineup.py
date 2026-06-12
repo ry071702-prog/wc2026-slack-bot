@@ -8,6 +8,8 @@ Bot Token (xoxb, files:write) で以下の3ステップを requests で行う
 
 env: SLACK_BOT_TOKEN, SLACK_CHANNEL_ID, (任意) LINEUP_PREFIX (例 "[テスト] ")
 CLI: python scripts/post_lineup.py data/lineups/sample.json
+     --fallback を付けると「⚠️ 予想スタメン (公式発表前)」表記になる
+     (fetch_lineup_auto.py の保険投稿用)
 """
 from __future__ import annotations
 
@@ -80,6 +82,14 @@ def build_initial_comment(lineup: dict[str, Any], prefix: str = "") -> str:
     return "\n".join(lines)
 
 
+FALLBACK_MARKER = "⚠️ 予想スタメン (公式発表前)"
+
+
+def apply_fallback_marker(title: str, comment: str) -> tuple[str, str]:
+    """タイトル末尾とコメント先頭に「予想スタメン」であることを明示する。"""
+    return f"{title} {FALLBACK_MARKER}", f"{FALLBACK_MARKER}\n{comment}"
+
+
 def _check_api(response: requests.Response, api: str) -> dict[str, Any]:
     response.raise_for_status()
     data = response.json()
@@ -137,6 +147,11 @@ def upload_png_to_slack(
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="スタメン図をSlackに投稿する")
     parser.add_argument("lineup_json", help="lineup JSONパス (data/lineups/*.json)")
+    parser.add_argument(
+        "--fallback",
+        action="store_true",
+        help="予想スタメン (公式発表前) であることをタイトル/コメントに明示する",
+    )
     args = parser.parse_args(argv)
 
     token = os.environ.get("SLACK_BOT_TOKEN")
@@ -149,6 +164,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     try:
         lineup = load_lineup(Path(args.lineup_json))
         comment = build_initial_comment(lineup, prefix=prefix)
+        title = lineup.get("title", "日本 スタメン")
+        if args.fallback:
+            title, comment = apply_fallback_marker(title, comment)
         with tempfile.TemporaryDirectory() as tmp_dir:
             png_path = render_lineup(lineup, Path(tmp_dir) / "lineup.png")
             upload_png_to_slack(
@@ -156,7 +174,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 channel_id,
                 png_path,
                 initial_comment=comment,
-                title=lineup.get("title", "日本 スタメン"),
+                title=title,
             )
     except Exception as exc:  # noqa: BLE001 — CLIなので本文を出して非0終了
         print(f"error: {exc}")

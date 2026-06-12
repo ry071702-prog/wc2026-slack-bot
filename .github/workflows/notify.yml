@@ -56,6 +56,54 @@ jobs:
             echo "no live matches; skip rebuild"
           fi
 
+      # 日本戦キックオフ前のスタメン自動取得 (窓外は "no window" で即終了する超軽量チェック)
+      # KO-50〜-20分: ニュース→Gemini抽出→26人照合 / KO-20〜-5分: 予想スタメンで保険投稿
+      - name: Auto lineup check
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          set -o pipefail
+          python scripts/fetch_lineup_auto.py | tee lineup_check.log
+
+      # LINEUP_READY が出たときだけ描画ライブラリを入れて本番チャンネルへ投稿する
+      # (mplsoccer のインストールを毎5分のcronに入れない)。
+      # 投稿失敗時は state を更新せず正常終了 → 次の5分で再試行。
+      - name: Auto lineup post
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          lineup=$(grep -oE "^LINEUP_READY=[A-Za-z0-9_-]+" lineup_check.log | head -1 | cut -d= -f2 || true)
+          if [ -z "$lineup" ]; then
+            echo "no lineup ready; skip"
+            exit 0
+          fi
+          match_id=$(grep -oE "^LINEUP_MATCH_ID=[0-9]+" lineup_check.log | head -1 | cut -d= -f2)
+          flags=""
+          if grep -qE "^LINEUP_READY=.* FALLBACK=1" lineup_check.log; then
+            flags="--fallback"
+          fi
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          pip install -r requirements-lineup.txt
+          if python scripts/post_lineup.py $flags "data/lineups/${lineup}.json"; then
+            LINEUP_MATCH_ID="$match_id" python - <<'PYEOF'
+          import os
+          from pathlib import Path
+          from src.state import StateStore
+
+          store = StateStore(Path("state/notified.json"))
+          state = store.load()
+          match_id = int(os.environ["LINEUP_MATCH_ID"])
+          if match_id not in state["lineup"]:
+              state["lineup"].append(match_id)
+              store.save(state)
+          PYEOF
+            echo "lineup posted: ${lineup} (match_id=${match_id})"
+          else
+            echo "lineup post failed; will retry on next run"
+          fi
+
       - name: Commit notification state
         run: |
           git config user.name "github-actions[bot]"
