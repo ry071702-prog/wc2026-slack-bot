@@ -13,7 +13,10 @@ from scripts.render_lineup import (
     compute_coordinates,
     kickoff_label,
     load_lineup,
+    load_squad,
     parse_formation,
+    resolve_photo_url,
+    squad_for_lineup,
 )
 
 SAMPLE_PATH = Path(__file__).resolve().parents[1] / "data" / "lineups" / "sample.json"
@@ -154,6 +157,81 @@ def test_load_lineup_rejects_wrong_player_count(
     path.write_text(json.dumps(sample_lineup, ensure_ascii=False), encoding="utf-8")
     with pytest.raises(ValueError):
         load_lineup(path)
+
+
+# --- 顔写真URLの照合 ---
+
+SQUAD = [
+    {"name": "Z. Suzuki", "name_ja": "鈴木彩艶", "number": 1, "photo": "http://x/1.png"},
+    {"name": "W. Endo", "name_ja": "遠藤航", "number": 6, "photo": "http://x/6.png"},
+    {"name": "T. Kubo", "name_ja": "久保建英", "number": 8, "photo": None},
+]
+
+
+def test_resolve_photo_url_by_number() -> None:
+    player = {"number": 6, "name": "違う名前"}
+    assert resolve_photo_url(player, SQUAD) == "http://x/6.png"
+
+
+def test_resolve_photo_url_fallback_by_name_ja() -> None:
+    player = {"number": 99, "name": "鈴木彩艶"}
+    assert resolve_photo_url(player, SQUAD) == "http://x/1.png"
+
+
+def test_resolve_photo_url_no_match_returns_none() -> None:
+    player = {"number": 99, "name": "存在しない選手"}
+    assert resolve_photo_url(player, SQUAD) is None
+
+
+def test_resolve_photo_url_skips_member_without_photo() -> None:
+    # number 8 は photo が無いため None (フォールバック描画になる)
+    player = {"number": 8, "name": "久保建英"}
+    assert resolve_photo_url(player, SQUAD) is None
+
+
+def test_resolve_photo_url_empty_squad() -> None:
+    assert resolve_photo_url({"number": 1, "name": "鈴木彩艶"}, []) is None
+
+
+# --- squads.json 読み込み ---
+
+
+def test_load_squad_japan_has_photos() -> None:
+    squad = load_squad("Japan")
+    assert len(squad) == 26
+    assert all(member.get("photo") for member in squad)
+
+
+def test_load_squad_unknown_team_returns_empty() -> None:
+    assert load_squad("Atlantis") == []
+
+
+def test_load_squad_missing_file_returns_empty(tmp_path: Path) -> None:
+    assert load_squad("Japan", tmp_path / "nope.json") == []
+
+
+def test_load_squad_broken_json_returns_empty(tmp_path: Path) -> None:
+    path = tmp_path / "broken.json"
+    path.write_text("{not json", encoding="utf-8")
+    assert load_squad("Japan", path) == []
+
+
+def test_squad_for_lineup_defaults_to_japan(sample_lineup: dict) -> None:
+    sample_lineup.pop("team", None)
+    squad = squad_for_lineup(sample_lineup)
+    assert squad == load_squad("Japan")
+
+
+def test_squad_for_lineup_uses_team_field(sample_lineup: dict) -> None:
+    sample_lineup["team"] = "Netherlands"
+    squad = squad_for_lineup(sample_lineup)
+    assert squad == load_squad("Netherlands")
+
+
+def test_sample_lineup_all_players_resolve_photo(sample_lineup: dict) -> None:
+    squad = squad_for_lineup(sample_lineup)
+    for player in sample_lineup["players"]:
+        assert resolve_photo_url(player, squad), player["name"]
 
 
 # --- その他 ---
