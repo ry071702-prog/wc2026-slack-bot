@@ -36,7 +36,8 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           NOTIFY_MINUTES_BEFORE: ${{ vars.NOTIFY_MINUTES_BEFORE || '15' }}
           MENTION_JAPAN: ${{ vars.MENTION_JAPAN || 'false' }}
-          QUIET_HOURS: ${{ vars.QUIET_HOURS || '01:00-06:30' }}
+          # 深夜帯もチャンネル全員の許可を得て通知する (2026-06-12)。再制限する場合は Variables の QUIET_HOURS に "01:00-06:30" 等を設定
+          QUIET_HOURS: ${{ vars.QUIET_HOURS || '' }}
           DRY_RUN: ${{ vars.DRY_RUN || 'false' }}
         run: python -m src.main --mode notify
 
