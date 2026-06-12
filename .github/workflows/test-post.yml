@@ -23,8 +23,8 @@ jobs:
       - name: Post sample notifications
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # テスト配信は #wctest 固定 (2026-06-12 ユーザー指示)。本番チャンネルには送らない
+          SLACK_CHANNEL_ID: C0BA5QNQC3W
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: |
           python - <<'EOF'
