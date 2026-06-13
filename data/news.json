@@ -1,13 +1,61 @@
 {
-  "generated_at": "2026-06-13T09:01:38+00:00",
+  "generated_at": "2026-06-13T10:01:38+00:00",
   "articles": [
+    {
+      "title": "The US border runs straight through the World Cup",
+      "source": "Al Jazeera",
+      "published_at": "2026-06-13T09:59:43+00:00",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNWWcwUnlzTWNOc1BPTGRsdWRwNHNNVGxkdFU4SHAwRVBiTUhlV2RpS0xWU2E2YlBudFhNbWN0alRKa201TGpqaVZhWGxnS29vRDFTRDhoS3VYZGRFT3JiSldTcjFmeXhiWVBhMUthaDBiblV6MkxjYlluUFE4bHRvNHdwdFZyQW9HVUNuTHZoOFBJeURKUDJNTzV30gGfAUFVX3lxTE9KVUlEbHowVHFYYjhhak9iX282TXNNY1ZQU1pib3F4b0hnYm9WYkJIaWtFYU9pUEhkLThSUlp4RjMzVmdnejgwYVNaRjBlNXdicVdiWmRrMDllZEhtNGNRdURwaFhZS3pyZGxzWmt1UklxalduMWpab1FVVGVGOFcweXpzX3VPLUsyM3NVMXI3N3VaU2pWZEtRWU44NE4zZw?oc=5",
+      "lang": "en",
+      "image": "https://www.aljazeera.com/wp-content/uploads/2026/06/reuters_6a2d2640-1781343808.jpg?resize=1200%2C675"
+    },
+    {
+      "title": "Injured referee Michael Oliver to miss his first 2026 World Cup match",
+      "source": "ESPN",
+      "published_at": "2026-06-13T09:58:50+00:00",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOTC0wVnQxN1lPLXhOMUZmaXlneVFURzdQNkEza3c2RzlUYVRBVjFBQWNHR2twZ3VpZk85a1huTzRUMzNiNXJoekx4bHRIczFXWElnY1NFS0hRbUZxNlowQjA4ODhkZURCMDBiYkNsLVpma2RDZnRKeUZPLUZXVVBZVjNLcEVEYWRmbUN1cjhsLWhqdGZmaTVRdG5POWwzYnU5SGZDTGVicFpyRzBUT01jb0FlZmcwQQ?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "I’m Not Watching The FIFA World Cup (And Neither Should You)",
+      "source": "The Liverpool Offside",
+      "published_at": "2026-06-13T09:24:14+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPVktEdG95TUMxTWZlaV9kX0hhbnVRd2k0cExRTy1xSE5WRk9QbVhKOEJKeWlENmdyYXRMUjFqVDctN2pvLWhCc0ZCX1JhdGlGNkNPSUM5ejNWTDY2cW0zeFYzMmRvSnp3TzRFOEZhMGMzaE9OVG5QYjhzYkc4NWZOaE85WHpYZGVoR2o2bHVTUzhKa2RDTjY0VmJ1Sm5vY09qcUVGR1lsV2NBWjZLMWhwdDIzYWROaXg2Z29UeWhFSWNrWE83ODFwa3NoeGZLNC1vZ0xFdm9Mel8zYmJkakt0aU1FWQ?oc=5",
+      "lang": "en",
+      "image": "https://platform.liverpooloffside.sbnation.com/wp-content/uploads/sites/99/2026/06/gettyimages-2280490922.jpg?quality=90&strip=all&crop=0%2C10.727335175699%2C100%2C78.545329648602&w=1200"
+    },
+    {
+      "title": "Is FIFA changing turf at Estadio Akron in Zapopan for 2026 World Cup?",
+      "source": "Knoxville News Sentinel",
+      "published_at": "2026-06-13T08:55:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOVEcyZENFQjRJLVhxS1lfNVJsWldYck1IN3pOaWZfOG04R3NhOUFLMUJibmxmMDVrMTR2ci1DTHRuWTVIbTVia0lSMXY5Vy1iY2c5WWV4aFN4aEh4a1JfaDBxYnV6UFBkZWh6ejZUZHhKSVdRQXFERWZLaW9pRldpNXBMVjFndmVzY0ZxTnlBSTYydThpbzZIVGFvTGFaYkRINmgtbjJsS0I0N1JzYkE4dEJwZlJyN2QtNkhnakhJRmRCajg2S193RDFWa1FseWFhOWNuNk5rZXpqR01UU3hUQm9kN0ZSLW5STWtNbmxn?oc=5",
+      "lang": "en",
+      "image": null
+    },
     {
       "title": "World Cup 2026: Injured Michael Oliver to miss Ivory Coast v Ecuador",
       "source": "BBC",
       "published_at": "2026-06-13T08:47:19+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQbUdLbHJnRnJDbFZ0Q25DUVc5cVZIRXl5NXVuekw0TVBpcEEyMVI4TVpETzFHSWdWTEUwUXpRam1jTjZTU3pGdVVNM1lJQVR2VmJ5aXZlNkl3aDdCV0NoaHlmTmFLTWhubWxaSHF4TVRWc3ZkU2xYeURiVnlDanQySmQ0dDhtbkdaTlVuMmt2SQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE11S0FmOVRONDdnYXdXcllOSnRhMnI1bWlpazh0bGVfN1FnVlRjWlE2MXM1Q1JBQmJXMURTdzhnOVA3LXI4dk9aNklmZmY4NTZpVW9QTHlwRm4ycU1CSzIzTGpHcUM5czQ?oc=5",
       "lang": "en",
       "image": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/b23b/live/9ddd2f30-6702-11f1-b73f-f9c113d06588.jpg"
+    },
+    {
+      "title": "Los Angeles conjures up irresistible spectacle as USA sparkle in opening act | Barney Ronay",
+      "source": "The Guardian",
+      "published_at": "2026-06-13T08:39:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOT1RMc255dXdUTzZfT280VHo2RVJhNWttdWg3YmQ0ZlFUUGxhOC1hUTVCZnVFa3ZKTlB0LTNTNTUyY3h4QVEyTjYwTG01Z2U1Um9ReGVkNTcyVVkxS3hrYTdyMGlUUE9pSklseC1jZ2JWQng0Z3ZoMHN5TFd5dGhNQ2F6WjdLRnZDeWpWWnl5LVdvYi00UG9uSlFzQjhjVFNJLW43dDltZkVTRnhSenRwZjNHR1dEaXRxNmdMTHRqbXJZcUctemZiZjh1RXQwOUhPU0hrVVpBWQ?oc=5",
+      "lang": "en",
+      "image": "https://i.guim.co.uk/img/media/bb90d2ad3a61b64f03ca88d4e219144312905aae/156_0_4201_3361/master/4201.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=9584ebbb7ab0c577bf934fd16215acbd"
+    },
+    {
+      "title": "World Cup 2026 live: Fifa releases statement on empty seats and investigation into theft at England camp",
+      "source": "The Independent",
+      "published_at": "2026-06-13T08:26:14+00:00",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQOG9za1BubzBZVWNYenM4Tm9tMWNkVzB0VFRIQU9INU9UbkdkOFB3UWlWOXBSSEJQQ09jZFBRX2FseGVwb1hycHpIWmwwaTRDSUdsd0F4X21uaW9mLVhzNmgtdUItY0UzMTRqdUJxM1h3ZUZPa0hINS1nVXBaemUyX1JMdlFVMHVyZlRZckZLUjBlMTdLbkxZZlc5a2dpQQ?oc=5",
+      "lang": "en",
+      "image": "https://static.independent.co.uk/2026/06/10/09/4588584ef4e5b417255a8b1997c2e444Y29udGVudHNlYXJjaGFwaSwxNzgxMTU3NTk1-2.84895075.jpg?width=1200&height=800&crop=1200:800"
     },
     {
       "title": "FIFA World Cup Day 3: Brazil vs Morocco prediction, schedule, what to know",
@@ -26,38 +74,6 @@
       "image": "https://s.yimg.com/ny/api/res/1.2/iI25A6oDF9e1Quz9psiagw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/al_jazeera_289/eaef84cead6479b9c9a757d17a0986e1"
     },
     {
-      "title": "Is FIFA changing turf at Mercedes-Benz Stadium for 2026 World Cup?",
-      "source": "Knoxville News Sentinel",
-      "published_at": "2026-06-13T07:55:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPTFlKa1RkbWR2dXg1UWNKX2lyekFTQ19RT2h2WWl0UklKVkJ5QlBJTEhJbHlLOHM0NGJuXzladkM1QzdsZmNLa200ajNTX1pScFJYNDVNaEJDbmQtdjU3bHU1V1dob0lublloclhHVDJmOVhIQi1yeGhEekI2UmxLRkYySHY2b1VfYUplWktVWlhuYmN5dTZkcnpjaEU4QTlNOVhyMm9abU9pV1dINUN0LW5xd2hlY01ISTMzblJkbHVSZDN3QlduMUZYcS1WeXhzbzUyYXFHc01ZQ0lLd3J5T09GbXZyM1JDU0lEQXNNeGkwSGc?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "World Cup 2026 today: Live updates, latest news as USMNT make dream start - June 13",
-      "source": "ESPN",
-      "published_at": "2026-06-13T07:41:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOMGEwS1UzZFk1VlNHR1d4bGNrc1pfWmU1TG5CYk1ac1B5U2V3VWlOUjJSdlpkcXgzR294aEF3U1RrU2JFTWRsay10VUFYQTVjNHV2U2dOeUJ0azdSMnVEenhCQkQ4ZDV0RUFjV2xVTlBzTkZHcDA2aGtLT3gzY25wLVFaNmdpcU5jck5jaFMwWl8xdGYzVmZGN1BCa0pfUE12NU9TT19vXzFwaEZYeVNYYWQ1cUNtYWFIUV9tUWhMLXZlVHhRTjVmNUJYTEVRUVdPd0lXQ0EwLTlQbkQ5Mzg4?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "FIFA World Cup 2026: USA vs Paraguay (Group D) - as it happened",
-      "source": "olympics.com",
-      "published_at": "2026-06-13T07:35:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPbGpqQ2JNZFBWQkRydWFUd3hWNXdiano0dWVOSkZITlByZU1CQm9ySUliRXByR25iSml5V3pQNUdPOHpWODlHMmlWeXVJRmZnMEFLNE04amZHUG1mR2ptdzB1dU5iby03WmlWQXV5LXpEMVZWcmxzbzhYQTV1WW5kZVV1bUhpZXBRODQzU0VEOW54S2s?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "LISA, Anitta And Rema Join Forces For FIFA World Cup Opening Ceremony",
-      "source": "Forbes",
-      "published_at": "2026-06-13T07:19:46+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQcThaa3J2UEZQMDBVeENyZVBucEV6MElKRnNxd0NpaVh3TVFlMlB6YUpsb3Q5NW12YzlwYmE4VEllTTlmY1lBdm9uUE9VdWtidXhFMXlsLVVtNmUyZ2YwUmx3cndRbXFqaWRkN0ZGNkF4TFhuMEtoMW9UT3ByXzIyQnpKenhHN0RMRlJ5dEM1dDdIeVlPUkNNclVtTXlnMEZNYjVDdVVqemdwWFBobmV4VzhFM0U5TDA2a2hILUR6Q2s?oc=5",
-      "lang": "en",
-      "image": "https://imageio.forbes.com/specials-images/imageserve/6a2cffb721c1f141babda8d4/0x0.jpg?format=jpg&crop=2407,1604,x605,y569,safe&height=900&width=1600&fit=bounds"
-    },
-    {
       "title": "Brazil vs Morocco World Cup team news: Neymar, start time and how to watch",
       "source": "Al Jazeera",
       "published_at": "2026-06-13T07:18:34+00:00",
@@ -66,20 +82,20 @@
       "image": "https://www.aljazeera.com/wp-content/uploads/2026/06/2026-06-01T125057Z_2136025211_RC2EHDAGH20O_RTRMADP_3_SOCCER-WORLDCUP-GROUPC-BRAZIL-1781255341_161312-1781267337.jpg?resize=1200%2C630&quality=80"
     },
     {
+      "title": "USA 4-1 Paraguay (Jun 12, 2026) Game Analysis",
+      "source": "ESPN",
+      "published_at": "2026-06-13T07:00:26+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5xRTJiSkpfaTVkLTBpcjlmUFhidll0dmtVanJwZVNkZXgzMDFVXzcyYmhseWFvQ1A5ZWpYRXpHLVJIT2s4cDZBNzFyQ29qZ1JEb2ZCcE9VdUowRnBFSThn?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
       "title": "World Cup 2026: Team Canada vs. Bosnia ends in dramatic draw, 1-1, after mighty effort makes history on Canadian soil — Live Updates",
       "source": "Yahoo News Canada",
       "published_at": "2026-06-13T06:31:00+00:00",
       "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxQTnhTTmtIQ3RPcTdEY3BYSjZ4ZEMwLXVWVGZhUUE3eS04OVNVdVE0X3U5aGVhOGN5d0hCTTJKbHA3UWJXcXJuWXIwek02RklGV2lVNVBwMDVuUzVJUU9uQ3VjUWduT3VwY2VRVUF1TjNmQlZfX08wbkZlZ2M0MU9lZm05aHNoTnRHbXBkTDU0MkowUlJNYlM2emxOOUdobWFTaGxIQktlTWEtai1pWjBaa2k5N3ZrSDZzQnBDSkhXa2hmNF8xTUlSN1R4QjdFcmJNYmZ4MDVjOVpRY0R6NkNkOTFPVE83andGR0ZyY09RbDNrd0lHMVNGZ1R2VE5TQ04yVEZ3?oc=5",
       "lang": "en",
       "image": "https://s.yimg.com/ny/api/res/1.2/P0TPdHpBSWeg3hVhEnCl7w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03OTk7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/2026-06/b3156027-2e56-4450-bff3-478b8cb5dfe8"
-    },
-    {
-      "title": "‘Dream come true’: World Cup fever ignites Los Angeles as USA beat Paraguay",
-      "source": "Al Jazeera",
-      "published_at": "2026-06-13T06:27:35+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxONnF1V3VnX2lfQ1hobi0xYkZQR1F2SzZLZHdsQ2FmeUhnTWh4QzhtNEVlZEVpb3h6bFFTeDBvc3NlVHYtcW1QT3VENGpEdWpvdS1ydXZvSlppbHdJOTNZTjNOZm9fLU5XaTJkcTBSaWEyd1owU1NBVkxPeFRQeFRya0hSQldfM3dEYWhGcWZCVW9DbWd4aUN3STg0M0wxSi00WXl3ZnpzODBreHJ1NE13ZDlrdmRCZ9IBuwFBVV95cUxNN3BWV3dXRmNJOXF4dnpTdU4yVnk0VlhXQlZjWHhDanZtZDZZY0VqYkY3bWhvYXZXSzk0bU1RbzhGTGE1RTB5d05jamE3b2ZtOWlOSnQ5TVBzOVFXRUlMbUx0OThaSjdmbjYydnA4aXJLVUpDMzFESFNlUkxUUlVxRGw5YnNrUThfTlUzbkJJUUg5WV9IZEYtanVENGtPZ2MtejEyaVJTazRrYnRCcElFcFhhaG9MZlB0SWJz?oc=5",
-      "lang": "en",
-      "image": "https://www.aljazeera.com/wp-content/uploads/2026/06/2026-06-13T033417Z_1704384862_UP1EM6D09X3NH_RTRMADP_3_SOCCER-WORLDCUP-USA-PRY-1781328229.jpg?resize=1920%2C1440"
     },
     {
       "title": "The costs and challenges facing the 2026 World Cup",
@@ -104,14 +120,6 @@
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTEdsMHBOaDJWZmZYTTl5RHJEN1A5UjZ1QS16NXcwTmVzOGUtTzZqUEx1R2RZUi1iR1BGdjZ0a1doSWpBNGdNbjVSVldZTE1TdW1STDFaeF9KUW40SHBreXlJdkNFaUw5RVpQY1pjb01jbXhOZWh6cjl2ZTdzNElpaXB3?oc=5",
       "lang": "en",
       "image": "https://s.yimg.com/os/en/football_today_articles_719/b28b6a0e08e9c6bc2de07e465dbb53cc"
-    },
-    {
-      "title": "World Cup 2026: USA v Paraguay - highlights & reaction",
-      "source": "BBC",
-      "published_at": "2026-06-13T06:07:23+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5OaXRlZVB3XzBrbjNUQXpHRGdUS1BXWTVFRHRHa3J2ZjljWG82VVluekVwXzJ2c083RHloVjJwaGpzRllFU2JJV2V1VmticnlhOVRqWmFQVmtDOWxRRy04dVdn?oc=5",
-      "lang": "en",
-      "image": null
     },
     {
       "title": "Folarin Balogun chose the U.S. over England. It’s already paying off in the World Cup",
@@ -146,20 +154,60 @@
       "image": null
     },
     {
-      "title": "Matt Freese Earns Start in FIFA World Cup 2026 Opener Against Paraguay",
-      "source": "US Soccer",
-      "published_at": "2026-06-13T05:44:03+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMnhjV2xvZnhvMGV1b0NYZ1llRWpXZlJlX3VvMGdtUE1FM0lXUHBSRlJ6ZjlFclZpbEdfS0lTNnlFbFR5ZGUzQS1KbDFLdFpCT09aUmhmSVhJR29uNEdXdDhrOFdBazNRX1ZiYklrTkVIVHpIYWFLTzNKckxMZFNyZ1A1S0t5cU9BYWNUNF9jeE9Yc2MzRUdjNzljVFp4eEE5clFGREYwZUhRNTNicHBGLWtQVktKTmJh?oc=5",
+      "title": "How to Watch the 2026 FIFA World Cup: Scores, Schedule, Dates for Every Match",
+      "source": "FOX Sports",
+      "published_at": "2026-06-13T05:24:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUVFCYXl0QkQ3TVVHMFlVZmFTVU5ZYkFIbkVOVUJzTUJxWU9lSU9ocDV5OGZxX2Y2MzM3RXpSOHJmTkYyS3Y3OXRWelBmMWdDNDdvZ1lnTDhFZnVWSjJNeC1GZ3VBMmdwUEF6aXVEd3pKdGEtakI5VFVLaXpTTUNrUGd6UVlpTWFfZmZ0MnNGZHZPZGdWV2YxRHVHV1cyM1prcTl2RtIBpAFBVV95cUxNQnBNVzFVejlFR0RBdTZSRUtvX19acUd4VTNKc3lLVFQ4eFRGV3ZFc202eDJIOWNzenFSUklSdHJLZFBRMGdYZE84UUtYVEVuckRoY0xsVnNvWndKTEcxdUFQLWVad0JzcV9qT0VBRzUyTFowYnQ4V1ExS2lGWFFaWjZ2TTVTeS1EOFh0RkYwWno0YzVFMGphLU9nRDlaZm5uV2Fudg?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "FIFA World Cup schedule today: Games, kickoff times, livestream info for June 13",
-      "source": "Mashable",
-      "published_at": "2026-06-13T05:26:29+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdFg3R2E4dkljTEgtOGJkbGJCajhwMFlUVWJVNG91UExlQ2JfUEVrTFZta0RTTFBEbGVTSHFqRDd6MkNVWmFESlVUdXAydnFIUjItUE9oQlFBREpOV1J2d3hhU1JGYWYtamcwSFBxR2p0TDZXcWJJeDdPOXZrelhsTm5uYWptQjNEbFpGalhqT2pNcDZnUXc?oc=5",
-      "lang": "en",
+      "title": "ブラジル代表FWネイマール、モロッコ戦を欠場…復帰時期は？「来週には回復し、全体練習にも参加できるだろう」｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-13T09:41:17+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPaTk3ZU5LTnJnd3IxUE16dzRYaW12U1hnZm44Rk9pS0JacTdBaUJFMXJra0JmdndUNEhCTllaWVFtMDhDUUpKN1NHdWxJQnZMQXZ2cWthLXRTREZwWHVMcGVPQWkzejR6YlB3RnVjTWp3MzRMZUVUT3VMV2FWc1BLVlhsTUlyMnRpdkdaazVSN3hnMXQxNVhFcGlGYURXUWF1bV9lWXFRcXhYbkYzeWhxMnAydUJOMHhteEYtV09oQ0JiNUtueUNNbQ?oc=5",
+      "lang": "ja",
       "image": null
+    },
+    {
+      "title": "3度目のW杯へ臨む33歳タレミが語るイラン代表の今…「僕だけの印象かもしれないがW杯の雰囲気を感じない。スポーツと政治は切り分けるべき」 ｜ FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-13T09:40:23+00:00",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQQ0tOSTh3OHpvanVNWDlsN2Q2LWEtaVE0Q2xoM1JOYlpJSjZoWk8zRW92MmhoUGx4dnZqQTA4RkxrYlBraXNvZTk5c1JWLUxiVlljdGVJSkpLTHJsMHJaYzZDcU0yc2ppU1lMSTFId0hGSGE3UVducmNOXzlfZVpYbFVVNjdfaFQzUVNhSmpGNngwSC1wTkVCU1ZiYjdiUjREeFk4SXluLUV3VVhWbnItaFJ1a1ZXOXJrdEpScFpHZHgxZzJx?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【最新】FIFAワールドカップ2026得点ランキング｜得点王争いを随時更新",
+      "source": "サッカーキング",
+      "published_at": "2026-06-13T09:29:41+00:00",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1UVUxoR1REdmQ5Y2ZWaU83VUtPVk03czkyS3dtVmF1UDRhaWgyQmZqZExUVnZaYWF4LXU0NW96QndHWlpIS2VMd2RvOE5heUw0c3JoN0t2UlYzNkFGclFhTXhXX1A5VGxIbDRV?oc=5",
+      "lang": "ja",
+      "image": "https://www.soccer-king.jp/wp-content/uploads/2026/06/20260613_Balogun_01.jpg"
+    },
+    {
+      "title": "【明日の予定】FIFAワールドカップ2026（北中米W杯） 14日に行われる試合のキックオフ時間や放送予定は？",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-13T09:00:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE50bmZra1dEdkx2Z3RjWWxFX2tIb0psQ1hab3F5UjBPc0VwQThONWo3dmFoZ2QwRlFSVnpndVZHbUFqeGtSY1BWZzZ2b2k5dGE5Y1o3UERzZmZ2b25SWWx0MDNrQQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/20260611_torophy_getty.jpg"
+    },
+    {
+      "title": "ブラジル代表ってどんなチーム？全大会出場を継続。苦しみながらも突破した南米予選を振り返る【北中米W杯】",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-13T08:50:57+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9JQlNmSXA0d2xfQXpTWGhjYzM1aHRBbTd0SVpRaWxJMGJ2T2JQbW93MU9hb0ZqZE9XVDV2TU8xX1Zab1RRZUNfc3pxV0xBMzBtQ0l2ZnFZMDlfdzJoRG5KckFKdw?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/03/GettyImages-2233757524-1.jpg"
+    },
+    {
+      "title": "開幕戦で4発快勝！アメリカへの称賛相次ぐ「本当に危険なチーム」「上位進出も期待」｜FIFAワールドカップ2026（DAZN News）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-06-13T08:40:02+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tdXhUdURmOWJ5aWJsTmZCbVo0MllyUWdBLUFsaUVTU0dQTU80U2ZnQ1lMYThsYlJSemEwOUVReVkzYWxIWG1QdnNXazdRTmVhaEdUa19sSHVrOHN0a2c5NU5BWjdPeWxZbk1lZDU3SFYyZ0N0WTg0WVNDUURiV2c?oc=5",
+      "lang": "ja",
+      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260613-00010014-dazn-000-1-view.jpg?exp=10800"
     },
     {
       "title": "開幕戦で4発快勝！アメリカへの称賛相次ぐ「本当に危険なチーム」「上位進出も期待」｜FIFAワールドカップ2026",
@@ -178,12 +226,12 @@
       "image": "https://img-footballchannel.com/wordpress/assets/2025/12/20251205_FIFA_getty.jpg"
     },
     {
-      "title": "契約縛りのないDAZN(ダゾーン)プランはどれ？北中米ワールドカップ(W杯)2026の短期視聴向け",
-      "source": "Goal.com",
-      "published_at": "2026-06-13T08:18:17+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNUFAyLUpkMTN4QWFuU3ltT0xMazdUejVzSUs1SnFBdE5qamVRM0ppSXpNZTJWS1JFN2Y1RkpCMjBxZ255U2NCcld6bjZoZGl6T3Nwb2xoaEw5dTlfUlhEQzlScjZ4aHlEejdETFBNOE5pb2IwN0pDYW1yeEpZTXNqMTZabUFOdDR4R2lfd0lhblpQVkFDRXNMaV92YTllU01Wb29JMnppMF9WMmlaWTVWVWEzZFF4MWxVUVpRcw?oc=5",
+      "title": "【特番】 米津玄師×遠藤航 NHKサッカーテーマSPECIAL対談",
+      "source": "NHK",
+      "published_at": "2026-06-13T08:07:28+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBsVW4zQW9HX2llRElyaUdCelFBTWxUY1hSTHRxUFY5OW1lOXJqY2hSLVk0N2xRTzc0Wi1idmpkazRiUzRZVDFDZXNUdER5ZGduSmtENVBuc1Q?oc=5",
       "lang": "ja",
-      "image": "https://assets.goal.com/images/v3/blt2b59018f01770e05/vinicius-haaland-mbappe.jpg"
+      "image": "https://g-img.nhk.jp/assets/dfd470c2eaaf4f90a547bdabbb16d678/484820ab3a1c4b7aa7a27ff6bc0f78b2/260610_%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB_%E9%BB%92%E6%96%87%E5%AD%97_%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E4%BB%98%E3%81%8D.png?w=1280"
     },
     {
       "title": "カナダがW杯初の勝ち点獲得！…同点弾決めたFWサイル・ラリン「カナダが僕を必要とするなら、ゴールを決めるよ」｜FIFAワールドカップ2026",
@@ -200,14 +248,6 @@
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQNGVDX3F3TXRtZHBDc2FPN0RDOEhLMWVXUHFMckFoWnVqVF9TQmpOR1hRMHZQeW1DQmw3OXpMZzlhVjh0NTNEeEVoVnhWbGtwdDFXU05hb0dubm5WNHJzeS1OU2Z4QW44Nl9sV1E1TUMtQjZhTC1DWTdCWWZTNWE5VkRXOFJPeGJqdTBYVDhKVE0ybU1zb3BPYzJLWjZqcVZkMUJSeGpmeDViZkdmQUZzVHdvUGU3NHFGcU4tTUJyMnBnckYyUllZYm9kUkFVZElMN1hLY0g2d3hrZFk?oc=5",
       "lang": "ja",
       "image": null
-    },
-    {
-      "title": "NHK中継解説決定！ FIFA ワールドカップ 2026",
-      "source": "NHK",
-      "published_at": "2026-06-13T07:37:31+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBaREF1LVdCb2I3dUd5ZXN5RE1TUU9YSmlVdHUyNWgyTDNFbGJ4UUNnUzd4aUczMHhGUVVFSmh3YXJRYWVmZmZkZENhMmhhLTRqZnl6Rmpn?oc=5",
-      "lang": "ja",
-      "image": "https://g-img.nhk.jp/assets/dfd470c2eaaf4f90a547bdabbb16d678/39f9ba43334b47969dd6a19e5d98d427/%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC%E8%A7%A3%E8%AA%AC%E6%B1%BA%E5%AE%9A%E4%BF%AE%E6%AD%A31_1920-1080.jpg?w=1280"
     },
     {
       "title": "【サッカーワールドカップ】開催国・米国、圧勝４ゴール発進 堅守パラグアイをものともせず",
@@ -258,6 +298,14 @@
       "image": null
     },
     {
+      "title": "“過去最強”のアメリカ代表、W杯で初の1試合4得点…3点差勝利は第1回大会以来（サッカーキング）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-06-13T05:55:16+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ZclVmOVkwaEFFY0hDTlhYbVlQZjVYOU1XVEFxbzBzUVJNWUlnRUluMFVicHJCbTNGNGVJazAwbDlVNVpWbUhyaUdTVlJfdUJnV09QUWZoRG9zQW5qdVU3QTdqTHNNZHNiYWtOMWY2TTFLUldPVGNTalZpS2JXSDg?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
       "title": "【W杯】サッカー日本代表、グループリーグ突破時のラウンド32対戦予想国は？",
       "source": "Goal.com",
       "published_at": "2026-06-13T05:32:42+00:00",
@@ -270,54 +318,6 @@
       "source": "olympics.com",
       "published_at": "2026-06-13T05:20:00+00:00",
       "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPejZiblV4UG1HeUJyZ1hzeVdzaUdLcUNVcEJQVDJrYXhjdko0a2VFbGVjQlQ2T3VwSzU2eXE5T3ZsbFlDWHFMRlNLVllaT1dQamdfSlFVUnlYX0RRV0ZjdWFjYVFwNHRVN1o1bDhGdWVoaFc5S1VEelc5MEtDUkUtRzhRakRaYllTeWlIdw?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "【大会日程】試合スケジュール｜FIFAワールドカップ（サッカーW杯）2026 北中米大会",
-      "source": "tv-tokyo.co.jp",
-      "published_at": "2026-06-13T05:19:33+00:00",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5HQUpLQWxEaGlmblJyNTN3YURQWmx4NDdmOURNU3FqQnlNREh6Qm1JdEtNSHFMSnBuSEp1NGhuV0dBYXRtQzBwLVJUS0ZLR0ctNHhzaHlUMTllb0xZRTA0U2M2aHVsdEhxTHk2NlFuMA?oc=5",
-      "lang": "ja",
-      "image": "https://www.tv-tokyo.co.jp/sports/assets/2026/06/aflo_332279656-thumb-900x600-60492.jpg"
-    },
-    {
-      "title": "FIFAワールドカップ2026｜出場国一覧｜試合日程・結果・放送・配信・実況・解説｜日本代表",
-      "source": "サッカーキング",
-      "published_at": "2026-06-13T04:36:55+00:00",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9HUXppMGo2SGFoSGhhd08zMjhjZVF3aHlvOWpPTnhtMXAxNkFEZ3dVT2xCQzhLZ3llekpORF9MazB5UU85MllIcFdpZ0QxeTlNeGdtR0N4eHdQa1FST3ZWWG4tcFpyQjNRbU5lTlMzQXVZOEE?oc=5",
-      "lang": "ja",
-      "image": "https://www.soccer-king.jp/wp-content/uploads/2025/12/2026worldcup-trophy-20251218.jpg"
-    },
-    {
-      "title": "サッカーワールドカップ2026 日程・試合データ",
-      "source": "日本経済新聞",
-      "published_at": "2026-06-13T04:33:51+00:00",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOSFd1ZzU3X2ozT1pxSVROcXI4RndWUy1KblZLbXhieUljQmFYX3dIcXIyWW5iTnprX0N5dDdsVmZPd0swY0NDSkQ2QWN2a3VZRXZYRVduRmpOQXlGRXJRVjJlaDRabjNiS0xPVW9LVG96MUFRQTgtWmZKVjktY0drSA?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "W杯初戦で逆転勝利の韓国を伊解説陣はどう見た？「見ていて面白いチーム」FC東京GKやフェイエMFを称賛 ｜ FIFAワールドカップ2026",
-      "source": "DAZN",
-      "published_at": "2026-06-13T03:57:01+00:00",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQbEpNWjVVNlg3VmNTbmFpYWlPT3dab25pOC1zLW5fOUxHVG1nWWFuUlJCR29Tc3BUSXlVOUlPZmhSUjlscF9hQVNOQTB1NC1EZ1Z5bnZucVhqVTlDRE9Bb3ZDUEtlSlMyR1NrclZhSl9pNnZrRFVoUGNYdEVVSW9MUFVmcFNvWjZ6bFNGT3NleXpwNFpVbE50T3B0eGpQTzRnSTZDQ1JKLW40cVlBSVdQSFpJdG5aNnBoR0FBRHZLbTk3LU05XzU0UUh2SjQzM00?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "W杯初戦で逆転勝利の韓国を伊解説陣はどう見た？「見ていて面白いチーム」FC東京GKやフェイエMFを称賛 ｜ FIFAワールドカップ2026（DAZN News）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-13T03:56:21+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRUo4UGZkbTgySGRETlJrdS1lZ2JRcDE1WFI0R1h0aXdBRUgwUjNGVi1iVko1MDIweWdzVTlLX2NGMXhRb1F2WFlqZ0VqaWhqYTN5YnA0UzNMVS1yOExDT25VMEhFWkcwQ0JVd3NIM0V2NUVSdWFIOGxaMzcxbnN5MmNWRzFiUGE5Z0VFYWFR?oc=5",
-      "lang": "ja",
-      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260613-00010011-dazn-000-1-view.jpg?exp=10800"
-    },
-    {
-      "title": "バルベルデ【ウルグアイ代表】を今すぐ観戦 | DAZN JP",
-      "source": "DAZN",
-      "published_at": "2026-06-13T03:53:18+00:00",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNTVhteXFxNkpROGRlMmtoZjMtV0U3M0tTZ2VlWjVmRVZObTd0UkpkSEN5dTRtMW1TS09LTjlHZFpLdWM2ZEx4VXp5Nmo2R3ZDOFJvV3IyWUtfU0pRQjE0M1NoTFNuTTlJQVZzU2FSYTBZX2JjQzZ6ZFlvc215emFCOWVDY3BEdXdhQWhrZTR4eHJ6TDFOZVB0aUxPUQ?oc=5",
       "lang": "ja",
       "image": null
     }
