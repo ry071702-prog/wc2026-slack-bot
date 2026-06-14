@@ -45,6 +45,15 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python scripts/build_site_data.py
 
+      - name: Build matchup cards
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: |
+          pip install pillow
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python scripts/build_matchups.py
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
