@@ -19,6 +19,7 @@ from src.slack import (
     build_poll_result_payload,
     build_prematch_payload,
     build_result_payload,
+    matchup_image_block,
 )
 from src.state import NotificationState, StateStore
 
@@ -78,6 +79,27 @@ def should_send_result(match: Match, state: NotificationState) -> bool:
         and match.score.home is not None
         and match.score.away is not None
     )
+
+
+def _matchup_image_block(slack: SlackSender, match: Match) -> Optional[dict]:
+    """対戦カード画像の image ブロックを安全に取得する。
+
+    Bot Token クライアント (requests.Session を持つ) かつ非 dry_run のときだけ
+    HEAD で存在確認し、200 のときのみブロックを返す。それ以外・確認失敗時は
+    None (= 画像なしで投稿) を返し、通知本体は絶対に壊さない。
+    """
+    if getattr(slack, "dry_run", False):
+        return None
+    if not isinstance(slack, SlackBotClient):
+        return None
+    session = getattr(slack, "session", None)
+    if session is None:
+        return None
+    try:
+        return matchup_image_block(match.id, session)
+    except Exception as exc:  # noqa: BLE001 (画像添付は通知本体を壊さない)
+        print(f"matchup image block skipped for {match.id}: {exc}")
+        return None
 
 
 def _supports_reactions(slack: SlackSender) -> bool:
@@ -189,7 +211,10 @@ def run_notify(
     )
 
     for match in prematch_matches:
-        sent = slack.send(build_prematch_payload(match, mention_japan))
+        image_block = _matchup_image_block(slack, match)
+        sent = slack.send(
+            build_prematch_payload(match, mention_japan, image_block=image_block)
+        )
         if sent and not slack.dry_run:
             state["prematch"].append(match.id)
             state_store.save(state)
@@ -244,7 +269,10 @@ def run_poll(
         key=lambda m: m.utc_kickoff,
     )
     for match in poll_matches:
-        response = slack.post_message(build_poll_payload(match))
+        image_block = _matchup_image_block(slack, match)
+        response = slack.post_message(
+            build_poll_payload(match, image_block=image_block)
+        )
         if not response or not response.get("ok"):
             continue
         ts = response.get("ts")
