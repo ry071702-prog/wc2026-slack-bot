@@ -8,8 +8,6 @@ from typing import Optional, Sequence
 
 from src.flags import opponent_reaction
 from src.messages import japan_opponent, japan_poll_reactions, poll_outcome
-
-POLL_MAX_WINNER_NAMES = 30
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
 from src.slack import (
@@ -24,6 +22,7 @@ from src.slack import (
 )
 from src.state import NotificationState, StateStore
 
+POLL_MAX_WINNER_NAMES = 30
 TOURNAMENT_START_UTC = datetime(2026, 6, 11, tzinfo=timezone.utc)
 TOURNAMENT_END_UTC = datetime(2026, 7, 21, tzinfo=timezone.utc)
 DEFAULT_STATE_PATH = Path("state/notified.json")
