@@ -102,6 +102,16 @@ def _matchup_image_block(slack: SlackSender, match: Match) -> Optional[dict]:
         return None
 
 
+def prematch_vote_reactions(match: Match) -> list[str]:
+    """prematch メッセージに種付けする3リアクション: ホーム国旗, 引き分け, アウェイ国旗。
+    未知チームは 'soccer' にフォールバックし空文字 (Slack invalid_name) を避ける。"""
+    return [
+        opponent_reaction(match.home),
+        "handshake",
+        opponent_reaction(match.away),
+    ]
+
+
 def _supports_reactions(slack: SlackSender) -> bool:
     """リアクション投票に必要な API (Bot Token クライアント) を備えているか。
     Incoming Webhook はリアクションを扱えないためポール機能はスキップされる。"""
@@ -212,11 +222,25 @@ def run_notify(
 
     for match in prematch_matches:
         image_block = _matchup_image_block(slack, match)
-        sent = slack.send(
-            build_prematch_payload(match, mention_japan, image_block=image_block)
-        )
+        payload = build_prematch_payload(match, mention_japan, image_block=image_block)
+
+        if _supports_reactions(slack):
+            response = slack.post_message(payload)
+            sent = bool(response and response.get("ok"))
+            ts: Optional[str] = (response or {}).get("ts")
+        else:
+            sent = slack.send(payload)
+            ts = None
+
         if sent and not slack.dry_run:
             state["prematch"].append(match.id)
+            state_store.save(state)
+
+        # リアクション種付け: ベストエフォート。失敗が prematch 配信・state 記録を妨げない。
+        if ts and not slack.dry_run and match.id not in state["prematch_poll"]:
+            for name in prematch_vote_reactions(match):
+                slack.add_reaction(ts, name)
+            state["prematch_poll"].append(match.id)
             state_store.save(state)
 
     for match in result_matches:
