@@ -293,6 +293,17 @@ def _paste_glow(card, box, radius, color, blur=22) -> None:
     card.alpha_composite(glow)
 
 
+def matchup_left_right(entry: dict[str, Any]) -> tuple[tuple, tuple]:
+    """(左チーム, 右チーム) を返す。各=(英語名, 日本語名, 日本か)。
+    日本戦は本文の「日本 vs 相手」表記に合わせ、日本を必ず左に置く。
+    非日本戦は home が左 (ホーム/アウェイ順)。"""
+    home = (entry.get("home"), str(entry.get("home_ja") or ""), entry.get("home") == "Japan")
+    away = (entry.get("away"), str(entry.get("away_ja") or ""), entry.get("away") == "Japan")
+    if entry.get("is_japan") and away[2]:  # 日本がアウェイ → 日本を左へ入れ替え
+        return away, home
+    return home, away
+
+
 def render_matchup_card(
     entry: dict[str, Any],
     output: Path,
@@ -325,12 +336,10 @@ def render_matchup_card(
         draw.text((CARD_W // 2, 74), stage, font=stage_font, fill=NEON, anchor="mm")
 
     is_japan = bool(entry.get("is_japan"))
-    home_jp = entry.get("home") == "Japan"
-    away_jp = entry.get("away") == "Japan"
-
+    left_team, right_team = matchup_left_right(entry)
     sides = (
-        (entry.get("home"), str(entry.get("home_ja") or ""), LEFT_FLAG_CX, home_jp),
-        (entry.get("away"), str(entry.get("away_ja") or ""), RIGHT_FLAG_CX, away_jp),
+        (left_team[0], left_team[1], LEFT_FLAG_CX, left_team[2]),
+        (right_team[0], right_team[1], RIGHT_FLAG_CX, right_team[2]),
     )
 
     box_w, box_h = FLAG_BOX
