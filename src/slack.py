@@ -192,8 +192,10 @@ class SlackBotClient:
     def get_reactions(self, ts: str) -> Optional[dict[str, Any]]:
         """reactions.get (full=true)。成功時はレスポンス JSON 全体を返す。失敗/未取得時 None。"""
         if self.dry_run:
-            print(f"Slack reactions.get skipped: DRY_RUN=true (ts={ts})")
-            return None
+            # 空のリアクション集合を返し、集計発表メッセージを dry_run でも
+            # プレビューできるようにする (None だと集計パスがスキップされる)。
+            print(f"Slack reactions.get stubbed: DRY_RUN=true (ts={ts})")
+            return {"ok": True, "message": {"reactions": []}}
 
         try:
             response = self.session.get(

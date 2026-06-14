@@ -48,3 +48,27 @@ def test_flag_emoji_england() -> None:
 
 def test_flag_emoji_unknown_is_empty() -> None:
     assert flag_emoji("Atlantis") == ""
+
+
+def test_team_iso_covers_all_team_names():
+    # TEAM_NAMES に載る全チームが空でないリアクション名に解決される (相手勝利票が壊れない)
+    from src.flags import opponent_reaction
+    from src.messages import TEAM_NAMES
+
+    empties = [name for name in TEAM_NAMES if not opponent_reaction(name)]
+    assert empties == []
+
+
+def test_opponent_reaction_falls_back_to_soccer():
+    from src.flags import opponent_flag, opponent_reaction
+
+    assert opponent_reaction("Netherlands") == "flag-nl"
+    assert opponent_reaction("Atlantis") == "soccer"  # 未知名
+    assert opponent_flag("Atlantis") == "⚽"
+
+
+def test_formerly_missing_isos_resolve():
+    from src.flags import flag_reaction
+
+    for team in ("Italy", "Chile", "Denmark", "Serbia", "Ukraine"):
+        assert flag_reaction(team).startswith("flag-")
