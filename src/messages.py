@@ -235,21 +235,19 @@ def _japan_side_label(name: str) -> str:
 
 
 def _poll_kickoff_label(match: Match) -> str:
-    """ポール用キックオフ表記 "M/D(曜) H:MM" (時は0埋めしない)。"""
+    """ポール用キックオフ表記 "M/D(曜) `H:MM`" (時は0埋めしない・時刻はバッククォート)。"""
     jst = match.kickoff_jst
     weekday = WEEKDAYS_JA[jst.weekday()]
-    return f"{jst.month}/{jst.day}({weekday}) {jst.hour}:{jst.minute:02d}"
+    return f"{jst.month}/{jst.day}({weekday}) `{jst.hour}:{jst.minute:02d}`"
 
 
 def japan_poll_text(match: Match) -> str:
-    """勝敗予想リアクション投票の募集メッセージ (mrkdwn)。"""
+    """勝敗予想リアクション投票の募集メッセージ (mrkdwn)。日本を先頭に固定。"""
     opponent = japan_opponent(match)
     opponent_name = team_name(opponent)
     opp_flag = opponent_flag(opponent)
-    home_label = _japan_side_label(match.home)
-    away_label = _japan_side_label(match.away)
     return (
-        f"🇯🇵 *{home_label} vs {away_label}* 結果予想！⚽\n"
+        f"🇯🇵 *日本 vs {opponent_name}* 結果予想！⚽\n"
         f"{_poll_kickoff_label(match)} KO ｜ {stage_name(match)}\n"
         "\n"
         "下のリアクションで投票しよう👇\n"
@@ -290,11 +288,13 @@ def japan_poll_result_text(
     opponent = japan_opponent(match)
     opponent_name = team_name(opponent)
     opp_flag = opponent_flag(opponent)
-    home_label = _japan_side_label(match.home)
-    away_label = _japan_side_label(match.away)
+    # 日本を先頭に固定 (日本側のスコアを先に出す)
+    japan_is_home = match.home == "Japan"
+    jp_score = match.score.home if japan_is_home else match.score.away
+    op_score = match.score.away if japan_is_home else match.score.home
     score_line = (
-        f"{home_label} {_score_value(match.score.home)} - "
-        f"{_score_value(match.score.away)} {away_label}"
+        f"日本 {_score_value(jp_score)} - "
+        f"{_score_value(op_score)} {opponent_name}"
     )
 
     outcome = poll_outcome(match)
