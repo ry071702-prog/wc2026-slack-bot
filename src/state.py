@@ -10,10 +10,19 @@ class NotificationState(TypedDict):
     prematch: list[int]
     result: list[int]
     lineup: list[int]
+    poll: dict[str, str]
+    poll_result: list[int]
 
 
 def empty_state() -> NotificationState:
-    return {"digest_dates": [], "prematch": [], "result": [], "lineup": []}
+    return {
+        "digest_dates": [],
+        "prematch": [],
+        "result": [],
+        "lineup": [],
+        "poll": {},
+        "poll_result": [],
+    }
 
 
 class StateStore:
@@ -48,14 +57,20 @@ class StateStore:
         prematch = raw.get("prematch", [])
         result = raw.get("result", [])
         lineup = raw.get("lineup", [])
+        poll = raw.get("poll", {})
+        poll_result = raw.get("poll_result", [])
         if not all(
             isinstance(value, list)
-            for value in (digest_dates, prematch, result, lineup)
+            for value in (digest_dates, prematch, result, lineup, poll_result)
         ):
             raise TypeError("state values must be arrays")
+        if not isinstance(poll, dict):
+            raise TypeError("poll must be an object")
         return {
             "digest_dates": [str(value) for value in digest_dates],
             "prematch": [int(value) for value in prematch],
             "result": [int(value) for value in result],
             "lineup": [int(value) for value in lineup],
+            "poll": {str(key): str(value) for key, value in poll.items()},
+            "poll_result": [int(value) for value in poll_result],
         }

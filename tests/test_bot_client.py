@@ -49,6 +49,86 @@ def test_bot_client_returns_false_on_slack_error() -> None:
     assert client.send(PAYLOAD) is False
 
 
+def test_post_message_returns_response_with_ts() -> None:
+    session = MagicMock()
+    response = MagicMock()
+    response.raise_for_status.return_value = None
+    response.json.return_value = {"ok": True, "channel": "C123", "ts": "111.222"}
+    session.post.return_value = response
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    data = client.post_message(PAYLOAD)
+
+    assert data is not None
+    assert data["ts"] == "111.222"
+
+
+def test_post_message_returns_none_on_error() -> None:
+    session = MagicMock()
+    session.post.return_value = _response(ok=False, error="channel_not_found")
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    assert client.post_message(PAYLOAD) is None
+
+
+def test_add_reaction_succeeds() -> None:
+    session = MagicMock()
+    session.post.return_value = _response(ok=True)
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    assert client.add_reaction("111.222", "jp") is True
+    _, kwargs = session.post.call_args
+    assert kwargs["json"] == {
+        "channel": "C123",
+        "timestamp": "111.222",
+        "name": "jp",
+    }
+
+
+def test_add_reaction_already_reacted_is_success() -> None:
+    session = MagicMock()
+    session.post.return_value = _response(ok=False, error="already_reacted")
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    assert client.add_reaction("111.222", "jp") is True
+
+
+def test_add_reaction_returns_false_on_other_error() -> None:
+    session = MagicMock()
+    session.post.return_value = _response(ok=False, error="invalid_name")
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    assert client.add_reaction("111.222", "nope") is False
+
+
+def test_get_reactions_returns_data() -> None:
+    session = MagicMock()
+    response = MagicMock()
+    response.raise_for_status.return_value = None
+    response.json.return_value = {
+        "ok": True,
+        "message": {"reactions": [{"name": "jp", "count": 3}]},
+    }
+    session.get.return_value = response
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    data = client.get_reactions("111.222")
+
+    assert data is not None
+    assert data["message"]["reactions"][0]["count"] == 3
+
+
+def test_get_reactions_returns_none_on_error() -> None:
+    session = MagicMock()
+    response = MagicMock()
+    response.raise_for_status.return_value = None
+    response.json.return_value = {"ok": False, "error": "message_not_found"}
+    session.get.return_value = response
+    client = SlackBotClient(token="xoxb-test", channel="C123", session=session)
+
+    assert client.get_reactions("111.222") is None
+
+
 def test_bot_client_requires_token_and_channel() -> None:
     with pytest.raises(ValueError):
         SlackBotClient(token="xoxb-test", channel=None)
