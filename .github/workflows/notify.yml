@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+    inputs:
+      poll_lead_hours:
+        description: "投票のリード時間(時間)を一時上書き。空なら既定14h (手動で早めに出したい時用)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -39,6 +44,8 @@ jobs:
           MENTION_JAPAN: ${{ vars.MENTION_JAPAN || 'false' }}
           # 深夜帯もチャンネル全員の許可を得て通知する (2026-06-12)。再制限する場合は Variables の QUIET_HOURS に "01:00-06:30" 等を設定
           QUIET_HOURS: ${{ vars.QUIET_HOURS || '' }}
+          # 手動dispatch時のみ inputs で上書き可。cron(空input)は既定14h
+          POLL_LEAD_HOURS: ${{ inputs.poll_lead_hours || vars.POLL_LEAD_HOURS || '14' }}
           DRY_RUN: ${{ vars.DRY_RUN || 'false' }}
         run: |
           set -o pipefail
