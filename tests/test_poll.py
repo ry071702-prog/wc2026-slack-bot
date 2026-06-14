@@ -259,7 +259,8 @@ def test_run_notify_posts_poll_result(tmp_path: Path, nl_japan: Match) -> None:
     run_notify(StubProvider([finished]), slack, store, now=now)
 
     assert len(slack.sends) == 1
-    text = slack.sends[0]["blocks"][0]["text"]["text"]
+    assert slack.sends[0]["blocks"][0]["text"]["text"] == "📊 予想結果発表"
+    text = slack.sends[0]["blocks"][1]["text"]["text"]
     assert "🇯🇵 日本勝利: 12票 ← 🎯的中！" in text  # 13 - 1
     assert "🤝 引き分け: 3票" in text  # 4 - 1
     assert "🇳🇱 オランダ勝利: 5票" in text  # 6 - 1

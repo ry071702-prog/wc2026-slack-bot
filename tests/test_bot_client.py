@@ -38,7 +38,7 @@ def test_bot_client_posts_to_chat_post_message() -> None:
     assert kwargs["headers"]["Authorization"] == "Bearer xoxb-test"
     assert kwargs["json"]["channel"] == "C123"
     assert kwargs["json"]["blocks"] == PAYLOAD["blocks"]
-    assert kwargs["json"]["text"] == "🏁 *試合終了*"
+    assert kwargs["json"]["text"] == "🏁 試合終了"
 
 
 def test_bot_client_returns_false_on_slack_error() -> None:
@@ -135,8 +135,72 @@ def test_bot_client_requires_token_and_channel() -> None:
 
 
 def test_fallback_text_uses_first_block_first_line() -> None:
-    assert fallback_text(PAYLOAD) == "🏁 *試合終了*"
+    # header が無い場合は最初の mrkdwn セクション先頭行を記号除去して使う
+    assert fallback_text(PAYLOAD) == "🏁 試合終了"
     assert fallback_text({"blocks": []}) == "W杯通知"
+
+
+def test_fallback_text_prefers_header_plain_text() -> None:
+    payload = {
+        "blocks": [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": "🔔 まもなくキックオフ",
+                    "emoji": True,
+                },
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ">🇯🇵 *日本*  vs  🇳🇱 オランダ\n>🕔 `5:00` KO",
+                },
+            },
+        ]
+    }
+    assert fallback_text(payload) == "🔔 まもなくキックオフ"
+
+
+def test_fallback_text_strips_quote_bold_code_and_links() -> None:
+    # header が無いとき: 引用記号(>)・太字(*)・コード(`)・リンクを除去する
+    payload = {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ">🇯🇵 *日本*  `2 - 1`  オランダ\n>🎉 *日本、勝利！*",
+                },
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "▶️ <https://example.com|ハイライト>",
+                    }
+                ],
+            },
+        ]
+    }
+    assert fallback_text(payload) == "🇯🇵 日本  2 - 1  オランダ"
+
+
+def test_fallback_text_keeps_link_display_name() -> None:
+    payload = {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "<https://example.com/x|順位表> を見てね",
+                },
+            }
+        ]
+    }
+    assert fallback_text(payload) == "順位表 を見てね"
 
 
 def test_create_slack_client_prefers_bot_token(monkeypatch) -> None:
