@@ -259,3 +259,26 @@ def test_build_matchups_writes_index(tmp_path: Path) -> None:
     assert not (tmp_path / "3.png").exists()
     index = json.loads((tmp_path / "index.json").read_text(encoding="utf-8"))
     assert index == {"ids": [1, 2]}
+
+
+def test_matchup_left_right_puts_japan_left():
+    from scripts.build_matchups import matchup_left_right
+
+    # 日本がアウェイ (オランダ vs 日本) → 日本を左に
+    e = {"home": "Netherlands", "home_ja": "オランダ", "away": "Japan",
+         "away_ja": "日本", "is_japan": True}
+    left, right = matchup_left_right(e)
+    assert left[0] == "Japan" and right[0] == "Netherlands"
+    assert left[2] is True
+
+    # 日本がホーム → そのまま左
+    e2 = {"home": "Japan", "home_ja": "日本", "away": "Sweden",
+          "away_ja": "スウェーデン", "is_japan": True}
+    left2, right2 = matchup_left_right(e2)
+    assert left2[0] == "Japan" and right2[0] == "Sweden"
+
+    # 非日本戦 → home が左
+    e3 = {"home": "Spain", "home_ja": "スペイン", "away": "Paraguay",
+          "away_ja": "パラグアイ", "is_japan": False}
+    left3, right3 = matchup_left_right(e3)
+    assert left3[0] == "Spain" and right3[0] == "Paraguay"
