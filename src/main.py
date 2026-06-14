@@ -254,6 +254,25 @@ def run_notify(
         run_poll(provider, slack, state_store, state, current_time, matches, poll_lead_hours)
 
 
+def _reaction_entry(
+    by_name: dict, name: str
+) -> tuple[int, Optional[dict]]:
+    """種リアクション名に対応する (合計count, リアクションentry) を返す。
+    Slack は flag-es → es のように国旗ショートコードを2文字エイリアスへ正規化する
+    ことがあるため、flag-xx は xx も合算して数える (決勝T対戦国で集計が0になるのを防ぐ)。"""
+    candidates = {name}
+    if name.startswith("flag-"):
+        candidates.add(name[len("flag-"):])
+    count = 0
+    entry: Optional[dict] = None
+    for candidate in candidates:
+        found = by_name.get(candidate)
+        if found:
+            count += found.get("count", 0)
+            entry = found
+    return count, entry
+
+
 def _resolve_winner_names(
     slack: SlackSender,
     reaction: Optional[dict],
@@ -320,16 +339,19 @@ def run_poll(
         reactions = (data.get("message") or {}).get("reactions") or []
         by_name = {item.get("name"): item for item in reactions}
         opp_reaction = opponent_reaction(japan_opponent(match))
-        votes_jp = max(0, (by_name.get("jp") or {}).get("count", 0) - 1)
-        votes_draw = max(0, (by_name.get("handshake") or {}).get("count", 0) - 1)
-        votes_opp = max(0, (by_name.get(opp_reaction) or {}).get("count", 0) - 1)
+        jp_count, jp_entry = _reaction_entry(by_name, "jp")
+        draw_count, draw_entry = _reaction_entry(by_name, "handshake")
+        opp_count, opp_entry = _reaction_entry(by_name, opp_reaction)
+        votes_jp = max(0, jp_count - 1)
+        votes_draw = max(0, draw_count - 1)
+        votes_opp = max(0, opp_count - 1)
 
         # 的中した選択肢に投票した人の名前を解決する (Botの種リアクションは除外)
         outcome = poll_outcome(match)
-        winning_reaction = {
-            "japan": "jp",
-            "draw": "handshake",
-            "opp": opp_reaction,
+        winning_entry = {
+            "japan": jp_entry,
+            "draw": draw_entry,
+            "opp": opp_entry,
         }[outcome]
         winning_votes = {
             "japan": votes_jp,
@@ -337,7 +359,7 @@ def run_poll(
             "opp": votes_opp,
         }[outcome]
         winner_names, winner_extra = _resolve_winner_names(
-            slack, by_name.get(winning_reaction), winning_votes
+            slack, winning_entry, winning_votes
         )
 
         sent = slack.send(
