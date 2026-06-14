@@ -60,3 +60,29 @@ def test_broken_json_falls_back_to_empty_state(tmp_path: Path) -> None:
 
     assert state == empty_state()
     assert json.loads(path.read_text(encoding="utf-8")) == empty_state()
+
+
+def test_empty_state_has_prematch_poll_key() -> None:
+    assert empty_state()["prematch_poll"] == []
+
+
+def test_legacy_state_without_prematch_poll_is_normalized(tmp_path: Path) -> None:
+    # prematch_poll 追加前の旧 JSON を読んでも prematch_poll: [] が補われる
+    path = tmp_path / "notified.json"
+    path.write_text(
+        json.dumps(
+            {
+                "digest_dates": ["2026-06-12"],
+                "prematch": [1],
+                "result": [2],
+                "lineup": [3],
+                "poll": {},
+                "poll_result": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    state = StateStore(path).load()
+
+    assert state["prematch_poll"] == []
+    assert state["prematch"] == [1]
