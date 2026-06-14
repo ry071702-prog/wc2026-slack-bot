@@ -11,6 +11,8 @@ from src.messages import (
     date_label,
     digest_match_line,
     digest_title,
+    japan_poll_result_text,
+    japan_poll_text,
     prematch_text,
     result_text,
 )
@@ -87,10 +89,42 @@ def build_result_payload(match: Match) -> Payload:
     return {"blocks": [_section(result_text(match))]}
 
 
+def build_poll_payload(match: Match) -> Payload:
+    return {"blocks": [_section(japan_poll_text(match))]}
+
+
+def build_poll_result_payload(
+    match: Match,
+    votes_jp: int,
+    votes_draw: int,
+    votes_opp: int,
+    winner_names: Optional[list[str]] = None,
+    winner_extra: int = 0,
+) -> Payload:
+    return {
+        "blocks": [
+            _section(
+                japan_poll_result_text(
+                    match,
+                    votes_jp,
+                    votes_draw,
+                    votes_opp,
+                    winner_names=winner_names,
+                    winner_extra=winner_extra,
+                )
+            )
+        ]
+    }
+
+
 class SlackBotClient:
     """Bot Token (xoxb-) で chat.postMessage する送信クライアント。"""
 
     API_URL = "https://slack.com/api/chat.postMessage"
+    REACTIONS_ADD_URL = "https://slack.com/api/reactions.add"
+    REACTIONS_GET_URL = "https://slack.com/api/reactions.get"
+    AUTH_TEST_URL = "https://slack.com/api/auth.test"
+    USERS_INFO_URL = "https://slack.com/api/users.info"
 
     def __init__(
         self,
@@ -110,11 +144,12 @@ class SlackBotClient:
         self.session = session or requests.Session()
         self.timeout = timeout
 
-    def send(self, payload: Payload) -> bool:
+    def post_message(self, payload: Payload) -> Optional[dict[str, Any]]:
+        """chat.postMessage を叩き、成功時はレスポンス JSON 全体 (ts 含む) を返す。失敗時 None。"""
         if self.dry_run:
             print(json.dumps(payload, ensure_ascii=False, indent=2))
             print("Slack POST skipped: DRY_RUN=true")
-            return True
+            return {"ok": True, "ts": "DRYRUN", "channel": self.channel}
 
         try:
             response = self.session.post(
@@ -131,14 +166,121 @@ class SlackBotClient:
             data = response.json()
         except (requests.RequestException, ValueError) as exc:
             print(f"Slack chat.postMessage failed: {exc}")
-            return False
+            return None
 
         if not data.get("ok"):
             print(f"Slack chat.postMessage failed: {data.get('error')}")
-            return False
+            return None
 
         print(f"Slack chat.postMessage succeeded: channel={data.get('channel')}")
+        return data
+
+    def send(self, payload: Payload) -> bool:
+        return self.post_message(payload) is not None
+
+    def add_reaction(self, ts: str, name: str) -> bool:
+        """reactions.add。already_reacted は成功扱い (True)。"""
+        if self.dry_run:
+            print(f"Slack reactions.add skipped: DRY_RUN=true (name={name} ts={ts})")
+            return True
+
+        try:
+            response = self.session.post(
+                self.REACTIONS_ADD_URL,
+                headers={"Authorization": f"Bearer {self.token}"},
+                json={"channel": self.channel, "timestamp": ts, "name": name},
+                timeout=self.timeout,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            print(f"Slack reactions.add failed: {exc}")
+            return False
+
+        if not data.get("ok"):
+            error = data.get("error")
+            if error == "already_reacted":
+                return True
+            print(f"Slack reactions.add failed: {error}")
+            return False
         return True
+
+    def get_reactions(self, ts: str) -> Optional[dict[str, Any]]:
+        """reactions.get (full=true)。成功時はレスポンス JSON 全体を返す。失敗/未取得時 None。"""
+        if self.dry_run:
+            # 空のリアクション集合を返し、集計発表メッセージを dry_run でも
+            # プレビューできるようにする (None だと集計パスがスキップされる)。
+            print(f"Slack reactions.get stubbed: DRY_RUN=true (ts={ts})")
+            return {"ok": True, "message": {"reactions": []}}
+
+        try:
+            response = self.session.get(
+                self.REACTIONS_GET_URL,
+                headers={"Authorization": f"Bearer {self.token}"},
+                params={
+                    "channel": self.channel,
+                    "timestamp": ts,
+                    "full": "true",
+                },
+                timeout=self.timeout,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            print(f"Slack reactions.get failed: {exc}")
+            return None
+
+        if not data.get("ok"):
+            print(f"Slack reactions.get failed: {data.get('error')}")
+            return None
+        return data
+
+    def bot_user_id(self) -> Optional[str]:
+        """auth.test で自分 (Bot) の user_id を取得 (1回だけ叩いてキャッシュ)。"""
+        if self.dry_run:
+            return None
+        if getattr(self, "_bot_user_id", None) is not None:
+            return self._bot_user_id
+        try:
+            response = self.session.post(
+                self.AUTH_TEST_URL,
+                headers={"Authorization": f"Bearer {self.token}"},
+                timeout=self.timeout,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            print(f"Slack auth.test failed: {exc}")
+            return None
+        self._bot_user_id = data.get("user_id") if data.get("ok") else None
+        return self._bot_user_id
+
+    def user_display_name(self, user_id: str) -> Optional[str]:
+        """users.info で表示名 (display_name → real_name → name) を解決する。"""
+        if self.dry_run:
+            return user_id
+        try:
+            response = self.session.get(
+                self.USERS_INFO_URL,
+                headers={"Authorization": f"Bearer {self.token}"},
+                params={"user": user_id},
+                timeout=self.timeout,
+            )
+            response.raise_for_status()
+            data = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            print(f"Slack users.info failed: {exc}")
+            return None
+        if not data.get("ok"):
+            return None
+        user = data.get("user") or {}
+        profile = user.get("profile") or {}
+        return (
+            profile.get("display_name")
+            or profile.get("real_name")
+            or user.get("real_name")
+            or user.get("name")
+        )
 
 
 def fallback_text(payload: Payload) -> str:

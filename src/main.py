@@ -6,6 +6,10 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Sequence
 
+from src.flags import opponent_reaction
+from src.messages import japan_opponent, japan_poll_reactions, poll_outcome
+
+POLL_MAX_WINNER_NAMES = 30
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
 from src.slack import (
@@ -13,6 +17,8 @@ from src.slack import (
     SlackSender,
     SlackWebhookClient,
     build_digest_payload,
+    build_poll_payload,
+    build_poll_result_payload,
     build_prematch_payload,
     build_result_payload,
 )
@@ -75,6 +81,42 @@ def should_send_result(match: Match, state: NotificationState) -> bool:
     )
 
 
+def _supports_reactions(slack: SlackSender) -> bool:
+    """リアクション投票に必要な API (Bot Token クライアント) を備えているか。
+    Incoming Webhook はリアクションを扱えないためポール機能はスキップされる。"""
+    return all(
+        hasattr(slack, attr)
+        for attr in ("post_message", "add_reaction", "get_reactions")
+    )
+
+
+def should_post_poll(
+    match: Match,
+    now: datetime,
+    poll_lead_hours: int,
+    state: NotificationState,
+) -> bool:
+    if not match.is_japan:
+        return False
+    if match.status not in {"SCHEDULED", "TIMED"}:
+        return False
+    if str(match.id) in state["poll"]:
+        return False
+    delta = match.utc_kickoff - now.astimezone(timezone.utc)
+    return timedelta(0) < delta <= timedelta(hours=poll_lead_hours)
+
+
+def should_post_poll_result(match: Match, state: NotificationState) -> bool:
+    return (
+        match.is_japan
+        and match.status == "FINISHED"
+        and match.score.home is not None
+        and match.score.away is not None
+        and str(match.id) in state["poll"]
+        and match.id not in state["poll_result"]
+    )
+
+
 def is_notify_period(now: datetime) -> bool:
     now_utc = now.astimezone(timezone.utc)
     return TOURNAMENT_START_UTC <= now_utc < TOURNAMENT_END_UTC
@@ -102,6 +144,7 @@ def run_notify(
     notify_minutes_before: int = 15,
     mention_japan: bool = False,
     quiet_hours: Optional[tuple[time, time]] = None,
+    poll_lead_hours: int = 14,
 ) -> None:
     current_time = now or datetime.now(timezone.utc)
     if not is_notify_period(current_time):
@@ -156,6 +199,108 @@ def run_notify(
         sent = slack.send(build_result_payload(match))
         if sent and not slack.dry_run:
             state["result"].append(match.id)
+            state_store.save(state)
+
+    # 日本戦の勝敗予想リアクション投票 (静音時間とは無関係、Bot Token クライアントのみ)
+    if _supports_reactions(slack):
+        run_poll(provider, slack, state_store, state, current_time, matches, poll_lead_hours)
+
+
+def _resolve_winner_names(
+    slack: SlackSender,
+    reaction: Optional[dict],
+    winning_votes: int,
+) -> tuple[Optional[list[str]], int]:
+    """的中リアクションを押した人の表示名を解決する。
+    Botの種リアクションを除外し、最大 POLL_MAX_WINNER_NAMES 人まで名前にする。
+    返り値: (名前リスト or None, 名前に載らなかった残り人数)。
+    名前解決に必要なメソッドを持たないクライアント等では (None, 0)。"""
+    resolver = getattr(slack, "user_display_name", None)
+    bot_id_fn = getattr(slack, "bot_user_id", None)
+    if reaction is None or resolver is None or bot_id_fn is None:
+        return None, 0
+    bot_id = bot_id_fn()
+    user_ids = [uid for uid in (reaction.get("users") or []) if uid != bot_id]
+    names: list[str] = []
+    for uid in user_ids[:POLL_MAX_WINNER_NAMES]:
+        name = resolver(uid)
+        if name:
+            names.append(name)
+    extra = max(0, winning_votes - len(names))
+    return (names or None), extra
+
+
+def run_poll(
+    provider: Provider,
+    slack: SlackSender,
+    state_store: StateStore,
+    state: NotificationState,
+    now: datetime,
+    matches: list[Match],
+    poll_lead_hours: int,
+) -> None:
+    """日本戦の勝敗予想ポール: 試合前に投票募集、試合後に集計を発表する。"""
+    poll_matches = sorted(
+        (m for m in matches if should_post_poll(m, now, poll_lead_hours, state)),
+        key=lambda m: m.utc_kickoff,
+    )
+    for match in poll_matches:
+        response = slack.post_message(build_poll_payload(match))
+        if not response or not response.get("ok"):
+            continue
+        ts = response.get("ts")
+        # 投稿が成功した時点で dedup レコードを確定させる (種リアクション付けの
+        # 途中でジョブが kill されても二重投稿しないよう、シード前に保存する)。
+        if not slack.dry_run:
+            state["poll"][str(match.id)] = ts
+            state_store.save(state)
+        for name in japan_poll_reactions(match):
+            slack.add_reaction(ts, name)
+
+    result_matches = sorted(
+        (m for m in matches if should_post_poll_result(m, state)),
+        key=lambda m: m.utc_kickoff,
+    )
+    for match in result_matches:
+        data = slack.get_reactions(state["poll"][str(match.id)])
+        if data is None:
+            # 取得失敗 (レート制限・一時障害等) → 次回実行で再試行
+            continue
+        reactions = (data.get("message") or {}).get("reactions") or []
+        by_name = {item.get("name"): item for item in reactions}
+        opp_reaction = opponent_reaction(japan_opponent(match))
+        votes_jp = max(0, (by_name.get("jp") or {}).get("count", 0) - 1)
+        votes_draw = max(0, (by_name.get("handshake") or {}).get("count", 0) - 1)
+        votes_opp = max(0, (by_name.get(opp_reaction) or {}).get("count", 0) - 1)
+
+        # 的中した選択肢に投票した人の名前を解決する (Botの種リアクションは除外)
+        outcome = poll_outcome(match)
+        winning_reaction = {
+            "japan": "jp",
+            "draw": "handshake",
+            "opp": opp_reaction,
+        }[outcome]
+        winning_votes = {
+            "japan": votes_jp,
+            "draw": votes_draw,
+            "opp": votes_opp,
+        }[outcome]
+        winner_names, winner_extra = _resolve_winner_names(
+            slack, by_name.get(winning_reaction), winning_votes
+        )
+
+        sent = slack.send(
+            build_poll_result_payload(
+                match,
+                votes_jp,
+                votes_draw,
+                votes_opp,
+                winner_names=winner_names,
+                winner_extra=winner_extra,
+            )
+        )
+        if sent and not slack.dry_run:
+            state["poll_result"].append(match.id)
             state_store.save(state)
 
 
@@ -259,6 +404,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     notify_minutes = int(os.getenv("NOTIFY_MINUTES_BEFORE", "15"))
     if notify_minutes <= 0:
         raise ValueError("NOTIFY_MINUTES_BEFORE must be greater than zero")
+    poll_lead_hours = int(os.getenv("POLL_LEAD_HOURS", "14"))
 
     provider = FootballDataProvider(
         api_key=os.getenv("FOOTBALL_DATA_API_KEY", "")
@@ -279,6 +425,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 if now >= QUIET_ACTIVE_FROM_UTC
                 else None
             ),
+            poll_lead_hours=poll_lead_hours,
         )
     else:
         run_digest(
