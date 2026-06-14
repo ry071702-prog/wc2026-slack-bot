@@ -366,3 +366,22 @@ def test_resolve_winner_names_without_capable_client():
 
     names, extra = _resolve_winner_names(PlainClient(), {"users": ["U1"]}, 1)
     assert names is None and extra == 0
+
+
+def test_reaction_entry_handles_slack_flag_canonicalization():
+    """Slackが flag-es を es に正規化しても相手票を正しく数える。"""
+    from src.main import _reaction_entry
+
+    # 相手=スペイン: seed名は flag-es だが Slackは es として保持
+    by_name = {"es": {"name": "es", "count": 6, "users": ["U1", "U2"]}}
+    count, entry = _reaction_entry(by_name, "flag-es")
+    assert count == 6
+    assert entry is not None and entry["users"] == ["U1", "U2"]
+
+    # 正規化されない国 (flag-nl) はそのまま
+    by_name2 = {"flag-nl": {"name": "flag-nl", "count": 3}}
+    assert _reaction_entry(by_name2, "flag-nl")[0] == 3
+
+    # jp / handshake / soccer はそのまま、未存在は0
+    assert _reaction_entry({"jp": {"count": 4}}, "jp")[0] == 4
+    assert _reaction_entry({}, "flag-fr") == (0, None)

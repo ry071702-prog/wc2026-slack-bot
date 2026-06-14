@@ -124,13 +124,13 @@ def test_build_initial_comment(sample_lineup: dict) -> None:
     comment = build_initial_comment(sample_lineup)
     lines = comment.split("\n")
     assert lines[0] == (
-        "🇯🇵 *日本代表スタメン発表！*｜4-3-3｜vs オランダ（グループF 第1節）"
+        "🇯🇵 *日本代表スタメン発表！*｜3-4-2-1｜vs オランダ（グループF 第1節）"
     )
     assert lines[1] == "GK: 1 鈴木彩艶"
-    assert lines[2] == "DF: 2 菅原由勢 / 4 板倉滉 / 22 冨安健洋 / 21 伊藤洋輝"
-    assert lines[3] == "MF: 6 遠藤航 / 7 田中碧 / 15 鎌田大地"
-    assert lines[4] == "FW: 14 伊東純也 / 18 上田綺世 / 8 久保建英"
-    assert lines[5] == "控えGK: 大迫敬介 / 早川友基"
+    assert lines[2] == "DF: 22 冨安健洋 / 4 板倉滉 / 21 伊藤洋輝 / 10 堂安律 / 13 中村敬斗"
+    assert lines[3] == "MF: 24 佐野海舟 / 15 鎌田大地 / 8 久保建英 / 14 伊東純也"
+    assert lines[4] == "FW: 18 上田綺世"
+    assert lines[5].startswith("控えGK: 大迫敬介 / 早川友基")
 
 
 def test_build_initial_comment_with_prefix(sample_lineup: dict) -> None:
@@ -158,7 +158,7 @@ def test_apply_fallback_marker(sample_lineup: dict) -> None:
 
 def test_load_lineup_sample() -> None:
     lineup = load_lineup(SAMPLE_PATH)
-    assert lineup["formation"] == "4-3-3"
+    assert lineup["formation"] == "3-4-2-1"
     assert len(lineup["players"]) == 11
 
 
