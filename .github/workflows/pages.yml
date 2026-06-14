@@ -45,7 +45,9 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python scripts/build_site_data.py
 
+      # 任意アセット: 失敗してもサイト全体のデプロイは止めない (continue-on-error)
       - name: Build matchup cards
+        continue-on-error: true
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: |
