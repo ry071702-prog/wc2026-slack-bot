@@ -24,6 +24,38 @@ from src.providers.base import Match
 
 Payload = dict[str, Any]
 
+# 対戦カード画像 (build_matchups.py が GitHub Pages にデプロイする PNG) の配信元。
+MATCHUP_IMAGE_BASE_URL = (
+    "https://ry071702-prog.github.io/wc2026-slack-bot/data/matchups"
+)
+
+
+def matchup_image_block(
+    match_id: Any,
+    session: requests.Session,
+    base_url: str = MATCHUP_IMAGE_BASE_URL,
+    timeout: float = 5.0,
+) -> Optional[dict[str, Any]]:
+    """対戦カード画像の image ブロックを返す。
+
+    Slack の image ブロックは image_url が到達不能 (404 等) だと
+    invalid_blocks でメッセージ全体が失敗するため、HEAD で 200 を確認できた
+    ときだけブロックを返す。確認失敗・ネットワーク例外時は None (画像なしで投稿)。
+    """
+    url = f"{base_url}/{match_id}.png"
+    try:
+        response = session.head(url, timeout=timeout, allow_redirects=True)
+    except requests.RequestException as exc:
+        print(f"matchup image HEAD failed for {match_id}: {exc}")
+        return None
+    if response.status_code != 200:
+        print(
+            f"matchup image not available for {match_id}: "
+            f"HTTP {response.status_code}"
+        )
+        return None
+    return {"type": "image", "image_url": url, "alt_text": "対戦カード"}
+
 
 class SlackSender(Protocol):
     dry_run: bool
@@ -79,16 +111,19 @@ def build_digest_payload(
 
 
 def build_prematch_payload(
-    match: Match, mention_japan: bool = False
+    match: Match,
+    mention_japan: bool = False,
+    image_block: Optional[dict[str, Any]] = None,
 ) -> Payload:
     viewing = VIEWING_TEXT_JAPAN if match.is_japan else VIEWING_TEXT
-    return {
-        "blocks": [
-            _header("🔔 まもなくキックオフ"),
-            _section(prematch_text(match, mention_japan)),
-            _context(viewing),
-        ]
-    }
+    blocks: list[dict[str, Any]] = [
+        _header("🔔 まもなくキックオフ"),
+        _section(prematch_text(match, mention_japan)),
+    ]
+    if image_block:
+        blocks.append(image_block)
+    blocks.append(_context(viewing))
+    return {"blocks": blocks}
 
 
 def build_result_payload(match: Match) -> Payload:
@@ -101,13 +136,16 @@ def build_result_payload(match: Match) -> Payload:
     }
 
 
-def build_poll_payload(match: Match) -> Payload:
-    return {
-        "blocks": [
-            _header("🗳️ 勝敗予想 受付中"),
-            _section(japan_poll_text(match)),
-        ]
-    }
+def build_poll_payload(
+    match: Match, image_block: Optional[dict[str, Any]] = None
+) -> Payload:
+    blocks: list[dict[str, Any]] = [
+        _header("🗳️ 勝敗予想 受付中"),
+        _section(japan_poll_text(match)),
+    ]
+    if image_block:
+        blocks.append(image_block)
+    return {"blocks": blocks}
 
 
 def build_poll_result_payload(

@@ -6,3 +6,4 @@ __pycache__/
 .coverage
 htmlcov/
 site/data/*.json
+site/data/matchups/
