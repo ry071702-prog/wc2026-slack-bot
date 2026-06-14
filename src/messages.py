@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 
+from src.flags import flag_emoji, flag_reaction
 from src.providers.base import Match
 
 TEAM_NAMES = {
@@ -172,6 +173,95 @@ def result_text(match: Match) -> str:
 
 def match_detail_url(match: Match) -> str:
     return f"{SITE_BASE_URL}/match.html?id={match.id}"
+
+
+def japan_opponent(match: Match) -> str:
+    """日本戦における対戦相手の英語名 (home が日本なら away、そうでなければ home)。"""
+    return match.away if match.home == "Japan" else match.home
+
+
+def _japan_side_label(name: str) -> str:
+    """チーム表示名。日本は常に「日本」、それ以外は team_name。"""
+    return "日本" if name == "Japan" else team_name(name)
+
+
+def _poll_kickoff_label(match: Match) -> str:
+    """ポール用キックオフ表記 "M/D(曜) H:MM" (時は0埋めしない)。"""
+    jst = match.kickoff_jst
+    weekday = WEEKDAYS_JA[jst.weekday()]
+    return f"{jst.month}/{jst.day}({weekday}) {jst.hour}:{jst.minute:02d}"
+
+
+def japan_poll_text(match: Match) -> str:
+    """勝敗予想リアクション投票の募集メッセージ (mrkdwn)。"""
+    opponent = japan_opponent(match)
+    opponent_name = team_name(opponent)
+    opponent_flag = flag_emoji(opponent)
+    home_label = _japan_side_label(match.home)
+    away_label = _japan_side_label(match.away)
+    return (
+        f"🇯🇵 *{home_label} vs {away_label}* 結果予想！⚽\n"
+        f"{_poll_kickoff_label(match)} KO ｜ {stage_name(match)}\n"
+        "\n"
+        "下のリアクションで投票しよう👇\n"
+        "🇯🇵 日本が勝つ\n"
+        "🤝 引き分け\n"
+        f"{opponent_flag} {opponent_name}が勝つ\n"
+        "\n"
+        "（試合後にみんなの予想結果を発表📊）"
+    )
+
+
+def japan_poll_reactions(match: Match) -> list[str]:
+    """ポールに付ける種リアクション名。順に 日本勝ち / 引き分け / 相手勝ち。"""
+    return ["jp", "handshake", flag_reaction(japan_opponent(match))]
+
+
+def japan_poll_result_text(
+    match: Match,
+    votes_jp: int,
+    votes_draw: int,
+    votes_opp: int,
+) -> str:
+    """ポール集計の発表メッセージ。実スコアから的中選択肢に🎯マーカーを付ける。"""
+    opponent = japan_opponent(match)
+    opponent_name = team_name(opponent)
+    opponent_flag = flag_emoji(opponent)
+    home_label = _japan_side_label(match.home)
+    away_label = _japan_side_label(match.away)
+    score_line = (
+        f"{home_label} {_score_value(match.score.home)} - "
+        f"{_score_value(match.score.away)} {away_label}"
+    )
+
+    side = _winner_side(match)
+    japan_side = "home" if match.home == "Japan" else "away"
+    if side == "draw":
+        outcome = "draw"
+    elif side == japan_side:
+        outcome = "japan"
+    else:
+        outcome = "opp"
+
+    marker = " ← 🎯的中！"
+    jp_marker = marker if outcome == "japan" else ""
+    draw_marker = marker if outcome == "draw" else ""
+    opp_marker = marker if outcome == "opp" else ""
+
+    winners = {"japan": votes_jp, "draw": votes_draw, "opp": votes_opp}[outcome]
+    if winners > 0:
+        closing = f"的中した{winners}人、おみごと！🎉"
+    else:
+        closing = "的中した人はいませんでした…次戦に期待！😢"
+
+    return (
+        f"📊 *みんなの予想結果*（{score_line}）\n"
+        f"🇯🇵 日本勝利: {votes_jp}票{jp_marker}\n"
+        f"🤝 引き分け: {votes_draw}票{draw_marker}\n"
+        f"{opponent_flag} {opponent_name}勝利: {votes_opp}票{opp_marker}\n"
+        "\n"
+        f"{closing}"
+    )
 
 
 def _group_letter(group: str | None) -> str:
