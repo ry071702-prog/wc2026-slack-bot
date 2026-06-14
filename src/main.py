@@ -6,7 +6,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Sequence
 
-from src.flags import flag_reaction
+from src.flags import opponent_reaction
 from src.messages import japan_opponent, japan_poll_reactions
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
@@ -223,11 +223,13 @@ def run_poll(
         if not response or not response.get("ok"):
             continue
         ts = response.get("ts")
-        for name in japan_poll_reactions(match):
-            slack.add_reaction(ts, name)
+        # 投稿が成功した時点で dedup レコードを確定させる (種リアクション付けの
+        # 途中でジョブが kill されても二重投稿しないよう、シード前に保存する)。
         if not slack.dry_run:
             state["poll"][str(match.id)] = ts
             state_store.save(state)
+        for name in japan_poll_reactions(match):
+            slack.add_reaction(ts, name)
 
     result_matches = sorted(
         (m for m in matches if should_post_poll_result(m, state)),
@@ -240,10 +242,10 @@ def run_poll(
             continue
         reactions = (data.get("message") or {}).get("reactions") or []
         counts = {item.get("name"): item.get("count", 0) for item in reactions}
-        opponent_flag = flag_reaction(japan_opponent(match))
+        opp_reaction = opponent_reaction(japan_opponent(match))
         votes_jp = max(0, counts.get("jp", 0) - 1)
         votes_draw = max(0, counts.get("handshake", 0) - 1)
-        votes_opp = max(0, counts.get(opponent_flag, 0) - 1)
+        votes_opp = max(0, counts.get(opp_reaction, 0) - 1)
         sent = slack.send(
             build_poll_result_payload(match, votes_jp, votes_draw, votes_opp)
         )

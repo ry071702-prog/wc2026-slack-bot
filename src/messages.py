@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from src.flags import flag_emoji, flag_reaction
+from src.flags import opponent_flag, opponent_reaction
 from src.providers.base import Match
 
 TEAM_NAMES = {
@@ -196,7 +196,7 @@ def japan_poll_text(match: Match) -> str:
     """勝敗予想リアクション投票の募集メッセージ (mrkdwn)。"""
     opponent = japan_opponent(match)
     opponent_name = team_name(opponent)
-    opponent_flag = flag_emoji(opponent)
+    opp_flag = opponent_flag(opponent)
     home_label = _japan_side_label(match.home)
     away_label = _japan_side_label(match.away)
     return (
@@ -206,15 +206,17 @@ def japan_poll_text(match: Match) -> str:
         "下のリアクションで投票しよう👇\n"
         "🇯🇵 日本が勝つ\n"
         "🤝 引き分け\n"
-        f"{opponent_flag} {opponent_name}が勝つ\n"
+        f"{opp_flag} {opponent_name}が勝つ\n"
         "\n"
         "（試合後にみんなの予想結果を発表📊）"
     )
 
 
 def japan_poll_reactions(match: Match) -> list[str]:
-    """ポールに付ける種リアクション名。順に 日本勝ち / 引き分け / 相手勝ち。"""
-    return ["jp", "handshake", flag_reaction(japan_opponent(match))]
+    """ポールに付ける種リアクション名。順に 日本勝ち / 引き分け / 相手勝ち。
+    相手の国旗が解決できない場合も opponent_reaction が ⚽ にフォールバックするため
+    空文字 (Slack invalid_name) にはならない。"""
+    return ["jp", "handshake", opponent_reaction(japan_opponent(match))]
 
 
 def japan_poll_result_text(
@@ -226,7 +228,7 @@ def japan_poll_result_text(
     """ポール集計の発表メッセージ。実スコアから的中選択肢に🎯マーカーを付ける。"""
     opponent = japan_opponent(match)
     opponent_name = team_name(opponent)
-    opponent_flag = flag_emoji(opponent)
+    opp_flag = opponent_flag(opponent)
     home_label = _japan_side_label(match.home)
     away_label = _japan_side_label(match.away)
     score_line = (
@@ -258,7 +260,7 @@ def japan_poll_result_text(
         f"📊 *みんなの予想結果*（{score_line}）\n"
         f"🇯🇵 日本勝利: {votes_jp}票{jp_marker}\n"
         f"🤝 引き分け: {votes_draw}票{draw_marker}\n"
-        f"{opponent_flag} {opponent_name}勝利: {votes_opp}票{opp_marker}\n"
+        f"{opp_flag} {opponent_name}勝利: {votes_opp}票{opp_marker}\n"
         "\n"
         f"{closing}"
     )

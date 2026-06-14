@@ -61,11 +61,29 @@ TEAM_ISO: dict[str, str] = {
     "Australia": "au",
     "New Zealand": "nz",
     "Congo DR": "cd",
+    # 2026 未出場だが TEAM_NAMES に存在する国 (決勝Tや表記ゆれの防御用)
+    "Chile": "cl",
+    "China PR": "cn",
+    "China": "cn",
+    "Costa Rica": "cr",
+    "Denmark": "dk",
+    "Italy": "it",
+    "Nigeria": "ng",
+    "Peru": "pe",
+    "Poland": "pl",
+    "Serbia": "rs",
+    "Ukraine": "ua",
+    "Venezuela": "ve",
     # ISO に無い英国構成国は特例値を持たせ、flag-england 等に展開する
     "England": "england",
     "Scotland": "scotland",
     "Wales": "wales",
 }
+
+# 国旗が解決できない相手のフォールバック (リアクション名 / 絵文字)。
+# これにより未マッピング相手でも「相手勝利」票が壊れない。
+FALLBACK_REACTION = "soccer"
+FALLBACK_EMOJI = "⚽"  # ⚽
 
 # 英国構成国の Unicode 旗 (タグシーケンス)
 SUBDIVISION_EMOJI: dict[str, str] = {
@@ -96,3 +114,14 @@ def flag_emoji(name: str) -> str:
     if iso in SUBDIVISION_EMOJI:
         return SUBDIVISION_EMOJI[iso]
     return "".join(chr(0x1F1E6 + ord(char) - ord("a")) for char in iso)
+
+
+def opponent_reaction(name: str) -> str:
+    """相手勝利の種リアクション名。未知名は ⚽(soccer) にフォールバックし、
+    空文字 (Slack invalid_name) になるのを防ぐ。"""
+    return flag_reaction(name) or FALLBACK_REACTION
+
+
+def opponent_flag(name: str) -> str:
+    """相手の表示用国旗。未知名は ⚽ にフォールバックする。"""
+    return flag_emoji(name) or FALLBACK_EMOJI
