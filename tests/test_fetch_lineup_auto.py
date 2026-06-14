@@ -496,3 +496,19 @@ def test_main_fetch_window_network_error_exits_zero(
     out = capsys.readouterr().out
     assert "auto fetch failed" in out
     assert "LINEUP_READY" not in out
+
+
+def test_auto_config_fallback_files_are_valid():
+    """auto_config が参照する全 fallback_lineup の .json が存在し11人で対戦相手が整合。"""
+    import json
+    from pathlib import Path
+
+    base = Path(__file__).resolve().parent.parent / "data" / "lineups"
+    config = json.loads((base / "auto_config.json").read_text(encoding="utf-8"))
+    for entry in config["matches"]:
+        path = base / f"{entry['fallback_lineup']}.json"
+        assert path.exists(), f"missing fallback: {path}"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        assert len(data["players"]) == 11, path
+        assert data["opponent"] == entry["opponent"], path
+        assert data["stage"] == entry["stage"], path

@@ -12,14 +12,14 @@
       "kickoff_jst": "2026-06-21T13:00:00+09:00",
       "opponent": "チュニジア",
       "stage": "グループF 第2節",
-      "fallback_lineup": "sample"
+      "fallback_lineup": "tunisia"
     },
     {
       "match_id": 537362,
       "kickoff_jst": "2026-06-26T08:00:00+09:00",
       "opponent": "スウェーデン",
       "stage": "グループF 第3節",
-      "fallback_lineup": "sample"
+      "fallback_lineup": "sweden"
     }
   ]
 }

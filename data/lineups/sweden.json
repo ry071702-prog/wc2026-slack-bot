@@ -1,0 +1,22 @@
+{
+  "title": "日本 スタメン",
+  "team": "Japan",
+  "opponent": "スウェーデン",
+  "kickoff_jst": "2026-06-26T08:00:00+09:00",
+  "stage": "グループF 第3節",
+  "formation": "4-3-3",
+  "players": [
+    {"number": 1, "name": "鈴木彩艶", "position": "GK"},
+    {"number": 2, "name": "菅原由勢", "position": "RB"},
+    {"number": 4, "name": "板倉滉", "position": "CB"},
+    {"number": 22, "name": "冨安健洋", "position": "CB"},
+    {"number": 21, "name": "伊藤洋輝", "position": "LB"},
+    {"number": 6, "name": "遠藤航", "position": "DM"},
+    {"number": 7, "name": "田中碧", "position": "CM"},
+    {"number": 15, "name": "鎌田大地", "position": "CM"},
+    {"number": 14, "name": "伊東純也", "position": "RW"},
+    {"number": 18, "name": "上田綺世", "position": "CF"},
+    {"number": 8, "name": "久保建英", "position": "LW"}
+  ],
+  "bench_note": "控えGK: 大迫敬介 / 早川友基　※公式発表前の予想"
+}
