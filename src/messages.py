@@ -85,11 +85,10 @@ KNOCKOUT_STAGE_NAMES = {
 }
 
 SITE_BASE_URL = "https://ry071702-prog.github.io/wc2026-slack-bot"
+STANDINGS_URL = f"{SITE_BASE_URL}/standings.html"
 VIEWING_TEXT_JAPAN = "📺 ABEMA de DAZN / DAZN ／ 地上波（NHK・日テレ）"
 VIEWING_TEXT = "📺 ABEMA de DAZN / DAZN"
-DIGEST_CONTEXT = (
-    "📺 ABEMA de DAZN / DAZN（全試合）｜日本戦は地上波も｜時刻はJST"
-)
+DIGEST_CONTEXT = "📺 全試合 DAZN ｜ 時刻はJST"
 WEEKDAYS_JA = "月火水木金土日"
 
 
@@ -109,22 +108,50 @@ def stage_name(match: Match, include_matchday: bool = True) -> str:
 
 def digest_title(day: date) -> str:
     weekday = WEEKDAYS_JA[day.weekday()]
-    return f"⚽ 今日のW杯（{day.month}/{day.day} {weekday}）"
+    return f"⚽ 今日のW杯 {day.month}/{day.day}({weekday})"
 
 
 def date_label(day: date) -> str:
     weekday = WEEKDAYS_JA[day.weekday()]
-    return f"{day.month}/{day.day} {weekday}"
+    return f"{day.month}/{day.day}({weekday})"
+
+
+def _kickoff_hhmm(match: Match) -> str:
+    """JST のキックオフ時刻を H:MM (時は0埋めしない) で返す。"""
+    jst = match.kickoff_jst
+    return f"{jst.hour}:{jst.minute:02d}"
 
 
 def digest_match_line(match: Match) -> str:
-    kickoff = match.kickoff_jst.strftime("%H:%M")
+    kickoff = _kickoff_hhmm(match)
     stage = stage_name(match)
-    home = team_name(match.home)
-    away = team_name(match.away)
     has_score = (
         match.score.home is not None and match.score.away is not None
     )
+    if match.is_japan:
+        # 日本を常に先頭に置く (日本ファン視点)。スコアも日本側を先に並べる。
+        opponent = team_name(japan_opponent(match))
+        if match.home == "Japan":
+            jp_score, opp_score = match.score.home, match.score.away
+        else:
+            jp_score, opp_score = match.score.away, match.score.home
+        if match.status == "FINISHED" and has_score:
+            card = f"日本 {jp_score} - {opp_score} {opponent}"
+            suffix = "　🏁終了"
+        elif match.status in ("IN_PLAY", "PAUSED"):
+            card = (
+                f"日本 {jp_score} - {opp_score} {opponent}"
+                if has_score
+                else f"日本 vs {opponent}"
+            )
+            suffix = "　🔴LIVE"
+        else:
+            card = f"日本 vs {opponent}"
+            suffix = ""
+        return f"🇯🇵 *{kickoff}　{card}*（{stage}）{suffix}← *日本戦！*"
+
+    home = team_name(match.home)
+    away = team_name(match.away)
     if match.status == "FINISHED" and has_score:
         card = f"{home} {match.score.home} - {match.score.away} {away}"
         suffix = "　🏁終了"
@@ -138,37 +165,58 @@ def digest_match_line(match: Match) -> str:
     else:
         card = f"{home} vs {away}"
         suffix = ""
-    if match.is_japan:
-        return f"🇯🇵 *{kickoff}　{card}*（{stage}）{suffix}← *日本戦！*"
-    return f"{kickoff}　{card}（{stage}）{suffix}"
+    return f"`{kickoff}`　{card}（{stage}）{suffix}"
 
 
 def prematch_text(match: Match, mention_japan: bool = False) -> str:
-    prefix = "<!here> " if match.is_japan and mention_japan else ""
-    flag = "🇯🇵 " if match.is_japan else ""
-    kickoff = match.kickoff_jst.strftime("%H:%M")
-    card = f"{team_name(match.home)} vs {team_name(match.away)}"
-    viewing = VIEWING_TEXT_JAPAN if match.is_japan else VIEWING_TEXT
-    return (
-        f"{prefix}🔔 *まもなくキックオフ！（{kickoff}〜）*\n"
-        f"{flag}*{card}*｜{stage_name(match)}\n"
-        f"{viewing}"
-    )
+    """開始前メッセージの本文 (引用ブロック)。日本戦は日本を先頭に固定。"""
+    kickoff = _kickoff_hhmm(match)
+    if match.is_japan:
+        opponent = japan_opponent(match)
+        card = (
+            f"🇯🇵 *日本*  vs  "
+            f"{opponent_flag(opponent)} {team_name(opponent)}"
+        )
+    else:
+        card = f"{team_name(match.home)}  vs  {team_name(match.away)}"
+    body = f">{card}\n>🕔 `{kickoff}` KO ｜ {stage_name(match)}"
+    if match.is_japan and mention_japan:
+        body = f"<!here>\n{body}"
+    return body
 
 
 def result_text(match: Match) -> str:
-    flag = "🇯🇵 " if match.is_japan else ""
-    home_score = _score_value(match.score.home)
-    away_score = _score_value(match.score.away)
+    """試合結果メッセージの本文 (引用ブロック2行)。日本戦は日本を先頭に固定。"""
     score_suffix = _score_suffix(match)
-    outcome = _outcome_text(match)
     stage = stage_name(match, include_matchday=False)
+    outcome = _outcome_text(match)
+    if match.is_japan:
+        opponent = team_name(japan_opponent(match))
+        if match.home == "Japan":
+            jp_score, opp_score = match.score.home, match.score.away
+        else:
+            jp_score, opp_score = match.score.away, match.score.home
+        score = f"`{_score_value(jp_score)} - {_score_value(opp_score)}`"
+        card = f"🇯🇵 *日本*  {score}  {opponent}{score_suffix}"
+    else:
+        home = team_name(match.home)
+        away = team_name(match.away)
+        side = _winner_side(match)
+        home_disp = f"*{home}*" if side == "home" else home
+        away_disp = f"*{away}*" if side == "away" else away
+        score = (
+            f"`{_score_value(match.score.home)} - "
+            f"{_score_value(match.score.away)}`"
+        )
+        card = f"{home_disp}  {score}  {away_disp}{score_suffix}"
+    return f">{card}\n>{outcome}  ｜  {stage}"
+
+
+def result_context(match: Match) -> str:
+    """結果メッセージ下部の context (ハイライト・順位表リンク)。"""
     return (
-        "🏁 *試合終了*\n"
-        f"{flag}{team_name(match.home)} *{home_score} - {away_score}* "
-        f"{team_name(match.away)}{score_suffix}\n"
-        f"{outcome} {stage}\n"
-        f"▶️ <{match_detail_url(match)}|試合詳細・ハイライト>"
+        f"▶️ <{match_detail_url(match)}|ハイライト・試合詳細>"
+        f"　📊 <{STANDINGS_URL}|順位表>"
     )
 
 
