@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import date
 from typing import Any, Optional, Protocol
 
@@ -8,12 +9,15 @@ import requests
 
 from src.messages import (
     DIGEST_CONTEXT,
+    VIEWING_TEXT,
+    VIEWING_TEXT_JAPAN,
     date_label,
     digest_match_line,
     digest_title,
     japan_poll_result_text,
     japan_poll_text,
     prematch_text,
+    result_context,
     result_text,
 )
 from src.providers.base import Match
@@ -42,19 +46,19 @@ def build_digest_payload(
         (match for match in matches if not match.is_japan),
         key=lambda match: match.utc_kickoff,
     )
-    blocks: list[dict[str, Any]] = [
-        {
-            "type": "header",
-            "text": {"type": "plain_text", "text": digest_title(day)},
-        }
-    ]
+    blocks: list[dict[str, Any]] = [_header(digest_title(day))]
 
     if japan_matches:
         blocks.append(_section("\n".join(map(digest_match_line, japan_matches))))
         blocks.append({"type": "divider"})
 
     if other_matches:
-        blocks.append(_section("\n".join(map(digest_match_line, other_matches))))
+        blocks.append(
+            _section(
+                "*きょうの試合*\n"
+                + "\n".join(map(digest_match_line, other_matches))
+            )
+        )
     elif not japan_matches:
         blocks.append(_section("本日の試合はありません。"))
 
@@ -70,27 +74,40 @@ def build_digest_payload(
             )
         )
 
-    blocks.append(
-        {
-            "type": "context",
-            "elements": [{"type": "mrkdwn", "text": DIGEST_CONTEXT}],
-        }
-    )
+    blocks.append(_context(DIGEST_CONTEXT))
     return {"blocks": blocks}
 
 
 def build_prematch_payload(
     match: Match, mention_japan: bool = False
 ) -> Payload:
-    return {"blocks": [_section(prematch_text(match, mention_japan))]}
+    viewing = VIEWING_TEXT_JAPAN if match.is_japan else VIEWING_TEXT
+    return {
+        "blocks": [
+            _header("🔔 まもなくキックオフ"),
+            _section(prematch_text(match, mention_japan)),
+            _context(viewing),
+        ]
+    }
 
 
 def build_result_payload(match: Match) -> Payload:
-    return {"blocks": [_section(result_text(match))]}
+    return {
+        "blocks": [
+            _header("🏁 試合終了"),
+            _section(result_text(match)),
+            _context(result_context(match)),
+        ]
+    }
 
 
 def build_poll_payload(match: Match) -> Payload:
-    return {"blocks": [_section(japan_poll_text(match))]}
+    return {
+        "blocks": [
+            _header("🗳️ 勝敗予想 受付中"),
+            _section(japan_poll_text(match)),
+        ]
+    }
 
 
 def build_poll_result_payload(
@@ -103,6 +120,7 @@ def build_poll_result_payload(
 ) -> Payload:
     return {
         "blocks": [
+            _header("📊 予想結果発表"),
             _section(
                 japan_poll_result_text(
                     match,
@@ -112,7 +130,7 @@ def build_poll_result_payload(
                     winner_names=winner_names,
                     winner_extra=winner_extra,
                 )
-            )
+            ),
         ]
     }
 
@@ -283,12 +301,35 @@ class SlackBotClient:
         )
 
 
+_LINK_RE = re.compile(r"<([^|>]*)\|([^>]*)>")
+
+
+def _strip_mrkdwn(line: str) -> str:
+    """mrkdwn 記号を除去してプッシュ通知向けのクリーンな1行にする。
+    行頭の引用記号(>)・リンク(<URL|表示>→表示名)・太字/斜体/コード記号を落とす。"""
+    line = line.lstrip(">").strip()
+    line = _LINK_RE.sub(r"\2", line)
+    for symbol in ("*", "_", "`"):
+        line = line.replace(symbol, "")
+    return line.strip()
+
+
 def fallback_text(payload: Payload) -> str:
-    """通知プレビュー用のテキスト (blocks非対応クライアント向け) を先頭ブロックから作る。"""
-    for block in payload.get("blocks", []):
-        text = block.get("text", {}).get("text")
-        if text:
-            return text.split("\n", 1)[0]
+    """通知プレビュー用のテキスト (blocks非対応クライアント向け)。
+    header があればその plain_text を、無ければ最初の mrkdwn セクション先頭行を
+    記号除去して採用する。"""
+    blocks = payload.get("blocks", [])
+    for block in blocks:
+        if block.get("type") == "header":
+            text = block.get("text", {}).get("text")
+            if text:
+                return _strip_mrkdwn(text)
+    for block in blocks:
+        text_obj = block.get("text", {})
+        if text_obj.get("type") == "mrkdwn":
+            cleaned = _strip_mrkdwn(text_obj.get("text", "").split("\n", 1)[0])
+            if cleaned:
+                return cleaned
     return "W杯通知"
 
 
@@ -328,8 +369,22 @@ class SlackWebhookClient:
         return True
 
 
+def _header(text: str) -> dict[str, Any]:
+    return {
+        "type": "header",
+        "text": {"type": "plain_text", "text": text, "emoji": True},
+    }
+
+
 def _section(text: str) -> dict[str, Any]:
     return {
         "type": "section",
         "text": {"type": "mrkdwn", "text": text},
+    }
+
+
+def _context(text: str) -> dict[str, Any]:
+    return {
+        "type": "context",
+        "elements": [{"type": "mrkdwn", "text": text}],
     }
