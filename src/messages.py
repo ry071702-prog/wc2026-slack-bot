@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
+from typing import Optional
 
 from src.flags import opponent_flag, opponent_reaction
 from src.providers.base import Match
@@ -219,13 +220,25 @@ def japan_poll_reactions(match: Match) -> list[str]:
     return ["jp", "handshake", opponent_reaction(japan_opponent(match))]
 
 
+def poll_outcome(match: Match) -> str:
+    """実スコアから的中した選択肢を返す ("japan" / "draw" / "opp")。"""
+    side = _winner_side(match)
+    japan_side = "home" if match.home == "Japan" else "away"
+    if side == "draw":
+        return "draw"
+    return "japan" if side == japan_side else "opp"
+
+
 def japan_poll_result_text(
     match: Match,
     votes_jp: int,
     votes_draw: int,
     votes_opp: int,
+    winner_names: Optional[list[str]] = None,
+    winner_extra: int = 0,
 ) -> str:
-    """ポール集計の発表メッセージ。実スコアから的中選択肢に🎯マーカーを付ける。"""
+    """ポール集計の発表メッセージ。実スコアから的中選択肢に🎯マーカーを付ける。
+    winner_names が渡されたら的中者の名前も列挙する (winner_extra=名前に載らない残り人数)。"""
     opponent = japan_opponent(match)
     opponent_name = team_name(opponent)
     opp_flag = opponent_flag(opponent)
@@ -236,14 +249,7 @@ def japan_poll_result_text(
         f"{_score_value(match.score.away)} {away_label}"
     )
 
-    side = _winner_side(match)
-    japan_side = "home" if match.home == "Japan" else "away"
-    if side == "draw":
-        outcome = "draw"
-    elif side == japan_side:
-        outcome = "japan"
-    else:
-        outcome = "opp"
+    outcome = poll_outcome(match)
 
     marker = " ← 🎯的中！"
     jp_marker = marker if outcome == "japan" else ""
@@ -251,10 +257,15 @@ def japan_poll_result_text(
     opp_marker = marker if outcome == "opp" else ""
 
     winners = {"japan": votes_jp, "draw": votes_draw, "opp": votes_opp}[outcome]
-    if winners > 0:
-        closing = f"的中した{winners}人、おみごと！🎉"
-    else:
+    if winners <= 0:
         closing = "的中した人はいませんでした…次戦に期待！😢"
+    elif winner_names:
+        names = "・".join(winner_names)
+        if winner_extra > 0:
+            names += f" ほか{winner_extra}人"
+        closing = f"🎯 *的中者*（{winners}人）: {names}\nおみごと！🎉"
+    else:
+        closing = f"的中した{winners}人、おみごと！🎉"
 
     return (
         f"📊 *みんなの予想結果*（{score_line}）\n"

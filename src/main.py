@@ -7,7 +7,9 @@ from pathlib import Path
 from typing import Optional, Sequence
 
 from src.flags import opponent_reaction
-from src.messages import japan_opponent, japan_poll_reactions
+from src.messages import japan_opponent, japan_poll_reactions, poll_outcome
+
+POLL_MAX_WINNER_NAMES = 30
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
 from src.slack import (
@@ -204,6 +206,30 @@ def run_notify(
         run_poll(provider, slack, state_store, state, current_time, matches, poll_lead_hours)
 
 
+def _resolve_winner_names(
+    slack: SlackSender,
+    reaction: Optional[dict],
+    winning_votes: int,
+) -> tuple[Optional[list[str]], int]:
+    """的中リアクションを押した人の表示名を解決する。
+    Botの種リアクションを除外し、最大 POLL_MAX_WINNER_NAMES 人まで名前にする。
+    返り値: (名前リスト or None, 名前に載らなかった残り人数)。
+    名前解決に必要なメソッドを持たないクライアント等では (None, 0)。"""
+    resolver = getattr(slack, "user_display_name", None)
+    bot_id_fn = getattr(slack, "bot_user_id", None)
+    if reaction is None or resolver is None or bot_id_fn is None:
+        return None, 0
+    bot_id = bot_id_fn()
+    user_ids = [uid for uid in (reaction.get("users") or []) if uid != bot_id]
+    names: list[str] = []
+    for uid in user_ids[:POLL_MAX_WINNER_NAMES]:
+        name = resolver(uid)
+        if name:
+            names.append(name)
+    extra = max(0, winning_votes - len(names))
+    return (names or None), extra
+
+
 def run_poll(
     provider: Provider,
     slack: SlackSender,
@@ -241,13 +267,37 @@ def run_poll(
             # 取得失敗 (レート制限・一時障害等) → 次回実行で再試行
             continue
         reactions = (data.get("message") or {}).get("reactions") or []
-        counts = {item.get("name"): item.get("count", 0) for item in reactions}
+        by_name = {item.get("name"): item for item in reactions}
         opp_reaction = opponent_reaction(japan_opponent(match))
-        votes_jp = max(0, counts.get("jp", 0) - 1)
-        votes_draw = max(0, counts.get("handshake", 0) - 1)
-        votes_opp = max(0, counts.get(opp_reaction, 0) - 1)
+        votes_jp = max(0, (by_name.get("jp") or {}).get("count", 0) - 1)
+        votes_draw = max(0, (by_name.get("handshake") or {}).get("count", 0) - 1)
+        votes_opp = max(0, (by_name.get(opp_reaction) or {}).get("count", 0) - 1)
+
+        # 的中した選択肢に投票した人の名前を解決する (Botの種リアクションは除外)
+        outcome = poll_outcome(match)
+        winning_reaction = {
+            "japan": "jp",
+            "draw": "handshake",
+            "opp": opp_reaction,
+        }[outcome]
+        winning_votes = {
+            "japan": votes_jp,
+            "draw": votes_draw,
+            "opp": votes_opp,
+        }[outcome]
+        winner_names, winner_extra = _resolve_winner_names(
+            slack, by_name.get(winning_reaction), winning_votes
+        )
+
         sent = slack.send(
-            build_poll_result_payload(match, votes_jp, votes_draw, votes_opp)
+            build_poll_result_payload(
+                match,
+                votes_jp,
+                votes_draw,
+                votes_opp,
+                winner_names=winner_names,
+                winner_extra=winner_extra,
+            )
         )
         if sent and not slack.dry_run:
             state["poll_result"].append(match.id)

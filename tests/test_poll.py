@@ -322,3 +322,46 @@ def test_legacy_state_without_poll_keys(tmp_path: Path) -> None:
     assert state["poll"] == {}
     assert state["poll_result"] == []
     assert state["prematch"] == [1]
+
+
+def test_result_text_lists_winner_names(japan_match):
+    from dataclasses import replace
+    from src.messages import japan_poll_result_text
+    from src.providers.base import MatchScore
+
+    # japan_match: home=Tunisia away=Japan。日本勝ち (チュニジア1-2日本)
+    m = replace(japan_match, status="FINISHED", score=MatchScore(home=1, away=2))
+    text = japan_poll_result_text(m, 3, 1, 2, winner_names=["山田", "鈴木"], winner_extra=1)
+    assert "🎯 *的中者*（3人）: 山田・鈴木 ほか1人" in text
+    # 名前なし(従来)も維持
+    text2 = japan_poll_result_text(m, 3, 1, 2)
+    assert "的中した3人、おみごと！🎉" in text2
+
+
+def test_resolve_winner_names_excludes_bot_and_caps():
+    from src.main import _resolve_winner_names, POLL_MAX_WINNER_NAMES
+
+    class FakeClient:
+        dry_run = False
+        def bot_user_id(self):
+            return "BOT"
+        def user_display_name(self, uid):
+            return f"name-{uid}"
+
+    users = ["BOT"] + [f"U{i}" for i in range(POLL_MAX_WINNER_NAMES + 5)]
+    reaction = {"name": "jp", "count": len(users), "users": users}
+    # 実投票数 = count - 1 (bot除外)
+    names, extra = _resolve_winner_names(FakeClient(), reaction, len(users) - 1)
+    assert len(names) == POLL_MAX_WINNER_NAMES
+    assert "name-BOT" not in names
+    assert extra == 5  # 35人中30人表示・残り5人
+
+
+def test_resolve_winner_names_without_capable_client():
+    from src.main import _resolve_winner_names
+
+    class PlainClient:
+        dry_run = False
+
+    names, extra = _resolve_winner_names(PlainClient(), {"users": ["U1"]}, 1)
+    assert names is None and extra == 0
