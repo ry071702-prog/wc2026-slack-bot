@@ -225,7 +225,21 @@ class SlackBotClient:
             return None
 
         if not data.get("ok"):
-            print(f"Slack chat.postMessage failed: {data.get('error')}")
+            error = data.get("error")
+            blocks = payload.get("blocks", [])
+            # HEAD200でもSlackが画像を拒否する場合(サイズ/content-type/TOCTOU)に備え、
+            # invalid_blocks のときは画像ブロックを外して必ずテキストを届ける。
+            if error == "invalid_blocks" and any(
+                b.get("type") == "image" for b in blocks
+            ):
+                print(
+                    "Slack rejected message with image (invalid_blocks); "
+                    "retrying without the matchup image"
+                )
+                return self.post_message(
+                    {"blocks": [b for b in blocks if b.get("type") != "image"]}
+                )
+            print(f"Slack chat.postMessage failed: {error}")
             return None
 
         print(f"Slack chat.postMessage succeeded: channel={data.get('channel')}")

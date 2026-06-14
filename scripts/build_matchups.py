@@ -399,7 +399,12 @@ def build_matchups(
     for match in chosen:
         entry = build_site_data.match_to_schedule_entry(match)
         out = output_override if output_override else output_dir / f"{match.id}.png"
-        render_matchup_card(entry, out, flag_loader, fonts)
+        # 1枚の描画失敗が全体を止めないよう個別に握る (index.jsonには成功分のみ載せる)
+        try:
+            render_matchup_card(entry, out, flag_loader, fonts)
+        except Exception as exc:  # noqa: BLE001
+            print(f"matchup card FAILED for {match.home} vs {match.away}: {exc}")
+            continue
         ids.append(match.id)
         print(f"matchup card: {match.home} vs {match.away} -> {out}")
 

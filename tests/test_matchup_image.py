@@ -130,3 +130,37 @@ def test_main_image_block_skipped_for_webhook(japan_match) -> None:
         webhook_url="https://hooks.slack.com/x", session=MagicMock()
     )
     assert _matchup_image_block(webhook, japan_match) is None
+
+
+def test_post_message_retries_without_image_on_invalid_blocks():
+    """HEAD200でもSlackが画像を拒否(invalid_blocks)したら、画像を外して再投稿し届く。"""
+    from unittest.mock import MagicMock
+    from src.slack import SlackBotClient
+
+    calls = []
+
+    def fake_post(url, **kwargs):
+        blocks = kwargs["json"]["blocks"]
+        calls.append([b.get("type") for b in blocks])
+        resp = MagicMock()
+        resp.raise_for_status.return_value = None
+        has_image = any(b.get("type") == "image" for b in blocks)
+        resp.json.return_value = (
+            {"ok": False, "error": "invalid_blocks"} if has_image
+            else {"ok": True, "ts": "1.2", "channel": "C1"}
+        )
+        return resp
+
+    session = MagicMock()
+    session.post.side_effect = fake_post
+    client = SlackBotClient(token="xoxb", channel="C1", session=session)
+
+    payload = {"blocks": [
+        {"type": "section", "text": {"type": "mrkdwn", "text": "x"}},
+        {"type": "image", "image_url": "https://e/x.png", "alt_text": "対戦カード"},
+    ]}
+    result = client.post_message(payload)
+
+    assert result is not None and result["ok"] is True   # 最終的に届く
+    assert len(calls) == 2                                # 画像あり→失敗→画像なし再送
+    assert "image" in calls[0] and "image" not in calls[1]
