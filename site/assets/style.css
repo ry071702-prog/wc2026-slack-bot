@@ -1329,6 +1329,127 @@ a.match-card {
   }
 }
 
+/* 試合スタッツ (home=左 / away=右 の対比) */
+.stats-card {
+  padding: clamp(20px, 4vw, 30px);
+}
+
+.stats-card:hover {
+  transform: none;
+}
+
+.stats-head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.stats-team {
+  font-size: clamp(13px, 2.6vw, 16px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.stats-team.stat-home {
+  text-align: left;
+  color: var(--accent-green);
+}
+
+.stats-team.stat-away {
+  text-align: right;
+  color: var(--accent-lime);
+}
+
+.stats-team-vs {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.stat-possession {
+  margin-bottom: 18px;
+}
+
+.poss-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  margin-top: 8px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.poss-fill {
+  display: block;
+  height: 100%;
+}
+
+.poss-fill.poss-home {
+  background: var(--accent-green);
+}
+
+.poss-fill.poss-away {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.stat-rows {
+  display: grid;
+  gap: 4px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.stat-row:first-child {
+  border-top: 0;
+}
+
+.stat-possession .stat-row {
+  padding: 0 0 2px;
+  border-top: 0;
+}
+
+.stat-value {
+  font-size: clamp(15px, 3vw, 18px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stat-value.stat-home {
+  text-align: left;
+}
+
+.stat-value.stat-away {
+  text-align: right;
+}
+
+.stat-value.is-more {
+  color: var(--text-primary);
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
 /* --- 10. 日程ページ ------------------------------------------------------------ */
 .date-group {
   margin-top: 36px;

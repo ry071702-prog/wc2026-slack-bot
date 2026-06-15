@@ -150,6 +150,50 @@ def test_generate_site_data_copies_highlights_and_match_facts(
     ) == {}
 
 
+def test_generate_site_data_copies_match_stats(tmp_path: Path) -> None:
+    match_stats_path = tmp_path / "match_stats.json"
+    match_stats = {
+        "1001": {
+            "home": {"possession": 61.1, "shots": 13},
+            "away": {"possession": 38.9, "shots": 8},
+            "source": "espn",
+        }
+    }
+    match_stats_path.write_text(
+        json.dumps(match_stats, ensure_ascii=False), encoding="utf-8"
+    )
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        match_stats_path=match_stats_path,
+    )
+
+    assert json.loads(
+        (output_dir / "match_stats.json").read_text(encoding="utf-8")
+    ) == match_stats
+
+
+def test_generate_site_data_match_stats_missing_file(tmp_path: Path) -> None:
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        match_stats_path=tmp_path / "missing-match-stats.json",
+    )
+
+    # 元データが無い場合は空オブジェクトを配信する
+    assert json.loads(
+        (output_dir / "match_stats.json").read_text(encoding="utf-8")
+    ) == {}
+
+
 def test_generate_site_data_copies_japan_opponents(tmp_path: Path) -> None:
     opponents_path = tmp_path / "japan_opponents.json"
     opponents = {
