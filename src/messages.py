@@ -182,7 +182,11 @@ def prematch_text(match: Match, mention_japan: bool = False) -> str:
             f"{opponent_flag(opponent)} {team_name(opponent)}"
         )
     else:
-        card = f"{team_name(match.home)}  vs  {team_name(match.away)}"
+        card = (
+            f"{opponent_flag(match.home)} {team_name(match.home)}"
+            f"  vs  "
+            f"{opponent_flag(match.away)} {team_name(match.away)}"
+        )
     body = f">{card}\n>🕔 `{kickoff}` KO ｜ {stage_name(match)}"
     if match.is_japan and mention_japan:
         body = f"<!here>\n{body}"
@@ -196,15 +200,18 @@ def result_text(match: Match) -> str:
     outcome = _outcome_text(match)
     if match.is_japan:
         opponent = team_name(japan_opponent(match))
+        opp_flag = opponent_flag(japan_opponent(match))
         if match.home == "Japan":
             jp_score, opp_score = match.score.home, match.score.away
         else:
             jp_score, opp_score = match.score.away, match.score.home
         score = f"`{_score_value(jp_score)} - {_score_value(opp_score)}`"
-        card = f"🇯🇵 *日本*  {score}  {opponent}{score_suffix}"
+        card = f"🇯🇵 *日本*  {score}  {opp_flag} {opponent}{score_suffix}"
     else:
         home = team_name(match.home)
         away = team_name(match.away)
+        hf = opponent_flag(match.home)
+        af = opponent_flag(match.away)
         side = _winner_side(match)
         home_disp = f"*{home}*" if side == "home" else home
         away_disp = f"*{away}*" if side == "away" else away
@@ -212,7 +219,7 @@ def result_text(match: Match) -> str:
             f"`{_score_value(match.score.home)} - "
             f"{_score_value(match.score.away)}`"
         )
-        card = f"{home_disp}  {score}  {away_disp}{score_suffix}"
+        card = f"{hf} {home_disp}  {score}  {af} {away_disp}{score_suffix}"
     return f">{card}\n>{outcome}  ｜  {stage}"
 
 
@@ -251,7 +258,7 @@ def japan_poll_text(match: Match) -> str:
     opponent_name = team_name(opponent)
     opp_flag = opponent_flag(opponent)
     return (
-        f"🇯🇵 *日本 vs {opponent_name}* 結果予想！⚽\n"
+        f"🇯🇵 *日本 vs {opp_flag} {opponent_name}* 結果予想！⚽\n"
         f"{_poll_kickoff_label(match)} KO ｜ {stage_name(match)}\n"
         "\n"
         "下のリアクションで投票しよう👇\n"
@@ -297,8 +304,8 @@ def japan_poll_result_text(
     jp_score = match.score.home if japan_is_home else match.score.away
     op_score = match.score.away if japan_is_home else match.score.home
     score_line = (
-        f"日本 {_score_value(jp_score)} - "
-        f"{_score_value(op_score)} {opponent_name}"
+        f"🇯🇵 日本 {_score_value(jp_score)} - "
+        f"{_score_value(op_score)} {opp_flag} {opponent_name}"
     )
 
     outcome = poll_outcome(match)

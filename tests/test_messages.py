@@ -55,7 +55,7 @@ def test_prematch_regular_match_has_no_mention(
 
     assert not text.startswith("<!here>")
     assert "🇯🇵" not in text
-    assert ">スペイン  vs  サウジアラビア" in text
+    assert ">🇪🇸 スペイン  vs  🇸🇦 サウジアラビア" in text
 
     payload = build_prematch_payload(regular_match, mention_japan=True)
     assert payload["blocks"][2]["elements"][0]["text"] == (
@@ -74,7 +74,7 @@ def test_result_japan_win(japan_match: Match) -> None:
 
     # 日本を先頭に固定し、スコアも日本側を先に並べる (away=日本=2, home=チュニジア=1)
     assert text == (
-        ">🇯🇵 *日本*  `2 - 1`  チュニジア\n"
+        ">🇯🇵 *日本*  `2 - 1`  🇹🇳 チュニジア\n"
         ">🎉 *日本、勝利！*  ｜  グループF"
     )
 
@@ -103,7 +103,7 @@ def test_result_extra_time(regular_match: Match) -> None:
 
     text = result_text(finished)
 
-    assert "*スペイン*  `2 - 1`  サウジアラビア (延長)" in text
+    assert "🇪🇸 *スペイン*  `2 - 1`  🇸🇦 サウジアラビア (延長)" in text
     assert "🏆 *スペインの勝利*  ｜  準々決勝" in text
 
 
