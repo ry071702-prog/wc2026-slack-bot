@@ -250,3 +250,14 @@ def test_save_and_load_round_trip(tmp_path: Path) -> None:
     payload = {"101": {"home": 4, "draw": 1, "away": 2, "total": 7, "final": True}}
     bmp.save_json(path, payload)
     assert json.loads(path.read_text(encoding="utf-8")) == payload
+
+
+def test_aggregate_both_unmapped_no_double_count():
+    """両チームとも国旗未マッピング(共にsoccer)時、勝敗票を二重計上しない。"""
+    from scripts.build_match_predictions import aggregate_reactions
+    # soccer に 実投票3 + Bot種1 = count4。home/awayへ二重計上しないこと
+    reactions = [{"name": "soccer", "count": 4}, {"name": "handshake", "count": 3}]
+    agg = aggregate_reactions(reactions, "Atlantis", "Wakanda")
+    assert agg["home"] == 0 and agg["away"] == 0
+    assert agg["draw"] == 2
+    assert agg["total"] == 2

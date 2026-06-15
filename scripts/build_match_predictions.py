@@ -82,9 +82,16 @@ def aggregate_reactions(
     各票は count から Bot の種リアクション1票を除外する (最低 0)。
     """
     by_name = {item.get("name"): item for item in reactions}
-    home_votes = max(0, _reaction_count(by_name, opponent_reaction(home)) - 1)
+    home_name = opponent_reaction(home)
+    away_name = opponent_reaction(away)
     draw_votes = max(0, _reaction_count(by_name, "handshake") - 1)
-    away_votes = max(0, _reaction_count(by_name, opponent_reaction(away)) - 1)
+    if home_name == away_name:
+        # 両チームとも国旗未マッピング (共に ⚽ にフォールバック) の防御。
+        # 同じリアクションを home/away に二重計上しないよう、勝敗票は不可算とする。
+        home_votes = away_votes = 0
+    else:
+        home_votes = max(0, _reaction_count(by_name, home_name) - 1)
+        away_votes = max(0, _reaction_count(by_name, away_name) - 1)
     return {
         "home": home_votes,
         "draw": draw_votes,
