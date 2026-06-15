@@ -12,7 +12,7 @@ class NotificationState(TypedDict):
     lineup: list[int]
     poll: dict[str, str]
     poll_result: list[int]
-    prematch_poll: list[int]
+    prematch_poll: dict[str, str]
 
 
 def empty_state() -> NotificationState:
@@ -23,8 +23,22 @@ def empty_state() -> NotificationState:
         "lineup": [],
         "poll": {},
         "poll_result": [],
-        "prematch_poll": [],
+        "prematch_poll": {},
     }
+
+
+def _normalize_prematch_poll(raw: Any) -> dict[str, str]:
+    """prematch_poll を {match_id文字列: prematch ts} に正規化する。
+
+    後方互換: 旧形式は list[int] (match_id のみ・ts 未記録) だったため、
+    list の場合は {str(id): ""} に変換する (ts 不明=空文字、過去シード分は
+    集計不可だが dedup は維持される)。dict の場合はキー/値を str に揃える。
+    """
+    if isinstance(raw, list):
+        return {str(value): "" for value in raw}
+    if isinstance(raw, dict):
+        return {str(key): str(value) for key, value in raw.items()}
+    raise TypeError("prematch_poll must be an array or object")
 
 
 class StateStore:
@@ -61,10 +75,10 @@ class StateStore:
         lineup = raw.get("lineup", [])
         poll = raw.get("poll", {})
         poll_result = raw.get("poll_result", [])
-        prematch_poll = raw.get("prematch_poll", [])
+        prematch_poll = raw.get("prematch_poll", {})
         if not all(
             isinstance(value, list)
-            for value in (digest_dates, prematch, result, lineup, poll_result, prematch_poll)
+            for value in (digest_dates, prematch, result, lineup, poll_result)
         ):
             raise TypeError("state values must be arrays")
         if not isinstance(poll, dict):
@@ -76,5 +90,5 @@ class StateStore:
             "lineup": [int(value) for value in lineup],
             "poll": {str(key): str(value) for key, value in poll.items()},
             "poll_result": [int(value) for value in poll_result],
-            "prematch_poll": [int(value) for value in prematch_poll],
+            "prematch_poll": _normalize_prematch_poll(prematch_poll),
         }

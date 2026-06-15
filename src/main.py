@@ -237,10 +237,12 @@ def run_notify(
             state_store.save(state)
 
         # リアクション種付け: ベストエフォート。失敗が prematch 配信・state 記録を妨げない。
-        if ts and not slack.dry_run and match.id not in state["prematch_poll"]:
+        # prematch_poll は {match_id文字列: ts} で記録し、サイトの予想集計
+        # (scripts/build_match_predictions.py) が後から reactions.get で集計する。
+        if ts and not slack.dry_run and str(match.id) not in state["prematch_poll"]:
             for name in prematch_vote_reactions(match):
                 slack.add_reaction(ts, name)
-            state["prematch_poll"].append(match.id)
+            state["prematch_poll"][str(match.id)] = ts
             state_store.save(state)
 
     for match in result_matches:

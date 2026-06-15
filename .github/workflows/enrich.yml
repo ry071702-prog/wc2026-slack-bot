@@ -48,6 +48,13 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python scripts/build_match_stats.py
 
+      - name: Build match predictions (Slack reaction votes)
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: python scripts/build_match_predictions.py
+
       # data/** の push で pages.yml が走りサイトへ反映されるため [skip ci] は付けない
       - name: Commit enriched data
         if: always()
