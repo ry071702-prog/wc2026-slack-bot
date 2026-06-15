@@ -981,7 +981,11 @@ main {
 }
 
 .matchup .team-name:last-child {
-  justify-self: end;
+  /* justify-self: end だとグリッドアイテムが内容幅で確定し、トラック幅を
+     超えてスコア側へはみ出す (長い国名で .team-label の省略が効かない)。
+     stretch でトラック幅に収め、row-reverse + flex-start で旗を右端に寄せる。 */
+  justify-self: stretch;
+  justify-content: flex-start;
   flex-direction: row-reverse;
   text-align: right;
 }
