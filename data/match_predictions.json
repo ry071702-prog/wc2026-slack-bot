@@ -9,6 +9,13 @@
   "537363": {
     "home": 0,
     "draw": 0,
+    "away": 1,
+    "total": 1,
+    "final": true
+  },
+  "537370": {
+    "home": 0,
+    "draw": 0,
     "away": 0,
     "total": 0,
     "final": false
