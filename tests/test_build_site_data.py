@@ -194,6 +194,48 @@ def test_generate_site_data_match_stats_missing_file(tmp_path: Path) -> None:
     ) == {}
 
 
+def test_generate_site_data_copies_match_predictions(tmp_path: Path) -> None:
+    predictions_path = tmp_path / "match_predictions.json"
+    predictions = {
+        "1001": {"home": 4, "draw": 3, "away": 8, "total": 15, "final": True}
+    }
+    predictions_path.write_text(
+        json.dumps(predictions, ensure_ascii=False), encoding="utf-8"
+    )
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        match_predictions_path=predictions_path,
+    )
+
+    assert json.loads(
+        (output_dir / "match_predictions.json").read_text(encoding="utf-8")
+    ) == predictions
+
+
+def test_generate_site_data_match_predictions_missing_file(
+    tmp_path: Path,
+) -> None:
+    output_dir = tmp_path / "site-data"
+
+    build_site_data.generate_site_data(
+        [make_match()],
+        rankings_path=tmp_path / "missing-rankings.json",
+        squads_path=tmp_path / "missing-squads.json",
+        output_dir=output_dir,
+        match_predictions_path=tmp_path / "missing-predictions.json",
+    )
+
+    # 元データが無い場合は空オブジェクトで配信する
+    assert json.loads(
+        (output_dir / "match_predictions.json").read_text(encoding="utf-8")
+    ) == {}
+
+
 def test_generate_site_data_copies_japan_opponents(tmp_path: Path) -> None:
     opponents_path = tmp_path / "japan_opponents.json"
     opponents = {

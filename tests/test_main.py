@@ -192,10 +192,12 @@ def test_run_notify_prematch_seeds_reactions_non_japan(
     run_notify(StubProvider([regular_match]), slack, store, now=now)
 
     assert len(slack.posts) == 1
+    ts = slack.posts[0][0]
     assert [name for _, name in slack.reactions_added] == ["flag-es", "handshake", "flag-sa"]
     loaded = store.load()
     assert loaded["prematch"] == [regular_match.id]
-    assert loaded["prematch_poll"] == [regular_match.id]
+    # prematch_poll は {match_id文字列: prematch ts} で記録される
+    assert loaded["prematch_poll"] == {str(regular_match.id): ts}
 
 
 def test_run_notify_prematch_seeds_reactions_japan_match(
@@ -210,11 +212,12 @@ def test_run_notify_prematch_seeds_reactions_japan_match(
     run_notify(StubProvider([japan_match]), slack, store, now=now)
 
     # prematch のリアクション (Tunisia away=Japan)
+    ts = slack.posts[0][0]
     reaction_names = [name for _, name in slack.reactions_added]
     assert "flag-tn" in reaction_names
     assert "handshake" in reaction_names
     assert "jp" in reaction_names
-    assert store.load()["prematch_poll"] == [japan_match.id]
+    assert store.load()["prematch_poll"] == {str(japan_match.id): ts}
 
 
 def test_run_notify_prematch_reactions_dedup(
@@ -224,7 +227,7 @@ def test_run_notify_prematch_reactions_dedup(
     store = StateStore(tmp_path / "notified.json")
     state = empty_state()
     # prematch_poll には既に登録済み、prematch には未登録 (prematch は再送される経路)
-    state["prematch_poll"].append(regular_match.id)
+    state["prematch_poll"][str(regular_match.id)] = "existing.ts"
     store.save(state)
     slack = ReactionStubSlack()
     now = regular_match.utc_kickoff - timedelta(minutes=10)
@@ -235,6 +238,8 @@ def test_run_notify_prematch_reactions_dedup(
     assert len(slack.posts) == 1
     # リアクションは種付けされない (dedup)
     assert slack.reactions_added == []
+    # 既存の ts は上書きされない
+    assert store.load()["prematch_poll"] == {str(regular_match.id): "existing.ts"}
 
 
 def test_run_notify_prematch_webhook_no_reactions(
@@ -251,7 +256,7 @@ def test_run_notify_prematch_webhook_no_reactions(
     assert len(slack.payloads) == 1  # send() が呼ばれた
     loaded = store.load()
     assert loaded["prematch"] == [regular_match.id]
-    assert loaded["prematch_poll"] == []
+    assert loaded["prematch_poll"] == {}
 
 
 def test_run_notify_prematch_dry_run_no_reactions(
@@ -268,7 +273,7 @@ def test_run_notify_prematch_dry_run_no_reactions(
 
     loaded = store.load()
     assert loaded["prematch"] == []
-    assert loaded["prematch_poll"] == []
+    assert loaded["prematch_poll"] == {}
     assert slack.reactions_added == []
 
 
