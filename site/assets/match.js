@@ -12,18 +12,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const [schedule, highlights, facts, stats] = await Promise.all([
+    const [schedule, highlights, facts, stats, predictions] = await Promise.all([
       app.fetchJson("data/schedule.json"),
       app.fetchJson("data/highlights.json", { optional: true }),
       app.fetchJson("data/match_facts.json", { optional: true }),
       app.fetchJson("data/match_stats.json", { optional: true }),
+      app.fetchJson("data/match_predictions.json", { optional: true }),
     ]);
     const match = schedule.find((item) => String(item.id) === matchId);
     if (!match) {
       renderNotFound();
       return;
     }
-    render(match, highlights || {}, facts || {}, stats || {});
+    render(match, highlights || {}, facts || {}, stats || {}, predictions || {});
   } catch (error) {
     app.logDataError(error);
     app.showLoadError(container);
@@ -39,13 +40,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   }
 
-  function render(match, highlights, facts, stats) {
+  function render(match, highlights, facts, stats, predictions) {
     container.setAttribute("aria-busy", "false");
     const homeName = match.home_ja || match.home;
     const awayName = match.away_ja || match.away;
     document.title = `${homeName} vs ${awayName} | WORLD CUP 2026`;
 
     const sections = [scoreboard(match)];
+
+    const predictionsSection = buildPredictionsSection(match, predictions);
+    if (predictionsSection) {
+      sections.push(predictionsSection);
+    }
 
     const highlightSection = buildHighlightSection(match, highlights);
     if (highlightSection) {
@@ -166,6 +172,131 @@ document.addEventListener("DOMContentLoaded", async () => {
     return board;
   }
 
+  // --- みんなの予想 (Slack リアクション投票の集計) -------------------------
+
+  function sectionHeading(eyebrow, title) {
+    const header = app.element("div", "detail-section-header");
+    header.append(
+      app.element("p", "detail-eyebrow", eyebrow),
+      app.element("h2", "detail-title", title),
+    );
+    return header;
+  }
+
+  // FINISHED の試合の結果区分 ("home" / "draw" / "away") を返す。未確定は null。
+  function predictionOutcome(match) {
+    if (match.status !== "FINISHED") {
+      return null;
+    }
+    const score = match.score || {};
+    if (!Number.isInteger(score.home) || !Number.isInteger(score.away)) {
+      return null;
+    }
+    if (score.home !== score.away) {
+      return score.home > score.away ? "home" : "away";
+    }
+    if (
+      Number.isInteger(score.penalties_home) &&
+      Number.isInteger(score.penalties_away) &&
+      score.penalties_home !== score.penalties_away
+    ) {
+      return score.penalties_home > score.penalties_away ? "home" : "away";
+    }
+    return "draw";
+  }
+
+  function predictionRow(side, flagName, label, votes, total, hit) {
+    const pct = total > 0 ? Math.round((votes / total) * 100) : 0;
+    const row = app.element(
+      "div",
+      `pred-row pred-${side}${hit ? " is-hit" : ""}`,
+    );
+
+    const head = app.element("div", "pred-row-head");
+    const name = app.element("span", "pred-name");
+    const flag = app.element("span", "pred-flag", flagName ? app.flagEmoji(flagName) : "🤝");
+    flag.setAttribute("aria-hidden", "true");
+    name.append(flag, app.element("span", "pred-team", label));
+    if (hit) {
+      name.append(app.element("span", "pred-hit", "✅的中"));
+    }
+    const value = app.element("span", "pred-value");
+    value.append(
+      app.element("span", "pred-pct", `${pct}%`),
+      app.element("span", "pred-votes", `${votes}票`),
+    );
+    head.append(name, value);
+    row.append(head);
+
+    const bar = app.element("div", "pred-bar");
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", `${label} ${pct}% (${votes}票)`);
+    const fill = app.element("span", "pred-fill");
+    fill.style.width = `${pct}%`;
+    bar.append(fill);
+    row.append(bar);
+    return row;
+  }
+
+  function buildPredictionsSection(match, predictions) {
+    const entry = predictions[String(match.id)];
+    if (!entry) {
+      return null;
+    }
+    const total = Number(entry.total) || 0;
+    if (total <= 0) {
+      return null;
+    }
+    const home = Number(entry.home) || 0;
+    const draw = Number(entry.draw) || 0;
+    const away = Number(entry.away) || 0;
+
+    const section = app.element("section", "detail-section");
+    section.append(sectionHeading("PREDICTIONS", "🗳️ みんなの予想"));
+
+    const card = app.element("div", "pred-card glass-card");
+    // FINISHED かつ集計確定 (final) のときだけ結果区分を判定して的中表示する
+    const outcome = entry.final ? predictionOutcome(match) : null;
+
+    card.append(
+      predictionRow(
+        "home",
+        match.home,
+        match.home_ja || match.home,
+        home,
+        total,
+        outcome === "home",
+      ),
+    );
+    card.append(
+      predictionRow("draw", null, "引き分け", draw, total, outcome === "draw"),
+    );
+    card.append(
+      predictionRow(
+        "away",
+        match.away,
+        match.away_ja || match.away,
+        away,
+        total,
+        outcome === "away",
+      ),
+    );
+
+    const footer = app.element("div", "pred-footer");
+    footer.append(app.element("span", "pred-total", `投票 ${total}票`));
+    if (outcome) {
+      const hitVotes = { home, draw, away }[outcome];
+      const hitPct = total > 0 ? Math.round((hitVotes / total) * 100) : 0;
+      footer.append(
+        app.element("span", "pred-accuracy", `✅ 的中率 ${hitPct}%`),
+      );
+    }
+    card.append(footer);
+
+    section.append(card);
+    return section;
+  }
+
   // --- ハイライト ---------------------------------------------------------
 
   function youtubeVideoId(url) {
@@ -183,15 +314,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch {
       return null;
     }
-  }
-
-  function sectionHeading(eyebrow, title) {
-    const header = app.element("div", "detail-section-header");
-    header.append(
-      app.element("p", "detail-eyebrow", eyebrow),
-      app.element("h2", "detail-title", title),
-    );
-    return header;
   }
 
   function buildHighlightSection(match, highlights) {

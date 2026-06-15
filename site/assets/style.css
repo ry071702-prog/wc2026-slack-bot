@@ -1450,6 +1450,139 @@ a.match-card {
   white-space: nowrap;
 }
 
+/* みんなの予想 (Slack リアクション投票の集計) */
+.pred-card {
+  display: grid;
+  gap: 16px;
+  padding: clamp(20px, 4vw, 30px);
+}
+
+.pred-card:hover {
+  transform: none;
+}
+
+.pred-row {
+  display: grid;
+  gap: 8px;
+}
+
+.pred-row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pred-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pred-flag {
+  flex: none;
+  font-size: 16px;
+}
+
+.pred-team {
+  font-size: 14px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.pred-hit {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(46, 224, 106, 0.16);
+  border: 1px solid rgba(46, 224, 106, 0.4);
+  color: var(--accent-green);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pred-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: none;
+}
+
+.pred-pct {
+  font-size: clamp(16px, 3.2vw, 19px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.pred-votes {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pred-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pred-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.5s ease;
+}
+
+.pred-home .pred-fill {
+  background: var(--accent-green);
+}
+
+.pred-draw .pred-fill {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.pred-away .pred-fill {
+  background: var(--accent-lime);
+}
+
+/* 的中区分を強調する */
+.pred-row.is-hit .pred-bar {
+  box-shadow: 0 0 0 1px rgba(46, 224, 106, 0.5);
+}
+
+.pred-row.is-hit .pred-pct {
+  color: var(--accent-green);
+}
+
+.pred-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  margin-top: 2px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.pred-total {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pred-accuracy {
+  color: var(--accent-green);
+  font-size: 13px;
+  font-weight: 800;
+}
+
 /* --- 10. 日程ページ ------------------------------------------------------------ */
 .date-group {
   margin-top: 36px;

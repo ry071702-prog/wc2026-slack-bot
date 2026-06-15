@@ -25,6 +25,7 @@ PREDICTIONS_RAW_PATH = ROOT_DIR / "data" / "predictions.json"
 HIGHLIGHTS_PATH = ROOT_DIR / "data" / "highlights.json"
 MATCH_FACTS_PATH = ROOT_DIR / "data" / "match_facts.json"
 MATCH_STATS_PATH = ROOT_DIR / "data" / "match_stats.json"
+MATCH_PREDICTIONS_PATH = ROOT_DIR / "data" / "match_predictions.json"
 NEWS_PATH = ROOT_DIR / "data" / "news.json"
 JAPAN_OPPONENTS_PATH = ROOT_DIR / "data" / "japan_opponents.json"
 
@@ -152,6 +153,7 @@ def generate_site_data(
     highlights_path: Path = HIGHLIGHTS_PATH,
     match_facts_path: Path = MATCH_FACTS_PATH,
     match_stats_path: Path = MATCH_STATS_PATH,
+    match_predictions_path: Path = MATCH_PREDICTIONS_PATH,
     news_path: Path = NEWS_PATH,
     team_history_path: Path = TEAM_HISTORY_PATH,
     japan_opponents_path: Path = JAPAN_OPPONENTS_PATH,
@@ -182,6 +184,11 @@ def generate_site_data(
     write_json(
         output_dir / "match_stats.json",
         load_optional_json(match_stats_path, {}),
+    )
+    # みんなの予想 (Slack リアクション投票の集計) — 無ければ空オブジェクトで配信
+    write_json(
+        output_dir / "match_predictions.json",
+        load_optional_json(match_predictions_path, {}),
     )
     # ニュース (Google News RSS) — 無ければ空オブジェクトで配信
     write_json(
