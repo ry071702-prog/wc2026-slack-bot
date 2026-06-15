@@ -131,39 +131,42 @@ def digest_match_line(match: Match) -> str:
     if match.is_japan:
         # 日本を常に先頭に置く (日本ファン視点)。スコアも日本側を先に並べる。
         opponent = team_name(japan_opponent(match))
+        opp_flag = opponent_flag(japan_opponent(match))
         if match.home == "Japan":
             jp_score, opp_score = match.score.home, match.score.away
         else:
             jp_score, opp_score = match.score.away, match.score.home
         if match.status == "FINISHED" and has_score:
-            card = f"日本 {jp_score} - {opp_score} {opponent}"
+            card = f"日本 {jp_score} - {opp_score} {opp_flag} {opponent}"
             suffix = "　🏁終了"
         elif match.status in ("IN_PLAY", "PAUSED"):
             card = (
-                f"日本 {jp_score} - {opp_score} {opponent}"
+                f"日本 {jp_score} - {opp_score} {opp_flag} {opponent}"
                 if has_score
-                else f"日本 vs {opponent}"
+                else f"日本 vs {opp_flag} {opponent}"
             )
             suffix = "　🔴LIVE"
         else:
-            card = f"日本 vs {opponent}"
+            card = f"日本 vs {opp_flag} {opponent}"
             suffix = ""
         return f"🇯🇵 *{kickoff}　{card}*（{stage}）{suffix}← *日本戦！*"
 
     home = team_name(match.home)
     away = team_name(match.away)
+    hf = opponent_flag(match.home)
+    af = opponent_flag(match.away)
     if match.status == "FINISHED" and has_score:
-        card = f"{home} {match.score.home} - {match.score.away} {away}"
+        card = f"{hf} {home} {match.score.home} - {match.score.away} {af} {away}"
         suffix = "　🏁終了"
     elif match.status in ("IN_PLAY", "PAUSED"):
         card = (
-            f"{home} {match.score.home} - {match.score.away} {away}"
+            f"{hf} {home} {match.score.home} - {match.score.away} {af} {away}"
             if has_score
-            else f"{home} vs {away}"
+            else f"{hf} {home} vs {af} {away}"
         )
         suffix = "　🔴LIVE"
     else:
-        card = f"{home} vs {away}"
+        card = f"{hf} {home} vs {af} {away}"
         suffix = ""
     return f"`{kickoff}`　{card}（{stage}）{suffix}"
 

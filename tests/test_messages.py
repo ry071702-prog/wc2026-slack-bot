@@ -22,13 +22,13 @@ def test_digest_places_japan_first(
     assert payload["blocks"][0]["text"]["text"] == "⚽ 今日のW杯 6/21(日)"
     assert payload["blocks"][0]["text"]["emoji"] is True
     assert payload["blocks"][1]["text"]["text"] == (
-        "🇯🇵 *13:00　日本 vs チュニジア*"
+        "🇯🇵 *13:00　日本 vs 🇹🇳 チュニジア*"
         "（グループF 第2節）← *日本戦！*"
     )
     assert payload["blocks"][2] == {"type": "divider"}
     assert payload["blocks"][3]["text"]["text"] == (
         "*きょうの試合*\n"
-        "`12:00`　スペイン vs サウジアラビア（グループH 第2節）"
+        "`12:00`　🇪🇸 スペイン vs 🇸🇦 サウジアラビア（グループH 第2節）"
     )
     assert "時刻はJST" in payload["blocks"][4]["elements"][0]["text"]
 
@@ -156,7 +156,7 @@ def test_digest_line_shows_score_for_finished(regular_match: Match) -> None:
     from src.messages import digest_match_line
 
     assert digest_match_line(finished) == (
-        "`12:00`　スペイン 0 - 1 サウジアラビア（グループH 第2節）　🏁終了"
+        "`12:00`　🇪🇸 スペイン 0 - 1 🇸🇦 サウジアラビア（グループH 第2節）　🏁終了"
     )
 
 
@@ -169,7 +169,7 @@ def test_digest_line_shows_live(regular_match: Match) -> None:
         score=MatchScore(home=2, away=0),
     )
 
-    assert "スペイン 2 - 0 サウジアラビア" in digest_match_line(live)
+    assert "🇪🇸 スペイン 2 - 0 🇸🇦 サウジアラビア" in digest_match_line(live)
     assert "🔴LIVE" in digest_match_line(live)
 
 
@@ -199,4 +199,4 @@ def test_digest_includes_tomorrow_section(
     tomorrow_text = [t for t in texts if "明日" in t]
     assert tomorrow_text, "明日セクションが無い"
     assert "📅 *明日（6/22(月)）の試合*" in tomorrow_text[0]
-    assert "スペイン vs サウジアラビア" in tomorrow_text[0]
+    assert "🇪🇸 スペイン vs 🇸🇦 サウジアラビア" in tomorrow_text[0]
