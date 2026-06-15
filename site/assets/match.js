@@ -12,17 +12,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const [schedule, highlights, facts] = await Promise.all([
+    const [schedule, highlights, facts, stats] = await Promise.all([
       app.fetchJson("data/schedule.json"),
       app.fetchJson("data/highlights.json", { optional: true }),
       app.fetchJson("data/match_facts.json", { optional: true }),
+      app.fetchJson("data/match_stats.json", { optional: true }),
     ]);
     const match = schedule.find((item) => String(item.id) === matchId);
     if (!match) {
       renderNotFound();
       return;
     }
-    render(match, highlights || {}, facts || {});
+    render(match, highlights || {}, facts || {}, stats || {});
   } catch (error) {
     app.logDataError(error);
     app.showLoadError(container);
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   }
 
-  function render(match, highlights, facts) {
+  function render(match, highlights, facts, stats) {
     container.setAttribute("aria-busy", "false");
     const homeName = match.home_ja || match.home;
     const awayName = match.away_ja || match.away;
@@ -54,6 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const goalsSection = buildGoalsSection(match, facts);
     if (goalsSection) {
       sections.push(goalsSection);
+    }
+
+    const statsSection = buildStatsSection(match, stats);
+    if (statsSection) {
+      sections.push(statsSection);
     }
 
     container.replaceChildren(...sections);
@@ -274,6 +280,146 @@ document.addEventListener("DOMContentLoaded", async () => {
       list.append(item);
     });
     section.append(list);
+    return section;
+  }
+
+  // --- スタッツ (ESPN) -----------------------------------------------------
+
+  function isNumber(value) {
+    return typeof value === "number" && Number.isFinite(value);
+  }
+
+  function passLabel(side) {
+    if (isNumber(side.passes_accurate) && isNumber(side.passes)) {
+      return `${side.passes_accurate}/${side.passes}`;
+    }
+    if (isNumber(side.passes)) {
+      return String(side.passes);
+    }
+    if (isNumber(side.passes_accurate)) {
+      return String(side.passes_accurate);
+    }
+    return null;
+  }
+
+  // 比較で優勢な側を強調するため、数値文字列 ("310/421" は先頭の成功数) を取り出す
+  function compareValue(text) {
+    if (text === null || text === undefined) {
+      return null;
+    }
+    const matched = String(text).match(/-?\d+(\.\d+)?/);
+    return matched ? Number(matched[0]) : null;
+  }
+
+  function statRow(label, homeText, awayText) {
+    const hasHome = homeText !== null && homeText !== undefined;
+    const hasAway = awayText !== null && awayText !== undefined;
+    if (!hasHome && !hasAway) {
+      return null;
+    }
+    const row = app.element("div", "stat-row");
+    const home = app.element(
+      "span",
+      "stat-value stat-home",
+      hasHome ? String(homeText) : "-",
+    );
+    const away = app.element(
+      "span",
+      "stat-value stat-away",
+      hasAway ? String(awayText) : "-",
+    );
+    const homeNum = compareValue(homeText);
+    const awayNum = compareValue(awayText);
+    if (isNumber(homeNum) && isNumber(awayNum) && homeNum !== awayNum) {
+      (homeNum > awayNum ? home : away).classList.add("is-more");
+    }
+    row.append(
+      home,
+      app.element("span", "stat-label", label),
+      away,
+    );
+    return row;
+  }
+
+  function possessionBlock(homeValue, awayValue) {
+    const hasHome = isNumber(homeValue);
+    const hasAway = isNumber(awayValue);
+    const home = hasHome ? homeValue : 100 - awayValue;
+    const away = hasAway ? awayValue : 100 - homeValue;
+    const total = home + away;
+    const homePct = total > 0 ? (home / total) * 100 : 50;
+    const awayPct = 100 - homePct;
+
+    const wrap = app.element("div", "stat-possession");
+    wrap.append(
+      statRow("ボール支配率", `${Math.round(home)}%`, `${Math.round(away)}%`),
+    );
+
+    const bar = app.element("div", "poss-bar");
+    bar.setAttribute("role", "img");
+    bar.setAttribute(
+      "aria-label",
+      `ボール支配率 ホーム ${Math.round(home)}% アウェイ ${Math.round(away)}%`,
+    );
+    const fillHome = app.element("span", "poss-fill poss-home");
+    fillHome.style.width = `${homePct}%`;
+    const fillAway = app.element("span", "poss-fill poss-away");
+    fillAway.style.width = `${awayPct}%`;
+    bar.append(fillHome, fillAway);
+    wrap.append(bar);
+    return wrap;
+  }
+
+  function buildStatsSection(match, stats) {
+    const entry = stats[String(match.id)];
+    if (!entry) {
+      return null;
+    }
+    const home = entry.home || {};
+    const away = entry.away || {};
+    if (Object.keys(home).length === 0 && Object.keys(away).length === 0) {
+      return null;
+    }
+
+    const section = app.element("section", "detail-section");
+    section.append(sectionHeading("STATS", "📊 スタッツ"));
+
+    const card = app.element("div", "stats-card glass-card");
+
+    // チーム名の対比ヘッダー (左=ホーム / 右=アウェイ)
+    const head = app.element("div", "stats-head");
+    head.append(
+      app.element("span", "stats-team stat-home", match.home_ja || match.home),
+      app.element("span", "stats-team-vs", "VS"),
+      app.element("span", "stats-team stat-away", match.away_ja || match.away),
+    );
+    card.append(head);
+
+    if (isNumber(home.possession) || isNumber(away.possession)) {
+      card.append(possessionBlock(home.possession, away.possession));
+    }
+
+    const rows = app.element("div", "stat-rows");
+    const definitions = [
+      ["シュート", home.shots, away.shots],
+      ["枠内シュート", home.shots_on_target, away.shots_on_target],
+      ["パス", passLabel(home), passLabel(away)],
+      ["CK", home.corners, away.corners],
+      ["ファウル", home.fouls, away.fouls],
+      ["オフサイド", home.offsides, away.offsides],
+      ["警告", home.yellow, away.yellow],
+      ["退場", home.red, away.red],
+    ];
+    definitions.forEach(([label, homeValue, awayValue]) => {
+      const value = (input) => (isNumber(input) || typeof input === "string" ? input : null);
+      const row = statRow(label, value(homeValue), value(awayValue));
+      if (row) {
+        rows.append(row);
+      }
+    });
+    card.append(rows);
+
+    section.append(card);
     return section;
   }
 });
