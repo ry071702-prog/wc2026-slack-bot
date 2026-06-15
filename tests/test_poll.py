@@ -137,7 +137,7 @@ def test_japan_poll_result_japan_win(nl_japan: Match) -> None:
         score=MatchScore(home=1, away=2, duration="REGULAR"),
     )
     text = japan_poll_result_text(finished, 12, 3, 5)
-    assert "📊 *みんなの予想結果*（日本 2 - 1 オランダ）" in text
+    assert "📊 *みんなの予想結果* （日本 2 - 1 オランダ）" in text
     assert "🇯🇵 日本勝利: 12票 ← 🎯的中！" in text
     assert "🤝 引き分け: 3票\n" in text
     assert "🇳🇱 オランダ勝利: 5票\n" in text
@@ -333,7 +333,7 @@ def test_result_text_lists_winner_names(japan_match):
     # japan_match: home=Tunisia away=Japan。日本勝ち (チュニジア1-2日本)
     m = replace(japan_match, status="FINISHED", score=MatchScore(home=1, away=2))
     text = japan_poll_result_text(m, 3, 1, 2, winner_names=["山田", "鈴木"], winner_extra=1)
-    assert "🎯 *的中者*（3人）: 山田・鈴木 ほか1人" in text
+    assert "🎯 *的中者* （3人）: 山田・鈴木 ほか1人" in text
     # 名前なし(従来)も維持
     text2 = japan_poll_result_text(m, 3, 1, 2)
     assert "的中した3人、おみごと！🎉" in text2

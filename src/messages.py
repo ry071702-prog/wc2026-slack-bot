@@ -149,7 +149,8 @@ def digest_match_line(match: Match) -> str:
         else:
             card = f"日本 vs {opp_flag} {opponent}"
             suffix = ""
-        return f"🇯🇵 *{kickoff}　{card}*（{stage}）{suffix}← *日本戦！*"
+        # 閉じ * の直後が全角「（」だとSlackが太字にしないため半角スペースを挟む
+        return f"🇯🇵 *{kickoff}　{card}* （{stage}）{suffix}← *日本戦！*"
 
     home = team_name(match.home)
     away = team_name(match.away)
@@ -314,12 +315,12 @@ def japan_poll_result_text(
         names = "・".join(winner_names)
         if winner_extra > 0:
             names += f" ほか{winner_extra}人"
-        closing = f"🎯 *的中者*（{winners}人）: {names}\nおみごと！🎉"
+        closing = f"🎯 *的中者* （{winners}人）: {names}\nおみごと！🎉"
     else:
         closing = f"的中した{winners}人、おみごと！🎉"
 
     return (
-        f"📊 *みんなの予想結果*（{score_line}）\n"
+        f"📊 *みんなの予想結果* （{score_line}）\n"
         f"🇯🇵 日本勝利: {votes_jp}票{jp_marker}\n"
         f"🤝 引き分け: {votes_draw}票{draw_marker}\n"
         f"{opp_flag} {opponent_name}勝利: {votes_opp}票{opp_marker}\n"

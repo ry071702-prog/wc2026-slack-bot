@@ -22,7 +22,7 @@ def test_digest_places_japan_first(
     assert payload["blocks"][0]["text"]["text"] == "⚽ 今日のW杯 6/21(日)"
     assert payload["blocks"][0]["text"]["emoji"] is True
     assert payload["blocks"][1]["text"]["text"] == (
-        "🇯🇵 *13:00　日本 vs 🇹🇳 チュニジア*"
+        "🇯🇵 *13:00　日本 vs 🇹🇳 チュニジア* "
         "（グループF 第2節）← *日本戦！*"
     )
     assert payload["blocks"][2] == {"type": "divider"}
