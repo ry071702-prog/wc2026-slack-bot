@@ -1,0 +1,292 @@
+{
+  "537327": {
+    "home": {
+      "fouls": 12,
+      "yellow": 1,
+      "red": 1,
+      "offsides": 1,
+      "corners": 3,
+      "saves": 2,
+      "possession": 60.5,
+      "shots": 16,
+      "shots_on_target": 4,
+      "passes_accurate": 467,
+      "passes": 520
+    },
+    "away": {
+      "fouls": 11,
+      "yellow": 2,
+      "red": 2,
+      "offsides": 1,
+      "corners": 1,
+      "saves": 2,
+      "possession": 39.5,
+      "shots": 3,
+      "shots_on_target": 2,
+      "passes_accurate": 272,
+      "passes": 334
+    },
+    "source": "espn"
+  },
+  "537328": {
+    "home": {
+      "fouls": 9,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 2,
+      "corners": 4,
+      "saves": 3,
+      "possession": 61.5,
+      "shots": 15,
+      "shots_on_target": 6,
+      "passes_accurate": 469,
+      "passes": 541
+    },
+    "away": {
+      "fouls": 16,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 2,
+      "corners": 5,
+      "saves": 4,
+      "possession": 38.5,
+      "shots": 7,
+      "shots_on_target": 4,
+      "passes_accurate": 230,
+      "passes": 327
+    },
+    "source": "espn"
+  },
+  "537333": {
+    "home": {
+      "fouls": 10,
+      "yellow": 2,
+      "red": 0,
+      "offsides": 1,
+      "corners": 9,
+      "saves": 2,
+      "possession": 61.1,
+      "shots": 13,
+      "shots_on_target": 4,
+      "passes_accurate": 310,
+      "passes": 421
+    },
+    "away": {
+      "fouls": 20,
+      "yellow": 3,
+      "red": 0,
+      "offsides": 0,
+      "corners": 4,
+      "saves": 1,
+      "possession": 38.9,
+      "shots": 8,
+      "shots_on_target": 3,
+      "passes_accurate": 172,
+      "passes": 271
+    },
+    "source": "espn"
+  },
+  "537345": {
+    "home": {
+      "fouls": 13,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 2,
+      "corners": 3,
+      "saves": 1,
+      "possession": 65.3,
+      "shots": 16,
+      "shots_on_target": 6,
+      "passes_accurate": 509,
+      "passes": 598
+    },
+    "away": {
+      "fouls": 17,
+      "yellow": 5,
+      "red": 0,
+      "offsides": 1,
+      "corners": 1,
+      "saves": 3,
+      "possession": 34.7,
+      "shots": 9,
+      "shots_on_target": 1,
+      "passes_accurate": 232,
+      "passes": 319
+    },
+    "source": "espn"
+  },
+  "537334": {
+    "home": {
+      "fouls": 12,
+      "yellow": 2,
+      "red": 0,
+      "offsides": 0,
+      "corners": 3,
+      "saves": 5,
+      "possession": 32.0,
+      "shots": 6,
+      "shots_on_target": 3,
+      "passes_accurate": 200,
+      "passes": 278
+    },
+    "away": {
+      "fouls": 11,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 1,
+      "corners": 10,
+      "saves": 3,
+      "possession": 68.0,
+      "shots": 26,
+      "shots_on_target": 7,
+      "passes_accurate": 527,
+      "passes": 576
+    },
+    "source": "espn"
+  },
+  "537339": {
+    "home": {
+      "fouls": 16,
+      "yellow": 2,
+      "red": 0,
+      "offsides": 0,
+      "corners": 6,
+      "saves": 2,
+      "possession": 51.4,
+      "shots": 12,
+      "shots_on_target": 5,
+      "passes_accurate": 449,
+      "passes": 514
+    },
+    "away": {
+      "fouls": 14,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 1,
+      "corners": 2,
+      "saves": 4,
+      "possession": 48.6,
+      "shots": 14,
+      "shots_on_target": 3,
+      "passes_accurate": 419,
+      "passes": 486
+    },
+    "source": "espn"
+  },
+  "537340": {
+    "home": {
+      "fouls": 23,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 3,
+      "corners": 4,
+      "saves": 1,
+      "possession": 53.7,
+      "shots": 15,
+      "shots_on_target": 2,
+      "passes_accurate": 367,
+      "passes": 431
+    },
+    "away": {
+      "fouls": 21,
+      "yellow": 3,
+      "red": 0,
+      "offsides": 1,
+      "corners": 3,
+      "saves": 2,
+      "possession": 46.3,
+      "shots": 9,
+      "shots_on_target": 2,
+      "passes_accurate": 307,
+      "passes": 374
+    },
+    "source": "espn"
+  },
+  "537346": {
+    "home": {
+      "fouls": 12,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 1,
+      "corners": 5,
+      "saves": 8,
+      "possession": 28.4,
+      "shots": 9,
+      "shots_on_target": 4,
+      "passes_accurate": 201,
+      "passes": 271
+    },
+    "away": {
+      "fouls": 4,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 3,
+      "corners": 8,
+      "saves": 2,
+      "possession": 71.6,
+      "shots": 30,
+      "shots_on_target": 8,
+      "passes_accurate": 635,
+      "passes": 704
+    },
+    "source": "espn"
+  },
+  "537351": {
+    "home": {
+      "fouls": 18,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 0,
+      "corners": 8,
+      "saves": 1,
+      "possession": 64.6,
+      "shots": 26,
+      "shots_on_target": 12,
+      "passes_accurate": 554,
+      "passes": 637
+    },
+    "away": {
+      "fouls": 11,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 1,
+      "corners": 1,
+      "saves": 4,
+      "possession": 35.4,
+      "shots": 8,
+      "shots_on_target": 2,
+      "passes_accurate": 282,
+      "passes": 343
+    },
+    "source": "espn"
+  },
+  "537357": {
+    "home": {
+      "fouls": 7,
+      "yellow": 3,
+      "red": 0,
+      "offsides": 1,
+      "corners": 5,
+      "saves": 1,
+      "possession": 59.8,
+      "shots": 10,
+      "shots_on_target": 6,
+      "passes_accurate": 463,
+      "passes": 524
+    },
+    "away": {
+      "fouls": 7,
+      "yellow": 0,
+      "red": 0,
+      "offsides": 0,
+      "corners": 4,
+      "saves": 4,
+      "possession": 40.2,
+      "shots": 10,
+      "shots_on_target": 3,
+      "passes_accurate": 286,
+      "passes": 341
+    },
+    "source": "espn"
+  }
+}
