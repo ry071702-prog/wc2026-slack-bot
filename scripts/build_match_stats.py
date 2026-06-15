@@ -55,7 +55,6 @@ TEAM_ALIASES = {
     "ir iran": "iran",
     "cape verde islands": "cape verde",
     "dr congo": "congo dr",
-    "congo": "congo dr",
     "turkiye": "turkey",
     "cote d'ivoire": "ivory coast",
     "cote d ivoire": "ivory coast",
@@ -105,12 +104,12 @@ def normalize_team(name: str) -> str:
 
 
 def team_matches(name_a: str, name_b: str) -> bool:
-    """表記差を吸収した部分一致 (どちらかがどちらかを含めばOK)。"""
+    """エイリアス解決後の完全一致で判定する。
+    部分一致は Mali↔Somalia / Guinea↔Equatorial Guinea のような誤マッチ
+    (home/away 取り違え) を生むため使わない。表記差は TEAM_ALIASES で吸収する。"""
     a = normalize_team(name_a)
     b = normalize_team(name_b)
-    if not a or not b:
-        return False
-    return a == b or a in b or b in a
+    return bool(a) and a == b
 
 
 def to_number(raw: Any, converter: Callable[[float], Any]) -> Optional[Any]:
