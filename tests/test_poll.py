@@ -111,7 +111,7 @@ def test_japan_opponent(nl_japan: Match, japan_nl: Match) -> None:
 
 def test_japan_poll_text_away_japan(nl_japan: Match) -> None:
     text = japan_poll_text(nl_japan)
-    assert text.startswith("🇯🇵 *日本 vs オランダ* 結果予想！⚽\n")
+    assert text.startswith("🇯🇵 *日本 vs 🇳🇱 オランダ* 結果予想！⚽\n")
     assert "6/15(月) `5:00` KO ｜ グループF 第1節" in text
     assert "🇯🇵 日本が勝つ" in text
     assert "🤝 引き分け" in text
@@ -121,7 +121,7 @@ def test_japan_poll_text_away_japan(nl_japan: Match) -> None:
 
 def test_japan_poll_text_home_japan(japan_nl: Match) -> None:
     text = japan_poll_text(japan_nl)
-    assert text.startswith("🇯🇵 *日本 vs オランダ* 結果予想！⚽\n")
+    assert text.startswith("🇯🇵 *日本 vs 🇳🇱 オランダ* 結果予想！⚽\n")
     assert "🇳🇱 オランダが勝つ" in text
 
 
@@ -137,7 +137,7 @@ def test_japan_poll_result_japan_win(nl_japan: Match) -> None:
         score=MatchScore(home=1, away=2, duration="REGULAR"),
     )
     text = japan_poll_result_text(finished, 12, 3, 5)
-    assert "📊 *みんなの予想結果* （日本 2 - 1 オランダ）" in text
+    assert "📊 *みんなの予想結果* （🇯🇵 日本 2 - 1 🇳🇱 オランダ）" in text
     assert "🇯🇵 日本勝利: 12票 ← 🎯的中！" in text
     assert "🤝 引き分け: 3票\n" in text
     assert "🇳🇱 オランダ勝利: 5票\n" in text
@@ -168,7 +168,7 @@ def test_japan_poll_result_opponent_win(nl_japan: Match) -> None:
     text = japan_poll_result_text(finished, 12, 3, 5)
     assert "🇳🇱 オランダ勝利: 5票 ← 🎯的中！" in text
     assert "日本勝利: 12票 ← 🎯的中！" not in text
-    assert "（日本 0 - 2 オランダ）" in text
+    assert "（🇯🇵 日本 0 - 2 🇳🇱 オランダ）" in text
     assert "的中した5人、おみごと！🎉" in text
 
 
