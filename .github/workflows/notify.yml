@@ -2,7 +2,7 @@ name: World Cup match notifications
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/10 * * 6,7 *"
   workflow_dispatch:
     inputs:
       poll_lead_hours:
@@ -57,8 +57,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if grep -qE "live_now=[1-9]|result=[1-9]" notify.log; then
-            gh workflow run pages.yml
-            echo "pages rebuild dispatched (live/finished matches detected)"
+            # pages dispatch は副作用。GitHub API が一時的に HTTP 500 を返すことが
+            # あるため数回リトライし、最終的に失敗しても notify ジョブは落とさない
+            # (通知本体は成功しているため。次回の実行で再度dispatchされる)。
+            dispatched=0
+            for attempt in 1 2 3; do
+              if gh workflow run pages.yml; then
+                echo "pages rebuild dispatched (live/finished matches detected, attempt ${attempt})"
+                dispatched=1
+                break
+              fi
+              echo "pages dispatch attempt ${attempt} failed; retrying in 5s..."
+              sleep 5
+            done
+            if [ "$dispatched" -eq 0 ]; then
+              echo "::warning::pages rebuild dispatch failed after retries (non-fatal); next run will retry"
+            fi
           else
             echo "no live matches; skip rebuild"
           fi
@@ -70,8 +84,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "$(date -u +%M)" -lt 5 ]; then
-            gh workflow run enrich.yml
-            echo "enrich dispatched (hourly)"
+            # こちらも副作用 dispatch。失敗しても notify ジョブは落とさない。
+            if gh workflow run enrich.yml; then
+              echo "enrich dispatched (hourly)"
+            else
+              echo "::warning::enrich dispatch failed (non-fatal)"
+            fi
           else
             echo "not the hourly slot; skip"
           fi
