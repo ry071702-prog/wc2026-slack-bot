@@ -31,7 +31,10 @@ class FootballDataProvider(Provider):
         }
         headers = {"X-Auth-Token": self.api_key}
 
-        for attempt in range(2):
+        # 一時的な SSL/接続切断 (SSLEOFError, RemoteDisconnected 等) で
+        # スケジュール実行が落ちないよう、指数バックオフで複数回リトライする。
+        max_attempts = 4
+        for attempt in range(max_attempts):
             try:
                 response = self.session.get(
                     self.BASE_URL,
@@ -48,7 +51,7 @@ class FootballDataProvider(Provider):
                 )
                 return [self._parse_match(item) for item in matches]
             except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
-                if attempt == 1:
+                if attempt == max_attempts - 1:
                     raise RuntimeError(
                         "football-data.org request failed after retry"
                     ) from exc

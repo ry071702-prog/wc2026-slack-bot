@@ -10,8 +10,8 @@ on:
       - "src/**"
       - "data/**"
   schedule:
-    - cron: "0 21 * * *"
-    - cron: "0 9 * * *"
+    - cron: "0 21 * 6,7 *"
+    - cron: "0 9 * 6,7 *"
   workflow_dispatch:
 
 permissions:
@@ -21,7 +21,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # 進行中の Pages デプロイをキャンセルせず完了させる (キャンセルすると
+  # 後続が "in progress deployment" HTTP 400 で落ちて失敗通知が出るため)
+  cancel-in-progress: false
 
 jobs:
   deploy:
