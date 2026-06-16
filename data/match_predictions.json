@@ -28,10 +28,17 @@
     "final": true
   },
   "537391": {
-    "home": 1,
+    "home": 2,
     "draw": 0,
     "away": 0,
-    "total": 1,
+    "total": 2,
+    "final": true
+  },
+  "537392": {
+    "home": 0,
+    "draw": 0,
+    "away": 0,
+    "total": 0,
     "final": false
   }
 }
