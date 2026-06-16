@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -137,14 +138,25 @@ def find_event(
 def fetch_events_for_day(
     session: requests.Session, day: date
 ) -> list[dict[str, Any]]:
-    response = session.get(
-        EVENTSDAY_URL,
-        params={"d": day.isoformat(), "s": "Soccer"},
-        timeout=15,
-    )
-    response.raise_for_status()
-    events = response.json().get("events") or []
-    return events if isinstance(events, list) else []
+    # TheSportsDB 無料API は一時的に 503 を返すことがある。enrich ジョブ全体を
+    # 落とさないよう、数回リトライしても駄目ならその日はスキップ ([] を返す)。
+    max_attempts = 3
+    for attempt in range(max_attempts):
+        try:
+            response = session.get(
+                EVENTSDAY_URL,
+                params={"d": day.isoformat(), "s": "Soccer"},
+                timeout=15,
+            )
+            response.raise_for_status()
+            events = response.json().get("events") or []
+            return events if isinstance(events, list) else []
+        except (requests.RequestException, ValueError) as exc:
+            if attempt == max_attempts - 1:
+                print(f"TheSportsDB eventsday failed for {day}, skipping: {exc}")
+                return []
+            time.sleep(2**attempt)
+    return []
 
 
 def candidate_days(match: Match) -> list[date]:
