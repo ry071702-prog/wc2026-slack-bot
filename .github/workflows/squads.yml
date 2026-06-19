@@ -50,7 +50,9 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
-          # GITHUB_TOKENによるpushはpages.ymlを自動起動しないため明示的にdispatchする
-          gh workflow run pages.yml
+          # GITHUB_TOKENによるpushはpages.ymlを自動起動しないため明示的にdispatchする。
+          # dispatch は副作用で、GitHub API が一時的に HTTP 500 を返すことがあるため
+          # 失敗しても squads ジョブ (データ commit/push は成功済み) は落とさない。
+          gh workflow run pages.yml || echo "::warning::pages dispatch failed (non-fatal); next run will retry"
         env:
           GH_TOKEN: ${{ github.token }}
