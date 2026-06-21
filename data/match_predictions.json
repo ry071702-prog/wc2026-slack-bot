@@ -165,6 +165,6 @@
     "draw": 0,
     "away": 6,
     "total": 6,
-    "final": false
+    "final": true
   }
 }
