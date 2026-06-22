@@ -1129,5 +1129,34 @@
       "passes": 277
     },
     "source": "espn"
+  },
+  "537366": {
+    "home": {
+      "fouls": 14,
+      "yellow": 2,
+      "red": 0,
+      "offsides": 3,
+      "corners": 4,
+      "saves": 4,
+      "possession": 44.3,
+      "shots": 11,
+      "shots_on_target": 5,
+      "passes_accurate": 337,
+      "passes": 420
+    },
+    "away": {
+      "fouls": 8,
+      "yellow": 1,
+      "red": 0,
+      "offsides": 0,
+      "corners": 4,
+      "saves": 4,
+      "possession": 55.7,
+      "shots": 19,
+      "shots_on_target": 7,
+      "passes_accurate": 462,
+      "passes": 528
+    },
+    "source": "espn"
   }
 }

@@ -193,6 +193,6 @@
     "draw": 0,
     "away": 0,
     "total": 1,
-    "final": false
+    "final": true
   }
 }
