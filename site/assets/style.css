@@ -3205,3 +3205,345 @@ a.match-card {
 .hmc-japan-link:focus-visible {
   text-decoration: underline;
 }
+
+/* =========================================================
+   決勝トーナメント表 (bracket.html)
+   ========================================================= */
+.bracket-rounds {
+  display: flex;
+  gap: 8px;
+  margin: 22px 0 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bracket-rounds::-webkit-scrollbar {
+  display: none;
+}
+
+.bracket-round-tab {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: var(--font-base);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.bracket-round-tab:hover,
+.bracket-round-tab:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--border-green);
+  background: var(--bg-card-hover);
+}
+
+.bracket-scroll {
+  overflow-x: auto;
+  padding-bottom: 14px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.bracket-track {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  min-width: min-content;
+}
+
+.bracket-col {
+  flex: 0 0 248px;
+  width: 248px;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.bracket-col-head {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 4px;
+  margin-bottom: 6px;
+  background: linear-gradient(180deg, var(--bg-primary) 70%, transparent);
+}
+
+.bracket-col-title {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.bracket-col-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bracket-col-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 12px;
+  flex: 1;
+}
+
+.bracket-match {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 13px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.bracket-match {
+  transition: border-color 0.18s, transform 0.18s, background 0.18s;
+}
+
+a.bracket-match:hover,
+a.bracket-match:focus-visible {
+  border-color: var(--border-green);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.bracket-match.is-japan {
+  border-color: var(--border-green);
+  box-shadow: inset 0 0 0 1px rgba(46, 224, 106, 0.25);
+}
+
+.bracket-match.is-live {
+  border-color: rgba(255, 59, 92, 0.5);
+}
+
+.bracket-match-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bracket-no {
+  font-family: var(--font-base);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--accent-lime);
+}
+
+.bracket-when {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-right: auto;
+}
+
+.bracket-sides {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bracket-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.bracket-side.is-slot {
+  color: var(--text-muted);
+}
+
+.bracket-side.is-winner {
+  background: rgba(46, 224, 106, 0.12);
+}
+
+.bracket-side.is-winner .bracket-team {
+  color: var(--accent-green);
+  font-weight: 900;
+}
+
+.bracket-flag {
+  font-size: 17px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.bracket-side.is-slot .bracket-flag {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.bracket-team {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bracket-side.is-slot .bracket-team {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.bracket-score {
+  flex: 0 0 auto;
+  font-family: var(--font-base);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--text-primary);
+  min-width: 14px;
+  text-align: right;
+}
+
+.bracket-venue {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.bracket-venue-icon svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+  color: var(--text-muted);
+}
+
+.bracket-venue-name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bracket-venue-city {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bracket-venue-city::before {
+  content: "・";
+  color: var(--text-muted);
+}
+
+.bracket-third {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.bracket-third-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--accent-gold, #e6c76a);
+  margin-bottom: 8px;
+}
+
+@media (max-width: 720px) {
+  .bracket-col {
+    flex-basis: 78vw;
+    width: 78vw;
+    max-width: 320px;
+  }
+  .bracket-col-body {
+    justify-content: flex-start;
+  }
+}
+
+/* トップページ: 決勝トーナメント特集 */
+.bracket-feature {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(46, 224, 106, 0.1), transparent 60%),
+    var(--bg-card);
+  border-color: var(--border-green);
+}
+
+.bracket-feature-head .sh-title {
+  margin: 6px 0 4px;
+}
+
+.bracket-feature-rounds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.bracket-feature-rounds::-webkit-scrollbar {
+  display: none;
+}
+
+.bracket-feature-round {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+}
+
+.bracket-feature-round.is-final {
+  border-color: var(--border-green);
+  background: rgba(46, 224, 106, 0.1);
+}
+
+.bfr-name {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.bfr-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bracket-feature .neon-btn {
+  align-self: flex-start;
+}
+
+@media (max-width: 600px) {
+  .bracket-feature .neon-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+}

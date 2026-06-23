@@ -1,0 +1,620 @@
+{
+  "rounds": [
+    "LAST_32",
+    "LAST_16",
+    "QUARTER_FINALS",
+    "SEMI_FINALS",
+    "THIRD_PLACE",
+    "FINAL"
+  ],
+  "matches": [
+    {
+      "match_no": 73,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-28",
+      "date_jst": "2026-06-29",
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles",
+      "city_ja": "ロサンゼルス",
+      "home": {
+        "type": "group",
+        "label": "A組 2位"
+      },
+      "away": {
+        "type": "group",
+        "label": "B組 2位"
+      }
+    },
+    {
+      "match_no": 74,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-29",
+      "date_jst": "2026-06-30",
+      "venue": "Gillette Stadium",
+      "city": "Boston",
+      "city_ja": "ボストン",
+      "home": {
+        "type": "group",
+        "label": "E組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(A/B/C/D/F組)"
+      }
+    },
+    {
+      "match_no": 75,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-29",
+      "date_jst": "2026-06-30",
+      "venue": "Estadio BBVA",
+      "city": "Monterrey",
+      "city_ja": "モンテレイ",
+      "home": {
+        "type": "group",
+        "label": "F組 1位"
+      },
+      "away": {
+        "type": "group",
+        "label": "C組 2位"
+      }
+    },
+    {
+      "match_no": 76,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-29",
+      "date_jst": "2026-06-30",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "city_ja": "ヒューストン",
+      "home": {
+        "type": "group",
+        "label": "C組 1位"
+      },
+      "away": {
+        "type": "group",
+        "label": "F組 2位"
+      }
+    },
+    {
+      "match_no": 77,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-30",
+      "date_jst": "2026-07-01",
+      "venue": "MetLife Stadium",
+      "city": "New York/New Jersey",
+      "city_ja": "ニューヨーク",
+      "home": {
+        "type": "group",
+        "label": "I組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(C/D/F/G/H組)"
+      }
+    },
+    {
+      "match_no": 78,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-30",
+      "date_jst": "2026-07-01",
+      "venue": "AT&T Stadium",
+      "city": "Dallas",
+      "city_ja": "ダラス",
+      "home": {
+        "type": "group",
+        "label": "E組 2位"
+      },
+      "away": {
+        "type": "group",
+        "label": "I組 2位"
+      }
+    },
+    {
+      "match_no": 79,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-06-30",
+      "date_jst": "2026-07-01",
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "city_ja": "メキシコシティ",
+      "home": {
+        "type": "group",
+        "label": "A組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(C/E/F/H/I組)"
+      }
+    },
+    {
+      "match_no": 80,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-01",
+      "date_jst": "2026-07-02",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "city_ja": "アトランタ",
+      "home": {
+        "type": "group",
+        "label": "L組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(E/H/I/J/K組)"
+      }
+    },
+    {
+      "match_no": 81,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-01",
+      "date_jst": "2026-07-02",
+      "venue": "Levi's Stadium",
+      "city": "San Francisco Bay Area",
+      "city_ja": "サンフランシスコ",
+      "home": {
+        "type": "group",
+        "label": "D組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(B/E/F/I/J組)"
+      }
+    },
+    {
+      "match_no": 82,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-01",
+      "date_jst": "2026-07-02",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "city_ja": "シアトル",
+      "home": {
+        "type": "group",
+        "label": "G組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(A/E/H/I/J組)"
+      }
+    },
+    {
+      "match_no": 83,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-02",
+      "date_jst": "2026-07-03",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "city_ja": "トロント",
+      "home": {
+        "type": "group",
+        "label": "K組 2位"
+      },
+      "away": {
+        "type": "group",
+        "label": "L組 2位"
+      }
+    },
+    {
+      "match_no": 84,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-02",
+      "date_jst": "2026-07-03",
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles",
+      "city_ja": "ロサンゼルス",
+      "home": {
+        "type": "group",
+        "label": "H組 1位"
+      },
+      "away": {
+        "type": "group",
+        "label": "J組 2位"
+      }
+    },
+    {
+      "match_no": 85,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-02",
+      "date_jst": "2026-07-03",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "city_ja": "バンクーバー",
+      "home": {
+        "type": "group",
+        "label": "B組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(E/F/G/I/J組)"
+      }
+    },
+    {
+      "match_no": 86,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-03",
+      "date_jst": "2026-07-04",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami",
+      "city_ja": "マイアミ",
+      "home": {
+        "type": "group",
+        "label": "J組 1位"
+      },
+      "away": {
+        "type": "group",
+        "label": "H組 2位"
+      }
+    },
+    {
+      "match_no": 87,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-03",
+      "date_jst": "2026-07-04",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "city_ja": "カンザスシティ",
+      "home": {
+        "type": "group",
+        "label": "K組 1位"
+      },
+      "away": {
+        "type": "third",
+        "label": "3位(D/E/I/J/L組)"
+      }
+    },
+    {
+      "match_no": 88,
+      "stage": "LAST_32",
+      "stage_ja": "ラウンド32",
+      "date_local": "2026-07-03",
+      "date_jst": "2026-07-04",
+      "venue": "AT&T Stadium",
+      "city": "Dallas",
+      "city_ja": "ダラス",
+      "home": {
+        "type": "group",
+        "label": "D組 2位"
+      },
+      "away": {
+        "type": "group",
+        "label": "G組 2位"
+      }
+    },
+    {
+      "match_no": 89,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-04",
+      "date_jst": "2026-07-05",
+      "venue": "Lincoln Financial Field",
+      "city": "Philadelphia",
+      "city_ja": "フィラデルフィア",
+      "home": {
+        "type": "winner",
+        "from": 74,
+        "label": "M74 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 77,
+        "label": "M77 勝者"
+      }
+    },
+    {
+      "match_no": 90,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-04",
+      "date_jst": "2026-07-05",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "city_ja": "ヒューストン",
+      "home": {
+        "type": "winner",
+        "from": 73,
+        "label": "M73 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 75,
+        "label": "M75 勝者"
+      }
+    },
+    {
+      "match_no": 91,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-05",
+      "date_jst": "2026-07-06",
+      "venue": "MetLife Stadium",
+      "city": "New York/New Jersey",
+      "city_ja": "ニューヨーク",
+      "home": {
+        "type": "winner",
+        "from": 76,
+        "label": "M76 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 78,
+        "label": "M78 勝者"
+      }
+    },
+    {
+      "match_no": 92,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-05",
+      "date_jst": "2026-07-06",
+      "venue": "Estadio Azteca",
+      "city": "Mexico City",
+      "city_ja": "メキシコシティ",
+      "home": {
+        "type": "winner",
+        "from": 79,
+        "label": "M79 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 80,
+        "label": "M80 勝者"
+      }
+    },
+    {
+      "match_no": 93,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-06",
+      "date_jst": "2026-07-07",
+      "venue": "AT&T Stadium",
+      "city": "Dallas",
+      "city_ja": "ダラス",
+      "home": {
+        "type": "winner",
+        "from": 83,
+        "label": "M83 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 84,
+        "label": "M84 勝者"
+      }
+    },
+    {
+      "match_no": 94,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-06",
+      "date_jst": "2026-07-07",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "city_ja": "シアトル",
+      "home": {
+        "type": "winner",
+        "from": 81,
+        "label": "M81 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 82,
+        "label": "M82 勝者"
+      }
+    },
+    {
+      "match_no": 95,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-07",
+      "date_jst": "2026-07-08",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "city_ja": "アトランタ",
+      "home": {
+        "type": "winner",
+        "from": 86,
+        "label": "M86 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 88,
+        "label": "M88 勝者"
+      }
+    },
+    {
+      "match_no": 96,
+      "stage": "LAST_16",
+      "stage_ja": "ラウンド16",
+      "date_local": "2026-07-07",
+      "date_jst": "2026-07-08",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "city_ja": "バンクーバー",
+      "home": {
+        "type": "winner",
+        "from": 85,
+        "label": "M85 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 87,
+        "label": "M87 勝者"
+      }
+    },
+    {
+      "match_no": 97,
+      "stage": "QUARTER_FINALS",
+      "stage_ja": "準々決勝",
+      "date_local": "2026-07-09",
+      "date_jst": "2026-07-10",
+      "venue": "Gillette Stadium",
+      "city": "Boston",
+      "city_ja": "ボストン",
+      "home": {
+        "type": "winner",
+        "from": 89,
+        "label": "M89 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 90,
+        "label": "M90 勝者"
+      }
+    },
+    {
+      "match_no": 98,
+      "stage": "QUARTER_FINALS",
+      "stage_ja": "準々決勝",
+      "date_local": "2026-07-10",
+      "date_jst": "2026-07-11",
+      "venue": "SoFi Stadium",
+      "city": "Los Angeles",
+      "city_ja": "ロサンゼルス",
+      "home": {
+        "type": "winner",
+        "from": 93,
+        "label": "M93 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 94,
+        "label": "M94 勝者"
+      }
+    },
+    {
+      "match_no": 99,
+      "stage": "QUARTER_FINALS",
+      "stage_ja": "準々決勝",
+      "date_local": "2026-07-11",
+      "date_jst": "2026-07-12",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami",
+      "city_ja": "マイアミ",
+      "home": {
+        "type": "winner",
+        "from": 91,
+        "label": "M91 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 92,
+        "label": "M92 勝者"
+      }
+    },
+    {
+      "match_no": 100,
+      "stage": "QUARTER_FINALS",
+      "stage_ja": "準々決勝",
+      "date_local": "2026-07-11",
+      "date_jst": "2026-07-12",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "city_ja": "カンザスシティ",
+      "home": {
+        "type": "winner",
+        "from": 95,
+        "label": "M95 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 96,
+        "label": "M96 勝者"
+      }
+    },
+    {
+      "match_no": 101,
+      "stage": "SEMI_FINALS",
+      "stage_ja": "準決勝",
+      "date_local": "2026-07-14",
+      "date_jst": "2026-07-15",
+      "venue": "AT&T Stadium",
+      "city": "Dallas",
+      "city_ja": "ダラス",
+      "home": {
+        "type": "winner",
+        "from": 97,
+        "label": "M97 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 98,
+        "label": "M98 勝者"
+      }
+    },
+    {
+      "match_no": 102,
+      "stage": "SEMI_FINALS",
+      "stage_ja": "準決勝",
+      "date_local": "2026-07-15",
+      "date_jst": "2026-07-16",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "city_ja": "アトランタ",
+      "home": {
+        "type": "winner",
+        "from": 99,
+        "label": "M99 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 100,
+        "label": "M100 勝者"
+      }
+    },
+    {
+      "match_no": 103,
+      "stage": "THIRD_PLACE",
+      "stage_ja": "3位決定戦",
+      "date_local": "2026-07-18",
+      "date_jst": "2026-07-19",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami",
+      "city_ja": "マイアミ",
+      "home": {
+        "type": "loser",
+        "from": 101,
+        "label": "M101 敗者"
+      },
+      "away": {
+        "type": "loser",
+        "from": 102,
+        "label": "M102 敗者"
+      }
+    },
+    {
+      "match_no": 104,
+      "stage": "FINAL",
+      "stage_ja": "決勝",
+      "date_local": "2026-07-19",
+      "date_jst": "2026-07-20",
+      "venue": "MetLife Stadium",
+      "city": "New York/New Jersey",
+      "city_ja": "ニューヨーク",
+      "home": {
+        "type": "winner",
+        "from": 101,
+        "label": "M101 勝者"
+      },
+      "away": {
+        "type": "winner",
+        "from": 102,
+        "label": "M102 勝者"
+      }
+    }
+  ]
+}
