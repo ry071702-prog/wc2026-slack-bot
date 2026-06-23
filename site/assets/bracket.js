@@ -77,10 +77,46 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
     });
-    return {
-      groupRanks,
-      thirdAssign: assignThirds(thirdSlots, qualifyingThirds),
-    };
+    const thirdAssign = assignThirds(thirdSlots, qualifyingThirds);
+
+    // 全体で同じ国が二度出ないよう、確定チームを優先しつつ
+    // 試合番号順に重複排除して各スロットの予測チームを確定させる。
+    // (確定チームとスロット対応のズレ等で同じ国が複数枠に出るのを防ぐ)
+    const claimed = new Set();
+    matches.forEach((node) => {
+      if (node.home_team) {
+        claimed.add(node.home_team);
+      }
+      if (node.away_team) {
+        claimed.add(node.away_team);
+      }
+    });
+    const resolved = new Map();
+    [...matches]
+      .sort((a, b) => (a.match_no || 0) - (b.match_no || 0))
+      .forEach((node) => {
+        ["home", "away"].forEach((which) => {
+          if (node[`${which}_team`]) {
+            return; // 確定済みは予測しない
+          }
+          const slot = node[which];
+          if (!slot) {
+            return;
+          }
+          let row = null;
+          if (slot.type === "group" && slot.group && slot.rank) {
+            row = (groupRanks.get(slot.group) || [])[slot.rank === "W" ? 0 : 1] || null;
+          } else if (slot.type === "third") {
+            row = thirdAssign.get(`${node.match_no}.${which}`) || null;
+          }
+          if (row && row.team && !claimed.has(row.team)) {
+            claimed.add(row.team);
+            resolved.set(`${node.match_no}.${which}`, row);
+          }
+        });
+      });
+
+    return { resolved };
   }
 
   // スロット(候補グループを持つ) と 3位通過チーム の二部マッチング (Kuhn法)
@@ -119,26 +155,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return map;
   }
 
-  // node の home/away スロットに対応する予測チーム行を返す (R32 のみ)
+  // node の home/away スロットに対応する予測チーム行を返す (重複排除済み・R32 のみ)
   function projectionFor(node, which) {
     if (!proj) {
       return null;
     }
-    const slot = node[which];
-    if (!slot) {
-      return null;
-    }
-    if (slot.type === "group" && slot.group && slot.rank) {
-      const rows = proj.groupRanks.get(slot.group);
-      if (!rows) {
-        return null;
-      }
-      return rows[slot.rank === "W" ? 0 : 1] || null;
-    }
-    if (slot.type === "third") {
-      return proj.thirdAssign.get(`${node.match_no}.${which}`) || null;
-    }
-    return null;
+    return proj.resolved.get(`${node.match_no}.${which}`) || null;
   }
 
   function render(data) {
