@@ -21,18 +21,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     { stage: "LAST_16", label: "ラウンド16", nos: [91, 92, 95, 96] },
     { stage: "LAST_32", label: "ラウンド32", nos: [76, 78, 79, 80, 86, 88, 85, 87] },
   ];
-  // ナビ用 (左列 + 中央決勝)
+  // ナビ用タブ (PC=該当列へスクロール / スマホ=該当ラウンドへ切替)
   const ROUND_TABS = [
-    { label: "ラウンド32", target: "bk-left-LAST_32" },
-    { label: "ラウンド16", target: "bk-left-LAST_16" },
-    { label: "準々決勝", target: "bk-left-QUARTER_FINALS" },
-    { label: "準決勝", target: "bk-left-SEMI_FINALS" },
-    { label: "決勝", target: "bk-center" },
+    { label: "ラウンド32", target: "bk-left-LAST_32", stage: "LAST_32" },
+    { label: "ラウンド16", target: "bk-left-LAST_16", stage: "LAST_16" },
+    { label: "準々決勝", target: "bk-left-QUARTER_FINALS", stage: "QUARTER_FINALS" },
+    { label: "準決勝", target: "bk-left-SEMI_FINALS", stage: "SEMI_FINALS" },
+    { label: "決勝", target: "bk-center", stage: "FINAL" },
+  ];
+  // スマホ用: 1ラウンドずつ縦リスト表示 (決勝は3位決定戦も併記)
+  const MOBILE_STAGES = [
+    { stage: "LAST_32", label: "ラウンド32" },
+    { stage: "LAST_16", label: "ラウンド16" },
+    { stage: "QUARTER_FINALS", label: "準々決勝" },
+    { stage: "SEMI_FINALS", label: "準決勝" },
+    { stage: "FINAL", label: "決勝", extra: ["THIRD_PLACE"] },
   ];
 
   let nodeByNo = new Map();
+  let allMatches = [];
   let scheduleData = null;
   let proj = null;
+  let mobileRounds = new Map();
+  let roundTabButtons = [];
 
   try {
     const [bracket, schedule] = await Promise.all([
@@ -152,6 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
       return;
     }
+    allMatches = matches;
     nodeByNo = new Map(matches.map((node) => [node.match_no, node]));
     proj = buildProjection(scheduleData, matches);
 
@@ -164,13 +176,67 @@ document.addEventListener("DOMContentLoaded", async () => {
       buildHalf(RIGHT_COLS, "right"),
     );
 
-    container.replaceChildren(tree);
-    // 初期表示は中央(決勝)が見えるようスクロール位置を寄せる
-    requestAnimationFrame(() => {
-      container.scrollLeft = Math.max(
-        0,
-        (container.scrollWidth - container.clientWidth) / 2,
+    container.replaceChildren(tree, buildMobile());
+
+    // PC は初期表示で中央(決勝)が見えるようスクロール位置を寄せる
+    if (window.matchMedia("(min-width: 761px)").matches) {
+      requestAnimationFrame(() => {
+        container.scrollLeft = Math.max(
+          0,
+          (container.scrollWidth - container.clientWidth) / 2,
+        );
+      });
+    }
+  }
+
+  function matchesByStages(stages) {
+    return allMatches
+      .filter((node) => stages.includes(node.stage))
+      .sort((a, b) => (a.match_no || 0) - (b.match_no || 0));
+  }
+
+  // スマホ用: ラウンドごとの縦リスト (タブで1ラウンドずつ表示)
+  function buildMobile() {
+    const wrap = app.element("div", "bracket-mobile");
+    mobileRounds = new Map();
+    MOBILE_STAGES.forEach((round, index) => {
+      const section = app.element(
+        "div",
+        `bracket-mobile-round${index === 0 ? " is-active" : ""}`,
       );
+      const stages = [round.stage].concat(round.extra || []);
+      const nodes = matchesByStages(stages);
+
+      const head = app.element("div", "bracket-mobile-head");
+      head.append(app.element("span", "bk-col-title", round.label));
+      const range = dateRangeOf(nodes.map((node) => node.match_no));
+      if (range) {
+        head.append(app.element("span", "bk-col-date", range));
+      }
+      section.append(head);
+
+      const list = app.element("div", "bracket-mobile-list");
+      nodes.forEach((node) => {
+        if (node.stage === "THIRD_PLACE") {
+          list.append(
+            app.element("span", "bracket-mobile-3rd-tag", "3位決定戦"),
+          );
+        }
+        list.append(buildMatchCell(node));
+      });
+      section.append(list);
+      wrap.append(section);
+      mobileRounds.set(round.stage, section);
+    });
+    return wrap;
+  }
+
+  function setMobileRound(stage, activeButton) {
+    mobileRounds.forEach((section, key) => {
+      section.classList.toggle("is-active", key === stage);
+    });
+    roundTabButtons.forEach((button) => {
+      button.classList.toggle("is-active", button === activeButton);
     });
   }
 
@@ -257,10 +323,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!roundsNav) {
       return;
     }
-    const buttons = ROUND_TABS.map((tab) => {
-      const btn = app.element("button", "bracket-round-tab", tab.label);
+    const buttons = ROUND_TABS.map((tab, index) => {
+      const btn = app.element(
+        "button",
+        `bracket-round-tab${index === 0 ? " is-active" : ""}`,
+        tab.label,
+      );
       btn.type = "button";
       btn.addEventListener("click", () => {
+        // スマホ: 該当ラウンドへ切替
+        setMobileRound(tab.stage, btn);
+        // PC: 該当列へスクロール
         const target = document.getElementById(tab.target);
         if (target) {
           target.scrollIntoView({
@@ -272,6 +345,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
       return btn;
     });
+    roundTabButtons = buttons;
     roundsNav.replaceChildren(...buttons);
   }
 
@@ -305,9 +379,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         provisional: true,
         name: projected.team_ja || projected.team,
         flag: app.flagEmoji(projected.team),
+        pos: positionLabel(slot, projected),
       };
     }
     return { determined: false, name: slot.label || "未定", flag: "" };
+  }
+
+  // 予測チームが「何組の何位か」のラベル (例: E組1位 / C組3位)
+  function positionLabel(slot, projected) {
+    if (slot.type === "group" && slot.group) {
+      return `${slot.group}組${slot.rank === "W" ? "1" : "2"}位`;
+    }
+    if (slot.type === "third") {
+      const letter = String(projected.group || "").split("_")[1] || projected.group;
+      return letter ? `${letter}組3位` : "3位";
+    }
+    return "";
   }
 
   function winnerSide(node) {
@@ -353,10 +440,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const row = app.element("div", classes.join(" "));
     const flag = app.element("span", "bracket-flag", info.flag || "•");
     flag.setAttribute("aria-hidden", "true");
-    row.append(flag, app.element("span", "bracket-team", info.name));
+
+    const text = app.element("div", "bracket-side-text");
+    text.append(app.element("span", "bracket-team", info.name));
     if (info.provisional) {
-      row.append(app.element("span", "bracket-proj-tag", "予測"));
+      const meta = app.element("div", "bracket-proj-meta");
+      if (info.pos) {
+        meta.append(app.element("span", "bracket-proj-pos", info.pos));
+      }
+      meta.append(app.element("span", "bracket-proj-tag", "予測"));
+      text.append(meta);
     }
+    row.append(flag, text);
+
     const score = scoreFor(node, which);
     if (score !== "") {
       row.append(app.element("span", "bracket-score", score));
