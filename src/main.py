@@ -1,15 +1,22 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Sequence
 
 from src.flags import opponent_reaction
-from src.messages import japan_opponent, japan_poll_reactions, poll_outcome
+from src.messages import (
+    MatchContext,
+    japan_opponent,
+    japan_poll_reactions,
+    poll_outcome,
+)
 from src.providers.base import JST, Match, Provider
 from src.providers.football_data import FootballDataProvider
+from src.standings import compute_group_positions
 from src.slack import (
     SlackBotClient,
     SlackSender,
@@ -26,6 +33,10 @@ from src.state import NotificationState, StateStore
 POLL_MAX_WINNER_NAMES = 30
 TOURNAMENT_START_UTC = datetime(2026, 6, 11, tzinfo=timezone.utc)
 TOURNAMENT_END_UTC = datetime(2026, 7, 21, tzinfo=timezone.utc)
+# グループステージの日程 (決勝T通知で「何位通過」を出すための順位計算に使う)
+GROUP_STAGE_START = date(2026, 6, 11)
+GROUP_STAGE_END = date(2026, 6, 27)
+FIFA_RANKINGS_PATH = Path("data/fifa_rankings.json")
 DEFAULT_STATE_PATH = Path("state/notified.json")
 MAX_RESULTS_PER_RUN = 10
 DEFAULT_QUIET_HOURS = "01:00-06:30"
@@ -167,6 +178,31 @@ def utc_query_dates_for_jst_day(day: date) -> tuple[date, date]:
     )
 
 
+def load_fifa_ranks(path: Path = FIFA_RANKINGS_PATH) -> dict[str, int]:
+    """data/fifa_rankings.json から {チーム英語名: ランク} を読む。失敗時は空。"""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    ranks = payload.get("ranks", {}) if isinstance(payload, dict) else {}
+    return {str(team): int(rank) for team, rank in ranks.items()}
+
+
+def build_match_context(
+    provider: Provider,
+    prematch_matches: list[Match],
+) -> MatchContext:
+    """prematch 強化用の context を組み立てる。
+    FIFAランクは常時。組順位は決勝T (グループ戦以外) の試合がある時だけ
+    グループ戦結果を取得して計算する (余分な API 呼び出しを避ける)。"""
+    fifa_ranks = load_fifa_ranks()
+    group_positions: dict[str, tuple[str, int]] = {}
+    if any(match.stage != "GROUP_STAGE" for match in prematch_matches):
+        group_matches = provider.fetch_matches(GROUP_STAGE_START, GROUP_STAGE_END)
+        group_positions = compute_group_positions(group_matches)
+    return MatchContext(fifa_ranks=fifa_ranks, group_positions=group_positions)
+
+
 def run_notify(
     provider: Provider,
     slack: SlackSender,
@@ -220,9 +256,13 @@ def run_notify(
         f"live_now={live_now}"
     )
 
+    context = build_match_context(provider, prematch_matches) if prematch_matches else None
+
     for match in prematch_matches:
         image_block = _matchup_image_block(slack, match)
-        payload = build_prematch_payload(match, mention_japan, image_block=image_block)
+        payload = build_prematch_payload(
+            match, mention_japan, image_block=image_block, context=context
+        )
 
         if _supports_reactions(slack):
             response = slack.post_message(payload)

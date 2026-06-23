@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from datetime import date
+from datetime import date, datetime, timezone
 
-from src.messages import prematch_text, result_text
+from src.messages import MatchContext, prematch_text, result_text
 from src.providers.base import Match, MatchScore
 from src.slack import (
     build_digest_payload,
@@ -46,6 +46,54 @@ def test_prematch_japan_with_mention(japan_match: Match) -> None:
     assert payload["blocks"][2]["elements"][0]["text"] == (
         "📺 ABEMA de DAZN / DAZN ／ 地上波（NHK・日テレ）"
     )
+
+
+def _knockout_match(home: str, away: str) -> Match:
+    return Match(
+        id=99,
+        utc_kickoff=datetime(2026, 6, 29, 19, 0, tzinfo=timezone.utc),
+        home=home,
+        away=away,
+        stage="LAST_32",
+        group=None,
+        matchday=None,
+        status="TIMED",
+        score=MatchScore(),
+    )
+
+
+def test_prematch_knockout_context_adds_rank_position_and_favorite() -> None:
+    match = _knockout_match("Germany", "Spain")
+    context = MatchContext(
+        fifa_ranks={"Germany": 10, "Spain": 2},
+        group_positions={"Germany": ("E", 1), "Spain": ("C", 2)},
+    )
+
+    text = prematch_text(match, context=context)
+
+    assert ">🇩🇪 ドイツ ・ FIFA 10位 ・ E組1位通過" in text
+    assert "FIFA 2位 ・ C組2位通過" in text
+    # ランク差 8 (>3) なので「やや優勢」、格上のスペインが優勢
+    assert "スペイン やや優勢（FIFA 2位 vs 10位）" in text
+
+
+def test_prematch_context_close_ranks_reported_as_even() -> None:
+    match = _knockout_match("Morocco", "Germany")
+    context = MatchContext(fifa_ranks={"Morocco": 7, "Germany": 10})
+
+    text = prematch_text(match, context=context)
+
+    # ランク差 3 以内は「互角の対戦」
+    assert "互角の対戦（FIFA 7位 vs 10位）" in text
+    assert "やや優勢" not in text
+
+
+def test_prematch_without_context_is_unchanged(regular_match: Match) -> None:
+    assert prematch_text(regular_match) == prematch_text(
+        regular_match, context=None
+    )
+    # context が無ければ追記行は付かない
+    assert "FIFA" not in prematch_text(regular_match)
 
 
 def test_prematch_regular_match_has_no_mention(

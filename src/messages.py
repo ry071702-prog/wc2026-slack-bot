@@ -1,10 +1,23 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from datetime import date
 from typing import Optional
 
 from src.flags import opponent_flag, opponent_reaction
 from src.providers.base import Match
+
+
+@dataclass(frozen=True)
+class MatchContext:
+    """prematch メッセージ強化用の付随情報。
+
+    fifa_ranks: チーム英語名 -> FIFAランク。
+    group_positions: チーム英語名 -> (組レター, 順位)。決勝T専用 (何位通過か)。
+    """
+
+    fifa_ranks: dict[str, int] = field(default_factory=dict)
+    group_positions: dict[str, tuple[str, int]] = field(default_factory=dict)
 
 TEAM_NAMES = {
     "Algeria": "アルジェリア",
@@ -172,8 +185,13 @@ def digest_match_line(match: Match) -> str:
     return f"`{kickoff}`　{card}（{stage}）{suffix}"
 
 
-def prematch_text(match: Match, mention_japan: bool = False) -> str:
-    """開始前メッセージの本文 (引用ブロック)。日本戦は日本を先頭に固定。"""
+def prematch_text(
+    match: Match,
+    mention_japan: bool = False,
+    context: Optional[MatchContext] = None,
+) -> str:
+    """開始前メッセージの本文 (引用ブロック)。日本戦は日本を先頭に固定。
+    context があれば FIFAランク・組順位 (決勝T)・予想を追記する。"""
     kickoff = _kickoff_hhmm(match)
     if match.is_japan:
         opponent = japan_opponent(match)
@@ -188,9 +206,66 @@ def prematch_text(match: Match, mention_japan: bool = False) -> str:
             f"{opponent_flag(match.away)} {team_name(match.away)}"
         )
     body = f">{card}\n>🕔 `{kickoff}` KO ｜ {stage_name(match)}"
+    if context is not None:
+        extra = _context_lines(match, context)
+        if extra:
+            body += "\n" + "\n".join(extra)
     if match.is_japan and mention_japan:
         body = f"<!here>\n{body}"
     return body
+
+
+def _ordered_sides(match: Match) -> list[tuple[str, str, str]]:
+    """表示順 (日本戦は日本先頭) に (英語名, 表示名, 国旗) を返す。"""
+    if match.is_japan:
+        opponent = japan_opponent(match)
+        return [
+            ("Japan", "日本", "🇯🇵"),
+            (opponent, team_name(opponent), opponent_flag(opponent)),
+        ]
+    return [
+        (match.home, team_name(match.home), opponent_flag(match.home)),
+        (match.away, team_name(match.away), opponent_flag(match.away)),
+    ]
+
+
+def _context_lines(match: Match, context: MatchContext) -> list[str]:
+    """FIFAランク・組順位・予想の追記行 (引用ブロック)。情報が無い行は省く。"""
+    knockout = match.stage != "GROUP_STAGE"
+    lines: list[str] = []
+    for name, display, flag in _ordered_sides(match):
+        segments: list[str] = []
+        rank = context.fifa_ranks.get(name)
+        if rank:
+            segments.append(f"FIFA {rank}位")
+        if knockout:
+            position = context.group_positions.get(name)
+            if position:
+                segments.append(f"{position[0]}組{position[1]}位通過")
+        if segments:
+            lines.append(f">{flag} {display} ・ " + " ・ ".join(segments))
+
+    favorite = _favorite_line(match, context)
+    if favorite:
+        lines.append(f">{favorite}")
+    return lines
+
+
+def _favorite_line(match: Match, context: MatchContext) -> Optional[str]:
+    """FIFAランク差からの「どちらが勝ちそうか」の一文。両者のランクが必要。"""
+    (name_a, disp_a, _), (name_b, disp_b, _) = _ordered_sides(match)
+    rank_a = context.fifa_ranks.get(name_a)
+    rank_b = context.fifa_ranks.get(name_b)
+    if not rank_a or not rank_b or rank_a == rank_b:
+        return None
+    if rank_a < rank_b:
+        fav_disp, fav_rank, other_rank = disp_a, rank_a, rank_b
+    else:
+        fav_disp, fav_rank, other_rank = disp_b, rank_b, rank_a
+    high, low = min(rank_a, rank_b), max(rank_a, rank_b)
+    if other_rank - fav_rank <= 3:
+        return f"🔮 予想: 互角の対戦（FIFA {high}位 vs {low}位）"
+    return f"🔮 予想: {fav_disp} やや優勢（FIFA {fav_rank}位 vs {other_rank}位）"
 
 
 def result_text(match: Match) -> str:

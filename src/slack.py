@@ -9,6 +9,7 @@ import requests
 
 from src.messages import (
     DIGEST_CONTEXT,
+    MatchContext,
     VIEWING_TEXT,
     VIEWING_TEXT_JAPAN,
     date_label,
@@ -114,11 +115,12 @@ def build_prematch_payload(
     match: Match,
     mention_japan: bool = False,
     image_block: Optional[dict[str, Any]] = None,
+    context: Optional[MatchContext] = None,
 ) -> Payload:
     viewing = VIEWING_TEXT_JAPAN if match.is_japan else VIEWING_TEXT
     blocks: list[dict[str, Any]] = [
         _header("🔔 まもなくキックオフ"),
-        _section(prematch_text(match, mention_japan)),
+        _section(prematch_text(match, mention_japan, context)),
     ]
     if image_block:
         blocks.append(image_block)
