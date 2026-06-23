@@ -19,10 +19,14 @@
       "city_ja": "ロサンゼルス",
       "home": {
         "type": "group",
+        "group": "A",
+        "rank": "RU",
         "label": "A組 2位"
       },
       "away": {
         "type": "group",
+        "group": "B",
+        "rank": "RU",
         "label": "B組 2位"
       }
     },
@@ -37,10 +41,19 @@
       "city_ja": "ボストン",
       "home": {
         "type": "group",
+        "group": "E",
+        "rank": "W",
         "label": "E組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "F"
+        ],
         "label": "3位(A/B/C/D/F組)"
       }
     },
@@ -55,10 +68,14 @@
       "city_ja": "モンテレイ",
       "home": {
         "type": "group",
+        "group": "F",
+        "rank": "W",
         "label": "F組 1位"
       },
       "away": {
         "type": "group",
+        "group": "C",
+        "rank": "RU",
         "label": "C組 2位"
       }
     },
@@ -73,10 +90,14 @@
       "city_ja": "ヒューストン",
       "home": {
         "type": "group",
+        "group": "C",
+        "rank": "W",
         "label": "C組 1位"
       },
       "away": {
         "type": "group",
+        "group": "F",
+        "rank": "RU",
         "label": "F組 2位"
       }
     },
@@ -91,10 +112,19 @@
       "city_ja": "ニューヨーク",
       "home": {
         "type": "group",
+        "group": "I",
+        "rank": "W",
         "label": "I組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "C",
+          "D",
+          "F",
+          "G",
+          "H"
+        ],
         "label": "3位(C/D/F/G/H組)"
       }
     },
@@ -109,10 +139,14 @@
       "city_ja": "ダラス",
       "home": {
         "type": "group",
+        "group": "E",
+        "rank": "RU",
         "label": "E組 2位"
       },
       "away": {
         "type": "group",
+        "group": "I",
+        "rank": "RU",
         "label": "I組 2位"
       }
     },
@@ -127,10 +161,19 @@
       "city_ja": "メキシコシティ",
       "home": {
         "type": "group",
+        "group": "A",
+        "rank": "W",
         "label": "A組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "C",
+          "E",
+          "F",
+          "H",
+          "I"
+        ],
         "label": "3位(C/E/F/H/I組)"
       }
     },
@@ -145,10 +188,19 @@
       "city_ja": "アトランタ",
       "home": {
         "type": "group",
+        "group": "L",
+        "rank": "W",
         "label": "L組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "E",
+          "H",
+          "I",
+          "J",
+          "K"
+        ],
         "label": "3位(E/H/I/J/K組)"
       }
     },
@@ -163,10 +215,19 @@
       "city_ja": "サンフランシスコ",
       "home": {
         "type": "group",
+        "group": "D",
+        "rank": "W",
         "label": "D組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "B",
+          "E",
+          "F",
+          "I",
+          "J"
+        ],
         "label": "3位(B/E/F/I/J組)"
       }
     },
@@ -181,10 +242,19 @@
       "city_ja": "シアトル",
       "home": {
         "type": "group",
+        "group": "G",
+        "rank": "W",
         "label": "G組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "A",
+          "E",
+          "H",
+          "I",
+          "J"
+        ],
         "label": "3位(A/E/H/I/J組)"
       }
     },
@@ -199,10 +269,14 @@
       "city_ja": "トロント",
       "home": {
         "type": "group",
+        "group": "K",
+        "rank": "RU",
         "label": "K組 2位"
       },
       "away": {
         "type": "group",
+        "group": "L",
+        "rank": "RU",
         "label": "L組 2位"
       }
     },
@@ -217,10 +291,14 @@
       "city_ja": "ロサンゼルス",
       "home": {
         "type": "group",
+        "group": "H",
+        "rank": "W",
         "label": "H組 1位"
       },
       "away": {
         "type": "group",
+        "group": "J",
+        "rank": "RU",
         "label": "J組 2位"
       }
     },
@@ -235,10 +313,19 @@
       "city_ja": "バンクーバー",
       "home": {
         "type": "group",
+        "group": "B",
+        "rank": "W",
         "label": "B組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "E",
+          "F",
+          "G",
+          "I",
+          "J"
+        ],
         "label": "3位(E/F/G/I/J組)"
       }
     },
@@ -253,10 +340,14 @@
       "city_ja": "マイアミ",
       "home": {
         "type": "group",
+        "group": "J",
+        "rank": "W",
         "label": "J組 1位"
       },
       "away": {
         "type": "group",
+        "group": "H",
+        "rank": "RU",
         "label": "H組 2位"
       }
     },
@@ -271,10 +362,19 @@
       "city_ja": "カンザスシティ",
       "home": {
         "type": "group",
+        "group": "K",
+        "rank": "W",
         "label": "K組 1位"
       },
       "away": {
         "type": "third",
+        "groups": [
+          "D",
+          "E",
+          "I",
+          "J",
+          "L"
+        ],
         "label": "3位(D/E/I/J/L組)"
       }
     },
@@ -289,10 +389,14 @@
       "city_ja": "ダラス",
       "home": {
         "type": "group",
+        "group": "D",
+        "rank": "RU",
         "label": "D組 2位"
       },
       "away": {
         "type": "group",
+        "group": "G",
+        "rank": "RU",
         "label": "G組 2位"
       }
     },

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/app.js" defer></script>
+    <script src="assets/standings.js" defer></script>
     <script src="assets/bracket.js" defer></script>
   </head>
   <body data-page="bracket">
@@ -48,6 +49,11 @@
         </p>
         <h1 class="page-heading">決勝トーナメント表</h1>
         <p class="page-lead">ラウンド32から決勝までの全32試合。会場・日程は確定済み、対戦カードは試合結果が出るたびに自動で勝ち上がっていきます。日本時間表示。</p>
+
+        <p class="bracket-legend">
+          <span class="bracket-legend-chip">予測</span>
+          グループステージが未確定の枠は、現在の順位をもとにした<strong>暫定予測</strong>です（点線・斜体表示）。試合が確定すると実際の対戦国に置き換わります。
+        </p>
 
         <div id="bracket-rounds" class="bracket-rounds" role="tablist" aria-label="ラウンド選択"></div>
 
