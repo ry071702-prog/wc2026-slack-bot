@@ -29,20 +29,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     { label: "準決勝", target: "bk-left-SEMI_FINALS", stage: "SEMI_FINALS" },
     { label: "決勝", target: "bk-center", stage: "FINAL" },
   ];
-  // スマホ用: 1ラウンドずつ縦リスト表示 (決勝は3位決定戦も併記)
-  const MOBILE_STAGES = [
-    { stage: "LAST_32", label: "ラウンド32" },
-    { stage: "LAST_16", label: "ラウンド16" },
-    { stage: "QUARTER_FINALS", label: "準々決勝" },
-    { stage: "SEMI_FINALS", label: "準決勝" },
-    { stage: "FINAL", label: "決勝", extra: ["THIRD_PLACE"] },
-  ];
-
   let nodeByNo = new Map();
-  let allMatches = [];
   let scheduleData = null;
   let proj = null;
-  let mobileRounds = new Map();
   let roundTabButtons = [];
 
   try {
@@ -163,7 +152,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
       return;
     }
-    allMatches = matches;
     nodeByNo = new Map(matches.map((node) => [node.match_no, node]));
     proj = buildProjection(scheduleData, matches);
 
@@ -176,65 +164,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       buildHalf(RIGHT_COLS, "right"),
     );
 
-    container.replaceChildren(tree, buildMobile());
+    container.replaceChildren(tree);
 
-    // PC は初期表示で中央(決勝)が見えるようスクロール位置を寄せる
-    if (window.matchMedia("(min-width: 761px)").matches) {
-      requestAnimationFrame(() => {
+    // 初期スクロール位置: PCは中央(決勝)を、スマホはまず左端(ラウンド32)を見せる
+    requestAnimationFrame(() => {
+      if (window.matchMedia("(min-width: 761px)").matches) {
         container.scrollLeft = Math.max(
           0,
           (container.scrollWidth - container.clientWidth) / 2,
         );
-      });
-    }
-  }
-
-  function matchesByStages(stages) {
-    return allMatches
-      .filter((node) => stages.includes(node.stage))
-      .sort((a, b) => (a.match_no || 0) - (b.match_no || 0));
-  }
-
-  // スマホ用: ラウンドごとの縦リスト (タブで1ラウンドずつ表示)
-  function buildMobile() {
-    const wrap = app.element("div", "bracket-mobile");
-    mobileRounds = new Map();
-    MOBILE_STAGES.forEach((round, index) => {
-      const section = app.element(
-        "div",
-        `bracket-mobile-round${index === 0 ? " is-active" : ""}`,
-      );
-      const stages = [round.stage].concat(round.extra || []);
-      const nodes = matchesByStages(stages);
-
-      const head = app.element("div", "bracket-mobile-head");
-      head.append(app.element("span", "bk-col-title", round.label));
-      const range = dateRangeOf(nodes.map((node) => node.match_no));
-      if (range) {
-        head.append(app.element("span", "bk-col-date", range));
+      } else {
+        container.scrollLeft = 0;
       }
-      section.append(head);
-
-      const list = app.element("div", "bracket-mobile-list");
-      nodes.forEach((node) => {
-        if (node.stage === "THIRD_PLACE") {
-          list.append(
-            app.element("span", "bracket-mobile-3rd-tag", "3位決定戦"),
-          );
-        }
-        list.append(buildMatchCell(node));
-      });
-      section.append(list);
-      wrap.append(section);
-      mobileRounds.set(round.stage, section);
     });
-    return wrap;
   }
 
-  function setMobileRound(stage, activeButton) {
-    mobileRounds.forEach((section, key) => {
-      section.classList.toggle("is-active", key === stage);
-    });
+  function setActiveTab(activeButton) {
     roundTabButtons.forEach((button) => {
       button.classList.toggle("is-active", button === activeButton);
     });
@@ -331,9 +276,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
       btn.type = "button";
       btn.addEventListener("click", () => {
-        // スマホ: 該当ラウンドへ切替
-        setMobileRound(tab.stage, btn);
-        // PC: 該当列へスクロール
+        setActiveTab(btn);
         const target = document.getElementById(tab.target);
         if (target) {
           target.scrollIntoView({

@@ -3823,76 +3823,9 @@ a.bracket-match:focus-visible {
   padding: 0 4px;
 }
 
-/* スマホ用: ラウンド別の縦リスト表示 (PCではツリー、スマホではこちら) */
-.bracket-mobile {
-  display: none;
-}
-
+/* ラウンドタブ: 選択中ハイライト (PC=該当列へスクロール / スマホも同様) */
 .bracket-round-tab.is-active {
   color: #07140b;
   background: var(--accent-green);
   border-color: var(--accent-green);
-}
-
-.bracket-mobile-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 2px 2px 12px;
-}
-
-.bracket-mobile-round {
-  display: none;
-}
-
-.bracket-mobile-round.is-active {
-  display: block;
-}
-
-.bracket-mobile-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.bracket-mobile-list .bracket-match {
-  width: 100%;
-}
-
-.bracket-mobile-3rd-tag {
-  display: block;
-  margin-top: 8px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  color: var(--accent-gold, #e6c76a);
-}
-
-@media (max-width: 760px) {
-  .bracket-tree {
-    display: none;
-  }
-  .bracket-mobile {
-    display: block;
-  }
-  /* スマホはリスト表示なので全幅トリックを解除して素直に並べる */
-  .bracket-scroll {
-    width: auto;
-    margin-left: 0;
-    overflow-x: visible;
-  }
-  /* スマホのカードは情報量を確保するため少し大きめに */
-  .bracket-mobile .bracket-team {
-    font-size: 14px;
-  }
-  .bracket-mobile .bracket-side.is-slot .bracket-team {
-    font-size: 13px;
-  }
-  .bracket-mobile .bracket-flag {
-    font-size: 19px;
-  }
-  .bracket-mobile .bracket-proj-pos {
-    font-size: 11px;
-  }
 }
