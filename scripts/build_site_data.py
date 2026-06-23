@@ -28,6 +28,17 @@ MATCH_STATS_PATH = ROOT_DIR / "data" / "match_stats.json"
 MATCH_PREDICTIONS_PATH = ROOT_DIR / "data" / "match_predictions.json"
 NEWS_PATH = ROOT_DIR / "data" / "news.json"
 JAPAN_OPPONENTS_PATH = ROOT_DIR / "data" / "japan_opponents.json"
+BRACKET_PATH = ROOT_DIR / "data" / "bracket.json"
+
+# 決勝トーナメントのステージ進行順 (ブラケット描画の列順にも使う)
+KNOCKOUT_ORDER = [
+    "LAST_32",
+    "LAST_16",
+    "QUARTER_FINALS",
+    "SEMI_FINALS",
+    "THIRD_PLACE",
+    "FINAL",
+]
 
 
 def fetch_matches(api_key: str) -> list[Match]:
@@ -137,6 +148,61 @@ def load_optional_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
     return payload
 
 
+def _is_determined(team: str | None) -> bool:
+    """football-data はチーム未確定の決勝T枠を "TBD" で返す。確定済みかを判定。"""
+    return bool(team) and team not in ("TBD", "TBC")
+
+
+def build_bracket(
+    schedule: list[dict[str, Any]],
+    bracket: dict[str, Any],
+) -> dict[str, Any]:
+    """静的ブラケット定義 (会場・対戦元スロット) に、ライブの決勝T結果を重ねる。
+
+    対応付けは「ステージ内でキックオフ昇順に並べたライブ試合」と
+    「match_no 昇順の静的スロット」の位置一致 (ベストエフォート)。FIFA の
+    マッチ番号は日程順に振られており football-data の取得順とほぼ一致する。
+    チーム未確定 (TBD) の間は会場・スロット表記のみ描画され、確定し次第
+    実チーム・スコアが自動で乗る。
+    """
+    live_by_stage: dict[str, list[dict[str, Any]]] = {}
+    for entry in schedule:
+        stage = entry.get("stage")
+        if stage and stage != "GROUP_STAGE":
+            live_by_stage.setdefault(stage, []).append(entry)
+    for items in live_by_stage.values():
+        items.sort(key=lambda match: match.get("kickoff_jst") or "")
+
+    out_matches: list[dict[str, Any]] = []
+    for stage in KNOCKOUT_ORDER:
+        static = sorted(
+            (node for node in bracket.get("matches", []) if node.get("stage") == stage),
+            key=lambda node: node.get("match_no", 0),
+        )
+        live = live_by_stage.get(stage, [])
+        for index, node in enumerate(static):
+            merged = dict(node)
+            match = live[index] if index < len(live) else None
+            if match is not None:
+                home_ok = _is_determined(match.get("home"))
+                away_ok = _is_determined(match.get("away"))
+                merged.update(
+                    {
+                        "fd_id": match.get("id"),
+                        "kickoff_jst": match.get("kickoff_jst"),
+                        "status": match.get("status"),
+                        "score": match.get("score"),
+                        "is_japan": bool(match.get("is_japan")),
+                        "home_team": match.get("home") if home_ok else None,
+                        "home_ja": match.get("home_ja") if home_ok else None,
+                        "away_team": match.get("away") if away_ok else None,
+                        "away_ja": match.get("away_ja") if away_ok else None,
+                    }
+                )
+            out_matches.append(merged)
+    return {"rounds": KNOCKOUT_ORDER, "matches": out_matches}
+
+
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -157,6 +223,7 @@ def generate_site_data(
     news_path: Path = NEWS_PATH,
     team_history_path: Path = TEAM_HISTORY_PATH,
     japan_opponents_path: Path = JAPAN_OPPONENTS_PATH,
+    bracket_path: Path = BRACKET_PATH,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     schedule = build_schedule(matches)
     teams = build_teams(
@@ -167,6 +234,11 @@ def generate_site_data(
     )
     write_json(output_dir / "schedule.json", schedule)
     write_json(output_dir / "teams.json", teams)
+    # 決勝トーナメント表: 静的ブラケット定義 (会場・スロット) にライブ結果を合成
+    write_json(
+        output_dir / "bracket.json",
+        build_bracket(schedule, load_optional_json(bracket_path, {})),
+    )
     predictions = build_predictions_summary(
         load_optional_json(PREDICTIONS_RAW_PATH, {})
     )

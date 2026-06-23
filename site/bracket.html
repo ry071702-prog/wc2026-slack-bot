@@ -4,17 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#050506">
-    <meta name="description" content="W杯2026のニュースまとめ。公式情報・速報・日本語ニュース・分析・日程結果のソースをまとめてチェック。">
-    <title>World Cup News | WORLD CUP 2026</title>
+    <meta name="description" content="W杯2026 決勝トーナメント表。ラウンド32から決勝までの組み合わせ・会場・日程を日本時間で。試合結果が出るたびに勝ち上がりを自動更新。">
+    <title>決勝トーナメント表 | WORLD CUP 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/app.js" defer></script>
-    <script src="assets/news-sources.js" defer></script>
-    <script src="assets/news.js" defer></script>
+    <script src="assets/bracket.js" defer></script>
   </head>
-  <body data-page="news">
+  <body data-page="bracket">
     <header class="site-header">
       <div class="header-inner container">
         <a class="brand" href="index.html">
@@ -44,25 +43,22 @@
     <main>
       <div class="container page-top">
         <p class="page-kicker">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></svg>
-          WORLD CUP NEWS
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 12 0V3"/><path d="M4 3h16M9 21h6M12 15v6"/></svg>
+          KNOCKOUT BRACKET
         </p>
-        <h1 class="page-heading">World Cup News</h1>
-        <p class="page-lead">公式情報・速報・日本語ニュースをまとめてチェック。公式と報道を分けて、信頼度の高い順に確認できます。</p>
+        <h1 class="page-heading">決勝トーナメント表</h1>
+        <p class="page-lead">ラウンド32から決勝までの全32試合。会場・日程は確定済み、対戦カードは試合結果が出るたびに自動で勝ち上がっていきます。日本時間表示。</p>
 
-        <div id="news-tabs" class="news-tabs" role="tablist" aria-label="ニュースカテゴリ">
-          <button type="button" class="news-tab" role="tab" data-category="official" aria-selected="true">公式情報</button>
-          <button type="button" class="news-tab" role="tab" data-category="breaking" aria-selected="false">速報</button>
-          <button type="button" class="news-tab" role="tab" data-category="japan" aria-selected="false">日本語</button>
-          <button type="button" class="news-tab" role="tab" data-category="analysis" aria-selected="false">分析</button>
-          <button type="button" class="news-tab" role="tab" data-category="schedule" aria-selected="false">日程・結果</button>
+        <div id="bracket-rounds" class="bracket-rounds" role="tablist" aria-label="ラウンド選択"></div>
+
+        <div id="bracket" class="bracket-scroll" aria-busy="true">
+          <div class="skeleton-card glass-card">
+            <div class="skeleton skeleton-pill"></div>
+            <div class="skeleton skeleton-line w-70"></div>
+            <div class="skeleton skeleton-line w-45"></div>
+            <p class="skeleton-note">トーナメント表を取得中...</p>
+          </div>
         </div>
-
-        <div id="news-feed" class="news-feed" aria-live="polite" hidden></div>
-
-        <div id="news-cards" class="news-grid" role="tabpanel" aria-label="ニュースソース一覧"></div>
-
-        <p class="news-policy-note">記事は外部メディアへのリンクのみを掲載しています。本文・画像は各メディアの公式ページでご確認ください。</p>
       </div>
     </main>
 
@@ -70,7 +66,7 @@
       <div class="container">
         <p class="footer-title">WORLD CUP <em>2026</em></p>
         <p class="footer-tagline">Slack Bot × 特設サイトでW杯観戦をもっと楽しく。</p>
-        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a> / 記事見出し: <a href="https://news.google.com/" rel="noreferrer">Google News RSS</a></p>
+        <p class="footer-credit">データ: <a href="https://www.football-data.org/" rel="noreferrer">football-data.org</a> ／ 会場・日程: FIFA 公式</p>
       </div>
     </footer>
   </body>
