@@ -3,7 +3,12 @@ from __future__ import annotations
 from dataclasses import replace
 from datetime import date, datetime, timezone
 
-from src.messages import MatchContext, prematch_text, result_text
+from src.messages import (
+    MatchContext,
+    digest_match_line,
+    prematch_text,
+    result_text,
+)
 from src.providers.base import Match, MatchScore
 from src.slack import (
     build_digest_payload,
@@ -94,6 +99,78 @@ def test_prematch_without_context_is_unchanged(regular_match: Match) -> None:
     )
     # context が無ければ追記行は付かない
     assert "FIFA" not in prematch_text(regular_match)
+
+
+def _knockout_result(home: str, away: str, hg: int, ag: int, stage: str = "LAST_32") -> Match:
+    return Match(
+        id=99,
+        utc_kickoff=datetime(2026, 7, 4, 19, 0, tzinfo=timezone.utc),
+        home=home,
+        away=away,
+        stage=stage,
+        group=None,
+        matchday=None,
+        status="FINISHED",
+        score=MatchScore(home=hg, away=ag, duration="REGULAR"),
+    )
+
+
+def test_result_knockout_adds_advance_line() -> None:
+    match = _knockout_result("Germany", "Spain", 2, 1)
+    context = MatchContext(
+        fifa_ranks={"Germany": 10},
+        group_positions={"Germany": ("E", 1)},
+    )
+
+    text = result_text(match, context)
+
+    assert "🎉 *ドイツ* がベスト16進出（FIFA 10位 ・ E組1位通過）" in text
+
+
+def test_result_japan_knockout_special() -> None:
+    match = _knockout_result("Japan", "Morocco", 1, 0)
+    context = MatchContext(group_positions={"Japan": ("F", 1)})
+
+    text = result_text(match, context)
+
+    assert "🎌🇯🇵 *日本、ベスト16進出！*" in text
+
+
+def test_result_final_winner_is_champion() -> None:
+    match = _knockout_result("Spain", "Germany", 2, 0, stage="FINAL")
+    text = result_text(match, MatchContext())
+    assert "🏆 *スペイン* が優勝！" in text
+
+
+def test_result_group_stage_has_no_advance_line() -> None:
+    group = replace(
+        _knockout_result("Germany", "Spain", 1, 0),
+        stage="GROUP_STAGE",
+        group="GROUP_E",
+        matchday=1,
+    )
+    text = result_text(group, MatchContext(fifa_ranks={"Germany": 10}))
+    assert "進出" not in text
+    assert "優勝" not in text
+
+
+def test_digest_knockout_shows_seeds() -> None:
+    match = Match(
+        id=5,
+        utc_kickoff=datetime(2026, 7, 4, 19, 0, tzinfo=timezone.utc),
+        home="Germany",
+        away="Spain",
+        stage="LAST_32",
+        group=None,
+        matchday=None,
+        status="TIMED",
+        score=MatchScore(),
+    )
+    context = MatchContext(group_positions={"Germany": ("E", 1), "Spain": ("C", 2)})
+
+    line = digest_match_line(match, context)
+
+    assert "ラウンド32 ｜ E組1位 vs C組2位" in line
 
 
 def test_prematch_regular_match_has_no_mention(

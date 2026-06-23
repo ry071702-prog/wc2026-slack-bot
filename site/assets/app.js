@@ -63,6 +63,19 @@
     return FLAG_EMOJI[name] || "⚽";
   }
 
+  // FIFAランク差からのざっくり勝率 (ロジスティック)。番号が小さいほど格上。
+  // 返り値: {home, away} の整数% (合計100)。どちらかのランクが無ければ null。
+  function winProbability(rankHome, rankAway) {
+    if (!Number.isFinite(rankHome) || !Number.isFinite(rankAway)) {
+      return null;
+    }
+    const k = 0.08;
+    const pHome = 1 / (1 + Math.exp(-k * (rankAway - rankHome)));
+    let home = Math.round(pHome * 100);
+    home = Math.min(97, Math.max(3, home));
+    return { home, away: 100 - home };
+  }
+
   async function fetchJson(url, options = {}) {
     const response = await fetch(url, { cache: "no-store" });
     if (options.optional && response.status === 404) {
@@ -351,6 +364,7 @@
     showLoadError,
     statusText,
     teamLabel,
+    winProbability,
   };
 
   document.addEventListener("DOMContentLoaded", () => {

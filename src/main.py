@@ -256,7 +256,8 @@ def run_notify(
         f"live_now={live_now}"
     )
 
-    context = build_match_context(provider, prematch_matches) if prematch_matches else None
+    notify_matches = prematch_matches + result_matches
+    context = build_match_context(provider, notify_matches) if notify_matches else None
 
     for match in prematch_matches:
         image_block = _matchup_image_block(slack, match)
@@ -286,7 +287,7 @@ def run_notify(
             state_store.save(state)
 
     for match in result_matches:
-        sent = slack.send(build_result_payload(match))
+        sent = slack.send(build_result_payload(match, context=context))
         if sent and not slack.dry_run:
             state["result"].append(match.id)
             state_store.save(state)
@@ -454,12 +455,14 @@ def run_digest(
     if not matches and not tomorrow_matches:
         print(f"digest: no matches on {date_key} nor next day; skipping")
         return
+    context = build_match_context(provider, matches + tomorrow_matches)
     sent = slack.send(
         build_digest_payload(
             matches,
             today_jst,
             tomorrow_matches=tomorrow_matches,
             tomorrow=tomorrow_jst,
+            context=context,
         )
     )
     if sent and not slack.dry_run:

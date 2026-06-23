@@ -31,15 +31,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   ];
   let nodeByNo = new Map();
   let scheduleData = null;
+  let ranks = {};
   let proj = null;
   let roundTabButtons = [];
 
   try {
-    const [bracket, schedule] = await Promise.all([
+    const [bracket, schedule, rankings] = await Promise.all([
       app.fetchJson("data/bracket.json"),
       app.fetchJson("data/schedule.json").catch(() => null),
+      app.fetchJson("data/rankings.json").catch(() => null),
     ]);
     scheduleData = schedule;
+    ranks = rankings || {};
     container.setAttribute("aria-busy", "false");
     render(bracket);
   } catch (error) {
@@ -335,13 +338,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const teamJa = node[`${which}_ja`];
     const slot = node[which] || {};
     if (teamKey) {
-      return { determined: true, name: teamJa || teamKey, flag: app.flagEmoji(teamKey) };
+      return {
+        determined: true,
+        team: teamKey,
+        name: teamJa || teamKey,
+        flag: app.flagEmoji(teamKey),
+      };
     }
     const projected = projectionFor(node, which);
     if (projected && projected.team) {
       return {
         determined: false,
         provisional: true,
+        team: projected.team,
         name: projected.team_ja || projected.team,
         flag: app.flagEmoji(projected.team),
         pos: positionLabel(slot, projected),
@@ -473,11 +482,47 @@ document.addEventListener("DOMContentLoaded", async () => {
       app.element("span", "bracket-venue-city", node.city_ja || node.city || ""),
     );
 
-    cell.append(head, sides, venue);
+    cell.append(head, sides);
+    const probability = buildWinBar(node);
+    if (probability) {
+      cell.append(probability);
+    }
+    cell.append(venue);
     if (node.is_japan) {
       cell.append(app.pill("JAPAN MATCH", "japan"));
     }
     return cell;
+  }
+
+  // FIFAランク差からの勝率バー (未確定の試合のみ。両者のランクが必要)
+  function buildWinBar(node) {
+    if (node.status === "FINISHED") {
+      return null;
+    }
+    const home = sideInfo(node, "home");
+    const away = sideInfo(node, "away");
+    if (!home.team || !away.team) {
+      return null;
+    }
+    const prob = app.winProbability(ranks[home.team], ranks[away.team]);
+    if (!prob) {
+      return null;
+    }
+    const wrap = app.element("div", "bracket-prob");
+    const labels = app.element("div", "bracket-prob-labels");
+    labels.append(
+      app.element("span", "bracket-prob-pct", `${prob.home}%`),
+      app.element("span", "bracket-prob-tag", "勝率予想"),
+      app.element("span", "bracket-prob-pct", `${prob.away}%`),
+    );
+    const bar = app.element("div", "bracket-prob-bar");
+    const homeFill = app.element("span", "bracket-prob-home");
+    homeFill.style.width = `${prob.home}%`;
+    const awayFill = app.element("span", "bracket-prob-away");
+    awayFill.style.width = `${prob.away}%`;
+    bar.append(homeFill, awayFill);
+    wrap.append(labels, bar);
+    return wrap;
   }
 
   function venueIcon() {
