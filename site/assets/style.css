@@ -3729,3 +3729,50 @@ a.bracket-match:focus-visible {
     justify-content: center;
   }
 }
+
+/* 予測(暫定)枠 */
+.bracket-legend {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.bracket-legend strong {
+  color: var(--text-primary);
+}
+
+.bracket-legend-chip,
+.bracket-proj-tag {
+  flex: 0 0 auto;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--accent-lime);
+  border: 1px dashed rgba(200, 240, 60, 0.55);
+  border-radius: 5px;
+  padding: 1px 5px;
+  line-height: 1.4;
+}
+
+.bracket-side.is-proj {
+  background: rgba(200, 240, 60, 0.06);
+}
+
+.bracket-side.is-proj .bracket-flag {
+  opacity: 0.85;
+}
+
+.bracket-side.is-proj .bracket-team {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.bracket-side.is-proj .bracket-proj-tag {
+  margin-left: auto;
+}

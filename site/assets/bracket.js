@@ -31,14 +31,114 @@ document.addEventListener("DOMContentLoaded", async () => {
   ];
 
   let nodeByNo = new Map();
+  let scheduleData = null;
+  let proj = null;
 
   try {
-    const bracket = await app.fetchJson("data/bracket.json");
+    const [bracket, schedule] = await Promise.all([
+      app.fetchJson("data/bracket.json"),
+      app.fetchJson("data/schedule.json").catch(() => null),
+    ]);
+    scheduleData = schedule;
     container.setAttribute("aria-busy", "false");
     render(bracket);
   } catch (error) {
     app.logDataError(error);
     app.showLoadError(container);
+  }
+
+  // 現在のグループ順位から、未確定の R32 枠を暫定予測する。
+  // 1位/2位は各組の現順位を直接、3位8枠は候補グループへの二部マッチングで割り当てる。
+  function buildProjection(schedule, matches) {
+    const standings = window.SiteStandings;
+    if (!standings || !Array.isArray(schedule)) {
+      return null;
+    }
+    const table = standings.computeStandings(schedule);
+    const groupRanks = new Map();
+    let totalPlayed = 0;
+    table.forEach((entry) => {
+      const letter = String(entry.group).split("_")[1] || entry.group;
+      groupRanks.set(letter, entry.teams);
+      totalPlayed += entry.teams.reduce((sum, row) => sum + (row.played || 0), 0);
+    });
+    if (totalPlayed === 0) {
+      return null; // 結果がまだ無ければ予測しない
+    }
+    const qualifyingThirds = standings
+      .rankThirdPlace(table)
+      .filter((row) => row.qualifies);
+    const thirdSlots = [];
+    matches.forEach((node) => {
+      ["home", "away"].forEach((which) => {
+        const slot = node[which];
+        if (slot && slot.type === "third") {
+          thirdSlots.push({ key: `${node.match_no}.${which}`, groups: slot.groups || [] });
+        }
+      });
+    });
+    return {
+      groupRanks,
+      thirdAssign: assignThirds(thirdSlots, qualifyingThirds),
+    };
+  }
+
+  // スロット(候補グループを持つ) と 3位通過チーム の二部マッチング (Kuhn法)
+  function assignThirds(slots, thirds) {
+    const candidates = thirds.map((row) => ({
+      row,
+      letter: String(row.group).split("_")[1] || row.group,
+    }));
+    const slotMatch = new Array(slots.length).fill(-1);
+    const thirdMatch = new Array(candidates.length).fill(-1);
+
+    function augment(slotIndex, seen) {
+      for (let ti = 0; ti < candidates.length; ti += 1) {
+        if (seen[ti] || !slots[slotIndex].groups.includes(candidates[ti].letter)) {
+          continue;
+        }
+        seen[ti] = true;
+        if (thirdMatch[ti] === -1 || augment(thirdMatch[ti], seen)) {
+          slotMatch[slotIndex] = ti;
+          thirdMatch[ti] = slotIndex;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    for (let si = 0; si < slots.length; si += 1) {
+      augment(si, new Array(candidates.length).fill(false));
+    }
+    const map = new Map();
+    slots.forEach((slot, si) => {
+      if (slotMatch[si] !== -1) {
+        map.set(slot.key, candidates[slotMatch[si]].row);
+      }
+    });
+    return map;
+  }
+
+  // node の home/away スロットに対応する予測チーム行を返す (R32 のみ)
+  function projectionFor(node, which) {
+    if (!proj) {
+      return null;
+    }
+    const slot = node[which];
+    if (!slot) {
+      return null;
+    }
+    if (slot.type === "group" && slot.group && slot.rank) {
+      const rows = proj.groupRanks.get(slot.group);
+      if (!rows) {
+        return null;
+      }
+      return rows[slot.rank === "W" ? 0 : 1] || null;
+    }
+    if (slot.type === "third") {
+      return proj.thirdAssign.get(`${node.match_no}.${which}`) || null;
+    }
+    return null;
   }
 
   function render(data) {
@@ -53,6 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     nodeByNo = new Map(matches.map((node) => [node.match_no, node]));
+    proj = buildProjection(scheduleData, matches);
 
     renderRoundNav();
 
@@ -189,13 +290,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     return first === last ? first : `${first} – ${last}`;
   }
 
-  // home/away の表示情報。確定チームがあれば国旗+日本語名、無ければスロット表記。
+  // home/away の表示情報。確定チーム > 順位からの暫定予測 > スロット表記 の優先順。
   function sideInfo(node, which) {
     const teamKey = node[`${which}_team`];
     const teamJa = node[`${which}_ja`];
     const slot = node[which] || {};
     if (teamKey) {
       return { determined: true, name: teamJa || teamKey, flag: app.flagEmoji(teamKey) };
+    }
+    const projected = projectionFor(node, which);
+    if (projected && projected.team) {
+      return {
+        determined: false,
+        provisional: true,
+        name: projected.team_ja || projected.team,
+        flag: app.flagEmoji(projected.team),
+      };
     }
     return { determined: false, name: slot.label || "未定", flag: "" };
   }
@@ -231,13 +341,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function buildSide(node, which, winner) {
     const info = sideInfo(node, which);
-    const row = app.element(
-      "div",
-      `bracket-side${winner === which ? " is-winner" : ""}${info.determined ? "" : " is-slot"}`,
-    );
+    const classes = ["bracket-side"];
+    if (winner === which) {
+      classes.push("is-winner");
+    }
+    if (info.provisional) {
+      classes.push("is-proj");
+    } else if (!info.determined) {
+      classes.push("is-slot");
+    }
+    const row = app.element("div", classes.join(" "));
     const flag = app.element("span", "bracket-flag", info.flag || "•");
     flag.setAttribute("aria-hidden", "true");
     row.append(flag, app.element("span", "bracket-team", info.name));
+    if (info.provisional) {
+      row.append(app.element("span", "bracket-proj-tag", "予測"));
+    }
     const score = scoreFor(node, which);
     if (score !== "") {
       row.append(app.element("span", "bracket-score", score));
