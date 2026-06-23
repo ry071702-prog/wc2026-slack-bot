@@ -70,7 +70,11 @@ def build_digest_payload(
     day: date,
     tomorrow_matches: Optional[list[Match]] = None,
     tomorrow: Optional[date] = None,
+    context: Optional[MatchContext] = None,
 ) -> Payload:
+    def line(match: Match) -> str:
+        return digest_match_line(match, context)
+
     japan_matches = sorted(
         (match for match in matches if match.is_japan),
         key=lambda match: match.utc_kickoff,
@@ -82,15 +86,12 @@ def build_digest_payload(
     blocks: list[dict[str, Any]] = [_header(digest_title(day))]
 
     if japan_matches:
-        blocks.append(_section("\n".join(map(digest_match_line, japan_matches))))
+        blocks.append(_section("\n".join(map(line, japan_matches))))
         blocks.append({"type": "divider"})
 
     if other_matches:
         blocks.append(
-            _section(
-                "*きょうの試合*\n"
-                + "\n".join(map(digest_match_line, other_matches))
-            )
+            _section("*きょうの試合*\n" + "\n".join(map(line, other_matches)))
         )
     elif not japan_matches:
         blocks.append(_section("本日の試合はありません。"))
@@ -103,7 +104,7 @@ def build_digest_payload(
         blocks.append(
             _section(
                 f"📅 *明日（{date_label(tomorrow)}）の試合*\n"
-                + "\n".join(map(digest_match_line, ordered))
+                + "\n".join(map(line, ordered))
             )
         )
 
@@ -128,11 +129,13 @@ def build_prematch_payload(
     return {"blocks": blocks}
 
 
-def build_result_payload(match: Match) -> Payload:
+def build_result_payload(
+    match: Match, context: Optional[MatchContext] = None
+) -> Payload:
     return {
         "blocks": [
             _header("🏁 試合終了"),
-            _section(result_text(match)),
+            _section(result_text(match, context)),
             _context(result_context(match)),
         ]
     }

@@ -135,9 +135,25 @@ def _kickoff_hhmm(match: Match) -> str:
     return f"{jst.hour}:{jst.minute:02d}"
 
 
-def digest_match_line(match: Match) -> str:
-    kickoff = _kickoff_hhmm(match)
+def _digest_stage_label(match: Match, context: Optional[MatchContext]) -> str:
+    """ダイジェスト用のステージ表記。決勝Tは「ラウンド32 ｜ E組1位 vs C組2位」と
+    各チームの組順位 (シード) を併記する。"""
     stage = stage_name(match)
+    if context is None or match.stage == "GROUP_STAGE":
+        return stage
+    codes: list[str] = []
+    for name, _display, _flag in _ordered_sides(match):
+        position = context.group_positions.get(name)
+        if position:
+            codes.append(f"{position[0]}組{position[1]}位")
+    if len(codes) == 2:
+        return f"{stage} ｜ {codes[0]} vs {codes[1]}"
+    return stage
+
+
+def digest_match_line(match: Match, context: Optional[MatchContext] = None) -> str:
+    kickoff = _kickoff_hhmm(match)
+    stage = _digest_stage_label(match, context)
     has_score = (
         match.score.home is not None and match.score.away is not None
     )
@@ -268,8 +284,65 @@ def _favorite_line(match: Match, context: MatchContext) -> Optional[str]:
     return f"🔮 予想: {fav_disp} やや優勢（FIFA {fav_rank}位 vs {other_rank}位）"
 
 
-def result_text(match: Match) -> str:
-    """試合結果メッセージの本文 (引用ブロック2行)。日本戦は日本を先頭に固定。"""
+KNOCKOUT_ADVANCE = {
+    "LAST_32": "ベスト16進出",
+    "LAST_16": "ベスト8進出",
+    "QUARTER_FINALS": "ベスト4進出",
+}
+
+
+def _winner_context_suffix(name: str, context: Optional[MatchContext]) -> str:
+    """勝者のFIFAランク・組順位を「（FIFA 10位 ・ E組1位通過）」の形で返す。"""
+    if context is None:
+        return ""
+    segments: list[str] = []
+    rank = context.fifa_ranks.get(name)
+    if rank:
+        segments.append(f"FIFA {rank}位")
+    position = context.group_positions.get(name)
+    if position:
+        segments.append(f"{position[0]}組{position[1]}位通過")
+    return f"（{' ・ '.join(segments)}）" if segments else ""
+
+
+def _advance_line(match: Match, context: Optional[MatchContext]) -> Optional[str]:
+    """決勝Tの勝者の「勝ち上がり」文言。日本は特別演出。グループ戦/引き分けは None。"""
+    if match.stage == "GROUP_STAGE":
+        return None
+    side = _winner_side(match)
+    if side not in ("home", "away"):
+        return None
+    winner = match.home if side == "home" else match.away
+    display = _japan_side_label(winner)
+    suffix = _winner_context_suffix(winner, context)
+
+    if winner == "Japan":
+        # 日本の決勝T突破は特別演出
+        special = {
+            "FINAL": "🎌🇯🇵 *日本、世界一！！！* 🏆🎉",
+            "THIRD_PLACE": "🎌🇯🇵 *日本、堂々の3位！* 🥉",
+            "SEMI_FINALS": "🎌🇯🇵 *日本、悲願の決勝進出！！* 🔥",
+        }
+        head = special.get(
+            match.stage,
+            f"🎌🇯🇵 *日本、{KNOCKOUT_ADVANCE.get(match.stage, '勝ち上がり')}！* 🔥",
+        )
+        return f"{head}{suffix}"
+
+    if match.stage == "FINAL":
+        head = f"🏆 *{display}* が優勝！"
+    elif match.stage == "THIRD_PLACE":
+        head = f"🥉 *{display}* が3位"
+    elif match.stage == "SEMI_FINALS":
+        head = f"🎉 *{display}* が決勝進出"
+    else:
+        head = f"🎉 *{display}* が{KNOCKOUT_ADVANCE.get(match.stage, '勝ち上がり')}"
+    return f"{head}{suffix}"
+
+
+def result_text(match: Match, context: Optional[MatchContext] = None) -> str:
+    """試合結果メッセージの本文 (引用ブロック)。日本戦は日本を先頭に固定。
+    context があれば決勝Tの勝ち上がり文言 (勝者のFIFAランク・組順位つき) を追記。"""
     score_suffix = _score_suffix(match)
     stage = stage_name(match, include_matchday=False)
     outcome = _outcome_text(match)
@@ -295,7 +368,11 @@ def result_text(match: Match) -> str:
             f"{_score_value(match.score.away)}`"
         )
         card = f"{hf} {home_disp}  {score}  {af} {away_disp}{score_suffix}"
-    return f">{card}\n>{outcome}  ｜  {stage}"
+    body = f">{card}\n>{outcome}  ｜  {stage}"
+    advance = _advance_line(match, context)
+    if advance:
+        body += f"\n>{advance}"
+    return body
 
 
 def result_context(match: Match) -> str:

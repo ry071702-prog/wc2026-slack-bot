@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let schedule = [];
   try {
     schedule = await app.fetchJson("data/schedule.json");
+    renderJapanKnockout(schedule);
     renderNextJapan(schedule);
     renderGroupF(schedule);
     renderGroupFStandings(schedule);
@@ -41,6 +42,92 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     app.logDataError(error);
     app.showLoadError(document.querySelector("#opponents"));
+  }
+
+  /* --- 0. 決勝トーナメント進出ハイライト (日本がKOに進んだ時だけ表示) ------ */
+
+  const KO_ADVANCE = {
+    LAST_32: "ベスト16",
+    LAST_16: "ベスト8",
+    QUARTER_FINALS: "ベスト4",
+    SEMI_FINALS: "決勝",
+  };
+
+  function japanKnockoutMatches(matches) {
+    return matches
+      .filter((match) => match.is_japan && match.stage !== "GROUP_STAGE")
+      .sort(
+        (a, b) =>
+          new Date(a.kickoff_jst).getTime() - new Date(b.kickoff_jst).getTime(),
+      );
+  }
+
+  function japanWon(match) {
+    if (match.status !== "FINISHED") {
+      return null;
+    }
+    const score = match.score || {};
+    const japanHome = match.home === JAPAN;
+    let jp = japanHome ? score.home : score.away;
+    let opp = japanHome ? score.away : score.home;
+    if (!Number.isInteger(jp) || !Number.isInteger(opp)) {
+      return null;
+    }
+    if (jp !== opp) {
+      return jp > opp;
+    }
+    const jpPk = japanHome ? score.penalties_home : score.penalties_away;
+    const oppPk = japanHome ? score.penalties_away : score.penalties_home;
+    if (Number.isInteger(jpPk) && Number.isInteger(oppPk) && jpPk !== oppPk) {
+      return jpPk > oppPk;
+    }
+    return null;
+  }
+
+  function knockoutStatusText(last) {
+    const won = japanWon(last);
+    if (last.status !== "FINISHED" || won === null) {
+      return `${last.stage_ja || "決勝トーナメント"} 進出中 🔥`;
+    }
+    if (won) {
+      if (last.stage === "FINAL") return "🏆 世界一！！！";
+      if (last.stage === "THIRD_PLACE") return "🥉 堂々の3位！";
+      if (last.stage === "SEMI_FINALS") return "✨ 決勝進出！";
+      return `✨ ${KO_ADVANCE[last.stage] || ""}進出！`;
+    }
+    if (last.stage === "FINAL") return "🥈 準優勝";
+    if (last.stage === "THIRD_PLACE") return "4位";
+    return `${last.stage_ja || ""}で敗退`;
+  }
+
+  function renderJapanKnockout(matches) {
+    const section = document.querySelector("#japan-knockout-section");
+    const container = document.querySelector("#japan-knockout");
+    if (!section || !container) {
+      return;
+    }
+    const knockout = japanKnockoutMatches(matches);
+    if (knockout.length === 0) {
+      section.hidden = true;
+      return;
+    }
+    section.hidden = false;
+
+    const banner = app.element("div", "jp-ko-banner glass-card");
+    banner.append(app.element("p", "jp-ko-kicker", "🎌 KNOCKOUT STAGE"));
+    banner.append(
+      app.element("p", "jp-ko-status", knockoutStatusText(knockout[knockout.length - 1])),
+    );
+
+    const path = app.element("div", "jp-ko-path");
+    knockout.forEach((match) => {
+      const item = app.element("div", "jp-ko-step");
+      item.append(app.element("span", "jp-ko-round", match.stage_ja || "決勝T"));
+      item.append(createMiniMatchRow(match));
+      path.append(item);
+    });
+
+    container.replaceChildren(banner, path);
   }
 
   /* --- 1. ヒーロー: W杯戦績チップ (teams.json から動的) --------------------- */

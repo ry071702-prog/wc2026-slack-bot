@@ -3829,3 +3829,94 @@ a.bracket-match:focus-visible {
   background: var(--accent-green);
   border-color: var(--accent-green);
 }
+
+/* 勝率予想バー (ブラケットの試合カード) */
+.bracket-prob {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bracket-prob-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bracket-prob-pct {
+  color: var(--text-secondary);
+}
+
+.bracket-prob-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.bracket-prob-bar {
+  display: flex;
+  height: 5px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bracket-prob-home {
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
+}
+
+.bracket-prob-away {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* 日本代表: 決勝トーナメント進出ハイライト */
+.jp-ko-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  border-color: var(--border-green);
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(46, 224, 106, 0.16), transparent 65%),
+    var(--bg-card);
+}
+
+.jp-ko-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: var(--accent-lime);
+}
+
+.jp-ko-status {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.jp-ko-path {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jp-ko-step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jp-ko-round {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--accent-lime);
+}

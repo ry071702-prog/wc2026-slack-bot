@@ -226,14 +226,17 @@ def generate_site_data(
     bracket_path: Path = BRACKET_PATH,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     schedule = build_schedule(matches)
+    rankings = load_rankings(rankings_path)
     teams = build_teams(
         schedule,
-        load_rankings(rankings_path),
+        rankings,
         load_squads(squads_path),
         load_team_history(team_history_path),
     )
     write_json(output_dir / "schedule.json", schedule)
     write_json(output_dir / "teams.json", teams)
+    # 勝率予想用の軽量な FIFAランク辞書 (team英語名 -> ランク)
+    write_json(output_dir / "rankings.json", rankings)
     # 決勝トーナメント表: 静的ブラケット定義 (会場・スロット) にライブ結果を合成
     write_json(
         output_dir / "bracket.json",
