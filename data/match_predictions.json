@@ -256,7 +256,7 @@
     "draw": 0,
     "away": 1,
     "total": 1,
-    "final": false
+    "final": true
   },
   "537338": {
     "home": 0,
