@@ -1,173 +1,277 @@
 {
-  "generated_at": "2026-06-25T00:01:38+00:00",
+  "generated_at": "2026-06-25T01:01:41+00:00",
   "articles": [
     {
-      "title": "Morocco vs Haiti live updates: Rahimi, Yassine goals give African champions lead in World Cup 2026 game",
-      "source": "The New York Times",
-      "published_at": "2026-06-24T23:56:33+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPYW14M1pxOGFCZGdqLUlHeVVhdUl0WndtT0FrNkxSeEJkd2FoTVN4UnJaS2xjTzhiSm5rNFladTB3YUo2OHFyR0s1TmxiN3lIeF8zNnJQUUpQSzlfYlNNcGprMzVBOERtdnpLSHVWYl9xWVFKaG5VWWZ4REh0TlF0eDRGRTJZSlo1X1BJdmRkRXdKMVMtbTh1S2YtT001NnZPakNwV1JxRC1rTVRwTUMtRHg2REdWdw?oc=5",
-      "lang": "en",
-      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/GQdPeLkhMyzO_qOFXHKZJG0om_1440x960.jpg"
-    },
-    {
-      "title": "World Cup 2026 live updates: Brazil vs. Scotland and Haiti vs. Morocco continue last round of group stage games",
-      "source": "NBC News",
-      "published_at": "2026-06-24T23:56:19+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOZ2hLYzdla043ZzlRWXFzX3BmMVNoQXppVXpyRnZJMUp6WFZROFhVTGRRRVlUSFhsZHpWbF93NUk4NzZQcDlsRlJnLWZkaXBmSndTT3BmYjJOVUJmam5oUXNqaFNtM3BOd2J2SWRFQkxPV0puR0NmN2lWV0pOVnYyNldZX3I3N1ZtOHBaX2JranpHNFFSal8wZGZFOU03eUlzV1ZieDlhLTU?oc=5",
-      "lang": "en",
-      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-06/260624-scotland-vs-brazil-vsb-1802-60f14b.jpg"
-    },
-    {
-      "title": "Scotland vs Brazil live updates: Vinicius Junior and Cunha strike in 2026 World Cup game",
-      "source": "The New York Times",
-      "published_at": "2026-06-24T23:55:47+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOUTQ3WGJSUGFIc19HYUhyN2l0a1RaOHJGTjEwVDJSeVJ2YlgtTWExOG84LTNjcEZMOUN6TzI0bmsxb3FFSmo5X0cwR1Vxc3IyeTNDNVZfT3VsVDd2RzJaTGM3aGYwRWlZVFNOUmJzOTE2NllzT2w0U2lhY0NnSXBSRmdXWHlEU2J5N2h0QzJLT3dPczhBcXZUY1NfaUhvTjh1VFRPTWdjeWJIak1XemVnWGhaQUNmeXhk?oc=5",
-      "lang": "en",
-      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/crq89LIfYHqK_OJt2PLEbfIgg_1440x960.jpg"
-    },
-    {
-      "title": "South Africa vs South Korea LIVE: World Cup 2026 updates as Bafana, Taegeuk Warriors seek to qualify",
+      "title": "FIFA World Cup 2026 MD14 recap: Vini brace helps Brazil top Group C, Switzerland top B",
       "source": "ESPN",
-      "published_at": "2026-06-24T23:48:45+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPLXhVeWxwTXBTb2k3d0hnV2R0OGl0VmhkY0tua3hCVDItTkcxNnVNSG5ZNU5NalpKcDFHNXZKbjQ2STNFeHV6c2FzUHpxVmg0bVFRTXdWbHRIZ0lQcDZ2VnJXN2dHaVd5ZFlxZ3NOQzFDaDNfTHdUbWlaYXVialVlNXpsSzVoOFZHempqZUJHYmhmeDg1Tlc0Zk5INUY1V091RzFDWVVvbXJsVk5OaWwyWUNwczdNbUhWWldBNHJtVzIzMHpFS01UaWQ2MjhqMkVkRlE?oc=5",
+      "published_at": "2026-06-25T00:51:28+00:00",
+      "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNN21ZaGNVWVZXTEc5dUkxTXZWX1poZ3poaGdVT2hhbFpFelByYUFwem9aTUUxRWZUQkVSejJlSWpmc29HUkVoSGhNWTJRaFdQbzFabnozbjZpOXpQd1hsamdnUXlVSXA1S0cySFBGYVBwS3dNN18wb20zQ1g4dm81SFF1eVZZdGZJOGZidVdzdW01RnpadXh6azkxVkVOdGUzOUZWVGVyVlhWUExodjBxR3p6UFBzSEZ2QUtFbDBTOU5iUERDV1g2Q1VOa0dCUjROYnREVm96ZVJqS19hdkk5UzhYWjB4LVRCZFVSbVZFMG8xekdaVzh0bXcwWWIzUXVCWHJIbTVCRnpndFl2eVE?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "World Cup Daily live: Neymar on as Brazil dominate Scotland; Morocco lead Haiti",
-      "source": "ESPN",
-      "published_at": "2026-06-24T23:46:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPcGFfdFNibkFHYmZMeDJmVEd4Q1hhT2FHM0NpakVxYXo2b19RcVZPMGlBX3ZwNDdPUVhzYjRjelc0YjVUMW95Ykp1Sk5qQnFUcFpRZDlTdlBzWGZHVnJLa1ZDMEQwRnhzMkNvam8xZ054cExNWTFGNmtaMm40YUhtTEpfeFpCVml2YXEtWmd5MmotMnJ5cWNDU2tuOXZ4dlpNZFlkeXlISmFJdTFwNWpIV1YxUGk5V0E?oc=5",
+      "title": "World Cup live updates, scores: Brazil tops Group C ahead of Morocco, Scotland in nervous third-place spot",
+      "source": "Yahoo Sports",
+      "published_at": "2026-06-25T00:44:17+00:00",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPUGVUWWdhZkFQM3M4YVVmejF6R2tBelM0RG9GLUNCT1J4MUxMYURHakl5NzB6MFhIT05mSGNwV0Z2MkVoYXpOUGFnN0lEdy1lWVpXblY5ZWZrTWU0TUNEa3BLdXc0QlZyX2Q4bUdqaWJfbUh2cWJDSHptQWZZbzRJazVvQ3puNWNpODUwLVVSbWdHd29BbHNVd1pLOFI0RFlkQlc5Y3c2UEtiam1GcWtjZ2J4c1g1clFteFFvZXAxMA?oc=5",
+      "lang": "en",
+      "image": "https://s.yimg.com/ny/api/res/1.2/vecewY.5i89gokttM9NTKQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/2026-06/7ab72139-8ad2-4151-a8f3-f3023b0f8053"
+    },
+    {
+      "title": "Neymar officially joins the OGs at the 2026 FIFA World Cup 🇧🇷",
+      "source": "FOX Sports",
+      "published_at": "2026-06-25T00:43:17+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBXVmc4NHpXZS01WmUxNHdJeHFickloV19MN1B2dTRGd0JhUGlUTHhwUk9OM29ldFk3TnU1bk9kVFpfVkE5V3pkMTE5cDJ6QTRJWnZDRm4wSlJ4QW5rNFpBNHZpM0xVajFFeFhjQkV3?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16479912/720/1280/lssm42ej818cd8v8.png?ve=1&tl=1"
+    },
+    {
+      "title": "TELEMUNDO AND PEACOCK CONTINUE FIFA WORLD CUP 2026™ MOMENTUM WITH HISTORIC GROUP STAGE AUDIENCES",
+      "source": "NBC Sports",
+      "published_at": "2026-06-25T00:43:15+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNNUl1V1hpdy1BQkJDclhBc3BNck1PSVVVVERmVlhyWm5MTldOM2lYcDJTdm4yVXFraUVfcVQ0ZGxhMjFmVFhUR25NTm94M0VGVGZBcDBEZlJDOHpnRjBJTjY4TjdHSFpGeHNJWnJrZnRSYnRORjhYeTJsTWUySHVtYzYyMDBlU3RBS0VfSERUamVBSmFTejhPejBCUzFPX19jVHRwcW12ZFhjRy0wRW9OVl9mMS1fRE9yMlAyQlk3NXhYRGhBMHFYNUszM05ZN1lGZ1ZseVdzOGFfWE1VMnc?oc=5",
+      "lang": "en",
+      "image": "https://nbcsports.brightspotcdn.com/dims4/default/91cbd94/2147483647/strip/true/crop/1920x1080+0+0/resize/1440x810!/quality/90/?url=https%3A%2F%2Fnbc-sports-production-nbc-sports.s3.us-east-1.amazonaws.com%2Fbrightspot%2F6c%2F57%2Fbc28af81495aa96b196d5559a7a4%2Fworld-cup-telemundo-pb-logo-1920x1080.png"
+    },
+    {
+      "title": "World Cup 2026 knockout fixtures, results and group tables",
+      "source": "The Independent",
+      "published_at": "2026-06-25T00:38:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOOUFCREVNWHhEWVV5RFdld1lJUVpBNmc3TGM4ZlcyTzF6cjhUUk5RTjlRZHBpN3VLdjh3bWtaTFBZR3BSSi1RQVhtOGQwNlBFRERfZzA0cV9ib1UyVF9CSWxxMXo2Z0ZDdmpkTlRDSHAwYUd4eHkxbnBfWTRvU1VPUGQ3WG9jQ0stam5PRTI2NUNUYmtZWW91MnAwcjVaNk5wcEZ6ZFNvekh6QVh2?oc=5",
+      "lang": "en",
+      "image": "https://static.independent.co.uk/2026/06/24/08/download..?trim=712,1951,1801,1819&width=1200&height=800&crop=1200:800"
+    },
+    {
+      "title": "Scotland vs Brazil Quick Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-25T00:29:34+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5WQlJHcUZjOUgtVDFRaEVIQjlpYnMyTUQ2dXBoNkxTeTBjbUJLR0YzNGJ2MWx2LS13b3hlMDA0QzBGcmpYRGFDNElZQWQzX0xkYmZkUXRZcGIyU2ZwQXBNamMzM2IxN3RNUV8yMTdR?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16479871/720/1280/y7gtjgrnd77mekg9.png?ve=1&tl=1"
+    },
+    {
+      "title": "Morocco vs Haiti Extended Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-25T00:25:21+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBPRm5XS1IwbTU3UDRBQUhQUmpZV092aTF6OC1WVE05RE1wUndXaGNfSHZRcHIxQjhqMlhOamxCTDgtOGhxU2FOZ1F6UkpvVGNWNmtSZ2NaekV3aHNKY0NocGlR?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16479828/1280/720/l3q2jqvnlz802f5c.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "‘Adrenaline was pumping’: KC Elite Drum Squad recalls World Cup performance at Arrowhead",
+      "source": "KSHB 41 Kansas City",
+      "published_at": "2026-06-25T00:22:52+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOM2pJQlFpSmFSNjF6ZjdWcXprWWdUazhFV3VrT2JrX25vYzUtR3BqLV9VV2VIVnBuSWUweU85RDNJcHRFRzhkZjVXbTdmckUzTjF4R19TRzVmdFNXZ2VMQ1RuRnpoWjloY3dEeDUzVXlHUXRtd3FuUmRiSWMzV082dXRTRml5X0h4RzlkTEJZVnQ5N0NDNGo0YkFYZEFVS2JHa2lCZDZBdGdYN3dZN2w3c1FwM09ObzltbUpsa3R2Ulc?oc=5",
+      "lang": "en",
+      "image": "https://ewscripps.brightspotcdn.com/dims4/default/0f51f05/2147483647/strip/true/crop/3568x1873+0+0/resize/1200x630!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2Fe2%2Fd8%2F23a2e3d74c30acc53bfe155cb6ca%2Fscreenshot-2026-06-24-at-5-22-30-pm.png"
+    },
+    {
+      "title": "Scotland vs Brazil Extended Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-25T00:22:40+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBaZkFHd3JmQmlCSjU1SGd3RTRGd3BUMmkzV28xVkd4ZzQwZWY4RnNoOGJDZENSdDN1V2NFSDZ1cEtOQ0FyU3g2eTNQS2tka0xzaDcyUTJ1N2RsVHVNdUlnTXNn?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16479808/1280/720/o7jh1hhr1viqthr2.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "FIFA World Cup 2026: Brazil coming to Houston Stadium for Round of 32 match on Monday",
+      "source": "FOX 26 Houston",
+      "published_at": "2026-06-25T00:21:10+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOamFIS2Z5X2Z3OEt5WGdVcG9DMWpOMEZpRGxta2JqQWpjZ2RsWlczd2FjdW9HYUNxdUZLekNlMEJoTG4wVHBjT2NVTjFSdTduVTV4OHc3T3EzV1RraVhVUHBBYkwxOFRPTWJaSmNOc29nOWhMTDNsY0lDUFV4QnFteGl5MFBpMVRCdzg5eXlNZ0piRGRmNEdEYmJfR05uaG9IbGZtOWxCUXjSAa4BQVVfeXFMTVNweDhocHdxTzVlMVg0MDVCQUZ5aklGQUhPRmxrWHVNRm1NdGNZbExGMU5IUnVJR3VpRkFYWDFuOE1SX2tOLTUwdzRSQmZCRUo1UHF2QkpEd192WDBsdHY5ZUpwdlNZM0JkOXV0OHU2QWlOQWFGVGhEVGhsNkQ5cDZPSFFSQUNqaEtuWjBmTm1CYTlCbGZUWm1WcFBVbU94NnhHWHd0eVF4VDhDSHhn?oc=5",
+      "lang": "en",
+      "image": "https://images.foxtv.com/static.fox26houston.com/www.fox26houston.com/content/uploads/2026/06/1200/630/gettyimages-2282644870.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "Vinicius Jr sends Brazil into World Cup last 32, who do they play? Are Scotland out?",
+      "source": "The New York Times",
+      "published_at": "2026-06-25T00:20:34+00:00",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOUlNlMGJyUzBVYnczUkpwMGl6MUVRVVd0T2RIcFZFLVhaZWN4WDdkR2RCd3YxNzRrT0NicUljSUFLeEhHNE1XaWdGUDVlRmNfdDZ1bkpOX0gyM3QyZm5ubHRqa19WQVBYSkJLYkN2Y011cUJzUHFqeXBpVEdQeWRxMThYM3VuRno2NDJxZ3ZWVXQ?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Matheus Cunha finds back of the net to extend Brazil's lead over Scotland | 2026 FIFA World Cup",
+      "title": "Gessime Yassine scores late goal, helping Morocco clinch 4-2 win vs Haiti | 2026 FIFA World Cup",
       "source": "FOX Sports",
-      "published_at": "2026-06-24T23:34:06+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9abGRoR3ZfTENBLWFJZkNhbjZXYmpYeDNvU0duQlFkOTVhQ3Y3RS1iY3Q4cVo5ZzBfQmV4TXpaVEYyQzdRX1oxTV9BRWlYUldPQXprbjN0WC1ZYmlremQzMEZR?oc=5",
+      "published_at": "2026-06-25T00:18:53+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9ab3kyZ3RZa01KQW9BMzdTZUpsa3g2eV9od3FLbGFwdkRGMFF4Yk1ab2VtUXJrNkVmWGMxQS04UUI1dUZCbU1aeDlhT2VoQWFKX3poTHpRX2I4emdOMUNJeXpR?oc=5",
       "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16479622/1280/720/lezzotalx2c98k5y.jpg?ve=1&tl=1"
+      "image": null
     },
     {
-      "title": "Feds give exclusive behind-the-scenes look at Miami Stadium security during FIFA World Cup",
-      "source": "WPLG Local 10",
-      "published_at": "2026-06-24T23:31:39+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPaVBrQ29EVXZUYl9GN29INjBienFOTVplWDJyV19jYlNjS0MyWEVYU0UwUlJJaTFSckR1bWM0b1FFbnRybVRFMXRqdG8xeExRNGRRY3JxZ2pSUVNnaGo3Sm1Zb1dwVUpOdmZGZ3F4LUdlMFJTTmlsTDFLRHRoOUhNd001MDdxT3QtamRlR055ZFVKQ2YyTk5iWUlqSzhZWGxWcU5sUm8wTW5wSDlMWlByYnhna2tYOVZ5SWlDZEpYdWVvSUNacHlpbm93NmhHODF2UnIw?oc=5",
+      "title": "Morocco vs Haiti LIVE: Watch FIFA World Cup Group C TV stream, score, commentary & updates",
+      "source": "BBC",
+      "published_at": "2026-06-25T00:18:02+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1QbjhLcWZ6T2VSSUNwSDZsMno1aEkyUGZLUlpoN1NZVnp6WXdVWHdiZ0hjazlJWU81TjVleGJ5NGs2Wkhyd0ppLXBhN3lfNWw2TmRTUlR1bWdNLXJ1RWlZRjh2cnc?oc=5",
       "lang": "en",
-      "image": "https://wplginc-wplg-prod.web.arc-cdn.net/resizer/v2/https%3A%2F%2Fd2p7h58ldpiqzj.cloudfront.net%2F06-24-2026%2Ft_193de1dcb9d549b0b464abaa132eb4bb_name_46752602441_hdtv.jpg?auth=8cfa3013fec2b4026b7fc914a065ef3e855d22e8c7ee17d1e329a999bb53cf48&width=700"
+      "image": null
     },
     {
-      "title": "Morocco vs. Haiti Live Updates, Score: Latest World Cup News and Goals",
+      "title": "Morocco's Soufiane Rahimi score go-ahead goal vs Haiti | 2026 FIFA World Cup™",
       "source": "FOX Sports",
-      "published_at": "2026-06-24T23:24:23+00:00",
+      "published_at": "2026-06-25T00:17:33+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1HWEFnLXBBS3NuMzBCV2V6SVRyOHV6VkRERURjcXBNdTBEcWN4aDhXRDluMTNuR25uUUZUdmxqcXZtQnJjWjFrNE9RYUZITjhSelBCY29saVVUZ0h1eC1xc3hR?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "Morocco vs. Haiti Highlights: Morocco Advances After 4-2 Win",
+      "source": "FOX Sports",
+      "published_at": "2026-06-25T00:14:45+00:00",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQSmxkZUtsNXlSMzc5RTZocEFJZ2g3MVF3ZjhOVVRSNWNKWTIyQlR6dHpteVRINExaeW9HTUpqM0hQRkxsdkY3U1lKOEtQRkg1aVg2eU9LLUFMZjRBNkU1eEVCSFhsZ05ET192RXU3RThibDlJTG9OZldvVzAzVWxJcFIzcUN6dFp1TnViU2VjNEFYaWZ4YnpfR19VOE5QTmFhRDZtUFdQQjB2QQ?oc=5",
       "lang": "en",
       "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/06/1408/814/haiti1-1.jpg?ve=1&tl=1"
     },
     {
-      "title": "South Africa v South Korea: World Cup 2026 – live",
-      "source": "The Guardian",
-      "published_at": "2026-06-24T23:21:59+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPOHVLUzlzbkpmS1B1cWFlSThxWHJRel9UT0kwRDJlbXFlZ0VsMG85UGdLTFRPMEZoSU14ejc3Q3hMaEFUOEwtWk9lQTcxY19TR01FS3VISkxBSndGTlFHRkJ1OUE0N3ZEZUhOc0Z2ME9qbmlfd2JqR25Cb1NIOHRrdk9ybXBFTFBVV0xDVTFmUENkMWZGeV9NRWxuM0JIZGx6ZHc?oc=5",
-      "lang": "en",
-      "image": "https://i.guim.co.uk/img/media/97ae0dfe2dbd4456bace51a98226340d9b9fcf86/1141_0_6467_5174/master/6467.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=b66e2d8600db5e385e1e87dff9da96e4"
-    },
-    {
-      "title": "Christian Pulisic feels ‘great,’ hopes to play for US in final World Cup group game vs. Turkey",
-      "source": "Boston Herald",
-      "published_at": "2026-06-24T23:19:54+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPemlXMkc3Q1JyVmtCN3NzX2JUVXBpbjNkeWpBZWo0QzJIZjFVRE5Hazl3V2xQQXJYYXh1aE1UbVFCVy1iYXlsd3IySllxNVU5WUZDWFBSZ0JaVVA3R2xrajBVblNKVUpCRGFicGlYOWRyc3V3VjQtVkJacloycDZlV1ZycVlrRm1fem1pTlZXWC0?oc=5",
-      "lang": "en",
-      "image": "https://www.bostonherald.com/wp-content/uploads/2026/06/US_Wcup_Soccer_2999_-1.jpg?w=1024&h=682"
-    },
-    {
-      "title": "Scotland vs. Brazil Live Updates, Score: Vinícius Júnior Bags Brace",
+      "title": "Morocco vs Haiti Quick Highlights | 2026 FIFA World Cup™",
       "source": "FOX Sports",
-      "published_at": "2026-06-24T23:11:37+00:00",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNV1F6RGVXalhGM3dpVEZaMHNYMXZRcGxxLUM1RU1hSWtNMDJtQ0RySFpLbUZ2MjFQdkVyMzRGcGpaSTk5cFFQaWxYSEFUSENGZ3U2RHkzT0NzSWVvY1REdDVFYXVNYV9nSFp0Z2JOeXVKYXdTMEFDMWZLaVdJeVJDX2lYZEpWNDJSdlk1WDIzRXBLRXdEN3BZVTRuUGExckNXb3lmdWk1UnZZVlJZ?oc=5",
+      "published_at": "2026-06-25T00:13:48+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1pNE8taVREQzdSVUpyWjB1X2pORDYyaERzNHZvS1VRb0VyREJ0cGxUajRKUy1mYVZJRGV3VHE3RWxLa3UxQlloWURRZEtrcUJBVHo3ckJsTzN0RUtuZ0xPWmI1bUh1bFJIS1lXb1BR?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Vinícius Júnior scores his second goal in first half vs Scotland | 2026 FIFA World Cup™",
+      "title": "Brazil ease past Scotland to win World Cup Group C: Live updates and reaction",
+      "source": "The New York Times",
+      "published_at": "2026-06-25T00:05:50+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOUTQ3WGJSUGFIc19HYUhyN2l0a1RaOHJGTjEwVDJSeVJ2YlgtTWExOG84LTNjcEZMOUN6TzI0bmsxb3FFSmo5X0cwR1Vxc3IyeTNDNVZfT3VsVDd2RzJaTGM3aGYwRWlZVFNOUmJzOTE2NllzT2w0U2lhY0NnSXBSRmdXWHlEU2J5N2h0QzJLT3dPczhBcXZUY1NfaUhvTjh1VFRPTWdjeWJIak1XemVnWGhaQUNmeXhk?oc=5",
+      "lang": "en",
+      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/crq89LIfYHqK_OJt2PLEbfIgg_1440x960.jpg"
+    },
+    {
+      "title": "Morocco vs Haiti Highlights | 2026 FIFA World Cup™",
       "source": "FOX Sports",
-      "published_at": "2026-06-24T23:08:19+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFA0a1lybkRFOU5GLUlyc3dPMTZ1bk5tR0hqZURZTThLclhhYlFCTEE4U19iNFozZUlERFR3bmlZeDVaMHpQSWw5Z2ZhRF82WUM2cU54SkxfVml6RHRudENzYVhn?oc=5",
+      "published_at": "2026-06-25T00:05:26+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE95eHI0NUlOby1GV1h5VnBPU3ZNaUVPbXNGS1B3aGpFWTNmbEFkTFN0UFdfY0lYRm9VNUFYa05WN3RBVURyT3NCSnBaSGRQNXpTZ1c2em1rczRXY1A1VnlwYlZR?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Vini Jr. scores his fourth goal of the 2026 FIFA World Cup™ 🇧🇷",
-      "source": "FOX Sports",
-      "published_at": "2026-06-24T23:05:11+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5VQ0V3TUpPWEducGRuN3Rab2dZUnBETzQxUE1HUGprekVPYmJnS0JMVklLV2RoVjNudjhxQzBVdXc4TWhHOUxEMVNTZy1rSUpRZHdrTGIwQS1aZjZpX2xpemNWM1pfMHp0b3FyU1JB?oc=5",
+      "title": "Brazil 3-0 Scotland LIVE: World Cup 2026",
+      "source": "Al Jazeera",
+      "published_at": "2026-06-25T00:04:38+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQQllGdVRBTm1ad29BaDRmOExhbW9XTW53YlB5YUc4S244SW80R3BFWjZUV0V0d0xrUHVHOEdQR1luVmlnT3JGUGUzRXdaMjdUMS03WmZuZ2l0cHFQZy1MMm1QV2ZHWjlvYVhhUFlYNDFtWi1icUtYaHFnSXo3X0hXOUxLT3BJSEFCWDFwZFN1bjE3SlZU0gGaAUFVX3lxTE0wY284MTdFdy0yM3h2c3A1N2s5ajJ4OWpoajhhNzM2NnNac3pJckcyQ0hXbElDdEh0Q0dkbGxtZGl1cEFXSTlCbFRHXzdZS2RXNXRjQnFlRTdodFdLLXc4UDJzMDhsY0wzUndUV2dpYjdlOWFtZlU0akdJOWxQYVZaMXVCSmNKMHVhdW8ySVVudTE0cVNBdFhhLWc?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Morocco's Ismael Saibari scores equalizer vs Haiti | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-24T23:00:21+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9WWVBjOGJaUjJLU2t6bm5rajB3d0o5U1JfMXliWlZDUUFCZE5uYk9zMnJJUGVSZ2d5LUl0U2UyS2FLdjF6MEYxWjVRNDRrcHRNd1JBLWh4YjB6cG0yeFExQU1B?oc=5",
+      "title": "Morocco beat spirited Haiti to progress as Group C runners-up at World Cup 2026: Live updates and reaction",
+      "source": "The New York Times",
+      "published_at": "2026-06-25T00:04:07+00:00",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPYW14M1pxOGFCZGdqLUlHeVVhdUl0WndtT0FrNkxSeEJkd2FoTVN4UnJaS2xjTzhiSm5rNFladTB3YUo2OHFyR0s1TmxiN3lIeF8zNnJQUUpQSzlfYlNNcGprMzVBOERtdnpLSHVWYl9xWVFKaG5VWWZ4REh0TlF0eDRGRTJZSlo1X1BJdmRkRXdKMVMtbTh1S2YtT001NnZPakNwV1JxRC1rTVRwTUMtRHg2REdWdw?oc=5",
       "lang": "en",
+      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/GQdPeLkhMyzO_qOFXHKZJG0om_1440x960.jpg"
+    },
+    {
+      "title": "灼熱のダラスで最終調整！ 日本代表、スウェーデン代表との大一番へ。「誰が出てもやれる」【練習レポート】",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-25T00:50:23+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9uclcyMUxXWERmcXFVNnFQN2xzc1psd090TWFNbVR6dXBucUlTUXIxbVk5SFZiSGItQXpXTjNxcXYzZk9HdnFUU1FyazJWdGU0NkFFX2hkMXZpbVc2WkdMRXB0aw?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/260624_ueda-ayase_motokawa-etsuko.jpg"
+    },
+    {
+      "title": "【ワールドカップ 決勝トーナメント表】組み合わせ W杯 FIFAワールドカップ2026",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-25T00:45:46+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DQy15dWRFV1JCd3NNRmItSllCZjFHOWR3b1R1UTVCWTZnZUpCVjBGVGlTQWxXQXRRUlk4ZndVVVpVYTBpdjNaWlduY1YwaEhCenlYQmNiZmFqbk0zVmd4TGhkVQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2025/12/20251206_worldcup_getty.jpg"
+    },
+    {
+      "title": "サッカー日本代表対スウェーデン代表の解説者は？ 放送局・ キャストを紹介",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-25T00:45:16+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB2d3czN3c2S3FDcU0yYUNmV2o5ZnNQTm5uVmlHREdNTHZmQzBPMHpYTm8ybmRORjl5Y2htTGMwM2JFWUZkak9aZ09WS2gya2kwRGszNWJTd0NoQ2xfeHQzaWViRQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/1d9b00926d825624bff31ae925b42ae3.jpg"
+    },
+    {
+      "title": "日本代表、決勝T初戦の対戦相手候補が確定！ 2位通過なら“優勝候補”ブラジル代表、首位突破なら前回ベスト4と激突へ",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-25T00:43:03+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE05RERReU9feFdVQ04teHoydmxzRk1kVVJWNUxRVWJYN2txbzlJYXl3TERCNjU3U1JRZmVIMzBhQUFoLUFCSEZzUjMzcXJERFI3MEl1ZUdQajNZX3FOY29feHZITQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/20260621_Japan_getty.jpg"
+    },
+    {
+      "title": "RB大宮、26/27シーズン新監督は37歳スペイン人指揮官「レッドブルサッカーを体現」 直近でウェストハムのアシスタントコーチを担当 ｜ Jリーグ",
+      "source": "DAZN",
+      "published_at": "2026-06-25T00:40:44+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxOaE85a1RkZ0NLbWtXX2FtbnROYWc3Y080X3VkUEpGNVJrZGxPR3oxWjF5cUYtZHBhSGZ3LXlRU1lVUHFUaFFWS3gzdDltQXpjNmh2dkRQU2tKMzkySEpUUndvYTZ1c3NkRUoxQnZHcmFxR2IyZzhWMkctaGxTYUlqU2JPUzdzaVFmX2VyZE9US09CLW5nM0RURGhxaWhBTmlpYlZsaDA2QWwzUTZzNnNENm5aeFI2M1lRa0JJX1JTRkhwdklsS2tFbGtlRDVBVV9tdVV3WHNXTjR1RzcxRjRNR0RCYTZ4eG80S0lvRw?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "Haiti's Wilson Isidor scores powerful screamer top corner vs Morocco | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-24T22:59:08+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5weG44X1lYZm8yeGVXZzYxRXIzRVBxWHpxN25fWVlqVHhYNTdVZUU0ZEVIRGtTRTUzbENURWdUanNEZUY5YTdzWGR0NEhRZm5GV3lndXNJTGZkRzZIaW0wcVFB?oc=5",
-      "lang": "en",
+      "title": "【生放送!Tver】 サッカーワールドカップ 放送・生中継・テレビ放送 2026年6月25日",
+      "source": "City of Windsor",
+      "published_at": "2026-06-25T00:32:55+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwANBVV95cUxPc0YxRThTM3NGd3hONVhId3RZM0tEa0ladDBxS1VoTGE2MlBkTmE5T2JMeTQ4V1EyU2NaTXZkZXJWNWtTM2VNeGk3VHVXREp6WHRrVFo2WTJLU2hDQkVuaTR1WUltQlNrS2dDUlVKdDBLTUFmUEdaN3RhYXFVSGZPZlVmNWNPekQ4am16VFVhY3hVdEs4bkozbGlCR09uZE95cDF4YkRLdHQ5c001WUJab2YwRXZmeE4ycmlydXl4cXhaYmZYeGszUDdNRFE0MHFWZzktZWNuR0hFZXFFOWtSV1cxMEs1U0dlRHM1Rm5fVm1PWkhDYmo3cnpfVGdTRDdoVFNjOUFNVktVNm92LTVkV3ZyMkctcWxiTHdMejlxN0NOT29XLTFvbmhwb2NaLXdnd0F0SXU1Z2JicUNHTTJYRVlmNlNRakxaSTJfMkR5dmxock4yeHdSb1lSNzRfYzZQMmpfOWk0b2VfekZ4cy1IUXlVcFNuVHFvZkZNU3FXVGNJZ1JLNEtzUFVENDVsbXJHQ0JoWHFkbGJrV004WnVjcEZsV1NjZ1lMdUV0MVJzR3l0LUx0bnlvNUxQRjhPb3Q2?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "Scotland vs. Brazil LIVE: World Cup 2026 updates as Vini Jr. punishes errant Scots",
-      "source": "ESPN",
-      "published_at": "2026-06-24T22:53:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPV2dQNDIxNnlnM3U1NkltbGJlSnNfYl8xa0FaOUc3U2p4X0dsVEJ3V0lkbjZSSXFCc0hyMmN0VUxZWDdHVkVPWk1PT1NPQ0g4dy02TXRYTkFSbURxZnNlMmg3NXhUelhzQlA4NUd6ZFR5NjV1N3U1aC1hNFNGemYwREVJV1dRRFB5V2VuTjhDMmptYk81T0Mwc3RvVWxtajJjclV5T0R1NnRNeUlLMnowTmMwLTJoTThXWXpwWFF6SjFKbVk?oc=5",
-      "lang": "en",
-      "image": null
+      "title": "W杯トルコ代表対アメリカ代表の地上波放送、ネット配信の予定は？ 視聴方法を紹介",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-25T00:30:15+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE0yVXAzY1l6cFZPcmVQMkoxdWlqbnlZaERGZXhwSVNlcmxRUjcyNUxyOVRzd1c3QXFTdk9HeF9OSURBd0c2NVFpNEJKZ3RfWFVqZC1nQWJBSlJ6dDkyQ0w0QUVQRQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/d529141ba90331a312847d42e32eebe9.jpg"
     },
     {
-      "title": "Achraf Hakimi taps in rebound to put Morocco level against Haiti | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-24T22:52:51+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBCUFduM0J4V3VtTVpBd2J2a20tMnNBdms1Q05OOFNGUU1IeThXNjllQ0F0NkJHdFU4OTdPX3VPTzBXZzQwRXZYS1VzU2dWLVdPN0pfUTAzaTlVdENhVUJKRWFB?oc=5",
-      "lang": "en",
-      "image": null
+      "title": "ワールドカップサッカー 南アフリカ対韓国 ライブスコア…グループA",
+      "source": "読売新聞",
+      "published_at": "2026-06-25T00:30:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFB1eVE3aUZFWTFzWXNUNzNSUmN2NmFwYnVJY2FIZFdOYl9qUkZhQXZFLU1iRzNpeTlCSFZDcVhNcVBtLVVyWFk3SVFycTRvUVVScTl2SmVrV1A5dWhjZFNWMHNabXR5ZDEtUTZ6Tlpxejc3MGRZS0VaNjh6cw?oc=5",
+      "lang": "ja",
+      "image": "https://www.yomiuri.co.jp/media/2026/06/wc2026-og-live-free.jpg?type=ogpw"
     },
     {
-      "title": "Haiti's Johny Placide makes remarkable double save to preserve lead vs Morocco | 2026 FIFA World Cup",
-      "source": "FOX Sports",
-      "published_at": "2026-06-24T22:47:40+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBOT2ExSjZVZzlWRl9MUVN0SnlUVmFDOWR0WGQ4TDNJYmlyYU9WOG1CdEsxcWxSUXdVVHNIYU1EVW1LZUc1SUl6T0t2bllmTjVmX1BXY1Q0ekgxSXc1dVpzREdB?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "World Cup 2026: Scotland v Brazil – in pictures",
-      "source": "The Guardian",
-      "published_at": "2026-06-24T22:47:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdjB5UkRuNExvVUZOdzR0dGxCREE5Mi1US0Y2cFBkWGdjZ0hza0FneWZqWS02RW9wZVZwaGxuOU9lOFJUb09fVjdPSHFyUmx4V0RYai1nS1djSWtRaHhQU1dLdUN5bTJhNUlSdmtaWUV4VGhYa3U4Mi1tS183RTQ3djdnY3JpY0JhOEtQMjNUOHNHT2dYUVFYdUJ0N2ktT2ltMGRv?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "2026 Fifa World Cup: Scotland vs Brazil - Vinicius Junior scores the opening goal",
-      "source": "BBC",
-      "published_at": "2026-06-24T22:38:49+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1PbkE0VDJ6VjRaN0NkVEdxVTl3SjIwS2RwQ0I4b2lDLUFMdFlZWFZla1JMZGhhUGFtV2NiQzVWdXRFVklMMFhBVV8yMG9IWmptdGJSVUo1MlFrWEdCNlZmbkxkTTU?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "スイスとカナダが決勝トーナメントに進出 サッカーW杯",
+      "title": "【サッカーワールドカップ】ブラジルがC組1位で決勝Ｔへ モロッコ、スイス、カナダも進出",
       "source": "日本経済新聞",
-      "published_at": "2026-06-24T23:34:52+00:00",
+      "published_at": "2026-06-25T00:18:43+00:00",
       "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9faWJUMnNlVGZzaWFWNnJHR3UxS0gzSzREWFZ4XzROd0dpYkhsQkE5TlNSV2tQNVJGbS1xdk5ySTZmRVU0YmVyY2JEdmhtdUJTemF5QnFuT0tvd29mM3BEcVNzcVE4TkZzXzVfYQ?oc=5",
       "lang": "ja",
       "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3217424024062026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.47&fp-y=0.22&h=630&w=1200&s=2e9890f59985b734543cb3b9594a8e3c"
+    },
+    {
+      "title": "決勝トーナメント表｜FIFAワールドカップ2026",
+      "source": "Goal.com",
+      "published_at": "2026-06-25T00:13:25+00:00",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNRUhTeDVfSllKMkRrUmloQzlwakUtcm1vQmwwR0M2QXFRc1hvNzVabHZqZUtTZnhncmpOYXFNcE9yTHJBR3BnV1BJSXlEX1l0dU5IWU55aERGQ0RjQVFDYVpqMklmYWUtQy1xQnNwR3kwajcxdlV6cmhDQ3g5Y1NTT0NfWEdxMHVMY0h6Um81dldLRzJxNmZDcjlUbk1YcFpfZUx4WkNsbDFYdmo2SFUw?oc=5",
+      "lang": "ja",
+      "image": "https://assets.goal.com/images/v3/blt806a9bd2e938353e/World%20Cup%20tournament%20bracket%20small%202026062501.jpg"
+    },
+    {
+      "title": "【北中米W杯】ブラジルが3発快勝でグループ首位突破、ネイマールも約2年8カ月ぶりに代表復帰！ 日本が2位突破なら決勝Tで激突 ｜スコットランドvsブラジル ｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-25T00:08:53+00:00",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOaFczUXNsZFNKVkdGamV0Y2dBb2N0cDZaRmFuLWhVcUUzWW9lRzRONGFOVW1UNXg1OGdVbERUcy1QeHliaGphR2hjdjVoTTM0YU5uQ1JrMmZzVlNxdHIwRHR2X0NMejg4TEdDZW9wNDdhUWlZVlpJQVE2TTBaaUVGa2RtS3JYQUZvNmhUR3YyVGJpUFRrcDRFV0xZSUFJSWdQQjlfMERPcTl4ZzBUVXRsbUg3V1F6Zzlud0RKckFFRW9NTUotckE?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【北中米W杯】ハイチ健闘も、モロッコが終盤のラヒミ弾で逆転勝利！ ｜モロッコvsハイチ｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-25T00:05:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPeU4zMGRSUWNVQS1UWGZoeUxIM3NqV0tfTkFNcEZ6N2Y1M2lNWFRhQzk1YlNDRGJRWmhDZ3RyQzdUTUhzVDZNNW5tcFJjeWFiMFdtY1ljTGN0VzdNeVJRN0JOVGYyMm4wVk54UnpUZXZxX0F4ZG03VTBRbWpwT05SM0dFSVBCOU1iWnpUY05vM0lkWDEwbEdqZFI1ZzFEQXJ3Vm40dTkteXB2SlNIZWx5OG8wZnBNV2tNS1ZaYjJOdGp0a1IwbV8yX0FuMnZ0OGRxZkYwM3lpVU4?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "モロッコ代表が勝利もグループ2位通過。ハイチ代表は2ゴールも史上初の勝ち点獲得にあと一歩及ばず（フットボールチャンネル）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-06-25T00:00:35+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBHNG5ENmkyMnpyZkktWTlVaVZ0anF5VDF5V1ZHTTVfbGZoMExzQnpmNVhyenBubFRQNkthODJUVkRaNDE3eDhiZnJNWU40Sm0zaEQ1d1hnVUMxNUI5dzVORUgxVnFoOGVraEwwTXFsUzRiWU5WNGVBM0NrZnlES0E?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【結果速報】スコットランド代表 対 ブラジル代表 スタメン・試合経過・得点情報 FIFAワールドカップ2026（北中米W杯）",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-24T23:58:47+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5BRHVKTERGY094UUx6VWVmV2hZeWlycy1hNVhPZUJHSExPVWZsMFpVUkVhUHkzNHpsN0hjUnpnaDV1bnpSbFE5Z2VuaHhlZmlScVNGQi1FWktKYmZ4NzE0OVFVQQ?oc=5",
+      "lang": "ja",
+      "image": null
     },
     {
       "title": "W杯キュラソー代表対コートジボワール代表の地上波放送、ネット配信の予定は？ 視聴方法を紹介",
@@ -194,20 +298,20 @@
       "image": "https://img-footballchannel.com/wordpress/assets/2026/06/0622_sweden.jpg"
     },
     {
-      "title": "W杯パラグアイ代表対オーストラリア代表の地上波放送、ネット配信の予定は？ 視聴方法を紹介",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T23:19:16+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE53RlpETXo3N1lMdVZmNzNjMFpVcWVQTnR5MTY0SHhXeGE2cm91MHRpUHlVbDBXckpfLUFTSS1oNG5aR0oxT1VQcl9vMUhPd2lvd05HMVpubC0zbjZPelRodTdOTQ?oc=5",
+      "title": "森保監督「甘くない」 スウェーデン戦へ警戒―サッカーワールドカップ：時事ドットコム",
+      "source": "時事ドットコム",
+      "published_at": "2026-06-24T23:14:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DeWNRT2hPcmZZZlNsVUUwVGlvOWdOV3daSDB6QVlkUktoMWRIU0pTLTJGOWNtQkd5YjEtd2JzZklRdGc0d0ZDeDhwRzJCaUdvVVVEbEtMUkFBRlBGd2JHY0JIdw?oc=5",
       "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/caa1689504bea5f6be17a447cb27e8f5.jpg"
+      "image": "https://www.jiji.com/news2/kiji_photos/202606/20260625fl27S_o.jpg"
     },
     {
-      "title": "勝利アンセムを阻止せよ。日本代表、「EDM大国」 スウェーデンとの決戦へ",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T23:15:12+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9ZUWtONWR3YzVzTVJ2VFFkb1dWRUJRYl9ncFlXZlF0Vk5nemFHcGQ2Q0tOcXhlV20wUWk3MDRQV1pvd09GVWhXZ1ItV3J3cTBiaXVkMG9aSDIzc3Z3UnZtb0RYdw?oc=5",
+      "title": "ポッター監督「守備で強さを」 日本と対戦控え―サッカーワールドカップ・スウェーデン",
+      "source": "時事ドットコム",
+      "published_at": "2026-06-24T23:06:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE04dEJLX3g3RXhfWFdqWksxVG1oLVR1NC1sTVBrc1MyRlNJUU9sQWIyQmRObnoxM2FmY3dTaF94UHYzaV9WTUJ3d0Znc3BjaWZVbDFDcmwxZ1pNODZhMlFZN0Nvaw?oc=5",
       "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/0625sweden_getty.jpg"
+      "image": null
     },
     {
       "title": "サッカー日本代表の最新FIFAランキング順位は？ 26日にスウェーデン代表と対戦！",
@@ -216,110 +320,6 @@
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9qTVdtYV9VdlRSV0VXRExRanhXZTU2dlFuNDVmZ3pIZG0xTXZRaFplUlpmNkw2bFJENDRpQVpFamdRZEtMS0dvdElGUEgyOVJVeDMtdGJXWFk1UlNtU1J4dGo2OA?oc=5",
       "lang": "ja",
       "image": "https://img-footballchannel.com/wordpress/assets/2026/06/20260624_japan_getty.jpg"
-    },
-    {
-      "title": "決勝トーナメント初戦の相手はブラジル？モロッコ？それとも…３位通過ならフランスと対戦の可能性",
-      "source": "読売新聞",
-      "published_at": "2026-06-24T22:51:36+00:00",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5XWkM4ZkgyODJreExtZHRFMHVUSGhyMUFZOVZPRms0aWxwWXFYWXhWM3ExTFhRSUlUSWwtdk1rVHN0MlEzOTFMcDJRdFBwUmR0WjBQaTNKZ3VmMGlxUVo3RDVVZkdaRTRTcDQwZE5ZV1hSZ2pjOTRsYg?oc=5",
-      "lang": "ja",
-      "image": "https://www.yomiuri.co.jp/media/2026/06/20260624-GYT1I00446-1.jpg?type=ogp"
-    },
-    {
-      "title": "W杯チュニジア代表対オランダ代表の地上波放送、ネット配信の予定は？ 視聴方法を紹介",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T22:36:53+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE84V3d1ODhDeHpCRVlzVXpQdEtXVFZrdk9rRGZQc1I1U29aYndseDNYQjAxY0N0RXZsQnlHQmJPbnA0NWsxZmlCelhaX1BNOTExRzBEZmIxanI5QmFxNllMWGdTbw?oc=5",
-      "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/b231696795e00a5aa3056b83ff325d43.jpg"
-    },
-    {
-      "title": "森保監督「甘くない」 スウェーデン戦へ警戒―Ｗ杯サッカー：時事ドットコム",
-      "source": "時事ドットコム",
-      "published_at": "2026-06-24T22:34:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DeWNRT2hPcmZZZlNsVUUwVGlvOWdOV3daSDB6QVlkUktoMWRIU0pTLTJGOWNtQkd5YjEtd2JzZklRdGc0d0ZDeDhwRzJCaUdvVVVEbEtMUkFBRlBGd2JHY0JIdw?oc=5",
-      "lang": "ja",
-      "image": "https://www.jiji.com/news2/kiji_photos/202606/20260625fl27S_o.jpg"
-    },
-    {
-      "title": "【W杯】ハイチ 52年ぶりの歴史的ゴール！今大会初得点で先制、モロッコがまさかの失点",
-      "source": "スポニチ Sponichi Annex",
-      "published_at": "2026-06-24T22:11:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPMnNDTC1oOTJjR012Yng4cVR4ODRoWUVGd3JWRURpcnN6SG5aaTR1dFN3dWxUMWNhLUZ0M215LVE4MldhSFVyMV82MXJTWXgtTWo4YzFEMXBpcWR6ZTBjTmpka3EyTHl6SmpOWG00c0tIMlJtaHVyODBqc05ITkZudzhOcXRPUUo1MzdWVg?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "パナマ戦を欠場か…イングランド、MFライスとDFジェームズが状態を検査へ いずれも軽傷？ ｜FIFAワールドカップ2026",
-      "source": "DAZN",
-      "published_at": "2026-06-24T22:08:39+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPN0VjUG9UVkFZTFpJZUpCcnVOU2hWRENlRWY5NDQwUkJ4akRuZTB1TzI4aWxrQ05CMU5Cd1JReko0Rk5KZkIzRFR6ZjVnMUh2MlNYRHBGZWU0R3ExLUx6aU1kU3BoX2hvbnNYcFJrMUgxRnlCTXRuODZpNmNxVzZFSHpHOVAtc2ZyVFdseFZMUDJEN0pSLVNIRldqc3RxUnZhaUZZdy1pZ2s0ODZpWEVqLXluR2YzY0VZODVIZFZfTHJ1dFVwMngxa0FR?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "本田圭佑を超えるのは誰？日本代表、止まらない得点ラッシュ。2戦6発の裏にある進化とは「僕が得点できなければ…」【北中米W杯コラム】",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T22:00:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBWdnhxUXdZZUtQWFJoYU9WOWdmWm1yd01jeU56b2g1aGg0ZHpRMFR0dUJXNzBXRGpYSUt4aVlqQlB5UFhYXzRJZXNpUFphcHQ3dTNkZFJScHlwbThpX0c2dWp1bw?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "ワールドカップ - FIFA ワールドカップ3位チーム順位表",
-      "source": "スポーツナビ",
-      "published_at": "2026-06-24T21:50:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1EdnZDYzhsVmxNVU56QkRWelpSSThhSHoxMVltOHFwMDFibEhncmZ2OTBTZW8xWDMtdUJjRFlvTVNTYVh2MTFhdEo5emd2alJTemlV?oc=5",
-      "lang": "ja",
-      "image": "https://s.yimg.jp/images/sports/all_device/banner/soccer/wcup2026/1200x630.png"
-    },
-    {
-      "title": "W杯、次の「日本対スウェーデン」中継はどこの地上波で見られる？ 決勝進出パターンでキックオフ時間まとめ（ハフポスト日本版）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-24T21:40:48+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFAzeDFiRWx6UW9MSnk3ZVY4TVpIQlQxRkplSEV4cG96dk9ndGxwXzFHTDcyQXQ1UWc2a2s4cDRFRV9kd1g0dzI1TWVtMGwtMVBWQnV3c2hDUnktR2k0eWV4X21Gbmo3UTBCcjdRSzBVZmxkam9SSU1YT0xsbVZOOUk?oc=5",
-      "lang": "ja",
-      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260625-00010001-huffpost-000-1-view.jpg?exp=10800"
-    },
-    {
-      "title": "スウェーデン代表、サッカー日本代表戦予想スタメン全選手紹介＆フォーメーション【北中米W杯】",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T21:30:52+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1sckhuQlAyQVZ1VE9LUHI4YWxHakVROGpDZE44TmJyb0xUMUh6eElhSG0zMXJ3eV81Sy02WXE1RE1Icjc2SThUZ1Zfc1RVazJ2ZlVuVTctTnpnTnQ1TlBnWm4zMA?oc=5",
-      "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/20260624_Sweden_getty-1.jpg"
-    },
-    {
-      "title": "【ワールドカップ 決勝トーナメント表】組み合わせ W杯 FIFAワールドカップ2026",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T21:30:52+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DQy15dWRFV1JCd3NNRmItSllCZjFHOWR3b1R1UTVCWTZnZUpCVjBGVGlTQWxXQXRRUlk4ZndVVVpVYTBpdjNaWlduY1YwaEhCenlYQmNiZmFqbk0zVmd4TGhkVQ?oc=5",
-      "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2025/12/20251206_worldcup_getty.jpg"
-    },
-    {
-      "title": "【ワールドカップ順位表】グループリーグ 北中米W杯 組み合わせ一覧",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T21:30:50+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9oS000QjZxODhMWG93bWRIZl9hR05xLTZwUE45QXVlM2FGcFV6VTk0TkI1ZmtXQXNyelVtTXlJaW54OVQ1ZkxfZlN1MUJKbDJ5YzA4RDJpbDhUTF9hOV9lakRBaw?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "【順位表】グループリーグ3位チームの最新順位表。決勝トーナメントに進む上位8ヵ国は？ FIFAワールドカップ2026（北中米W杯）",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-24T21:30:50+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5IM092NzNoS2hIQ2gwMFAzVmJsQVQ4WXhwYjFtZWxwMzBTUm1NYXB2R0M5V0NldEk0Z2t2WE53VHlXNEpNYU44b2xZNWVFOWZIYkNueXBWUUxNSDRGT182THVUUQ?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "ワールドカップサッカー モロッコ対ハイチ ライブスコア…グループC",
-      "source": "読売新聞",
-      "published_at": "2026-06-24T21:30:40+00:00",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBZVkpZNGtHak5PVjVteFdsODJvX2psNXF1bUczRXRqYk1hNVlTcFJ1SFNJSnpuQUFJVmpvOHotMHNkUTliYml4X25jSmdMUW1pSTVCY2lFdk81NHFtVkJoOXJMbm1ROHdud1NWaUFGMkNpSUNFNTlNVlFyaw?oc=5",
-      "lang": "ja",
-      "image": "https://www.yomiuri.co.jp/media/2026/06/wc2026-og-live-free.jpg?type=ogpw"
     }
   ]
 }
