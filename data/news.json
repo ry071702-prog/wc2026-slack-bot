@@ -1,6 +1,134 @@
 {
-  "generated_at": "2026-06-26T21:01:36+00:00",
+  "generated_at": "2026-06-26T22:01:34+00:00",
   "articles": [
+    {
+      "title": "World Cup 2026 live updates: France trounces Norway, and Senegal blows out Iraq to keep World Cup hopes alive",
+      "source": "NBC News",
+      "published_at": "2026-06-26T21:53:06+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNUxScTBTQkt0S2hYX0h3UzdCcmdtb2lxb0YyUUVPLU9MdlpOclhLel9xOWNkZUJkZGRnSDQ0VDZ2aHIxUTBKU0lMdkhIZGh1ZVVvOGxQWDlIeE1WeE9JZGJjV3FJLUNlekFGXzBMekc1aTJNOENTS0hDT1R5SVFfZFZQM3hnTVd0QXF2ZUo2bUdHNy1KU3k1TEdYLWliN0VNLUstUU1rMnM?oc=5",
+      "lang": "en",
+      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-06/260626-mbappe-mb-1406-5c68a0.jpg"
+    },
+    {
+      "title": "MATCH PREVIEW: Messi and De Paul Close Out FIFA World Cup 2026™ Group Stage Action With Argentina",
+      "source": "Inter Miami CF",
+      "published_at": "2026-06-26T21:45:35+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNNHNkZUwxSWNubDBXWm9zMlpUUWpMVGZsVjVsZ0pIeWtBbGMtRHFTLVJzSGFhaDFDNWZTR3Zac1AzcjBKcHBObVdacXo3NHM0eTRJVDUyS3AtalZQeER6UUdpUEozWDFncy1ZNDlicEozV0RJdGZ5Vzh1ZjFCTVN2VWoxazg5blVGYkRxVnd1bFd5Tmc3Nkp6enpTUE5zLUtTbEdlbHo1cDhaWkZQMmRDOGlCS29QMElsZEZieVlVQndXY2h3Y1lKMFV5bw?oc=5",
+      "lang": "en",
+      "image": "https://images.mlssoccer.com/image/private/t_editorial_landscape_3_4_desktop/mls-mia/jkm3x6asqfauqoeqhrny.jpg"
+    },
+    {
+      "title": "Norway vs France Quick Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:44:58+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE53X3lScXp5MUNLLXpRd0YzV3ljbHhBTndXdkxpOVg1NkZ3QVdHQ3VTOTBTNlZBamUwSnY5RVdmaUpnczYwOWRfR2Z5cC1KOG9EQThPSjZhN1VPOFY1WVdzVDRKOENmOHItVGF5NnVB?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16493446/720/1280/6c2c2tqafvo5uize.png?ve=1&tl=1"
+    },
+    {
+      "title": "Senegal vs Iraq Extended Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:40:33+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE54RUZuU3NjWEl0NFFWWmxxTWw2elRGdDF4YXlDS01tQlVBWXYxZ2FGOUZ5SHpZem1WT2VrSmtUNjdjU19wRjMwQXoxb2taZU9nVUxoQkFDVGtjcXhNQWp1R2J3?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16493349/1280/720/y3wj6wj66gb2b8ee.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "Norway vs France LIVE: FIFA World Cup Group I score, lineups, commentary & updates",
+      "source": "BBC",
+      "published_at": "2026-06-26T21:33:40+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE42RlNHTWFVenRwWGxic1c3cm1WOGZtTnJMSjJ6dlYtQzMySDNGTkVFZTZUQVVnQjRuUmlCOE5yWTZNYURjR0dQOGZMRWowZHgzWkZyYlFUZFFiVW4xZ0JocGN3?oc=5",
+      "lang": "en",
+      "image": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/7fb2/live/f0bfe550-71a0-11f1-8e1d-bbbb1017d210.jpg"
+    },
+    {
+      "title": "Everything You Need To Know: FIFA World Cup 2026 Knockout Stage",
+      "source": "US Soccer",
+      "published_at": "2026-06-26T21:28:20+00:00",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPY0JUMDhsZHpjdElsRUZEU0RMZ1BDYno3ckdhZy1JS0liSTZ2U05CMllDa2kxcS1qNUlha3JQZ1Z1UndEYWFTaVJibkJLWkkxcFVNWjQzb2ZHZjhycHpQSV9BZzI5Mk9UN3NpQlR6ZnZWb1VjenN6NEdDakVCNGtGQmwwUkNadlJCR0tQaDFKRGkyZWxZNXhkV055S1JrYkIyVXQ1REoxTQ?oc=5",
+      "lang": "en",
+      "image": "https://cdn.sanity.io/images/oyf3dba6/production/213237964d6016dc86b50c96fcf6c19987fafc98-1920x1920.jpg"
+    },
+    {
+      "title": "Norway vs France Extended Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:24:52+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB5MGNBNURra1JfOTkxbFo2QVlYYUh3YlFDRDdGbUJVbjl2MXEzYVRrdTlDemhPTnFrVGRPaHNsbFZTWlB2ZlBjRm13ak9uTTNjbndHbEdNNzJCOVVfZWZlNzlR?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16493308/1280/720/1rptd3dnpfst53wt.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "@Zlatan on just how good this France side is at the 2026 FIFA World Cup 🇫🇷",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:22:45+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9oWkZ1dklhQzQyZ1dBUk5mYzBtMDNRaXp2dXNNQTAtc3ZLejU4aUxSQkRsWmVmNlpNY29nWXZ4ZFdVejg2NXRncUJKWVF0YVpjb0lpaWtpOEhZdHNkVXhrZzJvRW5zRjFKcElWbFln?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16493322/720/1280/a3e1hbx9yu6qlygg.png?ve=1&tl=1"
+    },
+    {
+      "title": "World Cup 2026 Round of 32 tracker: Who’s qualified, who’s eliminated and who’s still alive",
+      "source": "Yahoo Sports",
+      "published_at": "2026-06-26T21:20:50+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOdFFQQjdURmhyUXZFRWxqXy0tMnhtcEY3OTBlb1htQ0pfXzliRk9wY09YaXd5Y1c4UHlCLWpCN0dBZV9mRDZZU2dncE96RlFEOXJYQ052ZUVOQ29fblhGNXNVVjJBYUZNNGNmeGdjNEVxbUFIczBZREZ5XzV4V2xnSTFDVjJ5ckc2OVNOX2FqUzU0X2RLZ2t0SmVhNEZVY3JobVlqSk12YUJ5UWFpZ3RIRnhsSDlHX3M0WGxIWVhNaUpJMk1WRTQ3RHFqclJ2YUFVYW1qcm54YmM?oc=5",
+      "lang": "en",
+      "image": "https://s.yimg.com/ny/api/res/1.2/ijvurYMHmvLYBFabWLs4tA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/2026-06/275f5113-015f-475e-92df-3b66784c13d6"
+    },
+    {
+      "title": "Désiré Doué heads home cross to seal France's win over Norway | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:19:11+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE10V1hhcDBPTHc2UlA3cVpJTE9nYkFUVXFhZHNNWDRmeW9fVkU5MERBUGxDU1ZabUdUQ2ZudmRkTm8xckZHMW5WRDBqZU9nMFJUVWRvRTdxOTc3QURSbmFpQ0pn?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16493323/1280/720/qfncbxpuo0xxte5j.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "Senegal's Iliman Ndiaye scores goal to seal win vs Iraq | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:14:27+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE16T0lfV0k4dmM4eVozU2xyZDJiZkU3bU1uZngwVnRTZWNoeW9SVDhjQUJxbkM0c1ZaRTBRSjRtb0hMU1QyRklZQlNZRi1KOVBMTTBaMDEyM0NKc2MxSV84aHFR?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "Norway vs France Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:11:28+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1SdEVtQ2QzLWhmU3ZLY0lLTk5xUjNkTEJNUDRYR1lKY0VwbmFSc3RZQnY0VnZxSkM2Vmh1UFpwcjRnZlJ6NERnN25COTJidjZMVEk1YWlNSi10U1VPeWtIdFV3?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "FIFA World Cup schedule today: Games, kickoff times, livestream info for June 26",
+      "source": "Mashable",
+      "published_at": "2026-06-26T21:07:15+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQU5nUEJibm0tZURVT0t1SG8zOWdpZ1dGQXc5RE1PclFhaWo0YWNDNHkyNlVmOGNvRlBnQUZWdERlU0cwRGMyQWwteHpkeUlPNDBMYmRCLUtFdTRHSkV2REN4Z0dkamV5Z3NnQTFaZHpDVWlndzMtNklYZWp4YWhEdnNITnNsYXR6cWRwRU8tNFpxdVBjOGc?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "Senegal vs Iraq Highlights | 2026 FIFA World Cup™",
+      "source": "FOX Sports",
+      "published_at": "2026-06-26T21:04:47+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9xREZYWXJaOGhWTjNCcjl2S2hIcmtMZW15YXR6dTB0dDQ5a3I3UmF2RDdoWGtZUGlOLVZqWnBNNjZPTlg4V0xYNHNkOUFsTHhGb29QOE53SUZGb2xSeld5LWRR?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "FIFA World Cup 2026: Ousmane Dembélé scores first-half hat-trick as France beat Norway 4-1 - as it happened!",
+      "source": "olympics.com",
+      "published_at": "2026-06-26T21:02:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPWHlPTWczYmpxclhrNmtsWHZKWE1FMmhIaG0tb0tkNlUzNS1iTkxTemYwbzdxUU1xMW42Q3FHR3otWGtXREdraVp4ckNMak9CQjNxVDhDRGNpYmpvVS16eDlyY1VmMmU2VmJnOWgxT3lnNlhHNUxzODZGRjdpRDA2YTBkZENYeG41WDRQQmU4ZWFUVlZmVGJEZElIVHl3UmVLdi1GcG9kU0lhMGs?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "World Cup recap: Dembélé propels France past Haaland-less Norway to top Group I",
+      "source": "ESPN",
+      "published_at": "2026-06-26T21:00:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPSVMwQzM1cEI4ZFE3aWRPQ25vcUhkNnVrV2gxajdZekhkVmUxSnYtSlRlMEh4eXlCSDRHLUdPU1FSbGRQSEpVbEQzbzNuM2w3a2QyZXQwN2szYWJZMEdkcU0xRXFmQ2N1Mzhsa0F0aG1ycjJkdGxUZzRlbDAwLTBrZlM5WDFCUkR5azdLNmtVVHIyVnoxcGxCaXY5cDliVmN3Q3RUMXU5WHM?oc=5",
+      "lang": "en",
+      "image": null
+    },
     {
       "title": "Watch World Cup Day 15: Netherlands, Australia advance; Curacao eliminated",
       "source": "Al Jazeera",
@@ -10,20 +138,12 @@
       "image": "https://www.aljazeera.com/wp-content/uploads/2026/06/AFP__20260626__B8D27EK__v1__HighRes__FblWc2026Match58TunNed-1782462552.jpg?resize=1920%2C1440"
     },
     {
-      "title": "Senegal vs Iraq live updates: Africans hit five in World Cup 2026 game; on course for round of 32",
+      "title": "Uruguay vs Spain live updates: World Cup 2026 game latest news and buildup",
       "source": "The New York Times",
-      "published_at": "2026-06-26T20:55:22+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQOG84NGpYVzU0aE5Ram0yLUp2TVEtd3h0YXZsaDFEZDBabk0wcGFnY2dQSFVsRE1xU2ZQM0hKZjlWQmtlVkhRUHpneFhJSEtaRVhXUHBVcmtrbHdfZ1FsbjFNcW9JLWxkSnZ5NFgxeGYtRFFqalF6VEU3UDl2c0RfYmhlVG1KLXNuckFSOVBYWXZvejBjUzdCa2tKR1BmVkV1MU5jT3dPZEdsOF90TmJxRFM4V04?oc=5",
+      "published_at": "2026-06-26T20:50:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOa3gzLTJvaVBVRVpDcVgwd0lFaGJ1WUg0MTVhNUFSLUh1S05wRjhJMmdwS1d4UkpEZGpOZFl4c0phN2preEYzZkh4ZXd2VVB5dmdnRUhuc1RrQUtLUG5BRC1hRmlLR3lwMjFQbTVnOHRpX1djWHNrNWR0eXZjdENwQjF2VHFGdzdZYmhGUGFYLUhHRjBsTFFtMkV1UDhPN3BPTHRlamNTRkxiUkhnS0V1MGlhWHRkQQ?oc=5",
       "lang": "en",
-      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/Ueltrqdk78iL_DlgArXjx3s2E_1440x960.jpg"
-    },
-    {
-      "title": "World Cup schedule, live updates, scores: France vs. Norway, Senegal vs. Iraq battle as Group I ends",
-      "source": "Yahoo Sports",
-      "published_at": "2026-06-26T20:52:09+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNbWxkZG1remo5eGtIaG1uT05qck1kVTd6OTJ4SFEwM3FBZlhsZFFJdWdkUGlNTlI1cXZidVI5WmxHdldWV1RRczM4SnpXb3JQSll5dkNoSEgyYnQ1V2FTeTlaaXNuSTdnc2EyZjdJWE5PR3ozQ3pQUFBmOXVfSEtQU3F3QnV2YVZsc01nMTZzZFVBU2dhR3lpWjJwUUh2UGtjQ1RHVHlwaEJ5MnhiUGJfeXZaSm81U1VVX2FuRHVqdw?oc=5",
-      "lang": "en",
-      "image": "https://s.yimg.com/ny/api/res/1.2/u8lSHpfAY13ALQMZVnidpQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://s.yimg.com/os/creatr-uploaded-images/2026-06/cbc4d5c0-70a7-11f1-bff3-8084f2795af0"
+      "image": null
     },
     {
       "title": "Senegal’s Pape Gueye scores his second goal vs Iraq | 2026 FIFA World Cup™",
@@ -34,132 +154,124 @@
       "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/baf477be-f500-4b56-96de-3eef9014b87a/1280/720/ksovpb40pi1ycm93.png?ve=1&tl=1"
     },
     {
-      "title": "Pape Gueye scores Senegal’s third goal vs Iraq | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T20:39:08+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9fY0d0S1dQNkRKM2FmYUZCZHo1bEVVaTdueTF2eVdUdFBranZJck1JNXpwenI5VmRoaDZxUlN3eEQ0eG41RENTVW9BUlZHX0tvWVF4Y29QUEg5Z0tWM08yeHN3?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/9327ab47-634b-4490-8fa0-8c0c8150c90e/1280/720/yczho6hz9pfux4wk.png?ve=1&tl=1"
-    },
-    {
-      "title": "Senegal’s Ismaïla Sarr nets goal to extend lead vs Iraq | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T20:39:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9MekUzUEttSkFaZEhOdkhxUmtaYXdXUV9kaWpQSFFtcC1jM3lYWGVOX1FNYjZiT282UnRtUVRIUHllUXNVWV9OV1lqYzRrLXNTZmFLSTJqSXNZenhaZzZVbGVR?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/9327ab47-634b-4490-8fa0-8c0c8150c90e/1280/720/tldbyjz0wqohchc6.png?ve=1&tl=1"
-    },
-    {
-      "title": "Norway vs France live updates: Dembele scores sublime hat-trick in 2026 World Cup clash",
-      "source": "The New York Times",
-      "published_at": "2026-06-26T20:30:07+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOWlBiV05zdEJNcDh5MzNJenAzci1sSVdaUnpMSkhCdHptSzRibm0xLTE0OWRQazZCRWVyT1dtNVVNb0lEaThpdGh1MGppdGwzbFBrUUVsUUR0dWwtSVhvVkFIS01WZnlrM1I0ZHBpSmZqSERZU3ZWaDNCdjk5cjlIUm8tZlFvbnJxTzN0NlpUVmlLQzE4M2ZsWTV4TndPQ0RiTThyYWtWSzhlLUpDZ0FxUFl4THlzdw?oc=5",
-      "lang": "en",
-      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/M2IB3h9yymG1_RdNawN1CSaaG_1440x906.jpg"
-    },
-    {
-      "title": "Norway vs France LIVE: World Cup 2026 updates as Dembélé delivers brilliant hat-trick, Senegal also winning",
-      "source": "ESPN",
-      "published_at": "2026-06-26T20:26:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOV2h5dlR6OE1hYWN3eDJHV1JYeGQwT1dhcFIyVnNud1V5MWZkMU1hRTBPWWJFcUl1STlWcWRDcWZEalk5bVBaRjRjVFoyWlRBSUhrclNwNHFiV3ktTkU4bXN5NXdzczlIRm0wcEowdXA4ckRwQWVZdlJOUDRMVEF5Mm9NOG4tVGN4VmJmMzFDNktKY1dhVklQT3U0LWpkZ01udXExbkVWTzlRV0pVUGRzLUl3dDY5SnVKeFRicw?oc=5",
+      "title": "World Cup goal leaders: France's Kylian Mbappé, Ousmane Dembélé on heels of Lionel Messi in Golden Boot race",
+      "source": "Yahoo Sports",
+      "published_at": "2026-06-26T20:45:49+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNOHZOa1dwTWhTX05IdFMzbHNOM0RGSDJhMFktbDR0eURrTVFLVXc0YUpZaWtXMHRJZ29mVW44UFhFVHlGUlVQX1FIZlF0V05WR2tOTEthdG4zeE9HYlRQM3FtRXc1anFFWEhqcEVGaU96eG9PUDRPWWc0R3hhRGtRMi1RWVk0YmhjWnN0eTUxMkFELWJCWHlaOE1wWk1feW5BRVU4bmo1QlBucFJvUkJvMW5Nb2lyZ0hEbXI0QTR0OUk4STU3blV5WFl0YmlFRHdkelBFcFZ3R050VXRET3dkbVRZbkVINmQtSVk1d1RyVDY?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "World Cup 2026 live updates: France vs. Norway, Iraq vs. Senegal, Norway rests Haaland and others",
-      "source": "NBC News",
-      "published_at": "2026-06-26T20:24:22+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNUxScTBTQkt0S2hYX0h3UzdCcmdtb2lxb0YyUUVPLU9MdlpOclhLel9xOWNkZUJkZGRnSDQ0VDZ2aHIxUTBKU0lMdkhIZGh1ZVVvOGxQWDlIeE1WeE9JZGJjV3FJLUNlekFGXzBMekc1aTJNOENTS0hDT1R5SVFfZFZQM3hnTVd0QXF2ZUo2bUdHNy1KU3k1TEdYLWliN0VNLUstUU1rMnM?oc=5",
-      "lang": "en",
-      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-06/260626-mbappe-mb-1406-5c68a0.jpg"
+      "title": "W杯 セネガルがイラクに快勝 グループ3位で決勝T進出に望み",
+      "source": "NHKニュース",
+      "published_at": "2026-06-26T21:51:27+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9SeUpHbDdqWUxfY2tTQ05OdWszcm8wTTh0NkE0WGlVZDNLTmV1T3ZwRWZjQ2Z6bHd3ZlA2X0pBUlZHaUptNk05cDl3cEZEc08wWW9uQ0NPZXRodnlwSmpz?oc=5",
+      "lang": "ja",
+      "image": "https://imgu.web.nhk/news/u/news/html/20260627/K10015162311_2606270650_0627065128_01_02.jpg"
     },
     {
-      "title": "Senegal vs. Iraq Live Updates, Score: Senegal Holds Lead In Match For 3rd Place In Group I",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T20:04:27+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdVVTS0xiTE42bThrNS0wZklOYnpJaUt6M0JvNWdFaGphYVJmUkVja2R3ZWJELVdoNUxVOUhzOGI4UEJFbkxJN3FHMVhFV0JjNlhpU25OUUc0Z0xQM1o2TVljYTdPSHFmZDNXcjYxRmRNV0VTcGhKbWlOT1ZBQTlqUmtIRW5DeEtyRzFiSHZnWDlPTDc0Zno1OEdNX0prV1NDMDc0U1VCQjQ?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/06/1408/814/senegal1.jpg?ve=1&tl=1"
+      "title": "W杯 フランスがノルウェーに快勝 グループ1位で決勝Tへ",
+      "source": "NHKニュース",
+      "published_at": "2026-06-26T21:45:28+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBnSDhsVXMwVDgtT1BoVV9kZGdzLVItdS1Ma1JOeS1PMXplcWRGRHJaOTNOeDZnZlF3TDloNTNtdWZzWXMzbExRYmpKS01ESHc1WExCU0ZpcG9wZzNYNHlB?oc=5",
+      "lang": "ja",
+      "image": "https://imgu.web.nhk/news/u/news/html/20260627/K10015162301_2606270644_0627064529_01_02.jpg"
     },
     {
-      "title": "Uruguay vs Spain LIVE: World Cup 2026",
-      "source": "Al Jazeera",
-      "published_at": "2026-06-26T20:03:47+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOamlHTmt5WnlqMEk4V2ZmTl9KLW9HRmt1dnQyRlZUU1pkOTZIU2xXWi1IemdwMHNpa1RPZWp4ejVPc3Y4NTR1OVRBaVpjelZ6Qk9GdHJCcHFCWTFBM2ZkbFZFQXMzVVNUekdvM25tY1J2VHVwVW5pSUxNdmJqdk9vOV8wdnlpYk5GRzUzQTVkbGpWUdIBlwFBVV95cUxNaFlCTzZsOU5kb2VGR09nNi1tV0Jja1B2UXd6ZXJDN3ZPeTZtWDlhOXhGNXNUVTZZX2dQR0FfREZwQ18yRkJlT2hna1lYUmRjUmM4ZXdlUUNxU3E2NFNkTlFkNHFhS2pWZDBWYUJEWjVFSF9vZUFiX1BIcnR4VU0xcnlpbENjVUdwY0E2YVFEMVdDeEhKcC0w?oc=5",
-      "lang": "en",
+      "title": "【6月27日】エジプトvsイランはいつ？日本時間何時キックオフ？日程・中継予定｜W杯グループG第3節",
+      "source": "DAZN",
+      "published_at": "2026-06-26T21:42:22+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQZEp5dTNJZVlOTmQ1YWZibHJnX2h0Tl9YWlIxamluYXJ1M0NBc2lnZEpkRDRQWWc0d20yS0NUTHhubHhJdktMU1VyajYzNnRyWGk3SkF1clVKVS14VTZuakdqVmlDMk9wckpROXhBdnhUSzFFUVJiOG9yYkRrYzlfX3RKd3RTUVREWnVIOXJCVEttNWFpaGozQjd2czZMaHNYa3N2SEJWYVZkSE91OXM1SXlfWmtVdXVMdDh5NzFUYm1jZU1XMkRDY01tRkw3VXFMeDE1RnR4QmFDbGNXektoZVdZSQ?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "US Soccer offers contract renewal to Mauricio Pochettino through 2030 World Cup",
-      "source": "The Guardian",
-      "published_at": "2026-06-26T20:03:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNNFkwd2JrdHdOWkxVWGRzR0Y4aW9zdGhaRnVuWXk0QnJHeEFDcFpPc01vMnNydzN0SDNTc0hrRFZ2N2ZoTllTWGJuQVpsUm1CLUt0TTh4cDk2RVRxWFZtWHRZX3ZDRm5qbTYzNmt1VDZtYWllLXBLMENjVXVVRVBEdEZ4TEZhVkd5WEpiTDJhaVBSbG52NUZjMEYyTHJZZ1E?oc=5",
-      "lang": "en",
+      "title": "決勝トーナメント表｜FIFAワールドカップ2026",
+      "source": "Goal.com",
+      "published_at": "2026-06-26T21:33:55+00:00",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNRUhTeDVfSllKMkRrUmloQzlwakUtcm1vQmwwR0M2QXFRc1hvNzVabHZqZUtTZnhncmpOYXFNcE9yTHJBR3BnV1BJSXlEX1l0dU5IWU55aERGQ0RjQVFDYVpqMklmYWUtQy1xQnNwR3kwajcxdlV6cmhDQ3g5Y1NTT0NfWEdxMHVMY0h6Um81dldLRzJxNmZDcjlUbk1YcFpfZUx4WkNsbDFYdmo2SFUw?oc=5",
+      "lang": "ja",
+      "image": "https://assets.goal.com/images/v3/bltf43c7394496e65d6/World%20Cup%20tournament%20bracket%20small%202026062701.jpg"
+    },
+    {
+      "title": "イラク代表DFの退場が今大会9枚目のレッドカード 過去2 大会の合計を超える",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-26T21:31:52+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9ER2RRcW9HRjFoWkxlV09aeGVGazJRZ2Fad21TMnN2eVRqcFFqa2lLVVVFeC1WaFlRbkZybGFxcS1VQk5oSTlHSzdKb2RhMGdtUlAxMWdWV0VBUmltRDhWMDRfRQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/GettyImages-2282948464-1.jpg"
+    },
+    {
+      "title": "【サッカーワールドカップ】I組フランス、デンベレ３得点で1位通過 ノルウェー2位で決勝Ｔへ",
+      "source": "日本経済新聞",
+      "published_at": "2026-06-26T21:27:12+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1MV3NfTE94cEJRUUF1WHhKOU5Sdy1tRzBZLVdFOXJZNDE2QUpOLWJQRDJzQUoxeko3THhqUTlSMU44NjRWRGR6dkxTaFIzZXJFZ05KZm9yd254Q1h5X3o2R0ZTdm9ibXkzX1V3Mw?oc=5",
+      "lang": "ja",
+      "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3231269026062026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.86&fp-y=0.22&h=630&w=1200&s=bad190077c17684217eaff2d3b03819e"
+    },
+    {
+      "title": "フランスがＩ組１位 Ｗ杯サッカー：時事ドットコム",
+      "source": "時事ドットコム",
+      "published_at": "2026-06-26T21:24:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE95cnJtN1J3VkI5Vm9EeThVX2gxeXdrbHV5cTRNZEdfRHV0NmstazUyZ1NPd19IcllCZjFyLU92Ui1YWXJncEowQ2hIZm9jV3VKYUtSWkhHNDdrNzZsUnVRMzB3OA?oc=5",
+      "lang": "ja",
+      "image": "https://www.jiji.com/news2/kiji_photos/202606/20260627fl07S_ogp.jpg"
+    },
+    {
+      "title": "セネガル代表、5発大勝で決勝T進出に望みをつなぐ！ 退場者出したイラクはGL“3戦全敗12失点”で大会を去る",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-26T21:10:25+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5JQkIyZm9RSjJsZTZrZkFjSnNvNUdYV1BLX05GYkVKVG9WM2dUaGpGUDdpeEtXeFJWTzNsYjhXTVhfc3k4VFo2ekZfSlU5NGNmMG1kWFJhbTMyUV83aHhrY0xhOA?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/GettyImages-2283469717-1.jpg"
+    },
+    {
+      "title": "【ワールドカップ順位表】グループリーグ 北中米W杯 組み合わせ一覧",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-26T21:10:06+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5rNjVRMWpFMDN0NE1RTnpaT2NJNXJBTkVHNVBvbTRmUGltU3VTcGFsR0ZuaHBJSWNKREFoaXhycW1KV1VpM0gwTkZmaUR1RGV6TEZKdGVDcVcxQ2ozR3VBbmVKRQ?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2025/12/1203World-Cup-Trophy_getty.jpg"
+    },
+    {
+      "title": "【北中米W杯】セネガルが5発大勝で3位での決勝T進出へ可能性つなぐ！ イラクは序盤に数的不利に… ｜セネガルvsイラク ｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-26T21:09:29+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNbW93WkdKNmR6M0ZyOGxpcjdCNG03ZEh6VndYS19raklVVGc5N2FvZmF0OWM1YnNicWF2b2sxYmdzSDlCS1BmWEFVc19lampRSHg4VXhUcHlYYVpMczQ2dk5lUmdLakZsYVhpN3lVSUN5SnBJSFBJZW9RWF9XSDVHeXFxdVJVWG1TVE81Vi1wNEdFeVZvbHl3R2U2OElxVlk4LTBiMXFWbXcwN2VqaFBaakRVWDYxdE1oanQ0YTY1OWtHdEdwdkdkYTViMW9hd2dHZnc?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "France's Ousmane Dembélé nets HAT TRICK in the first half against Norway | 2026 FIFA World Cup",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T20:02:34+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE92OXd1QXptNTA2N3AwYzZ4ZV9JdnlFcDFCWVdLbWQyby1LN2c4WkR4bVAzbzYyVDhBREhYbzVqNHJfUzNIaXpKWFNXMnFnTmhmSkJCSXpLS0c2SUZ4aHRGSnV3?oc=5",
-      "lang": "en",
+      "title": "韓国代表、W杯GL敗退へ“崖っぷち” セネガル勝利で3位争い7番手に転落、2日で4チームに抜かれる危機的状況",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-06-26T21:08:47+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE81aE5IWUhvQ1F0MlhCTTh2TVp4Ym1pZTZCSkYxNVg4MnpKblFHRGdUb3p2VEcwMDVqZzV0YzN1cjJsVjFKNVF0SmRXTnVvS3hzeXdkRjE5bUtFZXNGLUZsb1kweDNzSUFuS2FfYUdRYnRBRlFKMmZRTVNFc1dKQm8?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "Ousmane Dembélé completes first-half hat trick with curling finish against Norway | 2026 FIFA World Cup",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:50:27+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9OZUo1NzlNZGF5dUJUZTFKVlBkX0w5bmNPM1pUX1d3UnNELTlaNlN4em1IYU9HYWk4LXFtODJJYnRlcEVLZW5XdHl1MlpBcjktQVRNNC1nRENsLVpjSi1wUWxB?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16492837/1280/720/zstgomp8o20gaj0a.jpg?ve=1&tl=1"
-    },
-    {
-      "title": "Thelo Aasgaard beats the keeper to cut Norway's deficit vs. France | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:40:33+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFA1Z2w2QlM4bkd4RzNkRHVGVVliZXkxSEFCQnc5Nk5sUXBJUV9OVWxFczFVQ2o3Y1NBU0MxOG02dnBoMk9zS09ET1ltOG92a21SODdLQldHREJ3NVJMTkc4OWZB?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16492774/1280/720/48dgsnn76piiej14.jpg?ve=1&tl=1"
-    },
-    {
-      "title": "Norway vs. France Live Updates, Score: Ousmane Dembélé Delivers 1st Half Hat Trick",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:37:57+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZ1Jla0hpR1BQZzBVNV9TQnlRLXVOZjRDMXdwN01pU3FGR2xjWGN4UDFoNGVCQzJLLWVwbDFoWlpyTS1qdjE5Vk0wX1lZZVluV3BidTZfNUdjUDlUY3d2MmxnYThjb2JXNkd6YW5iLV81NFRKVTVXQVpZY1dUZE81UFl1Vmw5OFR6b3plaDJpRWNScEdkOGY4UWdUUEtoeHBUQ0UxcEVFazdVUQ?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/06/1408/814/2dcc083e-norway1.jpg?ve=1&tl=1"
-    },
-    {
-      "title": "France's Ousmane Dembélé nets his second goal of the game vs. Norway | 2026 FIFA World Cup",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:30:16+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5BWGN0T3hFQy1DUlZaeDBYZjAzRVhxQTZsR093WFNxWm8zcC1DNUtaejZKSlBwaXk1ekVtRmN5eU9tVWlDNi1jWFFwMllMMVk1T3M5Q0ZSNDc2WG1uczJpZk1R?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16492722/1280/720/3esmbb5byonveovf.jpg?ve=1&tl=1"
-    },
-    {
-      "title": "Zlatan & Thierry Henry Preview United States’ Round of 32 Matchup vs Bosnia and Herzegovina",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:22:42+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9KZFdNOVZPTTJlb2tPQkFjTGVRbEQwQllGekpBd3RTSFVyOTRDNmF4NzNpN2FRc3NETWNGZ2VNYzRHUnM4bDdhOThwd05tY3RzeU0wRXBJNHRkMXNweWppQmxB?oc=5",
-      "lang": "en",
+      "title": "【W杯】セネガル イラクに5―0大勝で突破へ望み! 3位死守して決勝T進出は他組の結果待ちに（スポニチアネックス）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-06-26T21:05:01+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4tU0FCSUx0NXFDcFpMYXBncXJPZGk3bVpWaTJyU0dyUk1UNkxTcnRrSThubnZXZjc2cDlCbGwxU1NiaHI3Q0lGWGZ6WmJfdWprNTlaZ3NyQTBuRHRoRldiTlVLVUZRWWZNS09HTDlnODBlSUg3RmhSUkZ2RzZoVm8?oc=5",
+      "lang": "ja",
       "image": null
     },
     {
-      "title": "France's Ousmane Dembélé opens the scoring against Norway | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:19:14+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5fLUNUX0d2dldMU2RReDF1Wk9YZm9xelljdHpsWW1udG5faENHWkxlSkcyempSM3JHZEtRcDJwSmJHZGgzTmR1bFlTS3JSZ1NhUjhYT08wbDVkR1Q1TkN1UmlR?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16492615/1280/720/7wwmnbnunk3fwb9r.jpg?ve=1&tl=1"
+      "title": "韓国代表、W杯GL敗退へ“崖っぷち” セネガル勝利で3位争い7番手に転落、2日で4チームに抜かれる危機的状況",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-06-26T21:04:52+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE45M2JTa3Qwd2l2dUREZzJkYWhpMW1qY0cwQVA4UFpyMEFaS3Ata1U1Yk9UQW1kYm9UUHJ3NU5qLWhiZTF5dENEMkdHb1lPX215QlloeUNnZUIzeEg3V1Z5MmkySQ?oc=5",
+      "lang": "ja",
+      "image": null
     },
     {
-      "title": "Habib Diarra gives Senegal early lead with goal vs Iraq | 2026 FIFA World Cup™",
-      "source": "FOX Sports",
-      "published_at": "2026-06-26T19:15:08+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5hSDE1SXk3SUloZG1zbTRKcnVYRnlzY0JvNWFFT2E2OHE5cnlLQUpaa2dLU0ctVkRrYjZPWFZEWTlBQkxfTEJfVzhDLWxSTXA1T0d6V2lTUkZEYWNPdG5kZnZ3?oc=5",
-      "lang": "en",
-      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/3c8792f9-6a8e-4796-8da9-ffaae8857efa/1280/720/bs06l15w9drxfwew.png?ve=1&tl=1"
+      "title": "【北中米W杯】デンベレがわずか32分でハットトリック…先発10人入れ替えのノルウェーを撃破｜ノルウェーvsフランス｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-06-26T21:00:27+00:00",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNak9Tblc5TDVROTNCaFQwU2l3dGF4T1Y2SlJmX0FEOTdDZUljMnBDdGp1TmY1WEl6TE9Tcmp2TmpYejA3MHRRMVdYN1JwZG5YcDZFT2g0bFdYb3JaTUJ2YlJxRXZ5cXBkZ3hRai0xNlZOTG9wMERIRDNVaV9PcTJBbEJHNW54aVNFZlFMSnJsT3hRY2dDaW9YYWtiSm9NcjZfblhERW1qa0FVUEQ2UlFaNHpPakRJZ0tXNXdPVGo0S0NqVTJSV1g4?oc=5",
+      "lang": "ja",
+      "image": null
     },
     {
       "title": "「ドイツと日本が裏切った」韓国代表、ラウンド32進出へ“非常事態” 韓国メディアは日本ドロー、ドイツ敗北に恨み節「確率が急落」",
@@ -168,14 +280,6 @@
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9IRFo5dWFqdEl6LXNMOEdxQ25IWkhTU2E2TUpfNms4TmpoTlFNQXUtdHV3UlZZWExtWTNpdkhRM3g4aW9oS0dCZGtEUlVvZzNmMWtCSWpGc0hBczFYdzRaVnhFWQ?oc=5",
       "lang": "ja",
       "image": "https://img-footballchannel.com/wordpress/assets/2026/06/GettyImages-2283209065-1.jpg"
-    },
-    {
-      "title": "【サッカーワールドカップ】I組フランスのデンベレがハットトリック サッカーW杯",
-      "source": "日本経済新聞",
-      "published_at": "2026-06-26T20:07:48+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1MV3NfTE94cEJRUUF1WHhKOU5Sdy1tRzBZLVdFOXJZNDE2QUpOLWJQRDJzQUoxeko3THhqUTlSMU44NjRWRGR6dkxTaFIzZXJFZ05KZm9yd254Q1h5X3o2R0ZTdm9ibXkzX1V3Mw?oc=5",
-      "lang": "ja",
-      "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3231269026062026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.86&fp-y=0.22&h=630&w=1200&s=bad190077c17684217eaff2d3b03819e"
     },
     {
       "title": "【試合速報】グループI セネガル vs イラク｜6月27日（土）4:00｜FIFAワールドカップ（サッカーW杯）2026 北中米大会",
@@ -194,12 +298,12 @@
       "image": "https://www.tv-tokyo.co.jp/sports/assets/2026/06/bb4dc6daef254ea5f04dabdb0ece343317521a67-thumb-1920x1080-60776.jpg"
     },
     {
-      "title": "【試合速報】グループH カーボベルデ vs サウジアラビア｜6月27日（土）9:00｜FIFAワールドカップ（サッカーW杯）2026 北中米大会",
+      "title": "【試合速報】グループH ウルグアイ vs スペイン｜6月27日（土）9:00｜FIFAワールドカップ（サッカーW杯）2026 北中米大会",
       "source": "tv-tokyo.co.jp",
-      "published_at": "2026-06-26T19:48:03+00:00",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1ucmhZN3R5T3ZvQXpiRkhQd1NEc0FUcHlWQjF0VEl6bFNvRVBTYjRKRUY2R3JtS2oxX1NEM1czR0ZIZGs3QWVYQnBFc3JZNDFoZkhaUjVUZi02WV9WM2NVMm1UdHByT2d2NG04bnNsbw?oc=5",
+      "published_at": "2026-06-26T19:49:06+00:00",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1CdHRzVDVQM2hVbzhuNGtsX0I2ejZ2dUlyWUNvd09lc1JqTmh2Vk1zSkx3UFpzRHduQThPWjEtNzh3dXZJVEJoSnhvNXVFY1RfczVxS0x2VmZ4enRHUEpMSS0xdGEydUp3NXVrOUZ1QQ?oc=5",
       "lang": "ja",
-      "image": "https://www.tv-tokyo.co.jp/sports/assets/2026/06/20b813f3d1a0ffd2d2960ab6f2e8cf4f3e7b693a-thumb-1920x1080-60774.jpg"
+      "image": null
     },
     {
       "title": "サッカー:Ｗ杯の観客動員、32年ぶり過去最多に 米国に巨大スタジアムずらり",
@@ -210,116 +314,12 @@
       "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3231241026062026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.44&fp-y=0.49&h=630&w=1200&s=5dc33dc79cdb0bd80c177c6dee3614dc"
     },
     {
-      "title": "決勝トーナメント表｜FIFAワールドカップ2026",
+      "title": "ハランドに敗れたノルウェー代表監督が、ワールドカップの「大胆な監督」リストに名を連ねた。",
       "source": "Goal.com",
-      "published_at": "2026-06-26T18:32:48+00:00",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNRUhTeDVfSllKMkRrUmloQzlwakUtcm1vQmwwR0M2QXFRc1hvNzVabHZqZUtTZnhncmpOYXFNcE9yTHJBR3BnV1BJSXlEX1l0dU5IWU55aERGQ0RjQVFDYVpqMklmYWUtQy1xQnNwR3kwajcxdlV6cmhDQ3g5Y1NTT0NfWEdxMHVMY0h6Um81dldLRzJxNmZDcjlUbk1YcFpfZUx4WkNsbDFYdmo2SFUw?oc=5",
-      "lang": "ja",
-      "image": "https://assets.goal.com/images/v3/bltf43c7394496e65d6/World%20Cup%20tournament%20bracket%20small%202026062701.jpg"
-    },
-    {
-      "title": "ワールドカップサッカー セネガル対イラク ライブスコア…グループI",
-      "source": "読売新聞",
-      "published_at": "2026-06-26T18:30:25+00:00",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5RYUVVTWZRa3QtXzdiR0RkRHIya3JJNm5wUWtTSUExZEYtbDBUSVlVZXprSlZERE80dWVmYjZJdGpwUS1ncjFCQUtya0JsaXpfbmhWT1o1RE9qTHZ1alhyUm1JY3hqeG1SZnFGV2pCa3pJRHRodWVKdzhBbw?oc=5",
-      "lang": "ja",
-      "image": "https://www.yomiuri.co.jp/media/2026/06/wc2026-og-live-free.jpg?type=ogpw"
-    },
-    {
-      "title": "W杯ノルウェー代表対フランス代表の地上波放送、ネット配信の予定は？ 視聴方法を紹介",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-06-26T18:13:28+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE81emVuWTBUZmc0QkR3QWlZMTlOdFJXdVpIUmZvMEx3S3lCckg0bFVtMG9WSW44WHM5cElPSUtqQWh0YzliR2w4Y0Z1aEVRZWNWaWZ4cnU4YVI4ZWtPM3E5TkZfdw?oc=5",
-      "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/06/ad6c5f193f1ba91e4223a6896b8875d5.jpg"
-    },
-    {
-      "title": "FIFAワールドカップ2026｜出場国一覧｜試合日程・結果・順位表・放送・配信・実況・解説｜日本代表",
-      "source": "サッカーキング",
-      "published_at": "2026-06-26T17:42:46+00:00",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9HUXppMGo2SGFoSGhhd08zMjhjZVF3aHlvOWpPTnhtMXAxNkFEZ3dVT2xCQzhLZ3llekpORF9MazB5UU85MllIcFdpZ0QxeTlNeGdtR0N4eHdQa1FST3ZWWG4tcFpyQjNRbU5lTlMzQXVZOEE?oc=5",
+      "published_at": "2026-06-26T19:13:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMinAVBVV95cUxQV0NRZWk3cmpUWnJCSDN3NTBOQzRiSUtfN0VkSmdBRlZwNXoxNTNaTkdOV3Vsc19EMERidEdkSHdlaG9MdXNDZ2ZsZHY3RDhkQ09kSlJHbmVQbGl6MGphazhZOE9ucTRNQ09iT0dMTnAzV3dDWXI5R0lzM0NsSHVJdjYyMF84VVRWd3JWQVZFTWJYSGhxM28yektuQ1ZhSFlLbHFjME9BdkI0eGhWOFRLTTJ2UDJBZ3NWTmdKUUZNUWM1X3JIbmZwZFRQbkdvaXJLQm5mWlNLT2hFaU5SUmswWF9BaDV6d08zeklMbXkxTV94ZmJkNHZlWWZhcUFUZW50RHZiTXFUVFBiTk5fWl9TRFpqcTl1NnEyeGlrSFlLRWw2YlNDZm50QVRFQkE1WC1qUm5KQ1o5TVY1d041aHU5eXVoUEJVQ1dxakdXeTNYRjAxYTkxUGVTVGJHMTZzNHJtRkhBcmZWZ1dDN1ZaZC1RcEx3R3F1aERSaXBLQ3luSEgxVVM2OUswUF9RMEUwQkZ5YU11Sm8zMDE5MzJzN2gwWXU1R215aklvY0dGbFl1N08wRlVIc1dnWFd1SlZ3NjdZZlJLbHlyRzJFZDB1d2p1N0hVdlJyX25yelRUd1VoaUFMcVctMTlfNEJNM2VMd1hXS1RoTWtoekxQTVB4dU4xem90RFNUMTJOSTZBQ1NwVUNvRkM0eGt6SVlUcldybnhVNjFLNlJfMGdudVZPR19hNThMdHRrdkt3SjI2MWRubUV0Y013QVpMbUJYZEhTVXNYYWQtbmE5dFltaGZIVy1pazhndGFOYWI4QU9CZlRRYTBOdERvWGFNVnV0bldfZ1FFRlBxdGRhMkx5RDVoMENsa2E4UTY5NVFocEczUw?oc=5",
       "lang": "ja",
       "image": null
-    },
-    {
-      "title": "【番組表】FIFAワールドカップ2026全試合のテレビ放送・地上波中継・ネット配信予定",
-      "source": "Goal.com",
-      "published_at": "2026-06-26T17:36:24+00:00",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOVVdSTjVYREZyT2pCSE1HQ1A5NXRxRHE4SUZxR0Z1a2hpRzQ0aEtpNjhnZXJ0LWpDUG9SWmVUMTVLblhvbDVkOExfMzZoLVF5S2x1YlpxUm5ZYjlHNVhlUlJINFBBZG1yOTJLaG81ekk3REVxOS1yRjhkVENrZ0ZIdXloa2xITzhmLU1VQjlkZFhuWmMwbFJQVzdFOUUyS1RM?oc=5",
-      "lang": "ja",
-      "image": "https://assets.goal.com/images/v3/bltdc11c904472eae36/FIFA%20World%20Cup%202026%20All%20Broadcast%20Schedule.jpg"
-    },
-    {
-      "title": "【決勝トーナメント】FIFAワールドカップ（サッカーW杯）2026 北中米大会",
-      "source": "tv-tokyo.co.jp",
-      "published_at": "2026-06-26T17:26:13+00:00",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBSQUk0UXF3ZVZRalVyRzI1dE9FbzU4QVo5c05RTk1RTjFxSlh3SG5hYWhLNzQyT3hkclZpOHNXcGU2eUZHTG5pX1pkT0FycFZKWEF0NkxPVXRqbWxvY1pveUI4X1NhS3B2MU5iM0FyRQ?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "レアルDFミリトン、ブラジルと対戦する日本を警戒「真面目に優勝候補だと思う。彼らは自分たちのプレーリズムを見出した」｜ FIFAワールドカップ2026",
-      "source": "DAZN",
-      "published_at": "2026-06-26T15:32:40+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPQnpSR3FTbnliRlFBUlRPbGlrdmU2QjBhaDRDQjI0UHBuOGZLTERMaURlaTNpeWNlRW9DU1V4MjdTZDZFbWp3dnhxVVNKNkNhYUFld1IybEFkVVVTSTU2TXBqX1pqeFhWSF95MTBBWnl0eUlnaVdDMzV2RlRvUF94bk5HOHhwSE4xSmpMSlpCbUNJQVN1LXJEQS1wWUVIYTFKMWxrbU5WRVdDMWlkX2FSV1c2Z0FWb09SeFVwWjFMUTVFbmtEenpFeUpWSHNHUW1kbzRFYzVxWXpHb1k5VUI3NjZuNA?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "”不可解”中村敬斗ソックス問題 ルールどうなってる？選手困惑 宮本恒靖会長「再確認したい」 - ワールドカップ2026",
-      "source": "日刊スポーツ",
-      "published_at": "2026-06-26T14:16:43+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPQjN5RDF3ZjlSNGVtRlJpQnNJU1QzdzNNQWF3UTJuRkk2WEFzREJoaTVyS3VobmdLTzAxR3AyZXdlTndydXZ2Q0MyZnlWMFB6aXZFYlo1N0FGaGVuZ2M5SGREMWhOUEZtazhHVnlvMEdZWXdBRW5wcGFiU2xpd0VwOHktd1VJbUZ2SEYyYTJCUGQ?oc=5",
-      "lang": "ja",
-      "image": "https://www.nikkansports.com/soccer/worldcup2026/news/img/202606260001845-w500_0.jpg"
-    },
-    {
-      "title": "【6月29日】南アフリカ代表 vs カナダ代表｜地上波テレビ放送・中継・ネット配信｜実況・解説｜順位表｜FIFAワールドカップ2026",
-      "source": "サッカーキング",
-      "published_at": "2026-06-26T13:28:07+00:00",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE94SUh2Z3M5aG5wQVRqTFFjdkZaaGx4ZER0OWxsOEk3aHhPeEZhdVExU0EzU2NJaTA0Tno2anJ0OExQSXc2QU1CcFljbkl6S2tPekpsdVVwcVFCMVZQQzU0QU5LRjNua2poVVhj?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "Ｗ杯決勝トーナメント日本対ブラジル戦のパブリックビューイングチケットが発売９分で完売（日刊スポーツ）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-26T13:21:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA3MzMyQ1U3OVV4aEF3WWxRVXY5V29ZQlhpMXRuOHVYTDJqeUxuZExJSEZMYnZCb1hMZ0RmdGsxaUd0dWpVaHFqeXVxeEw2TnhmOFRFYTBUUUpfMmZNZTFZVTdOUV85Zk5CM2RNNFVhWTkyUm84SzBVM1BIbmZPMU0?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "森保監督「日本サッカーが確実に成長している」日本代表3大会連続GS突破！次戦ブラジルに決定【サッカーW杯】",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-26T12:47:38+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE04VW5lOUwtLXhsYnBpZk1kU0xXOWZETmhkVUNVcUxsSkpXTWpKNUYtVm5RWktCcTV5SklfMU5BVXFFbFpLTUxOSUxyV0UzSU5BeWZiNERzOGZPVkNaSHdDUXViMnhkZ0JGdU5VZTRTd0U3TUlxNXRkQ21lMlNwZkU?oc=5",
-      "lang": "ja",
-      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260626-00010008-tvtokyos-000-2-view.jpg?exp=10800"
-    },
-    {
-      "title": "サッカー日本代表｜チーム紹介・結果｜サッカーワールドカップ2026：時事ドットコム",
-      "source": "時事ドットコム",
-      "published_at": "2026-06-26T12:45:52+00:00",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNWnI5UnV0MFN3WDhrX2NUaHM0U040TkRoUWx6R1c2NFl5ZmlYZTd4VU1QOVViYndpN0w4SHBFZFBKTGtLQWRVcXJTekZuN19kQ0dMR2ZkelRoWmwxdkxpZGQxbmtMRkpUWG9BeWU5ODBrcjc4NG5jNHliV2Y5REEyZE5DQWNsZw?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "ブラジルは“レアルのエース”＆約3年ぶり復帰ネイマールらスター揃い!日本代表のベスト16かけた舞台に「歴史を作ろう」【サッカーFIFAワールドカップ2026】（めざましmedia）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-26T12:25:28+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBqTnozM2R0UkpSR2RSVTEzN0oyaDJhZ2tSQXVuTTlMdk1qM0hCTnJqbDJRZVdKajVSenVqeWlqazhTeE1heU44WVgxU0M4MVZoNVJYaDYxV2ZnbmZoeWNYaDZSQ3FpbE03YlRNSzZtYUNLVFBEMC1vazNWYWFXMUE?oc=5",
-      "lang": "ja",
-      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260626-00313599-fujitv-000-1-view.jpg?exp=10800"
-    },
-    {
-      "title": "元日本代表キャプテン・吉田麻也がピッチで掲げた“あるもの”に反響!熱い思いを背負う姿に「次もきっと…」【サッカーFIFAワールドカップ2026】（めざましmedia）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-06-26T12:09:18+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1MU2ZXaFRiaHJHLUY3bVB2Y0NheFlwTDJiSTNKb09qd1hhdFBYYWljS05zQVFwWnlZdk9fVDFBcXNtSWZwRl9UeUxoRjFaTFVFaDNjNHRVdFBoaWdibDZOOUdGNWVfNGgtcTRoazVpV0x4UG9fQW1SMEw2N3Vxclk?oc=5",
-      "lang": "ja",
-      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260626-00313658-fujitv-000-1-view.jpg?exp=10800"
     }
   ]
 }
