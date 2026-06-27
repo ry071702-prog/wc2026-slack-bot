@@ -354,9 +354,23 @@
     "draw": 0,
     "away": 0,
     "total": 0,
-    "final": false
+    "final": true
   },
   "537374": {
+    "home": 0,
+    "draw": 0,
+    "away": 0,
+    "total": 0,
+    "final": true
+  },
+  "537367": {
+    "home": 0,
+    "draw": 0,
+    "away": 0,
+    "total": 0,
+    "final": false
+  },
+  "537368": {
     "home": 0,
     "draw": 0,
     "away": 0,
