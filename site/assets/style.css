@@ -3837,7 +3837,45 @@ a.bracket-match:focus-visible {
   gap: 3px;
 }
 
-.bracket-prob-labels {
+/* 予想コールアウト: どの国が何%で有利かを名指し */
+.bracket-prob-callout {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.bracket-prob-lead {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.bracket-prob-fav-flag {
+  font-size: 13px;
+}
+
+.bracket-prob-fav-name {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.bracket-prob-fav-pct {
+  font-weight: 900;
+  color: var(--accent-lime);
+}
+
+.bracket-prob-fav-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+
+/* バー下の両国 % (国旗つき) */
+.bracket-prob-ends {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3845,28 +3883,27 @@ a.bracket-match:focus-visible {
   font-weight: 800;
 }
 
-.bracket-prob-pct {
-  color: var(--text-muted);
-  transition: color 0.2s ease;
+.bracket-prob-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
 
-/* 有利側を強調 (太字・緑・少し大きく)、格下側は控えめに */
-.bracket-prob-pct.is-fav {
-  color: var(--accent-lime);
+.bracket-prob-end-flag {
   font-size: 12px;
+}
+
+.bracket-prob-end.is-fav .bracket-prob-end-pct {
+  color: var(--accent-lime);
   font-weight: 900;
 }
 
-.bracket-prob-pct.is-under {
-  color: var(--text-muted);
-  opacity: 0.75;
+.bracket-prob-end.is-under {
+  opacity: 0.7;
 }
 
-.bracket-prob-tag {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--text-secondary);
+.bracket-prob-end.is-under .bracket-prob-end-pct {
+  color: var(--text-muted);
 }
 
 .bracket-prob-bar {
