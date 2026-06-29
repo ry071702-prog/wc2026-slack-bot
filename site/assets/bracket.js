@@ -508,35 +508,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!prob) {
       return null;
     }
-    // どちらがどれくらい有利かを一目で分かるようにする:
-    //   ・格上(高%)側を緑、格下側を控えめ色で塗り分ける (ホーム/アウェイ固定ではない)
-    //   ・有利側の % を太字+▲で強調し、中央に優勢度ラベル(互角/やや有利/有利/大本命)
-    const homeFav = prob.home > prob.away;
+    // どの国が・何%で・どれくらい勝ちやすいかを国名つきで明示する:
+    //   ・コールアウト「予想 🇧🇷 ブラジル 62% やや有利」で有利な国を名指し
+    //   ・バーは有利側=緑/格下=控えめ (ホーム/アウェイ位置に依存しない)
+    //   ・バー下に両国の国旗つき % を併記 (格下側は控えめ)
+    const homeFav = prob.home >= prob.away;
     const even = prob.home === prob.away;
+    const fav = homeFav ? home : away;
     const favPct = Math.max(prob.home, prob.away);
-    const tagText = even ? "互角" : strengthLabel(favPct);
+    const strength = even ? "互角" : strengthLabel(favPct);
 
     const wrap = app.element("div", "bracket-prob");
-    const labels = app.element("div", "bracket-prob-labels");
-    const homePct = app.element(
-      "span",
-      "bracket-prob-pct",
-      `${!even && homeFav ? "▲" : ""}${prob.home}%`,
-    );
-    const awayPct = app.element(
-      "span",
-      "bracket-prob-pct",
-      `${!even && !homeFav ? "▲" : ""}${prob.away}%`,
-    );
-    if (!even) {
-      (homeFav ? homePct : awayPct).classList.add("is-fav");
-      (homeFav ? awayPct : homePct).classList.add("is-under");
+
+    // 予想コールアウト (どの国が有利か)
+    const callout = app.element("div", "bracket-prob-callout");
+    callout.append(app.element("span", "bracket-prob-lead", "予想"));
+    if (even) {
+      callout.append(
+        app.element("span", "bracket-prob-fav-tag", `互角 ${prob.home}%-${prob.away}%`),
+      );
+    } else {
+      const favFlag = app.element("span", "bracket-prob-fav-flag", fav.flag || "");
+      favFlag.setAttribute("aria-hidden", "true");
+      callout.append(
+        favFlag,
+        app.element("span", "bracket-prob-fav-name", fav.name),
+        app.element("span", "bracket-prob-fav-pct", `${favPct}%`),
+        app.element("span", "bracket-prob-fav-tag", strength),
+      );
     }
-    labels.append(
-      homePct,
-      app.element("span", "bracket-prob-tag", tagText),
-      awayPct,
-    );
+
+    // バー (有利側=緑)
     const bar = app.element("div", "bracket-prob-bar");
     const homeFill = app.element(
       "span",
@@ -549,8 +551,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     awayFill.style.width = `${prob.away}%`;
     bar.append(homeFill, awayFill);
-    wrap.append(labels, bar);
+
+    // 両国の国旗つき % (左=home / 右=away、上のチーム行と並びを合わせる)
+    const ends = app.element("div", "bracket-prob-ends");
+    ends.append(
+      buildProbEnd(home, prob.home, !even && homeFav),
+      buildProbEnd(away, prob.away, !even && !homeFav),
+    );
+
+    wrap.append(callout, bar, ends);
     return wrap;
+  }
+
+  function buildProbEnd(info, pct, isFav) {
+    const span = app.element(
+      "span",
+      `bracket-prob-end ${isFav ? "is-fav" : "is-under"}`,
+    );
+    const flag = app.element("span", "bracket-prob-end-flag", info.flag || "");
+    flag.setAttribute("aria-hidden", "true");
+    span.append(
+      flag,
+      app.element("span", "bracket-prob-end-pct", `${isFav ? "▲" : ""}${pct}%`),
+    );
+    return span;
   }
 
   // 勝率(有利側の%)から優勢度の言葉を返す。50%付近=互角、差が開くほど強い表現に。
