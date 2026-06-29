@@ -3846,30 +3846,49 @@ a.bracket-match:focus-visible {
 }
 
 .bracket-prob-pct {
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+/* 有利側を強調 (太字・緑・少し大きく)、格下側は控えめに */
+.bracket-prob-pct.is-fav {
+  color: var(--accent-lime);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.bracket-prob-pct.is-under {
+  color: var(--text-muted);
+  opacity: 0.75;
 }
 
 .bracket-prob-tag {
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.04em;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .bracket-prob-bar {
   display: flex;
-  height: 5px;
+  height: 7px;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
 }
 
-.bracket-prob-home {
+/* 塗りは「有利側=緑 / 格下側=控えめ」で、ホーム/アウェイの位置に依存しない */
+.bracket-prob-fill.is-fav {
   background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
 }
 
-.bracket-prob-away {
-  background: rgba(255, 255, 255, 0.22);
+.bracket-prob-fill.is-under {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ランク不明などで互角扱い (クラス無し) のときの既定塗り */
+.bracket-prob-fill {
+  background: rgba(255, 255, 255, 0.14);
 }
 
 /* 日本代表: 決勝トーナメント進出ハイライト */

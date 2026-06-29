@@ -201,6 +201,7 @@ def test_run_notify_does_not_repost_existing_poll(
     store = StateStore(tmp_path / "notified.json")
     state = empty_state()
     state["poll"]["537357"] = "existing.ts"
+    state["poll_seeded"].append(537357)  # 種付けも完了済み
     store.save(state)
     slack = PollStubSlack()
     now = nl_japan.utc_kickoff - timedelta(hours=10)

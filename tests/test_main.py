@@ -223,11 +223,12 @@ def test_run_notify_prematch_seeds_reactions_japan_match(
 def test_run_notify_prematch_reactions_dedup(
     tmp_path: Path, regular_match: Match
 ) -> None:
-    """prematch_poll に記録済みの match にはリアクションを再シードしない。"""
+    """種付け完了済み (prematch_poll_seeded) の match は再シードしない。"""
     store = StateStore(tmp_path / "notified.json")
     state = empty_state()
-    # prematch_poll には既に登録済み、prematch には未登録 (prematch は再送される経路)
+    # prematch_poll に ts 記録済み かつ 種付け完了済み (prematch_poll_seeded)
     state["prematch_poll"][str(regular_match.id)] = "existing.ts"
+    state["prematch_poll_seeded"].append(regular_match.id)
     store.save(state)
     slack = ReactionStubSlack()
     now = regular_match.utc_kickoff - timedelta(minutes=10)
@@ -236,10 +237,53 @@ def test_run_notify_prematch_reactions_dedup(
 
     # prematch は送られる
     assert len(slack.posts) == 1
-    # リアクションは種付けされない (dedup)
+    # 完了済みなのでリアクションは再種付けされない
     assert slack.reactions_added == []
     # 既存の ts は上書きされない
     assert store.load()["prematch_poll"] == {str(regular_match.id): "existing.ts"}
+
+
+def test_run_notify_prematch_reseeds_incomplete(
+    tmp_path: Path, regular_match: Match
+) -> None:
+    """ts 記録済みでも種付け未完了 (prematch_poll_seeded に無い) なら、
+    キックオフ前に次回実行で再シードされる (自己修復)。"""
+    store = StateStore(tmp_path / "notified.json")
+    state = empty_state()
+    # 前回 prematch 送信済み (ts 記録) だが一部リアクション失敗で未完了の状態
+    state["prematch"].append(regular_match.id)
+    state["prematch_poll"][str(regular_match.id)] = "earlier.ts"
+    store.save(state)
+    slack = ReactionStubSlack()
+    now = regular_match.utc_kickoff - timedelta(minutes=10)
+
+    run_notify(StubProvider([regular_match]), slack, store, now=now)
+
+    # prematch は再送されない (state["prematch"] 済み) が、リアクションは再種付けされる
+    assert slack.posts == []
+    assert [name for _, name in slack.reactions_added] == [
+        "flag-es",
+        "handshake",
+        "flag-sa",
+    ]
+    assert store.load()["prematch_poll_seeded"] == [regular_match.id]
+
+
+def test_run_notify_prematch_incomplete_not_marked_on_failure(
+    tmp_path: Path, regular_match: Match
+) -> None:
+    """リアクションが失敗したら完了マークを付けず、次回再試行できる状態を保つ。"""
+    store = StateStore(tmp_path / "notified.json")
+    store.save(empty_state())
+    slack = ReactionStubSlack(add_reaction_succeeds=False)
+    now = regular_match.utc_kickoff - timedelta(minutes=10)
+
+    run_notify(StubProvider([regular_match]), slack, store, now=now)
+
+    loaded = store.load()
+    # ts は記録される (再試行で使う) が、完了マークは付かない
+    assert loaded["prematch_poll"] != {}
+    assert loaded["prematch_poll_seeded"] == []
 
 
 def test_run_notify_prematch_webhook_no_reactions(

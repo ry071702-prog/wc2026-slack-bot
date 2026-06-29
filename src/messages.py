@@ -279,9 +279,17 @@ def _favorite_line(match: Match, context: MatchContext) -> Optional[str]:
     else:
         fav_disp, fav_rank, other_rank = disp_b, rank_b, rank_a
     high, low = min(rank_a, rank_b), max(rank_a, rank_b)
-    if other_rank - fav_rank <= 3:
+    gap = other_rank - fav_rank
+    if gap <= 3:
         return f"🔮 予想: 互角の対戦（FIFA {high}位 vs {low}位）"
-    return f"🔮 予想: {fav_disp} やや優勢（FIFA {fav_rank}位 vs {other_rank}位）"
+    # ランク差で優勢度を段階表示し、「どちらがどれくらい有利か」を一目で分かるようにする
+    if gap <= 10:
+        label = "やや優勢"
+    elif gap <= 25:
+        label = "優勢"
+    else:
+        label = "大本命"
+    return f"🔮 予想: {fav_disp} {label}（FIFA {fav_rank}位 vs {other_rank}位）"
 
 
 KNOCKOUT_ADVANCE = {

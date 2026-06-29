@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from datetime import date
 from typing import Any, Optional, Protocol
 
@@ -253,32 +254,62 @@ class SlackBotClient:
     def send(self, payload: Payload) -> bool:
         return self.post_message(payload) is not None
 
-    def add_reaction(self, ts: str, name: str) -> bool:
-        """reactions.add。already_reacted は成功扱い (True)。"""
+    def add_reaction(self, ts: str, name: str, attempts: int = 2) -> bool:
+        """reactions.add。already_reacted は成功扱い (True)。
+
+        一時失敗 (HTTP 429 レート制限 / タイムアウト等) は最大 `attempts` 回まで
+        指数バックオフ付きで再試行する。429 のときは Retry-After ヘッダを尊重する。
+        恒久エラー (invalid_name 等) は再試行せず即 False。種付け呼び出し側
+        (main._seed_reactions) は全成功時のみ完了マークするため、ここで取り切れ
+        なかった失敗も次回 cron で再試行される。"""
         if self.dry_run:
             print(f"Slack reactions.add skipped: DRY_RUN=true (name={name} ts={ts})")
             return True
 
-        try:
-            response = self.session.post(
-                self.REACTIONS_ADD_URL,
-                headers={"Authorization": f"Bearer {self.token}"},
-                json={"channel": self.channel, "timestamp": ts, "name": name},
-                timeout=self.timeout,
-            )
-            response.raise_for_status()
-            data = response.json()
-        except (requests.RequestException, ValueError) as exc:
-            print(f"Slack reactions.add failed: {exc}")
-            return False
+        for attempt in range(attempts):
+            try:
+                response = self.session.post(
+                    self.REACTIONS_ADD_URL,
+                    headers={"Authorization": f"Bearer {self.token}"},
+                    json={"channel": self.channel, "timestamp": ts, "name": name},
+                    timeout=self.timeout,
+                )
+            except requests.RequestException as exc:
+                print(f"Slack reactions.add failed (attempt {attempt + 1}): {exc}")
+                if attempt + 1 < attempts:
+                    time.sleep(2**attempt)
+                    continue
+                return False
 
-        if not data.get("ok"):
-            error = data.get("error")
-            if error == "already_reacted":
-                return True
-            print(f"Slack reactions.add failed: {error}")
-            return False
-        return True
+            if response.status_code == 429 and attempt + 1 < attempts:
+                retry_after = response.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    delay = int(retry_after)
+                else:
+                    delay = 2**attempt
+                print(f"Slack reactions.add rate-limited (429); retrying in {delay}s")
+                time.sleep(delay)
+                continue
+
+            try:
+                response.raise_for_status()
+                data = response.json()
+            except (requests.RequestException, ValueError) as exc:
+                print(f"Slack reactions.add failed (attempt {attempt + 1}): {exc}")
+                if attempt + 1 < attempts:
+                    time.sleep(2**attempt)
+                    continue
+                return False
+
+            if not data.get("ok"):
+                error = data.get("error")
+                if error == "already_reacted":
+                    return True
+                print(f"Slack reactions.add failed: {error}")
+                return False  # 恒久エラーは再試行しない
+            return True
+
+        return False
 
     def get_reactions(self, ts: str) -> Optional[dict[str, Any]]:
         """reactions.get (full=true)。成功時はレスポンス JSON 全体を返す。失敗/未取得時 None。"""

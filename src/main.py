@@ -5,7 +5,7 @@ import json
 import os
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Callable, Optional, Sequence
 
 from src.flags import opponent_reaction
 from src.messages import (
@@ -129,6 +129,65 @@ def _supports_reactions(slack: SlackSender) -> bool:
     return all(
         hasattr(slack, attr)
         for attr in ("post_message", "add_reaction", "get_reactions")
+    )
+
+
+def _seed_reactions(
+    slack: SlackSender,
+    state_store: StateStore,
+    state: NotificationState,
+    now: datetime,
+    matches: list[Match],
+    *,
+    ts_by_id: dict[str, str],
+    seeded_ids: list[int],
+    reactions_of: Callable[[Match], list[str]],
+    eligible: Callable[[Match], bool],
+) -> None:
+    """キックオフ前で未完了の試合に予想リアクションを種付けする自己修復パス。
+
+    ts_by_id に ts が記録済み (= メッセージ投稿済み) で、まだ seeded_ids に無く、
+    キックオフ前の試合について reactions_of(match) を全て付ける。1つでも失敗した
+    場合は seeded_ids に積まず、次回実行で残りを再試行する (add_reaction は
+    already_reacted を成功扱いするため冪等で、既に付いた分の重複押下は起きない)。
+    GitHub Actions の cron 遅延や Slack の一時失敗 (429/timeout) で一部しか付かな
+    かったケースを後続実行で確実に埋める。"""
+    now_utc = now.astimezone(timezone.utc)
+    for match in matches:
+        if match.id in seeded_ids:
+            continue
+        if not eligible(match):
+            continue
+        ts = ts_by_id.get(str(match.id))
+        if not ts:
+            continue
+        if match.utc_kickoff <= now_utc:
+            continue  # キックオフ済みは再試行しない (種付けの意味が無い)
+        results = [slack.add_reaction(ts, name) for name in reactions_of(match)]
+        if results and all(results):
+            seeded_ids.append(match.id)
+            state_store.save(state)
+
+
+def seed_prematch_reactions(
+    slack: SlackSender,
+    state_store: StateStore,
+    state: NotificationState,
+    now: datetime,
+    matches: list[Match],
+) -> None:
+    """全試合の prematch メッセージへ勝敗予想リアクション (ホーム旗/🤝/アウェイ旗)
+    を種付けする。失敗分は次回実行で再試行 (自己修復)。"""
+    _seed_reactions(
+        slack,
+        state_store,
+        state,
+        now,
+        matches,
+        ts_by_id=state["prematch_poll"],
+        seeded_ids=state["prematch_poll_seeded"],
+        reactions_of=prematch_vote_reactions,
+        eligible=lambda _match: True,
     )
 
 
@@ -277,12 +336,11 @@ def run_notify(
             state["prematch"].append(match.id)
             state_store.save(state)
 
-        # リアクション種付け: ベストエフォート。失敗が prematch 配信・state 記録を妨げない。
-        # prematch_poll は {match_id文字列: ts} で記録し、サイトの予想集計
-        # (scripts/build_match_predictions.py) が後から reactions.get で集計する。
+        # prematch メッセージの ts を記録する (リアクション種付けは後段の
+        # seed_prematch_reactions で自己修復的に行う)。prematch_poll は
+        # {match_id文字列: ts} で、サイトの予想集計 (build_match_predictions) が
+        # 後から reactions.get で集計する。
         if ts and not slack.dry_run and str(match.id) not in state["prematch_poll"]:
-            for name in prematch_vote_reactions(match):
-                slack.add_reaction(ts, name)
             state["prematch_poll"][str(match.id)] = ts
             state_store.save(state)
 
@@ -292,8 +350,10 @@ def run_notify(
             state["result"].append(match.id)
             state_store.save(state)
 
-    # 日本戦の勝敗予想リアクション投票 (静音時間とは無関係、Bot Token クライアントのみ)
+    # 勝敗予想リアクションの種付け + 日本戦ポール (Bot Token クライアントのみ。
+    # 静音時間とは無関係)。種付けは失敗分を次回実行で再試行する自己修復方式。
     if _supports_reactions(slack):
+        seed_prematch_reactions(slack, state_store, state, current_time, matches)
         run_poll(provider, slack, state_store, state, current_time, matches, poll_lead_hours)
 
 
@@ -367,8 +427,19 @@ def run_poll(
         if not slack.dry_run:
             state["poll"][str(match.id)] = ts
             state_store.save(state)
-        for name in japan_poll_reactions(match):
-            slack.add_reaction(ts, name)
+
+    # ポールの種リアクションも自己修復方式で付ける (一部失敗は次回実行で再試行)。
+    _seed_reactions(
+        slack,
+        state_store,
+        state,
+        now,
+        matches,
+        ts_by_id=state["poll"],
+        seeded_ids=state["poll_seeded"],
+        reactions_of=japan_poll_reactions,
+        eligible=lambda match: match.is_japan,
+    )
 
     result_matches = sorted(
         (m for m in matches if should_post_poll_result(m, state)),
