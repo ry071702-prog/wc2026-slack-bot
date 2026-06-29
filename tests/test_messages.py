@@ -93,6 +93,18 @@ def test_prematch_context_close_ranks_reported_as_even() -> None:
     assert "やや優勢" not in text
 
 
+def test_prematch_favorite_is_graded_by_rank_gap() -> None:
+    # ランク差で優勢度が段階表示される (やや優勢 < 優勢 < 大本命)
+    def favorite(rank_a: int, rank_b: int) -> str:
+        match = _knockout_match("Spain", "Ghana")
+        context = MatchContext(fifa_ranks={"Spain": rank_a, "Ghana": rank_b})
+        return prematch_text(match, context=context)
+
+    assert "スペイン やや優勢（FIFA 2位 vs 12位）" in favorite(2, 12)  # 差10
+    assert "スペイン 優勢（FIFA 2位 vs 22位）" in favorite(2, 22)  # 差20
+    assert "スペイン 大本命（FIFA 2位 vs 60位）" in favorite(2, 60)  # 差58
+
+
 def test_prematch_without_context_is_unchanged(regular_match: Match) -> None:
     assert prematch_text(regular_match) == prematch_text(
         regular_match, context=None

@@ -159,11 +159,14 @@ def build_bracket(
 ) -> dict[str, Any]:
     """静的ブラケット定義 (会場・対戦元スロット) に、ライブの決勝T結果を重ねる。
 
-    対応付けは「ステージ内でキックオフ昇順に並べたライブ試合」と
-    「match_no 昇順の静的スロット」の位置一致 (ベストエフォート)。FIFA の
-    マッチ番号は日程順に振られており football-data の取得順とほぼ一致する。
-    チーム未確定 (TBD) の間は会場・スロット表記のみ描画され、確定し次第
-    実チーム・スコアが自動で乗る。
+    対応付けは「ステージ内でキックオフ昇順に並べたライブ試合」と、同じく
+    「公式キックオフ昇順に並べた静的スロット」の位置一致で行う。FIFA のマッチ
+    番号はキックオフ時刻順では*ない* (例: ブラジル×日本は M76 だが時刻は早い) ため、
+    match_no 順で zip すると別スロットに乗ってしまう。これを避けるため、静的スロット
+    には公式キックオフ (kickoff_jst) を持たせ、その順でライブ試合と突き合わせる。
+    kickoff_jst を持たないスロット (テスト用の簡易データ等) は match_no 順に
+    フォールバックする。チーム未確定 (TBD) の間は会場・スロット表記のみ描画され、
+    確定し次第 実チーム・スコアが自動で乗る。出力は match_no 昇順で安定させる。
     """
     live_by_stage: dict[str, list[dict[str, Any]]] = {}
     for entry in schedule:
@@ -175,12 +178,17 @@ def build_bracket(
 
     out_matches: list[dict[str, Any]] = []
     for stage in KNOCKOUT_ORDER:
-        static = sorted(
-            (node for node in bracket.get("matches", []) if node.get("stage") == stage),
-            key=lambda node: node.get("match_no", 0),
+        stage_nodes = [
+            node for node in bracket.get("matches", []) if node.get("stage") == stage
+        ]
+        # 公式キックオフ順でライブ試合と位置一致させる (無ければ match_no 順)
+        by_kickoff = sorted(
+            stage_nodes,
+            key=lambda node: (node.get("kickoff_jst") or "", node.get("match_no", 0)),
         )
         live = live_by_stage.get(stage, [])
-        for index, node in enumerate(static):
+        merged_by_no: dict[Any, dict[str, Any]] = {}
+        for index, node in enumerate(by_kickoff):
             merged = dict(node)
             match = live[index] if index < len(live) else None
             if match is not None:
@@ -199,7 +207,9 @@ def build_bracket(
                         "away_ja": match.get("away_ja") if away_ok else None,
                     }
                 )
-            out_matches.append(merged)
+            merged_by_no[node.get("match_no")] = merged
+        for node in sorted(stage_nodes, key=lambda node: node.get("match_no", 0)):
+            out_matches.append(merged_by_no[node.get("match_no")])
     return {"rounds": KNOCKOUT_ORDER, "matches": out_matches}
 
 

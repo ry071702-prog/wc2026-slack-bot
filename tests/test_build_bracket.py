@@ -100,6 +100,62 @@ def test_build_bracket_overlays_live_results_in_kickoff_order() -> None:
     assert by_no[74]["is_japan"] is True
 
 
+def test_build_bracket_maps_by_official_kickoff_not_match_no() -> None:
+    """静的スロットに公式 kickoff_jst がある場合、ライブ試合は match_no 順ではなく
+    キックオフ時刻順で対応付けられる。FIFA の match番号はキックオフ順ではないため
+    (例: ブラジル×日本=M76 だが時刻は早い)、これが無いと別スロットに乗ってしまう。"""
+    static = {
+        "rounds": ["LAST_32"],
+        "matches": [
+            {
+                "match_no": 74,  # 公式は遅い時刻 (5:30)
+                "stage": "LAST_32",
+                "venue": "Gillette Stadium",
+                "kickoff_jst": "2026-06-30T05:30:00+09:00",
+                "home": {"type": "group", "label": "E組 1位"},
+                "away": {"type": "third", "label": "3位(A/B/C/D/F組)"},
+            },
+            {
+                "match_no": 76,  # 公式は早い時刻 (2:00)
+                "stage": "LAST_32",
+                "venue": "NRG Stadium",
+                "kickoff_jst": "2026-06-30T02:00:00+09:00",
+                "home": {"type": "group", "label": "C組 1位"},
+                "away": {"type": "group", "label": "F組 2位"},
+            },
+        ],
+    }
+    schedule = [
+        _schedule_entry(
+            match_id=823,
+            stage="LAST_32",
+            kickoff_jst="2026-06-30T02:00:00+09:00",  # 早い → M76 に乗るべき
+            home="Brazil",
+            away="Japan",
+            is_japan=True,
+        ),
+        _schedule_entry(
+            match_id=815,
+            stage="LAST_32",
+            kickoff_jst="2026-06-30T05:30:00+09:00",  # 遅い → M74 に乗るべき
+            home="Germany",
+            away="Paraguay",
+        ),
+    ]
+
+    result = build_site_data.build_bracket(schedule, static)
+    by_no = {node["match_no"]: node for node in result["matches"]}
+
+    # 早いキックオフの ブラジル×日本 は M76、遅い ドイツ×パラグアイ は M74
+    assert by_no[76]["home_team"] == "Brazil"
+    assert by_no[76]["away_team"] == "Japan"
+    assert by_no[76]["fd_id"] == 823
+    assert by_no[74]["home_team"] == "Germany"
+    assert by_no[74]["fd_id"] == 815
+    # 出力は match_no 昇順で安定
+    assert [n["match_no"] for n in result["matches"]] == [74, 76]
+
+
 def test_build_bracket_without_live_keeps_static_slots() -> None:
     result = build_site_data.build_bracket([], _static_bracket())
 

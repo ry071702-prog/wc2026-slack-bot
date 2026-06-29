@@ -508,21 +508,57 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!prob) {
       return null;
     }
+    // どちらがどれくらい有利かを一目で分かるようにする:
+    //   ・格上(高%)側を緑、格下側を控えめ色で塗り分ける (ホーム/アウェイ固定ではない)
+    //   ・有利側の % を太字+▲で強調し、中央に優勢度ラベル(互角/やや有利/有利/大本命)
+    const homeFav = prob.home > prob.away;
+    const even = prob.home === prob.away;
+    const favPct = Math.max(prob.home, prob.away);
+    const tagText = even ? "互角" : strengthLabel(favPct);
+
     const wrap = app.element("div", "bracket-prob");
     const labels = app.element("div", "bracket-prob-labels");
+    const homePct = app.element(
+      "span",
+      "bracket-prob-pct",
+      `${!even && homeFav ? "▲" : ""}${prob.home}%`,
+    );
+    const awayPct = app.element(
+      "span",
+      "bracket-prob-pct",
+      `${!even && !homeFav ? "▲" : ""}${prob.away}%`,
+    );
+    if (!even) {
+      (homeFav ? homePct : awayPct).classList.add("is-fav");
+      (homeFav ? awayPct : homePct).classList.add("is-under");
+    }
     labels.append(
-      app.element("span", "bracket-prob-pct", `${prob.home}%`),
-      app.element("span", "bracket-prob-tag", "勝率予想"),
-      app.element("span", "bracket-prob-pct", `${prob.away}%`),
+      homePct,
+      app.element("span", "bracket-prob-tag", tagText),
+      awayPct,
     );
     const bar = app.element("div", "bracket-prob-bar");
-    const homeFill = app.element("span", "bracket-prob-home");
+    const homeFill = app.element(
+      "span",
+      `bracket-prob-fill ${even ? "" : homeFav ? "is-fav" : "is-under"}`,
+    );
     homeFill.style.width = `${prob.home}%`;
-    const awayFill = app.element("span", "bracket-prob-away");
+    const awayFill = app.element(
+      "span",
+      `bracket-prob-fill ${even ? "" : homeFav ? "is-under" : "is-fav"}`,
+    );
     awayFill.style.width = `${prob.away}%`;
     bar.append(homeFill, awayFill);
     wrap.append(labels, bar);
     return wrap;
+  }
+
+  // 勝率(有利側の%)から優勢度の言葉を返す。50%付近=互角、差が開くほど強い表現に。
+  function strengthLabel(favPct) {
+    if (favPct < 58) return "互角";
+    if (favPct < 68) return "やや有利";
+    if (favPct < 80) return "有利";
+    return "大本命";
   }
 
   function venueIcon() {

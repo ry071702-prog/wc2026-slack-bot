@@ -13,6 +13,11 @@ class NotificationState(TypedDict):
     poll: dict[str, str]
     poll_result: list[int]
     prematch_poll: dict[str, str]
+    # 勝敗予想リアクションを「3つ全て」種付けし終えた match_id (自己修復用)。
+    # prematch_poll は ts を記録するだけ (= メッセージ済み)。3リアクションが
+    # 全て成功した時だけ seeded に積み、途中失敗は次回実行で再試行する。
+    prematch_poll_seeded: list[int]
+    poll_seeded: list[int]
 
 
 def empty_state() -> NotificationState:
@@ -24,6 +29,8 @@ def empty_state() -> NotificationState:
         "poll": {},
         "poll_result": [],
         "prematch_poll": {},
+        "prematch_poll_seeded": [],
+        "poll_seeded": [],
     }
 
 
@@ -76,9 +83,21 @@ class StateStore:
         poll = raw.get("poll", {})
         poll_result = raw.get("poll_result", [])
         prematch_poll = raw.get("prematch_poll", {})
+        # prematch_poll_seeded / poll_seeded は後発フィールド。旧 JSON には無いため
+        # 既定 [] で補い、後方互換を保つ。
+        prematch_poll_seeded = raw.get("prematch_poll_seeded", [])
+        poll_seeded = raw.get("poll_seeded", [])
         if not all(
             isinstance(value, list)
-            for value in (digest_dates, prematch, result, lineup, poll_result)
+            for value in (
+                digest_dates,
+                prematch,
+                result,
+                lineup,
+                poll_result,
+                prematch_poll_seeded,
+                poll_seeded,
+            )
         ):
             raise TypeError("state values must be arrays")
         if not isinstance(poll, dict):
@@ -91,4 +110,6 @@ class StateStore:
             "poll": {str(key): str(value) for key, value in poll.items()},
             "poll_result": [int(value) for value in poll_result],
             "prematch_poll": _normalize_prematch_poll(prematch_poll),
+            "prematch_poll_seeded": [int(value) for value in prematch_poll_seeded],
+            "poll_seeded": [int(value) for value in poll_seeded],
         }

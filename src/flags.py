@@ -42,6 +42,7 @@ TEAM_ISO: dict[str, str] = {
     "Ghana": "gh",
     "Ivory Coast": "ci",
     "Côte d'Ivoire": "ci",
+    "Cote d'Ivoire": "ci",  # アクセント無し表記ゆれの保険
     "Ecuador": "ec",
     "Colombia": "co",
     "Panama": "pa",
@@ -61,6 +62,7 @@ TEAM_ISO: dict[str, str] = {
     "Australia": "au",
     "New Zealand": "nz",
     "Congo DR": "cd",
+    "DR Congo": "cd",  # 表記ゆれの保険 (football-data は "Congo DR")
     # 2026 未出場だが TEAM_NAMES に存在する国 (決勝Tや表記ゆれの防御用)
     "Chile": "cl",
     "China PR": "cn",
