@@ -459,6 +459,6 @@
     "draw": 0,
     "away": 0,
     "total": 0,
-    "final": false
+    "final": true
   }
 }
