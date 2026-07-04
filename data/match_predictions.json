@@ -527,8 +527,8 @@
   "537430": {
     "home": 1,
     "draw": 0,
-    "away": 0,
-    "total": 1,
-    "final": false
+    "away": 1,
+    "total": 2,
+    "final": true
   }
 }
