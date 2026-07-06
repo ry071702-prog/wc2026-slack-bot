@@ -3,8 +3,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const app = window.SiteApp;
 
+  setupStatCountUp();
+
   try {
     const schedule = await app.fetchJson("data/schedule.json");
+    renderHeadline(schedule);
     renderNextJapan(schedule);
     renderToday(schedule);
     renderResults(schedule);
@@ -21,6 +24,166 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     app.logDataError(error);
     app.showLoadError(document.querySelector("#teams-preview"));
+  }
+
+  // 一面の見出しをその日の実データで組む (失敗時は静的コピーのまま)
+  function renderHeadline(schedule) {
+    const node = document.querySelector("#hero-headline");
+    if (!node || !Array.isArray(schedule) || schedule.length === 0) {
+      return;
+    }
+    const liveStatuses = new Set(["IN_PLAY", "PAUSED"]);
+    const today = app.jstDateKey();
+    const todays = schedule.filter((match) => match.date_jst === today);
+
+    const setHeadline = (before, markerText, after) => {
+      const marker = app.element("span", "marker", markerText);
+      node.replaceChildren(before, marker, after);
+    };
+
+    // 1. 日本戦 (進行中 > 今日開催)
+    const japanToday = todays.find((match) => match.is_japan);
+    if (japanToday && liveStatuses.has(japanToday.status)) {
+      setHeadline("いま、", "日本戦", "が進行中");
+      return;
+    }
+    if (japanToday && japanToday.status !== "FINISHED") {
+      setHeadline(
+        `きょう ${app.formatKickoff(japanToday.kickoff_jst)}、`,
+        "日本戦",
+        "キックオフ",
+      );
+      return;
+    }
+
+    // 2. 決勝が終わっていれば優勝国
+    const finalMatch = schedule.find((match) => match.stage === "FINAL");
+    if (finalMatch && finalMatch.status === "FINISHED") {
+      const winner = finalWinnerName(finalMatch);
+      if (winner) {
+        setHeadline("優勝は、", winner, "");
+        return;
+      }
+    }
+
+    // 3. いま試合中
+    const liveNow = todays.find((match) => liveStatuses.has(match.status));
+    if (liveNow) {
+      setHeadline("いま、", liveNow.stage_ja || "試合", "が進行中");
+      return;
+    }
+
+    // 4. 今日の試合
+    if (todays.length > 0) {
+      const stages = [
+        ...new Set(todays.map((match) => match.stage_ja).filter(Boolean)),
+      ];
+      if (stages.length === 1) {
+        setHeadline("きょうは", stages[0], `、${todays.length}試合`);
+      } else {
+        setHeadline("きょうは", `${todays.length}試合`, "キックオフ");
+      }
+      return;
+    }
+
+    // 5. 開幕前 (1試合も終わっていない) はカウントダウン
+    const upcoming = schedule
+      .filter((match) => app.isUpcoming(match))
+      .sort(
+        (left, right) =>
+          new Date(left.kickoff_jst) - new Date(right.kickoff_jst),
+      );
+    const hasFinished = schedule.some((match) => match.status === "FINISHED");
+    if (!hasFinished && upcoming.length > 0) {
+      const days = daysUntil(upcoming[0].date_jst, today);
+      if (days > 0) {
+        setHeadline("開幕まで、あと", `${days}日`, "");
+        return;
+      }
+    }
+
+    // 6. 中休み (次の試合日)
+    if (upcoming.length > 0) {
+      const next = upcoming[0];
+      setHeadline(
+        "次の試合は",
+        app.formatDay(next.date_jst),
+        `　${next.stage_ja || ""}`,
+      );
+      return;
+    }
+
+    // 7. 全日程終了
+    setHeadline("大会は", "閉幕", "　また4年後に");
+  }
+
+  function finalWinnerName(match) {
+    const score = match.score || {};
+    if (score.home == null || score.away == null) {
+      return null;
+    }
+    if (score.home !== score.away) {
+      return score.home > score.away
+        ? match.home_ja || match.home
+        : match.away_ja || match.away;
+    }
+    if (score.penalties_home != null && score.penalties_away != null) {
+      return score.penalties_home > score.penalties_away
+        ? match.home_ja || match.home
+        : match.away_ja || match.away;
+    }
+    return null;
+  }
+
+  function daysUntil(dateKey, todayKey) {
+    const target = new Date(`${dateKey}T00:00:00+09:00`);
+    const base = new Date(`${todayKey}T00:00:00+09:00`);
+    return Math.round((target - base) / 86400000);
+  }
+
+  // ステータスボードの数値をスコアボード風にカウントアップ
+  function setupStatCountUp() {
+    const counters = document.querySelectorAll(".stat-value[data-count]");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (
+      counters.length === 0 ||
+      reduceMotion ||
+      !("IntersectionObserver" in window)
+    ) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          observer.unobserve(entry.target);
+          animateCount(entry.target, Number(entry.target.dataset.count));
+        });
+      },
+      { threshold: 0.5 },
+    );
+    counters.forEach((node) => observer.observe(node));
+  }
+
+  function animateCount(node, target) {
+    if (!Number.isFinite(target)) {
+      return;
+    }
+    const duration = 900;
+    const started = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - started) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      node.textContent = String(Math.round(target * eased));
+      if (progress < 1) {
+        window.requestAnimationFrame(tick);
+      }
+    };
+    window.requestAnimationFrame(tick);
   }
 
   function findNextJapanMatch(schedule) {
