@@ -1,31 +1,54 @@
 /* ==========================================================================
-   WORLD CUP 2026 — 特設サイト v2
-   スポーツ配信サービス × サッカー中継UI × 社内企画サイト
+   WORLD CUP 2026 — 特設サイト v4 "MATCHDAY PAPER"
+   スポーツ新聞の一面 × ミヤマ式 (紙白 + インク黒 + ピッチ緑1色 / タイポ主役)
    ========================================================================== */
 
 /* --- 1. Design tokens ----------------------------------------------------- */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg-primary: #050506;
-  --bg-secondary: #0c0d0f;
-  --bg-card: #111317;
-  --bg-card-hover: #16191f;
+  /* 紙とインク */
+  --paper: #faf9f4;
+  --paper-2: #f2f0e8;
+  --ink: #14161a;
 
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.72);
-  --text-muted: rgba(255, 255, 255, 0.48);
+  --bg-primary: var(--paper);
+  --bg-secondary: var(--paper-2);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f3f6f1;
 
-  --accent-green: #2ee06a;
-  --accent-lime: #c8f03c;
-  --accent-yellow: #d7ff00;
+  --text-primary: #14161a;
+  --text-secondary: rgba(20, 22, 26, 0.72);
+  --text-muted: rgba(20, 22, 26, 0.5);
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-green: rgba(46, 224, 106, 0.42);
+  /* アクセントはピッチ緑1色 (文字用は濃く、面用は鮮やかに) */
+  --accent-green: #0a7a37;
+  --green-vivid: #12b25a;
+  --green-marker: #c5efd2;
 
-  --live-red: #ff3b5c;
+  /* 意味を持つ色だけ残す (LIVE=赤 / 優勝=金 / 日本代表=藍) */
+  --live-red: #d93025;
+  --trophy-gold: #a87f1f;
+  --accent-gold: #a87f1f;
+  --samurai-blue: #234fa5;
 
-  --radius-card: 24px;
+  /* 旧トークン互換 (ページ固有層が参照) — 役割を新パレットに割当 */
+  --accent-lime: #0a7a37;
+  --accent-yellow: #0a7a37;
+  --accent-cyan: #14161a;
+  --accent-blue: #234fa5;
+  --accent-rose: #d93025;
+  --host-red: #b3403a;
+  --host-green: #0a7a37;
+  --host-blue: #2b4c7e;
+
+  --border-subtle: rgba(20, 22, 26, 0.16);
+  --border-ink: #14161a;
+  --border-green: rgba(10, 122, 55, 0.45);
+
+  --grad-band: linear-gradient(90deg, var(--green-vivid), var(--green-vivid));
+
+  --radius-card: 8px;
   --radius-pill: 999px;
   --header-height: 64px;
   --font-base:
@@ -36,6 +59,115 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+  --font-display: "Anton", Inter, "Noto Sans JP", sans-serif;
+
+  /* 新聞の活版的な固い影 */
+  --shadow-press: 4px 4px 0 rgba(20, 22, 26, 0.9);
+  --shadow-press-sm: 3px 3px 0 rgba(20, 22, 26, 0.9);
+}
+
+/* --- 1b. Web BENTO parts (紙面トーンに改変) --------------------------------- */
+
+/* 区切り線: 新聞の二重罫 */
+.rule-double {
+  height: 7px;
+  border: none;
+  margin: 0;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+/* 区切り線: テキスト入り */
+.bnto-hr-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bnto-hr-label::before,
+.bnto-hr-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(20, 22, 26, 0.3);
+}
+
+.bnto-hr-gradient {
+  height: 1px;
+  border: none;
+  margin: clamp(48px, 7vw, 72px) auto 0;
+  max-width: 1200px;
+  background: rgba(20, 22, 26, 0.25);
+}
+
+/* マーカー (見出しの一部を緑で塗る) */
+.marker {
+  background: linear-gradient(transparent 58%, var(--green-marker) 58%);
+}
+
+/* 背景パターン: 紙の網点 */
+.bnto-bg-dots {
+  background-image: radial-gradient(rgba(20, 22, 26, 0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.bnto-bg-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(20, 22, 26, 0.03) 0 10px,
+    transparent 10px 24px
+  );
+}
+
+/* ボタン: 活版プッシュ (固い影が沈む) */
+.bnto-btn-3d {
+  box-shadow: var(--shadow-press);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.18s ease;
+}
+
+.bnto-btn-3d:hover,
+.bnto-btn-3d:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(20, 22, 26, 0.9);
+}
+
+.bnto-btn-3d:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 rgba(20, 22, 26, 0.9);
+}
+
+/* ボタン: 矢印スライド */
+.bnto-btn-arrow svg {
+  transition: transform 0.2s ease;
+}
+
+.bnto-btn-arrow:hover svg,
+.bnto-btn-arrow:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* カード: 切り取りクーポン (破線 + 丸穴) */
+.bnto-card-coupon {
+  position: relative;
+  border: 2px dashed var(--ink);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* ホバー: 紙が浮く */
+.bnto-hov-lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.bnto-hov-lift:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-press-sm);
 }
 
 /* --- 2. Base -------------------------------------------------------------- */
@@ -44,7 +176,7 @@
 }
 
 html {
-  background: var(--bg-primary);
+  background: var(--paper);
   color: var(--text-primary);
   font-family: var(--font-base);
   line-height: 1.6;
@@ -59,69 +191,18 @@ body {
   overflow-x: hidden;
 }
 
-/* グロー + ピッチライン背景 (固定1レイヤー) */
+/* 紙面の質感: ごく薄い網点 + 中央の折り目 */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   background:
-    /* ネオングロー */
-    radial-gradient(circle at 72% 18%, rgba(46, 224, 106, 0.14), transparent 32%),
-    radial-gradient(circle at 18% 82%, rgba(200, 240, 60, 0.07), transparent 30%),
-    /* センターサークル */
-    radial-gradient(
-      circle at 50% 38%,
-      transparent calc(min(36vw, 250px) - 1px),
-      rgba(255, 255, 255, 0.05) min(36vw, 250px),
-      rgba(255, 255, 255, 0.05) calc(min(36vw, 250px) + 1.5px),
-      transparent calc(min(36vw, 250px) + 2.5px)
-    ),
-    /* センタースポット */
-    radial-gradient(
-      circle at 50% 38%,
-      rgba(255, 255, 255, 0.08) 0 2px,
-      transparent 3px
-    ),
-    /* ハーフウェーライン */
-    linear-gradient(
-      to bottom,
-      transparent calc(38% - 1px),
-      rgba(255, 255, 255, 0.045) calc(38% - 1px),
-      rgba(255, 255, 255, 0.045) calc(38% + 1px),
-      transparent calc(38% + 1px)
-    ),
-    /* タッチライン (ゴールエリア風の直線) */
-    linear-gradient(
-      to right,
-      transparent 18px,
-      rgba(255, 255, 255, 0.04) 18px,
-      rgba(255, 255, 255, 0.04) calc(18px + 1.5px),
-      transparent calc(18px + 1.5px),
-      transparent calc(100% - 18px - 1.5px),
-      rgba(255, 255, 255, 0.04) calc(100% - 18px - 1.5px),
-      rgba(255, 255, 255, 0.04) calc(100% - 18px),
-      transparent calc(100% - 18px)
-    ),
-    linear-gradient(180deg, #050506 0%, #0c0d0f 100%);
+    radial-gradient(rgba(20, 22, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(20, 22, 26, 0.04) 50%, transparent calc(50% + 1px)),
+    linear-gradient(180deg, #fbfaf6 0%, var(--paper) 100%);
+  background-size: 22px 22px, auto, auto;
   z-index: -2;
-}
-
-/* ネオングリーンのパーティクル (微細な光の粒) */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 12% 24%, rgba(46, 224, 106, 0.5) 0 1px, transparent 2px),
-    radial-gradient(circle at 84% 12%, rgba(200, 240, 60, 0.45) 0 1px, transparent 2px),
-    radial-gradient(circle at 64% 64%, rgba(46, 224, 106, 0.35) 0 1px, transparent 2px),
-    radial-gradient(circle at 28% 78%, rgba(46, 224, 106, 0.4) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 92% 52%, rgba(215, 255, 0, 0.3) 0 1px, transparent 2px),
-    radial-gradient(circle at 44% 8%, rgba(46, 224, 106, 0.3) 0 1px, transparent 2px);
-  opacity: 0.5;
-  z-index: -1;
 }
 
 a {
@@ -154,15 +235,16 @@ svg {
   margin-inline: auto;
 }
 
-/* --- 3. Sticky Header ------------------------------------------------------ */
+/* --- 3. マストヘッド (Sticky Header) ---------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(5, 5, 6, 0.72);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
-  backdrop-filter: blur(18px) saturate(150%);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(250, 249, 244, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 3px solid var(--ink);
+  box-shadow: 0 4px 0 rgba(20, 22, 26, 0.08);
 }
 
 .header-inner {
@@ -186,11 +268,10 @@ svg {
   place-items: center;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.1);
-  border: 1px solid rgba(46, 224, 106, 0.32);
-  box-shadow: 0 0 18px rgba(46, 224, 106, 0.22);
+  border-radius: 8px;
+  color: var(--paper);
+  background: var(--ink);
+  border: 2px solid var(--ink);
 }
 
 .brand-mark svg {
@@ -200,11 +281,13 @@ svg {
 
 .brand-title {
   margin: 0;
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
+  color: var(--ink);
 }
 
 .brand-title em {
@@ -221,16 +304,15 @@ svg {
   overflow-x: auto;
   margin-inline: -4px;
   padding: 2px 4px 8px;
-  -webkit-overflow-scrolling: touch;
 }
 
 .main-nav a {
   flex: 0 0 auto;
-  padding: 7px 14px;
-  border-radius: var(--radius-pill);
+  padding: 7px 12px;
+  border-radius: 6px;
   color: var(--text-muted);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.02em;
   text-decoration: none;
   white-space: nowrap;
@@ -239,14 +321,13 @@ svg {
 
 .main-nav a:hover,
 .main-nav a:focus-visible {
-  color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.08);
+  color: var(--ink);
+  background: rgba(20, 22, 26, 0.06);
 }
 
 .main-nav a[aria-current="page"] {
-  color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.12);
-  box-shadow: inset 0 0 0 1px rgba(46, 224, 106, 0.3);
+  color: var(--ink);
+  box-shadow: inset 0 -3px 0 var(--green-vivid);
 }
 
 .header-cta {
@@ -271,9 +352,11 @@ svg {
 
 /* --- 4. 共通コンポーネント -------------------------------------------------- */
 
-/* SectionHeader */
+/* SectionHeader: 新聞の欄見出し (太罫 + 見出し) */
 .section-header {
-  margin-bottom: 28px;
+  margin-bottom: 26px;
+  padding-top: 14px;
+  border-top: 3px solid var(--ink);
 }
 
 .section-header-row {
@@ -288,25 +371,46 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--accent-green);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .sh-eyebrow svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
 }
 
 .sh-title {
   margin: 0;
-  font-size: clamp(22px, 4vw, 30px);
+  font-size: clamp(23px, 4vw, 32px);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.25;
+  color: var(--ink);
+}
+
+/* 2言語見出し (EN ディスプレイ + JA サブ) */
+.sh-title .sh-en {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 4.8vw, 46px);
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.sh-title .sh-ja {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .sh-desc {
@@ -317,37 +421,30 @@ svg {
 }
 
 .section-header::after {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 2px;
-  margin-top: 16px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent-green), transparent);
+  content: none;
 }
 
 .sh-cta {
   flex: 0 0 auto;
 }
 
-/* GlassCard */
+/* GlassCard → 紙面カード */
 .glass-card {
-  background: rgba(17, 19, 23, 0.86);
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  border: 1px solid rgba(20, 22, 26, 0.35);
   border-radius: var(--radius-card);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  box-shadow: 2px 2px 0 rgba(20, 22, 26, 0.12);
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .glass-card:hover {
-  transform: translateY(-3px);
-  background: rgba(22, 25, 31, 0.92);
-  border-color: rgba(46, 224, 106, 0.36);
+  transform: translate(-1px, -1px);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-press-sm);
 }
 
 /* PillBadge */
@@ -356,21 +453,21 @@ svg {
   align-items: center;
   gap: 5px;
   padding: 3px 10px;
-  border-radius: var(--radius-pill);
+  border-radius: 6px;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
-  border: 1px solid var(--border-subtle);
+  border: 1.5px solid rgba(20, 22, 26, 0.4);
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.04);
+  background: #fff;
 }
 
 .pill-live {
   color: #fff;
-  background: rgba(255, 59, 92, 0.16);
-  border-color: rgba(255, 59, 92, 0.5);
+  background: var(--live-red);
+  border-color: var(--live-red);
 }
 
 .pill-live::before {
@@ -378,51 +475,50 @@ svg {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--live-red);
-  animation: live-blink 1.4s ease-in-out infinite;
+  background: #fff;
+  animation: live-pulse 1.6s ease-out infinite;
 }
 
 .pill-next,
 .pill-today {
   color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.1);
-  border-color: rgba(46, 224, 106, 0.32);
+  background: rgba(18, 178, 90, 0.1);
+  border-color: var(--border-green);
 }
 
 .pill-finished {
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .pill-japan {
-  color: var(--accent-lime);
-  background: rgba(200, 240, 60, 0.1);
-  border-color: rgba(200, 240, 60, 0.38);
+  color: #fff;
+  background: var(--samurai-blue);
+  border-color: var(--samurai-blue);
 }
 
 .pill-stage {
   color: var(--text-secondary);
 }
 
-/* NeonButton */
+/* NeonButton → 活版ボタン */
 .neon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 13px 26px;
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
   transition:
-    filter 0.18s ease,
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease;
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    background-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .neon-btn svg {
@@ -431,28 +527,38 @@ svg {
 }
 
 .neon-btn-primary {
-  background: var(--accent-green);
-  color: #04140a;
-  box-shadow: 0 6px 28px rgba(46, 224, 106, 0.32);
+  background: var(--green-vivid);
+  color: #06290f;
+  box-shadow: var(--shadow-press-sm);
 }
 
 .neon-btn-primary:hover,
 .neon-btn-primary:focus-visible {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 34px rgba(46, 224, 106, 0.45);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(20, 22, 26, 0.9);
+}
+
+.neon-btn-primary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 rgba(20, 22, 26, 0.9);
 }
 
 .neon-btn-secondary {
-  background: rgba(46, 224, 106, 0.06);
-  color: var(--accent-green);
-  border-color: rgba(46, 224, 106, 0.45);
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow-press-sm);
 }
 
 .neon-btn-secondary:hover,
 .neon-btn-secondary:focus-visible {
-  background: rgba(46, 224, 106, 0.14);
-  transform: translateY(-1px);
+  background: var(--bg-card-hover);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(20, 22, 26, 0.9);
+}
+
+.neon-btn-secondary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 rgba(20, 22, 26, 0.9);
 }
 
 /* Skeleton loading */
@@ -460,7 +566,7 @@ svg {
   position: relative;
   overflow: hidden;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 22, 26, 0.08);
 }
 
 .skeleton::after {
@@ -470,7 +576,7 @@ svg {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.65),
     transparent
   );
   transform: translateX(-100%);
@@ -519,6 +625,7 @@ svg {
 
 .empty-state:hover {
   transform: none;
+  box-shadow: 2px 2px 0 rgba(20, 22, 26, 0.12);
 }
 
 .empty-state-title {
@@ -546,86 +653,165 @@ svg {
   transform: none;
 }
 
-/* --- 5. Hero ---------------------------------------------------------------- */
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* --- 5. 一面 (Hero) ----------------------------------------------------------- */
 .hero {
   position: relative;
-  padding: clamp(48px, 8vw, 96px) 0 clamp(36px, 5vw, 64px);
+  isolation: isolate;
+  padding: clamp(36px, 5vw, 64px) 0 clamp(44px, 6vw, 72px);
   overflow: hidden;
+  border-bottom: 3px double var(--ink);
+}
+
+/* 巨大アウトライン 26 (紙面のすかし) */
+.hero::after {
+  content: "26";
+  position: absolute;
+  right: -0.08em;
+  bottom: -0.18em;
+  z-index: -1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(20, 22, 26, 0.08);
+  font-family: var(--font-display);
+  font-size: clamp(200px, 34vw, 460px);
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .hero-inner {
   display: grid;
-  gap: 40px;
-  align-items: center;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
 }
 
-.hero-eyebrow {
-  display: inline-flex;
+/* 一面の日付行 */
+.hero-dateline {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 8px 18px;
   margin: 0 0 18px;
-  padding: 6px 14px;
-  border: 1px solid rgba(46, 224, 106, 0.32);
-  border-radius: var(--radius-pill);
-  color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.07);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(20, 22, 26, 0.3);
+  color: var(--text-muted);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.hero-eyebrow svg {
-  width: 13px;
-  height: 13px;
+.hero-dateline strong {
+  color: var(--accent-green);
 }
 
 .hero-title {
   margin: 0;
-  font-size: clamp(44px, 8.5vw, 88px);
   font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  letter-spacing: 0;
+  line-height: 0.98;
   text-transform: uppercase;
+  color: var(--ink);
 }
 
-.hero-title .hero-year {
+.hero-title-top {
   display: block;
-  color: var(--accent-green);
-  text-shadow: 0 0 42px rgba(46, 224, 106, 0.45);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(44px, 7.6vw, 92px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* 26 は緑で、画面右へ食い込ませる (違和感) */
+.hero-num-row {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(10px, 2vw, 22px);
+}
+
+.hero-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(110px, 19vw, 210px);
+  line-height: 0.84;
+  color: var(--green-vivid);
+  letter-spacing: 0.01em;
+  text-shadow: 5px 5px 0 rgba(20, 22, 26, 0.9);
+}
+
+.hero-num-trophy {
+  flex: 0 0 auto;
+  width: clamp(52px, 7vw, 84px);
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.hero-num-trophy path {
+  stroke: currentColor;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* サブページ (japan.html) 用: 行内強調 */
+.hero-title .hero-year {
+  display: inline-block;
+  color: var(--samurai-blue);
 }
 
 .hero-sub {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   color: var(--text-secondary);
   font-size: clamp(14px, 2vw, 16px);
   font-weight: 700;
-  letter-spacing: 0.08em;
 }
 
 .hero-catch {
-  margin: 14px 0 0;
-  font-size: clamp(19px, 3vw, 26px);
+  margin: 22px 0 0;
+  max-width: 26em;
+  font-size: clamp(18px, 2.6vw, 25px);
   font-weight: 900;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+  line-height: 1.55;
+  color: var(--ink);
 }
 
 .hero-desc {
-  margin: 14px 0 0;
-  max-width: 54ch;
+  margin: 12px 0 0;
+  max-width: 56ch;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 15px;
+}
+
+.hero-hosts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 18px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 30px;
+  margin-top: 26px;
 }
 
-/* スマホでは CTA を横幅いっぱいに */
 @media (max-width: 559px) {
   .hero-cta .neon-btn,
   .prediction-cta .neon-btn {
@@ -634,54 +820,65 @@ svg {
   }
 }
 
-/* Hero 右側ビジュアル */
+/* 縦書きの耳 (違和感その2は入れない — 1カ所だけ) */
+.hero-ear {
+  position: absolute;
+  right: 14px;
+  top: clamp(24px, 4vw, 48px);
+  writing-mode: vertical-rl;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+}
+
+@media (max-width: 900px) {
+  .hero-ear {
+    display: none;
+  }
+}
+
+/* --- 5b. 一面右カラム (日本戦BOX + 紙面インデックス) --------------------------- */
 .hero-side {
   display: grid;
-  gap: 20px;
-  justify-items: center;
-}
-
-.hero-visual {
-  position: relative;
-  width: min(74vw, 320px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-}
-
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: 6%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(46, 224, 106, 0.2) 0%,
-    rgba(46, 224, 106, 0.05) 46%,
-    transparent 70%
-  );
-  animation: glow-breathe 5s ease-in-out infinite;
-}
-
-.hero-visual svg {
-  position: relative;
+  gap: 16px;
+  align-content: start;
   width: 100%;
-  height: 100%;
+}
+
+.japan-box {
+  position: relative;
+  padding: 18px 20px 20px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow-press);
+}
+
+.japan-box-label {
+  position: absolute;
+  top: -13px;
+  left: 14px;
+  padding: 2px 12px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
 }
 
 .hero-mini-card {
-  width: 100%;
-  max-width: 340px;
-  padding: 18px 22px;
-  text-align: center;
+  padding: 10px 0 0;
+  text-align: left;
 }
 
 .hero-mini-label {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--accent-green);
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -689,6 +886,7 @@ svg {
   margin: 0;
   font-size: 17px;
   font-weight: 900;
+  color: var(--ink);
 }
 
 .hero-mini-kickoff {
@@ -698,61 +896,309 @@ svg {
   font-variant-numeric: tabular-nums;
 }
 
-@media (min-width: 920px) {
+.japan-box-note {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.japan-box .neon-btn {
+  margin-top: 14px;
+  width: 100%;
+  font-size: 13px;
+  padding: 10px 16px;
+}
+
+/* 紙面インデックス (目次) */
+.paper-index {
+  border: 1px solid rgba(20, 22, 26, 0.35);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.paper-index-title {
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.paper-index a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  border-top: 1px solid rgba(20, 22, 26, 0.14);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--ink);
+  transition: background-color 0.15s ease, padding-left 0.15s ease;
+}
+
+.paper-index a:first-of-type {
+  border-top: none;
+}
+
+.paper-index a:hover,
+.paper-index a:focus-visible {
+  background: var(--bg-card-hover);
+  padding-left: 20px;
+}
+
+.paper-index a span {
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 960px) {
   .hero-inner {
-    grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+    grid-template-columns: minmax(0, 63fr) minmax(0, 37fr);
   }
 }
 
-/* --- 6. Quick Stats ---------------------------------------------------------- */
+/* --- 5c. ティッカー (速報帯) --------------------------------------------------- */
+.hero-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-seq {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  padding-right: 36px;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 13.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.marquee-sep {
+  flex: 0 0 auto;
+  color: var(--green-vivid);
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- 6. 大会データ欄 (Quick Stats — カードなし・罫線区切り) -------------------- */
 .quick-stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  padding-bottom: 16px;
+  gap: 0;
+  margin-top: clamp(28px, 4vw, 44px);
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid rgba(20, 22, 26, 0.35);
+}
+
+.js .quick-stats.reveal {
+  opacity: 1;
+  transform: none;
 }
 
 .stat-card {
   display: grid;
   gap: 2px;
-  padding: 20px 22px;
-  border-radius: 18px;
+  align-content: start;
+  padding: 18px 20px 20px;
+  border-left: 1px solid rgba(20, 22, 26, 0.2);
+  background: transparent;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.stat-icon {
-  color: var(--accent-green);
-  margin-bottom: 8px;
+.stat-card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.stat-icon svg {
-  width: 20px;
-  height: 20px;
+.stat-card:nth-child(odd) {
+  border-left: none;
+}
+
+.stat-card .stat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stat-card .stat-tag i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live-red);
+  animation: live-pulse 1.6s ease-out infinite;
 }
 
 .stat-value {
-  font-size: clamp(26px, 4vw, 34px);
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  color: var(--accent-lime);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4.5vw, 44px);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
+  text-align: left;
 }
 
 @media (min-width: 720px) {
   .quick-stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .stat-card:nth-child(odd) {
+    border-left: 1px solid rgba(20, 22, 26, 0.2);
+  }
+
+  .stat-card:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+/* --- 6b. 開催3カ国 (罫線カラム・色は緑数字だけ) -------------------------------- */
+.hosts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.host-card {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 16px 0 4px;
+  border-top: 2px solid var(--ink);
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.host-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.host-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.host-flag {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.host-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.host-name-ja {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.host-final-pill {
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+.host-stats {
+  display: flex;
+  gap: 24px;
+  margin: 10px 0 0;
+}
+
+.host-stats div {
+  display: grid;
+}
+
+.host-stats strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  color: var(--accent-green);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.host-stats span {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.host-cities {
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+@media (min-width: 760px) {
+  .hosts-grid {
+    grid-template-columns: 1fr 1fr 1.45fr;
+    gap: 28px;
+  }
 }
 
 /* --- 7. Sections ------------------------------------------------------------- */
 .section {
-  margin-top: clamp(56px, 8vw, 88px);
+  margin-top: clamp(48px, 7vw, 76px);
 }
 
 main {
@@ -761,6 +1207,18 @@ main {
 
 .page-top {
   padding-top: clamp(36px, 6vw, 64px);
+}
+
+.section-tight {
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.join-divider {
+  margin-top: clamp(52px, 7.5vw, 84px);
+}
+
+.join-divider .bnto-hr-label {
+  margin: 0;
 }
 
 /* --- 8. 次の日本戦 (大型カード) ------------------------------------------------- */
@@ -877,7 +1335,7 @@ main {
   padding: 12px 4px;
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
-  background: rgba(5, 5, 6, 0.6);
+  background: #ffffff;
   text-align: center;
 }
 
@@ -886,7 +1344,7 @@ main {
   font-size: clamp(24px, 4vw, 32px);
   font-weight: 900;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -925,18 +1383,18 @@ main {
 }
 
 .match-card.is-japan {
-  border-color: rgba(200, 240, 60, 0.35);
+  border-color: rgba(168, 127, 31, 0.35);
   box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.32),
-    inset 0 1px 0 rgba(200, 240, 60, 0.18);
+    0 24px 80px rgba(20, 22, 26, 0.12),
+    inset 0 1px 0 rgba(168, 127, 31, 0.18);
 }
 
 .match-card.is-live {
-  border-color: rgba(255, 59, 92, 0.4);
+  border-color: rgba(217, 48, 37, 0.4);
 }
 
 .match-card.is-finished {
-  background: rgba(13, 14, 17, 0.82);
+  background: #ffffff;
 }
 
 .match-card-top {
@@ -971,7 +1429,7 @@ main {
   min-width: 0;
   font-size: 14px;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .team-name .team-label {
@@ -1080,11 +1538,11 @@ a.match-card {
 }
 
 .match-board.is-japan {
-  border-color: rgba(200, 240, 60, 0.4);
+  border-color: rgba(168, 127, 31, 0.4);
 }
 
 .match-board.is-live {
-  border-color: rgba(255, 59, 92, 0.45);
+  border-color: rgba(217, 48, 37, 0.45);
 }
 
 .board-top {
@@ -1124,7 +1582,7 @@ a.match-card {
 .board-team-name {
   font-size: clamp(16px, 3vw, 24px);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .board-score {
@@ -1198,7 +1656,7 @@ a.match-card {
   margin: 0;
   font-size: clamp(19px, 3.4vw, 24px);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 /* YouTube 埋め込み (16:9) */
@@ -1283,15 +1741,15 @@ a.match-card {
   gap: 8px;
   max-width: calc(50% + 60px);
   padding: 8px 14px;
-  border: 1px solid rgba(46, 224, 106, 0.28);
+  border: 1px solid rgba(16, 141, 71, 0.28);
   border-radius: 12px;
-  background: rgba(5, 5, 6, 0.6);
+  background: #ffffff;
 }
 
 .goal-away .goal-body {
   flex-direction: row-reverse;
   text-align: right;
-  border-color: rgba(200, 240, 60, 0.3);
+  border-color: rgba(168, 127, 31, 0.3);
 }
 
 .goal-minute {
@@ -1355,7 +1813,7 @@ a.match-card {
 .stats-team {
   font-size: clamp(13px, 2.6vw, 16px);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 
@@ -1387,7 +1845,7 @@ a.match-card {
   margin-top: 8px;
   border-radius: var(--radius-pill);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 22, 26, 0.06);
 }
 
 .poss-fill {
@@ -1400,7 +1858,7 @@ a.match-card {
 }
 
 .poss-fill.poss-away {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(20, 22, 26, 0.5);
 }
 
 .stat-rows {
@@ -1499,8 +1957,8 @@ a.match-card {
   flex: none;
   padding: 2px 8px;
   border-radius: var(--radius-pill);
-  background: rgba(46, 224, 106, 0.16);
-  border: 1px solid rgba(46, 224, 106, 0.4);
+  background: rgba(16, 141, 71, 0.16);
+  border: 1px solid rgba(16, 141, 71, 0.4);
   color: var(--accent-green);
   font-size: 11px;
   font-weight: 800;
@@ -1534,7 +1992,7 @@ a.match-card {
   height: 12px;
   border-radius: var(--radius-pill);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 22, 26, 0.06);
 }
 
 .pred-fill {
@@ -1549,7 +2007,7 @@ a.match-card {
 }
 
 .pred-draw .pred-fill {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(20, 22, 26, 0.45);
 }
 
 .pred-away .pred-fill {
@@ -1558,7 +2016,7 @@ a.match-card {
 
 /* 的中区分を強調する */
 .pred-row.is-hit .pred-bar {
-  box-shadow: 0 0 0 1px rgba(46, 224, 106, 0.5);
+  box-shadow: 0 0 0 1px rgba(16, 141, 71, 0.5);
 }
 
 .pred-row.is-hit .pred-pct {
@@ -1601,7 +2059,7 @@ a.match-card {
   gap: 9px;
   margin: 0 0 14px;
   padding: 10px 4px;
-  background: rgba(5, 5, 6, 0.82);
+  background: #ffffff;
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   font-size: 15px;
@@ -1615,7 +2073,7 @@ a.match-card {
   height: 8px;
   border-radius: 50%;
   background: var(--accent-green);
-  box-shadow: 0 0 12px rgba(46, 224, 106, 0.6);
+  box-shadow: 0 0 12px rgba(16, 141, 71, 0.6);
 }
 
 .filter-row {
@@ -1632,7 +2090,7 @@ a.match-card {
   padding: 8px 18px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  background: rgba(17, 19, 23, 0.86);
+  background: #ffffff;
   cursor: pointer;
   font-size: 13px;
   font-weight: 700;
@@ -1681,7 +2139,7 @@ a.match-card {
   padding: 10px 16px 10px 44px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  background: rgba(5, 5, 6, 0.7);
+  background: #ffffff;
   color: var(--text-primary);
   font-size: 14px;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
@@ -1694,7 +2152,7 @@ a.match-card {
 .search-box input:focus {
   outline: none;
   border-color: var(--accent-green);
-  box-shadow: 0 0 0 3px rgba(46, 224, 106, 0.18);
+  box-shadow: 0 0 0 3px rgba(16, 141, 71, 0.18);
 }
 
 .sort-select {
@@ -1711,7 +2169,7 @@ a.match-card {
   padding: 10px 14px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  background: rgba(5, 5, 6, 0.7);
+  background: #ffffff;
   color: var(--text-primary);
   font-size: 13px;
   font-weight: 700;
@@ -1784,7 +2242,7 @@ a.match-card {
   margin: 0;
   font-size: 16px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1830,14 +2288,14 @@ a.match-card {
 }
 
 .history-badge.is-gold {
-  border-color: rgba(230, 199, 106, 0.42);
-  background: rgba(230, 199, 106, 0.1);
+  border-color: rgba(168, 127, 31, 0.42);
+  background: rgba(168, 127, 31, 0.1);
   color: var(--accent-gold);
 }
 
 .history-badge.is-debut {
   border-color: var(--border-green);
-  background: rgba(46, 224, 106, 0.1);
+  background: rgba(16, 141, 71, 0.1);
   color: var(--accent-green);
   font-weight: 800;
 }
@@ -1865,8 +2323,8 @@ a.match-card {
   flex: 0 0 auto;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(46, 224, 106, 0.3);
-  background: rgba(46, 224, 106, 0.08);
+  border: 1px solid rgba(16, 141, 71, 0.3);
+  background: rgba(16, 141, 71, 0.08);
   color: var(--accent-green);
   font-size: 10px;
   font-weight: 800;
@@ -1912,7 +2370,7 @@ a.match-card {
   align-items: center;
   padding: 7px 12px;
   border-radius: 8px;
-  background: rgba(5, 5, 6, 0.55);
+  background: #ffffff;
   font-size: 13px;
 }
 
@@ -1926,7 +2384,7 @@ a.match-card {
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--border-subtle);
-  background: rgba(46, 224, 106, 0.08);
+  background: rgba(16, 141, 71, 0.08);
   flex: 0 0 auto;
 }
 
@@ -2048,7 +2506,7 @@ a.match-card {
   margin: 0;
   font-size: 18px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .step-desc {
@@ -2061,8 +2519,8 @@ a.match-card {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 8px;
-  border: 1px solid rgba(46, 224, 106, 0.35);
-  background: rgba(5, 5, 6, 0.8);
+  border: 1px solid rgba(16, 141, 71, 0.35);
+  background: #ffffff;
   color: var(--accent-green);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.95em;
@@ -2104,7 +2562,7 @@ a.match-card {
   margin: 0;
   font-size: clamp(26px, 5vw, 38px);
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .prediction-hero-desc {
@@ -2121,8 +2579,8 @@ a.match-card {
   margin-top: 10px;
   padding: 12px 20px;
   border-radius: 14px;
-  border: 1px solid rgba(46, 224, 106, 0.4);
-  background: rgba(5, 5, 6, 0.85);
+  border: 1px solid rgba(16, 141, 71, 0.4);
+  background: #ffffff;
   color: var(--accent-green);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 16px;
@@ -2182,7 +2640,7 @@ a.match-card {
   height: 12px;
   overflow: hidden;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(20, 22, 26, 0.07);
 }
 
 .chart-bar {
@@ -2191,12 +2649,12 @@ a.match-card {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
-  box-shadow: 0 0 14px rgba(46, 224, 106, 0.35);
+  box-shadow: 0 0 14px rgba(16, 141, 71, 0.35);
 }
 
 /* --- 12b. World Cup News ----------------------------------------------------------- */
 :root {
-  --accent-gold: #e6c76a;
+  --accent-gold: #a87f1f;
 }
 
 .news-tabs {
@@ -2214,7 +2672,7 @@ a.match-card {
   padding: 8px 18px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  background: rgba(17, 19, 23, 0.86);
+  background: #ffffff;
   color: var(--text-secondary);
   font-size: 13px;
   font-weight: 800;
@@ -2236,7 +2694,7 @@ a.match-card {
   color: #04140a;
   background: var(--accent-green);
   border-color: var(--accent-green);
-  box-shadow: 0 4px 20px rgba(46, 224, 106, 0.3);
+  box-shadow: 0 4px 20px rgba(16, 141, 71, 0.3);
 }
 
 /* ソースカード一覧 */
@@ -2263,14 +2721,14 @@ a.match-card {
 
 /* 公式ソースは少し目立たせる (ゴールドは控えめなアクセント) */
 .news-card.is-official {
-  border-color: rgba(230, 199, 106, 0.34);
+  border-color: rgba(168, 127, 31, 0.34);
   box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.32),
-    inset 0 1px 0 rgba(230, 199, 106, 0.16);
+    0 24px 80px rgba(20, 22, 26, 0.12),
+    inset 0 1px 0 rgba(168, 127, 31, 0.16);
 }
 
 .news-card.is-official:hover {
-  border-color: rgba(230, 199, 106, 0.55);
+  border-color: rgba(168, 127, 31, 0.55);
 }
 
 .news-card-top {
@@ -2282,14 +2740,14 @@ a.match-card {
 
 .pill-official {
   color: var(--accent-gold);
-  background: rgba(230, 199, 106, 0.1);
-  border-color: rgba(230, 199, 106, 0.42);
+  background: rgba(168, 127, 31, 0.1);
+  border-color: rgba(168, 127, 31, 0.42);
 }
 
 .pill-reliability-high {
   color: var(--accent-green);
-  background: rgba(46, 224, 106, 0.08);
-  border-color: rgba(46, 224, 106, 0.3);
+  background: rgba(16, 141, 71, 0.08);
+  border-color: rgba(16, 141, 71, 0.3);
 }
 
 .pill-reliability-medium {
@@ -2304,7 +2762,7 @@ a.match-card {
   margin: 2px 0 0;
   font-size: 17px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.4;
 }
 
@@ -2358,7 +2816,7 @@ a.match-card {
   margin: 0;
   font-size: 17px;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .news-feed-updated {
@@ -2399,7 +2857,7 @@ a.match-card {
 
 .news-article:hover,
 .news-article:focus-visible {
-  background: rgba(46, 224, 106, 0.06);
+  background: rgba(16, 141, 71, 0.06);
 }
 
 .news-article-title {
@@ -2476,7 +2934,7 @@ a.match-card {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: rgba(5, 5, 6, 0.6);
+  background: #ffffff;
 }
 
 .news-thumb-img {
@@ -2501,7 +2959,7 @@ a.match-card {
   background:
     radial-gradient(
       120% 140% at 80% 0%,
-      rgba(46, 224, 106, 0.28) 0%,
+      rgba(16, 141, 71, 0.28) 0%,
       rgba(10, 60, 28, 0.9) 45%,
       rgba(4, 20, 10, 1) 100%
     );
@@ -2511,7 +2969,7 @@ a.match-card {
   font-size: 38px;
   line-height: 1;
   opacity: 0.85;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 4px 14px rgba(20, 22, 26, 0.16));
 }
 
 .news-thumb-body {
@@ -2579,7 +3037,7 @@ a.match-card {
   margin: 0 0 8px;
   font-size: clamp(30px, 6vw, 48px);
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -2592,7 +3050,7 @@ a.match-card {
 /* --- 14. フッター ------------------------------------------------------------------ */
 .site-footer {
   border-top: 1px solid var(--border-subtle);
-  background: rgba(5, 5, 6, 0.85);
+  background: #ffffff;
   padding: 40px 0 48px;
   text-align: center;
 }
@@ -2708,11 +3166,11 @@ a.match-card {
 }
 
 .standings-card.is-japan {
-  border-color: rgba(200, 240, 60, 0.4);
+  border-color: rgba(168, 127, 31, 0.4);
   box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.32),
-    0 0 24px rgba(200, 240, 60, 0.12),
-    inset 0 1px 0 rgba(200, 240, 60, 0.18);
+    0 24px 80px rgba(20, 22, 26, 0.12),
+    0 0 24px rgba(168, 127, 31, 0.12),
+    inset 0 1px 0 rgba(168, 127, 31, 0.18);
 }
 
 .standings-card-head {
@@ -2823,7 +3281,7 @@ a.match-card {
 
 /* 1-2位: 進出ライン (緑) */
 .st-table tr.is-qualify {
-  background: rgba(46, 224, 106, 0.06);
+  background: rgba(16, 141, 71, 0.06);
 }
 
 .st-table tr.is-qualify td:first-child {
@@ -2832,7 +3290,7 @@ a.match-card {
 
 /* 3位: 黄色マーク */
 .st-table tr.is-third td:first-child {
-  border-left-color: rgba(215, 255, 0, 0.65);
+  border-left-color: rgba(16, 141, 71, 0.6);
 }
 
 .st-badge-third {
@@ -2852,10 +3310,10 @@ a.match-card {
   flex: 0 0 auto;
   display: inline-block;
   padding: 0 5px;
-  border: 1px solid rgba(255, 59, 92, 0.5);
+  border: 1px solid rgba(217, 48, 37, 0.5);
   border-radius: var(--radius-pill);
   color: #fff;
-  background: rgba(255, 59, 92, 0.18);
+  background: rgba(217, 48, 37, 0.18);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -2888,7 +3346,7 @@ a.match-card {
 }
 
 .legend-line-yellow {
-  background: rgba(215, 255, 0, 0.65);
+  background: rgba(16, 141, 71, 0.6);
 }
 
 .third-place-card {
@@ -2911,8 +3369,8 @@ a.match-card {
 /* ヒーロー: ごく控えめなサムライブルーのグラデーション (基調はネオングリーンのまま) */
 .japan-hero {
   background:
-    radial-gradient(circle at 16% 14%, rgba(29, 58, 143, 0.4), transparent 46%),
-    radial-gradient(circle at 86% 78%, rgba(29, 58, 143, 0.22), transparent 42%);
+    radial-gradient(circle at 16% 14%, rgba(35, 79, 165, 0.1), transparent 46%),
+    radial-gradient(circle at 86% 78%, rgba(35, 79, 165, 0.06), transparent 42%);
 }
 
 .japan-hero-title {
@@ -2930,7 +3388,7 @@ a.match-card {
   display: inline-flex;
   align-items: center;
   padding: 7px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(20, 22, 26, 0.16);
   border-radius: var(--radius-pill);
   background: rgba(17, 19, 23, 0.78);
   color: var(--text-secondary);
@@ -2941,8 +3399,8 @@ a.match-card {
 }
 
 .japan-chip.is-rank {
-  border-color: rgba(46, 224, 106, 0.4);
-  background: rgba(46, 224, 106, 0.1);
+  border-color: rgba(16, 141, 71, 0.4);
+  background: rgba(16, 141, 71, 0.1);
   color: var(--accent-green);
 }
 
@@ -3117,7 +3575,7 @@ a.match-card {
   padding: 7px 12px;
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
-  background: rgba(5, 5, 6, 0.55);
+  background: #ffffff;
   font-size: 13px;
   font-weight: 700;
 }
@@ -3257,8 +3715,8 @@ a.match-card {
 .bracket-tree {
   --bk-col-w: 176px;
   --bk-gap: 30px;
-  --bk-line: rgba(255, 255, 255, 0.22);
-  --bk-line-win: rgba(46, 224, 106, 0.55);
+  --bk-line: rgba(20, 22, 26, 0.22);
+  --bk-line-win: rgba(16, 141, 71, 0.55);
   display: flex;
   align-items: stretch;
   gap: var(--bk-gap);
@@ -3434,21 +3892,21 @@ a.match-card {
 .bk-champion.is-set {
   padding: 12px;
   border-radius: 16px;
-  border: 1px solid var(--accent-gold, #e6c76a);
-  background: radial-gradient(120% 140% at 50% 0%, rgba(230, 199, 106, 0.18), transparent 70%);
+  border: 1px solid var(--accent-gold, #a87f1f);
+  background: radial-gradient(120% 140% at 50% 0%, rgba(168, 127, 31, 0.18), transparent 70%);
 }
 
 .bk-trophy svg {
   width: 26px;
   height: 26px;
-  color: var(--accent-gold, #e6c76a);
+  color: var(--accent-gold, #a87f1f);
 }
 
 .bk-champion-label {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.12em;
-  color: var(--accent-gold, #e6c76a);
+  color: var(--accent-gold, #a87f1f);
 }
 
 .bk-champion-name {
@@ -3474,7 +3932,7 @@ a.match-card {
 
 .bk-final-block .bracket-match {
   border-color: var(--accent-lime);
-  box-shadow: 0 0 0 1px rgba(200, 240, 60, 0.25), 0 12px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(168, 127, 31, 0.25), 0 12px 32px rgba(20, 22, 26, 0.14);
 }
 
 .bk-third {
@@ -3490,7 +3948,7 @@ a.match-card {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.06em;
-  color: var(--accent-gold, #e6c76a);
+  color: var(--accent-gold, #a87f1f);
   margin-bottom: 6px;
 }
 
@@ -3517,11 +3975,11 @@ a.bracket-match:focus-visible {
 
 .bracket-match.is-japan {
   border-color: var(--border-green);
-  box-shadow: inset 0 0 0 1px rgba(46, 224, 106, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(16, 141, 71, 0.25);
 }
 
 .bracket-match.is-live {
-  border-color: rgba(255, 59, 92, 0.5);
+  border-color: rgba(217, 48, 37, 0.5);
 }
 
 .bracket-match-head {
@@ -3557,7 +4015,7 @@ a.bracket-match:focus-visible {
   gap: 8px;
   padding: 5px 7px;
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(20, 22, 26, 0.03);
 }
 
 .bracket-side.is-slot {
@@ -3565,7 +4023,7 @@ a.bracket-match:focus-visible {
 }
 
 .bracket-side.is-winner {
-  background: rgba(46, 224, 106, 0.12);
+  background: rgba(16, 141, 71, 0.12);
 }
 
 .bracket-side.is-winner .bracket-team {
@@ -3709,7 +4167,7 @@ a.bracket-match:focus-visible {
   flex-direction: column;
   gap: 20px;
   background:
-    radial-gradient(120% 140% at 100% 0%, rgba(46, 224, 106, 0.1), transparent 60%),
+    radial-gradient(120% 140% at 100% 0%, rgba(16, 141, 71, 0.1), transparent 60%),
     var(--bg-card);
   border-color: var(--border-green);
 }
@@ -3740,13 +4198,13 @@ a.bracket-match:focus-visible {
   padding: 12px 16px;
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(20, 22, 26, 0.03);
   text-align: center;
 }
 
 .bracket-feature-round.is-final {
   border-color: var(--border-green);
-  background: rgba(46, 224, 106, 0.1);
+  background: rgba(16, 141, 71, 0.1);
 }
 
 .bfr-name {
@@ -3798,14 +4256,14 @@ a.bracket-match:focus-visible {
   font-weight: 900;
   letter-spacing: 0.08em;
   color: var(--accent-lime);
-  border: 1px dashed rgba(200, 240, 60, 0.55);
+  border: 1px dashed rgba(168, 127, 31, 0.55);
   border-radius: 5px;
   padding: 1px 5px;
   line-height: 1.4;
 }
 
 .bracket-side.is-proj {
-  background: rgba(200, 240, 60, 0.06);
+  background: rgba(168, 127, 31, 0.06);
 }
 
 .bracket-side.is-proj .bracket-flag {
@@ -3911,7 +4369,7 @@ a.bracket-match:focus-visible {
   height: 7px;
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(20, 22, 26, 0.08);
 }
 
 /* 塗りは「有利側=緑 / 格下側=控えめ」で、ホーム/アウェイの位置に依存しない */
@@ -3920,12 +4378,12 @@ a.bracket-match:focus-visible {
 }
 
 .bracket-prob-fill.is-under {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(20, 22, 26, 0.18);
 }
 
 /* ランク不明などで互角扱い (クラス無し) のときの既定塗り */
 .bracket-prob-fill {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(20, 22, 26, 0.14);
 }
 
 /* 日本代表: 決勝トーナメント進出ハイライト */
@@ -3939,7 +4397,7 @@ a.bracket-match:focus-visible {
   text-align: center;
   border-color: var(--border-green);
   background:
-    radial-gradient(120% 140% at 50% 0%, rgba(46, 224, 106, 0.16), transparent 65%),
+    radial-gradient(120% 140% at 50% 0%, rgba(16, 141, 71, 0.16), transparent 65%),
     var(--bg-card);
 }
 
@@ -3975,4 +4433,923 @@ a.bracket-match:focus-visible {
   font-weight: 900;
   letter-spacing: 0.05em;
   color: var(--accent-lime);
+}
+
+
+/* --- 21. v3 refresh (トップページ + サイト共通の仕上げ) ---------------------- */
+
+/* --- 21. 紙面仕上げ (トップページ + サイト共通の上書き) ------------------------ */
+
+/* 角丸はサイト全体で 8px 基準に統一 */
+.section-header,
+.page-top,
+.bracket-feature,
+.prediction-hero,
+.hero-match-card,
+.match-board,
+.stats-card,
+.pred-card,
+.chart,
+.standings-card,
+.third-place-card,
+.opponent-card,
+.news-card,
+.news-thumb-card,
+.team-card,
+.team-preview-card,
+.step-card,
+.jp-mini-match,
+.jp-player-card,
+.bracket-match,
+.bk-champion.is-set,
+.bracket-feature-round,
+.news-tab,
+.bracket-round-tab,
+.toggle,
+.search-box input,
+.sort-select select,
+.prediction-command,
+.cmd,
+.rank-badge,
+.group-badge,
+.history-badge,
+.st-badge-third,
+.bracket-legend-chip,
+.bracket-proj-tag {
+  border-radius: 8px;
+}
+
+.sh-title,
+.page-heading,
+.team-title,
+.news-card-title,
+.news-feed-title,
+.prediction-hero-title,
+.detail-title,
+.board-team-name,
+.jp-ko-status,
+.hero-mini-match,
+.team-name,
+.stats-team,
+.step-title,
+.opponent-label,
+.bracket-team,
+.bfr-name {
+  letter-spacing: 0;
+}
+
+/* カードは押すと沈む (紙の活版プッシュ) */
+a.match-card:active,
+.news-thumb-card:active,
+.team-preview-card:active,
+.step-card:active,
+.bracket-match:active,
+.jp-mini-match:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* 試合カード: 日本戦 = 藍 / LIVE = 赤の背表紙 */
+.match-card.is-japan {
+  border-color: var(--samurai-blue);
+  box-shadow:
+    2px 2px 0 rgba(20, 22, 26, 0.12),
+    inset 4px 0 0 var(--samurai-blue);
+}
+
+.match-card.is-live {
+  border-color: var(--live-red);
+  box-shadow:
+    2px 2px 0 rgba(20, 22, 26, 0.12),
+    inset 4px 0 0 var(--live-red);
+}
+
+.match-score {
+  color: var(--ink);
+}
+
+/* タブ選択中はインク面 */
+.news-tab[aria-selected="true"],
+.bracket-round-tab.is-active {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* 大型カード (次の日本戦 / 試合詳細 / 優勝予想ヒーロー) */
+.hero-match-card,
+.match-board,
+.prediction-hero {
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+
+.hero-match-card::before,
+.match-board::before,
+.prediction-hero::before {
+  background: var(--green-vivid);
+}
+
+/* --- 21b. トップページ: 決勝トーナメント特集 (インク枠の号外) ------------------- */
+.bracket-feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: var(--shadow-press);
+  overflow: hidden;
+}
+
+.bracket-feature::after {
+  content: "KNOCKOUT";
+  position: absolute;
+  right: 14px;
+  top: 6px;
+  color: rgba(20, 22, 26, 0.06);
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 88px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.bracket-feature > * {
+  position: relative;
+  z-index: 1;
+}
+
+.bracket-feature .section-header,
+.bracket-feature .bracket-feature-head {
+  margin-bottom: 0;
+}
+
+.bracket-feature .bracket-feature-head {
+  border-top: none;
+  padding-top: 0;
+}
+
+.bracket-feature-rounds {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bracket-feature-round {
+  display: grid;
+  gap: 2px;
+  align-content: end;
+  min-height: 80px;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(20, 22, 26, 0.4);
+  background: #fff;
+  text-align: left;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bracket-feature-round:hover {
+  transform: translate(-2px, -2px);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-press-sm);
+}
+
+.bfr-name {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.bfr-date {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bracket-feature-round.is-final {
+  border: 2px solid var(--accent-green);
+  background: rgba(18, 178, 90, 0.08);
+}
+
+.bracket-feature-round.is-final .bfr-name {
+  color: var(--accent-green);
+}
+
+.bracket-feature-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .bracket-feature-rounds {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .bracket-feature-round {
+    flex: 0 0 150px;
+  }
+}
+
+/* --- 21c. トップページ: 優勝予想バトル (切り取りクーポン) ----------------------- */
+.steps-grid .step-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.step-card-featured {
+  border: 2px dashed var(--ink);
+  background: #fff;
+}
+
+.steps-grid .cmd {
+  justify-self: start;
+  font-size: 15px;
+  padding: 4px 12px;
+}
+
+.cmd {
+  border: 1.5px solid var(--border-green);
+  background: rgba(18, 178, 90, 0.08);
+  color: var(--accent-green);
+}
+
+@media (min-width: 760px) {
+  .steps-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+.step-num {
+  letter-spacing: 0.14em;
+}
+
+/* --- 21d. フッター (奥付) ------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  margin-top: clamp(56px, 8vw, 96px);
+  border-top: 3px double var(--ink);
+  padding: 44px 0 48px;
+  text-align: center;
+  background: var(--paper-2);
+}
+
+.footer-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.footer-title em {
+  font-style: normal;
+  color: var(--accent-green);
+}
+
+.footer-hosts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-hosts li {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.footer-tagline {
+  margin: 12px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.footer-credit {
+  margin: 16px 0 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.footer-credit a {
+  color: var(--text-muted);
+  transition: color 0.18s ease;
+}
+
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--accent-green);
+}
+
+/* --- 21e. サブページ微調整 ------------------------------------------------------ */
+.page-kicker {
+  color: var(--accent-green);
+  letter-spacing: 0.14em;
+}
+
+.page-heading {
+  color: var(--ink);
+}
+
+.page-heading::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-top: 14px;
+  background: var(--green-vivid);
+}
+
+/* japan.html ヒーロー: 淡い藍の刷り */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 5px 12px;
+  border: 1.5px solid var(--samurai-blue);
+  border-radius: 6px;
+  color: var(--samurai-blue);
+  background: rgba(35, 79, 165, 0.06);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-eyebrow svg {
+  width: 13px;
+  height: 13px;
+}
+
+.japan-hero {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(35, 79, 165, 0.08), transparent 46%),
+    radial-gradient(circle at 86% 78%, rgba(35, 79, 165, 0.05), transparent 42%);
+}
+
+.japan-hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* --- 22. モーションパック (reduce-motion 完全対応) ----------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* 一面の入場コレオグラフィ */
+  body[data-page="home"] .hero-copy > * {
+    animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  body[data-page="home"] .hero-copy > :nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  body[data-page="home"] .hero-copy > :nth-child(2) {
+    animation-delay: 0.14s;
+  }
+
+  body[data-page="home"] .hero-copy > :nth-child(3) {
+    animation-delay: 0.24s;
+  }
+
+  body[data-page="home"] .hero-copy > :nth-child(4) {
+    animation-delay: 0.34s;
+  }
+
+  body[data-page="home"] .hero-side {
+    animation: rise-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+  }
+
+  /* スクロール連動: セクション内カードの時差登場 */
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card, .hero-match-card) {
+    animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card):nth-child(2) {
+    animation-delay: 0.07s;
+  }
+
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card):nth-child(3) {
+    animation-delay: 0.14s;
+  }
+
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card):nth-child(4) {
+    animation-delay: 0.21s;
+  }
+
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card):nth-child(5) {
+    animation-delay: 0.28s;
+  }
+
+  .js .reveal.is-visible :is(.stat-card, .host-card, .step-card, .bracket-feature-round, .match-card, .news-card, .news-thumb-card, .team-preview-card):nth-child(n + 6) {
+    animation-delay: 0.35s;
+  }
+
+  /* マーキー: ホバーで一時停止 */
+  .hero-marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* すかし 26 のスクロールパララックス (対応ブラウザのみ) */
+  @supports (animation-timeline: scroll()) {
+    body[data-page="home"] .hero::after {
+      animation: mark-drift linear both;
+      animation-timeline: scroll();
+      animation-range: 0 120vh;
+    }
+
+    @keyframes mark-drift {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-60px);
+      }
+    }
+  }
+}
+
+/* --- 23. フットボール装飾 (新聞 × 戦術ボード) ---------------------------------- */
+
+/* 一面のピッチ図 (インク線) + 戦術マーク (緑) */
+.hero-pitch-art {
+  position: absolute;
+  left: 50%;
+  bottom: -36px;
+  transform: translateX(-50%);
+  width: min(1150px, 108vw);
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-pitch-art .pitch-line {
+  stroke: rgba(20, 22, 26, 0.09);
+  fill: none;
+  stroke-width: 2;
+}
+
+.hero-pitch-art .tactic {
+  stroke: rgba(18, 178, 90, 0.45);
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.hero-pitch-art .tactic-dash {
+  stroke-dasharray: 12 12;
+}
+
+.hero-pitch-art .tactic-fill {
+  fill: rgba(18, 178, 90, 0.45);
+  stroke: none;
+}
+
+/* セクション見出しのコーナーアーク (コーナーキックの弧) */
+.section-header {
+  position: relative;
+}
+
+.section-header::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid var(--green-vivid);
+  border-top: none;
+  border-right: none;
+  border-bottom-left-radius: 100%;
+}
+
+/* ティッカーの上に芝のライン */
+.hero-marquee {
+  border-top: 4px solid var(--green-vivid);
+}
+
+/* フッターのセンターサークル */
+.site-footer {
+  overflow: hidden;
+}
+
+.site-footer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -110px;
+  width: 220px;
+  height: 220px;
+  border: 2px solid rgba(20, 22, 26, 0.14);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(20, 22, 26, 0.1);
+  pointer-events: none;
+}
+
+/* --- 24. 芝ピッチの帯 + サッカー要素の強化 -------------------------------------- */
+
+/* 一面の下に本物のピッチ: 刈り込みストライプの芝 + 白ライン + ボール */
+body[data-page="home"] .hero {
+  border-bottom: none;
+}
+
+.pitch-strip {
+  position: relative;
+  height: 68px;
+  border-top: 3px solid var(--ink);
+  background: repeating-linear-gradient(90deg, #14b45c 0 110px, #0da551 110px 220px);
+  overflow: hidden;
+}
+
+.pitch-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 25px, rgba(255, 255, 255, 0.9) 26px, rgba(255, 255, 255, 0.9) 28.5px, transparent 29.5px),
+    linear-gradient(90deg, transparent calc(50% - 1.5px), rgba(255, 255, 255, 0.9) calc(50% - 1.5px), rgba(255, 255, 255, 0.9) calc(50% + 1.5px), transparent calc(50% + 1.5px)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0 3px, transparent 3px calc(100% - 3px), rgba(255, 255, 255, 0.9) calc(100% - 3px)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0 3px, transparent 3px calc(100% - 3px), rgba(255, 255, 255, 0.9) calc(100% - 3px));
+}
+
+.pitch-ball {
+  position: absolute;
+  left: 18%;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #fff 55%, #e8e8e2 56%);
+  border: 2px solid var(--ink);
+  transform: translateY(-50%);
+  box-shadow: 3px 4px 0 rgba(6, 60, 30, 0.45);
+}
+
+/* 一面の戦術ボードをはっきり見せる */
+.hero-pitch-art .pitch-line {
+  stroke: rgba(20, 22, 26, 0.16);
+}
+
+.hero-pitch-art .tactic {
+  stroke: rgba(18, 178, 90, 0.8);
+}
+
+.hero-pitch-art .tactic-fill {
+  fill: rgba(18, 178, 90, 0.8);
+}
+
+/* コーナーアークを大きく */
+.section-header::before {
+  width: 22px;
+  height: 22px;
+  border-width: 3px;
+}
+
+/* フッターのセンターサークルも濃く */
+.site-footer::after {
+  border-color: rgba(20, 22, 26, 0.22);
+}
+
+/* ボールが転がる (reduce-motion では静止) */
+@media (prefers-reduced-motion: no-preference) {
+  .pitch-ball {
+    animation: pitch-ball-roll 11s ease-in-out infinite alternate;
+  }
+
+  @keyframes pitch-ball-roll {
+    from {
+      transform: translateY(-50%) translateX(0);
+    }
+    to {
+      transform: translateY(-50%) translateX(min(52vw, 700px));
+    }
+  }
+}
+
+/* --- 25. スタジアム電光掲示板 (試合カード) -------------------------------------- */
+.match-card {
+  position: relative;
+  overflow: hidden;
+  background: #14161a;
+  border: 2px solid #14161a;
+  color: #f2f6f2;
+  box-shadow: 4px 4px 0 rgba(20, 22, 26, 0.22);
+}
+
+/* 走査線 (LEDパネルの質感) */
+.match-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 120% 90% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
+  pointer-events: none;
+}
+
+.match-card:hover {
+  transform: translate(-2px, -2px);
+  background: #1a1d23;
+  border-color: #14161a;
+  box-shadow: 6px 6px 0 rgba(20, 22, 26, 0.28);
+}
+
+.match-card .match-time {
+  color: #4be388;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.match-card .match-score {
+  color: #4be388;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(75, 227, 136, 0.45);
+}
+
+.match-card .team-name,
+.match-card .team-label {
+  color: #f7faf7;
+}
+
+.match-card .team-name.is-winner .team-label {
+  color: #4be388;
+}
+
+.match-card .match-stage,
+.match-card .match-extra {
+  color: rgba(242, 246, 242, 0.55);
+}
+
+.match-card .match-cta {
+  color: #4be388;
+}
+
+.match-card .pill {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.match-card .pill-live {
+  background: var(--live-red);
+  border-color: var(--live-red);
+  color: #fff;
+}
+
+.match-card .pill-next,
+.match-card .pill-today {
+  border-color: rgba(75, 227, 136, 0.6);
+  color: #4be388;
+}
+
+.match-card .pill-japan {
+  background: transparent;
+  border-color: rgba(130, 165, 255, 0.7);
+  color: #a8c0ff;
+}
+
+.match-card.is-japan {
+  box-shadow:
+    4px 4px 0 rgba(20, 22, 26, 0.22),
+    inset 4px 0 0 #6f9dff;
+  border-color: #14161a;
+}
+
+.match-card.is-live {
+  box-shadow:
+    4px 4px 0 rgba(20, 22, 26, 0.22),
+    inset 4px 0 0 var(--live-red);
+  border-color: #14161a;
+}
+
+a.match-card:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 rgba(20, 22, 26, 0.22);
+}
+
+/* --- 25b. 開催国セクションのスタジアム線画 -------------------------------------- */
+.hosts-header {
+  position: relative;
+}
+
+.stadium-art {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  width: min(330px, 30vw);
+  height: auto;
+  pointer-events: none;
+}
+
+.stadium-art .st-line {
+  stroke: rgba(20, 22, 26, 0.55);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.stadium-art .st-beam {
+  fill: rgba(18, 178, 90, 0.18);
+  stroke: none;
+}
+
+@media (max-width: 900px) {
+  .stadium-art {
+    display: none;
+  }
+}
+
+/* --- 25c. 芝の帯 (フッター側) + コーナーフラッグ -------------------------------- */
+.pitch-strip-footer {
+  border-bottom: none;
+}
+
+.pitch-strip-footer + .site-footer {
+  margin-top: 0;
+  border-top: 3px solid var(--ink);
+}
+
+.corner-flag {
+  position: absolute;
+  left: 30px;
+  bottom: 10px;
+  width: 3px;
+  height: 40px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.corner-flag::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 22px solid var(--live-red);
+  transform-origin: left center;
+}
+
+.pitch-ball-2 {
+  left: 72%;
+}
+
+/* --- 25d. 動き足し (reduce-motion 完全対応) ------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* パス矢印に沿ってボールが流れる (破線が行進する) */
+  .hero-pitch-art .tactic-dash {
+    animation: dash-march 2.4s linear infinite;
+  }
+
+  @keyframes dash-march {
+    to {
+      stroke-dashoffset: -48;
+    }
+  }
+
+  /* 戦術マークがチョークで打たれる (時差フェード) */
+  .hero-pitch-art .tactic > * {
+    animation: chalk-in 0.5s ease-out backwards;
+  }
+
+  .hero-pitch-art .tactic > :nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-pitch-art .tactic > :nth-child(3) {
+    animation-delay: 0.8s;
+  }
+
+  .hero-pitch-art .tactic > :nth-child(4) {
+    animation-delay: 1.1s;
+  }
+
+  .hero-pitch-art .tactic-fill {
+    animation: chalk-in 0.5s ease-out 1.3s backwards;
+  }
+
+  @keyframes chalk-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* コーナーフラッグがはためく */
+  .corner-flag::after {
+    animation: flag-wave 2.8s ease-in-out infinite;
+  }
+
+  @keyframes flag-wave {
+    0%,
+    100% {
+      transform: skewY(0deg);
+    }
+    50% {
+      transform: skewY(-8deg) scaleX(0.92);
+    }
+  }
+
+  /* コーナーアークが reveal で描かれる */
+  .js .reveal .section-header::before {
+    transform: scale(0);
+    transform-origin: top right;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
+  }
+
+  .js .reveal.is-visible .section-header::before {
+    transform: scale(1);
+  }
+
+  /* スタジアム照明が点灯する */
+  .stadium-art .st-beam {
+    animation: floodlight 5s ease-in-out infinite;
+  }
+
+  @keyframes floodlight {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* LIVE 中のスコアが明滅する */
+  .match-card.is-live .match-score {
+    animation: led-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes led-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  /* フッター側のボールは逆方向に転がる */
+  .pitch-ball-2 {
+    animation-name: pitch-ball-roll-back;
+  }
+
+  @keyframes pitch-ball-roll-back {
+    from {
+      transform: translateY(-50%) translateX(0);
+    }
+    to {
+      transform: translateY(-50%) translateX(max(-52vw, -700px));
+    }
+  }
 }
