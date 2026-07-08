@@ -1,173 +1,285 @@
 {
-  "generated_at": "2026-07-07T23:01:21+00:00",
+  "generated_at": "2026-07-08T00:02:03+00:00",
   "articles": [
     {
-      "title": "How to buy Switzerland vs. Argentina World Cup quarterfinal tickets",
-      "source": "USA Today",
-      "published_at": "2026-07-07T22:59:28+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQZTNna0xwOUJFRXAydlRTRU5uZUs4bG9sVjNyeDZydTBrMGVYeTVvYUZkU3VzSkMzTWV4d0JRVTBQVWtnbkRDaDRrMWFCU0U3T3lJdTFHNDROelgxOVp5QkQ4X0NEd2tyd0FqMTM5ZmhIbTc5Zk1KMnpaZ2d5bmlfZlJsT0xTdTJDZGNNaHVudE9kR0dKWjVPUnBNLVhuZnNBYlB3TnllcE9YaDF1Y09aMk0zV2xqZWQ2VU1fMjVOMFNUZ1AxVTNMNjd5bjZVRTZwNWg5RzYxdWprRnNqTG1BR1dXbmM?oc=5",
+      "title": "From chicken, waffles to luxury hotels: FIFA World Cup 2026 boosts Houston businesses",
+      "source": "Click2Houston",
+      "published_at": "2026-07-07T23:24:44+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNUU0yQ1RuUHJCMTU3enJvQ0VYaUtKNU1DMThUS1RObXRwdTItRlVYWndydk1Rd1EwMDEwamFnQnhVTEZMdTlRTUI0M0toMVpVRmZaTllsNmtmNEtMT2NCUXNqb3U2aVVuU2FBT0J2SHBGZnZvb2ZpczFQSVN0OTZZTW15NVBZNGhaMV81aThUc2Fua2FjaF9TWUJnaVN3QVFLeFdobWFGNkoybG9BcEpDUlljTlFfZGpfNXBTbkZTc24taVZ1Y1cyM0R4SzZPbmpYTGc?oc=5",
+      "lang": "en",
+      "image": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/video/kprc/51848488-10fd-4f7d-9dc0-875f77644c04/image.jpg?_a=DATAg1kSZAA0"
+    },
+    {
+      "title": "2026 World Cup: How to get tickets to quarterfinals soccer games in the U.S. and across North America with Gametime",
+      "source": "Yahoo Sports",
+      "published_at": "2026-07-07T23:22:49+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxORG5KLXFuVndnaWcwaDdLbE0wcXlmRDNrcWxqMERMSC15X0tKN0NJZDBfQkhtXy1oZ3B0TkQ1WDVELWQyQ1JaRnlCcTlNODhISHVHajMyQU04YlVwNXpSWm03MDBzMWFaZGFUdjBmVWFhUmRGZEZtWmlaTDZtV2VCVGRCWkM1T1d5NFQ4ajVSQlhueDhNS0VZZTdYOHBpd2txeXIwRE1IWTBnbFgtcllMcENBRzVtNFlQYllUN2dETlJEN242SjhvYnNSdURiTnBQblBDaE1QYkQzRE5zVzVBTnJoZEw5MmNPcmJWSGhTLThGNUVpeE8yVXVERQ?oc=5",
+      "lang": "en",
+      "image": "https://s.yimg.com/ny/api/res/1.2/5XRmfiDc26Qqubw_xCnaHg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://s.yimg.com/os/creatr-uploaded-images/2026-05/5eef6090-5983-11f1-bbff-18cf959ad3b7"
+    },
+    {
+      "title": "Winners and Losers of the 2026 FIFA World Cup Round of 16",
+      "source": "Bleacher Report",
+      "published_at": "2026-07-07T23:21:54+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTTA3b3RheVRtcVRETlB4T2ttelJRNG11bkhTeEJEU3ZUQURJWjBsajFpckdBN192eFZmX1M3MEVtQ1JSblI3WDdBa3loMDh1YTlwVFhqUy1YY1lQdk11T01yNTk0Rk10Ukh4UWFaWVkwYnR6RzYzZTBOUnhpUFZ4QXE4blBLVEV2OEtHZ0xWYkFqWXRyS05j?oc=5",
+      "lang": "en",
+      "image": "https://gsp-image-cdn.wmsports.io/cms/prod/bleacher-report/getty_images/2026-07/2285113899_0_large_cropped.jpg?w=3800&h=2000"
+    },
+    {
+      "title": "Magic mortal Messi rescues Argentina and lives to fight another day",
+      "source": "Reuters",
+      "published_at": "2026-07-07T23:19:52+00:00",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOeHE0XzZMcktFRWlxYjJnY0YwZzlqZlg4TmFvNlNXMUJINXQ4MVBXdERtMDNnRFd6NFQ0U05CSnR4TjBRM2huUFRiWk9iOFd6cnpIemhFN00xak9mVTRkdWJ5S3VfZ1Rod212NWo0b3Y4aVlUa0xwRHhxUXpBbzdFQnNyYm5qNTVQS0dDRl9xSmhIRnJvU0huVVlORnVHRUFuOUFCajhTYXZmU1lrU2hF?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "FIFA World Cup schedule today: Games, kickoff times, livestream info for July 7",
-      "source": "Mashable",
-      "published_at": "2026-07-07T22:53:53+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPdS0zX2ZDNkIxUk56MmZGMzJVZTlCRXBOX1ZvRThEYmZoRG13S2JGUmhTOTFDeF83MXI3QnNFM015LUktSGNCNzFGVGRJaVN4OUVJRjdEUlZYSHlYdGtuR3JaRFZGNzhESURadmhoaEluN3VSSUxrazdfVHZWTjliald2QUd1WUNkYWN1SDY0LW5JQkl3?oc=5",
-      "lang": "en",
-      "image": "https://helios-i.mashable.com/imagery/articles/03VRX5hM2i1QKGSV47AaemD/hero-image.fill.size_1200x675.v1783418681.jpg"
-    },
-    {
-      "title": "Switzerland vs. Colombia live updates: World Cup 2026 score, news and highlights",
-      "source": "New York Post",
-      "published_at": "2026-07-07T22:37:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOLUdFWU1yUzU0Zm81bXcweWRZM00tZ0ozQWN3Z1FjN3Qwa01RSzV1ckxSdDVaM3pzaUhXbFNEckR4MFlLX3VsN1o5V3RRLUhGS096WW9ObDljcVdmdV9zcmdubU1nMnNlVjljR1JONEFaZkQtVnB5ckFyejlNbjZUa3p2WEZUdlZoTUZLLXRGQ1Q1ZU5FRDItX3R4Wmo3WXlpU2NQbFNTel9MUk5URGJ3NGpkclpCZw?oc=5",
+      "title": "Tears in Scaloni's eyes as Argentina storm back to sink Egypt",
+      "source": "Reuters",
+      "published_at": "2026-07-07T23:19:46+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQSmZLNGYzMWwzZnVJaThmdEZrQV9JSHFtb0NsdGdhRnlTRUJhb213bzU2dVdaOTU1OUdDTVpNTXNkOUJlTXZibVFNeUJLellEN19xaWtkMFplTWdaRUtYQmRBQ1hxYXhxd0lEbFZDUnNON2Y2MVF0UmhmQ1FxdDFaNi1ETGl2RVhxb0pzZXZFZU95dnlwYXc2Y2xuYlpKRHhtRC1z?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Switzerland vs Colombia LIVE: Updates from World Cup round of 16 clash as goalless game heads to penalties",
-      "source": "ESPN",
-      "published_at": "2026-07-07T22:36:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNZmx1TVBaS1VzakVUbGt2WUF5N2NxZENwOXc3XzA3cDFOZWJ0MTE4MktqaTZRcHNHN2JsQUVHV2xiMlBVMVEzam50TFRDTHR0SEFrM3RXalpoblQxNEVpblFVMFNsYUszUGY3bTg1UGMtcTJ1dWtlLW5LVTkyc3FPOEtlTFpGMDZjejR3TlRjZi1ic0thdW9JcERPb2R6NnRMOEpaeGhUZ3ZxbnlkMEdXWmdROHVlcks1RDNac2dUVkNSWVk1NUNvRkJBa09kVU5BbHZhckt4YW5xWEpKeFBz?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "Switzerland and Colombia level in cagey final World Cup last-16 clash: Live updates",
-      "source": "The New York Times",
-      "published_at": "2026-07-07T22:31:58+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOVWcwQ3o1VHQzX1BUNm5IbnBJbjBZSEs5RTFZM2czVWNhaV8xUm9zY0kwNjFxRUhvakgwMkJ0VjEyMVI4UEJjYVJZQmZ5QkVuOV95M3FvbzBJV1VXZFdSNzB3dFJIWFNHSzVIS1dQNlllZGFoTG0xOXZhZWwyUENMOFQ3d3RJTEdoTzRvVWh4SlpYQ0NXUUpmVFFiMDFqNkMyZ21YTlQ2dUNLdlFSd2VrVUtKcUFNZmNVakQ3TGhfWQ?oc=5",
-      "lang": "en",
-      "image": "https://cdn-media.theathletic.com/cdn-cgi/image/width=1200,height=630,fit=cover/m0RS0qM4SLCj_cmEwxoI6gOvv_1440x960.jpg"
-    },
-    {
-      "title": "Two US Soccer staff members mysteriously suspended by FIFA ahead of World Cup loss",
-      "source": "New York Post",
-      "published_at": "2026-07-07T22:30:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbF9qNEJkRF9rV21IaDRtOFVCMmlKbmR4MnJJTHlVc053R0tGWnZZVVV3ZmtIR2FqcngyaWk5aG1HRXBMMmU2V29oYVF4MGNBUnZ4QjdlUGszd2R6aEJoU3JvaWhMbE5FVmdEdWlKTXZjZHZLdTRLeTMyN09YZ29Id0o3WlJzeUJ2UkVSSE01Vjc1cjhZcGxsNDJ0T2pEdnkzai1fakVWZFE5M2pfVmU2eWdiQ0dIS3FNdVVYeA?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "Switzerland vs. Colombia Live Updates, Score: Who Will Advance To Face Argentina?",
+      "title": "Switzerland vs Colombia Extended Highlights 🌎🏆 2026 FIFA World Cup™ | Round of 16",
       "source": "FOX Sports",
-      "published_at": "2026-07-07T22:15:19+00:00",
+      "published_at": "2026-07-07T23:19:23+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9yaEJxMkEyejlzWHVuczgwYktVc2tTaTZQa0dYVUF5WGtyV2dJQjBKVkF2dDNObTBrX0tnbV9vSFYta3BoZkx4SGZXX3h2eFF2RFZQQjg3bWZxSWpBWDVRWDFn?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/static-media.fox.com/fmc/prod/sports/VX-16552330/1280/720/y68yxxxwuh1xug6b.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "2026 World Cup Quarterfinals Preview: The Key Storyline For Every Team",
+      "source": "FOX Sports",
+      "published_at": "2026-07-07T23:15:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPbFVCZ3ZZZUxtdVNtbDJ3S0RlbFdPaXRzZlN3VDllT2ljZ0NQeUdvd2JZajZ3Z1hTRFRXZFJEY3BCSzdPdkJHWUY3bldmZ1c4aXFYWFBVOUg1a2NTXy1Pcll5R2tUUVVPcDBKWWVLMVBPRTVLNVIzcEVMYUxGWHdPMVF5cllxRTRyYTRWcWs3OU5PenVBRTlueE82Z3d5VUJIMGt1etIBpAFBVV95cUxOLVVtT1V0ZFBncHNqZEQweFJadlMzbzhqV0JrZVBCVmVBOURDeWFIRkdRbUdTeUZnWmlWT1BuVE5UNFFlVl9QaXFjRVZRUWNPS3pQYlRaZDBfeG1LYmpNb0FYLVlnVGhoX3JnTHRsdTE1QWQ1TEhnVTRnN09Hb2tDY0VwSnQ1WVp3Qlhfa3ZWbnNCb2ZPalJQZjJ4Z2hPLWlYQUtVbQ?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/07/1408/814/c7b022c8-artboard-1-1.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "Switzerland beat Colombia on penalties: World Cup 2026 – as it happened",
+      "source": "Al Jazeera",
+      "published_at": "2026-07-07T23:15:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPM3hjYTlLV3YxRlNXbVpjRENXdGJXX1hkZ1A1OVdlLUtaX2dWczRNZUFSLXBjanYxaXg5UXJTdVdBOXlRdnQzN2k4WktvTXhUMmRDZEZldVNFWnRHQl93YzIxTkoyZDQ5cFJsTXFaMmNHbUU3Y09tQ2dSS3Q3dkNpYlNyNjhVZS1tbFlwNE12OXM5VDFMTWV2Yjk4bW9pSG9V0gGmAUFVX3lxTE92c3RVUy1yZXVOdHFVNUxsQ2M3elRPSEFMeWZyMWZQWDVQazJ1S1VjaHhIYXZzbjVTNHl0YWJwcUlIT0VldUxndWN6RllsM2lpZmxJRDNkYk5HaEV4UXl4TTgxVzFPMkZUR2dSVnR0Qm54bDc5VTE2N2JVcTNKdmI2OE5oSVd6X3hvREVfM2hjNlZwTm41cXBRbUFMZUE3Ri1tdk95RGc?oc=5",
+      "lang": "en",
+      "image": "https://www.aljazeera.com/wp-content/uploads/2026/07/2026-07-07T230722Z_1503563944_UP1EM771RPUMW_RTRMADP_3_SOCCER-WORLDCUP-SWI-COL-1783466315.jpg?resize=1920%2C1440"
+    },
+    {
+      "title": "All the presidents’ meddling: the Balogun scandal shows how Fifa can break football | Barney Ronay",
+      "source": "The Guardian",
+      "published_at": "2026-07-07T23:15:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNY2NpbHRxODVMcnZpXzJiQmdRTW54cWFweFpWbXU4T0xLZUZlT0dRSWRoVmNpd3JLYlAwNWpuVmsxcDY0MFpiYjI4Ync0Zkdpc25KcHhnUHdJUk4tSlFPSEdNUzR6Q0hBUHNLM2hIODR1Tm11MnV5VzFFcTFmd085VVg5Yi1zdkV0X0lrUDNBQ3BuSDBITGJEN1F6M0FqR1BvRlo0ZFVyUEl4Mi1CeUN2YWFJcno?oc=5",
+      "lang": "en",
+      "image": "https://i.guim.co.uk/img/media/811893465d8fc42dd33c07d814bd7b60bb2307c9/0_0_2500_2000/master/2500.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=eb4d6ac8e64eaf83f29b87f4e5d66a27"
+    },
+    {
+      "title": "Switzerland face Argentina in World Cup quarterfinal after beating Colombia",
+      "source": "Al Jazeera",
+      "published_at": "2026-07-07T23:14:16+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPT3NlNVk1ODlLY2V6ZG0wLUY2MjhJMXh5Zk1xUDc0RzVWOVVyQmlPVEVjUUtxNVNEbzA4YmJ3dVpFRXNuZUs5d1Y1TnVnRW5XcHowcFFscUZuUHNoYVhCTmdVQTFRVEUxTGtOMXNMREdTNW1uMUlqeWJNdGpseEFoc2dUN25SNUlZcWZ2akROTElwMVVyME45SnJla09YS0dpd3AyNGdEdmQyNjV4NkZJQkVzT09QRWEz0gG-AUFVX3lxTE0xVWlwaEpxRFJXYVAxRVRtTmMxMWpDNFFTVV9lSDllTjJ2blV4eDJZZ1FUS3NYVXFQRkJZQXlxWEk0X2JhUk9yUUZKdFpQMFplUGVwZHBEUkp3Rk43WFpNMHg0SE81OVcxMm45ZS1OX0pZcVptVGx3Q0ltcDVmR0JweEhOazljX0l6MGFXUUJoMWxxZnV2T1hlR0dUbTFWdkdibUwzSTBUNFEwQWhibktGVmRUSVR4X09EeFVoV0E?oc=5",
+      "lang": "en",
+      "image": "https://www.aljazeera.com/wp-content/uploads/2026/07/2026-07-07T225550Z_178859915_UP1EM771RP1MT_RTRMADP_3_SOCCER-WORLDCUP-SWI-COL-1783465511.jpg?resize=1920%2C1440"
+    },
+    {
+      "title": "Switzerland/Colombia through to World Cup last eight after shoot-out win over Switzerland/Colombia",
+      "source": "Reuters",
+      "published_at": "2026-07-07T23:10:38+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPTWo4djdReVl4RjZDR3NjU0g0dktiZExpS19NWlpsa090WXM0TnhmUnh1R2tJdjFVaHA5X0lYTFdNMV83NUxFVUJXaURkbFdTcHJTdjNwanUzVE5ERGFDVFFfalllRnF5dTJWeTZUS3BjRWNzQ0lZcXdVVTNzWHRINWVaN29Pb1dEbmYzWEg5UkcySHlycTlRamtDT1o3U0hYeVU4OTJxZXFfTkNsRGZkRFV1RUlHV3N6cWtCTEpNdG0?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "FULL PENALTIES ⚽️ Switzerland vs Colombia 2026 FIFA World Cup™ Round of 16",
+      "source": "FOX Sports",
+      "published_at": "2026-07-07T23:09:50+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1VaThxU25OYThPVHphMDFqVEZiQkRpekMteEFsVGY1Vk9kZjdycHNyUW15MVVQQk1YZkpGTXFHNzRYYnQxR2FqUlNOV215dGhoSFI2MEEtLW9SNFVzQUdCbFJ3?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "FIFA World Cup 2026 LIVE updates: Switzerland beats Colombia 0-0 (4-3) on penalties; Messi leads Argentina to 3-2 win over Egypt as round of 16 continues",
+      "source": "SMH.com.au",
+      "published_at": "2026-07-07T23:07:32+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilgJBVV95cUxOcFRTRVZzbXU0NmNZOGYyeTVjbTZJc296U2VaSGlrcTRZNDVtRWZOQm5ORVpQYldiaF92LTgyV3ZVTVlMcHh0eGJJZnNJRTV1cHZtTjQzeWlyVE5sUDNKZmF0aTVGcUM3eW9vbGxteFRqUmxjeFdkdTI5eU13aFJwMlYxVE55RzBRczd0SmtETW0wX1FJeWpkVWM0QjkyNWNfcjhMRGZqNkUtVUdlb2ZveXh2MVRfMjZiREl0MGdiOUwyaU5fUzdWQl9DUHBoVWdzak9jRVpYUzFWOElleVJUMzJqSDlrOVFPSFRrZGh3SXhCOVJWc1doX1R0czdDY0QybDNCMGpvNGZvemUzMllDR0R3RXE0dw?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
+      "title": "Switzerland vs. Colombia Highlights: The Swiss Advance After Penalties",
+      "source": "FOX Sports",
+      "published_at": "2026-07-07T23:05:19+00:00",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPXzlzQmxMTTdOcUFJeko5WTJNVXJvTURTM1JGaFZ0YVR2ZC1ZRmU2NHJjdV9qOGpxdmRndHB5VXc2SHJqTzNac0NTXzg2d25BU1pzTnpHSml2aGdNQXY3TWpWcUFHaGQtTFI1V3JSVnFsSkVIcTBrNGljdmFhOEZKMlhKc0lhMnZ1MmtsMzNLYThteURzUlBFUVJtRVc5UXpMcG5FZVdQZUQ2d0FtSFFRbE93bw?oc=5",
       "lang": "en",
       "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/07/1408/814/colombia1-1.jpg?ve=1&tl=1"
     },
     {
-      "title": "Egypt were ‘cheated’ in World Cup loss to Argentina, coach Hassan says",
-      "source": "Al Jazeera",
-      "published_at": "2026-07-07T22:07:08+00:00",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOOUtvbl8wUnl1aG1td05NOWtMR05EeG9kQVFjenRITDRjeU1KWGVWMFNnZ080aG14Q1lrd2w0eWFycm90dUV2aTlSQlljQUFVWWhsdmVHSFpmRko1Y3RHMFF2eEFGT0R2MXFLWXZZemlBZDZ5UHNkOW9DZlhOaUJKMHdFREhqU0t1TUp4WmVQLURRVkhRWWhadVVFUVFoSUNYSGFEaXJBWGdSRTQxQWfSAbMBQVVfeXFMTlJ0X2hKSHpyVEFfQ2hWNXE5dHkzV05MN1lhVWVWRzVQMGVJNkY3bVFZaExpUHBpbHBTckpjeTRkWF8zMWJlZE9PNFhmOEo3a3lMYkFhbDZ3V0JsU2hITW5XdXBTYm9tXzNOOHNqSENFQ2lkRmJ5WjVkaHVjQ0x3a1FaUXhwckxuYmZQYmtmUWdTeXVEMW0zeUhfeVJCSlZ4enhDV0FHbVp6SUg1bi1rY2UySEE?oc=5",
+      "title": "Switzerland Eliminates Colombia, Final Match Stats, Highlights & Updated World Cup 2026 Bracket",
+      "source": "Bleacher Report",
+      "published_at": "2026-07-07T23:04:20+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQSVZpbUlRM2ptQjZXeEYwZXZ5TWFpN3hxdWRabFVsamJiWDROQVFWa3EwaHc0Vy1xb1dDa0tYbWlQemNyQTlJOWZDczNWcVV6alUzRFV1WUgtR2MtY29lMEcxeFQyTnE0ZVBiVHBjUkt6bUNaTnhTN3NyNWpiVVpEVnNFdTB4UTFTZEVLRzk1Z08tRUtLWXFQSTM5VE5OZnhtTUJnNXJkZDFjYS1wYmlyMW5uM0liRlZ6V1F2eTgtb0dXcENaSGI3SDRRbjlzRGNKeFE?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "FIFA World Cup: Schedule, Results and Standings",
-      "source": "Eli Sports Network",
-      "published_at": "2026-07-07T22:03:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPWmhOT3hOZTRTdTI4ZlZITkIyMFpSeGpsS3ZMTVUyQktsUFNneVUweWZrcVVmS1YwR3lWc0pwNDllYWVzY043NXBBV29zSUlObkYtb2pZYlgzMFZwQlFjRlJoY2tlTVU0ckFXay1JVjdMNmRPTl9HVjJNS3NsSTVtdkRxZWlZM0FYUFlBUWkyb2RjaTNE?oc=5",
-      "lang": "en",
-      "image": "https://www.elisportsnetwork.com/wp-content/uploads/2026/06/World-Cup-26.png"
-    },
-    {
-      "title": "Seattle lives up to its reputation as soccer city during World Cup run",
-      "source": "The Seattle Times",
-      "published_at": "2026-07-07T22:01:37+00:00",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNZGI0bm1BS0VFRkdURGNJbzdlU1dLa2FYMjBFOE1OZHhyTHo5TnBqb3lDcDhXYjM2NUZZMFJYVEk5SkN1WERMY3RTT1RPanVmdmdNd1N2TjVibElvSHBSbzQ3WTRwcWE0cm4xSHJhdHdTYjZ4V1pYSnFyNjFqZmVPdjlram13WnZMcFBSbllNT3gyWXppMFFwZDh4YWxiWXc1aEZEODl4Vnc5X3IxTjVaSQ?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "2026 World Cup Odds: Which Songs Will BTS, Shakira, Madonna Perform First?",
+      "title": "Switzerland vs Colombia Highlights 🌎🏆 2026 FIFA World Cup™ | Round of 16",
       "source": "FOX Sports",
-      "published_at": "2026-07-07T21:55:50+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQmJOeEZuWVRwbk96c3BnMnhTazhjYUNRd01Vd1dTakxTY0F4M25zMkZtaE14Y3lxVVFOYVFlQkhjZUNnZXdfSFloS2NrVC1QczBtRUoxN292Vk0zekMwXy0zOEF5d0dpeDMtT1BiRFo3aVhFTm0yMUwyYXNrTTBZTjI4eE1GNXF6dTdaVS1rdWgtVFHSAZMBQVVfeXFMTzU4emp4dWcxRkNfNTNhNnFpNE8wdzFkV0JvSXlsNkhlc2h3YV9ZdkpzVm5ISGcxS1MxVDRDNU40YzhXYk41UWZJMkd4eWo5MGpFSlRIRF9hcXFDYThZbUF4Zk1zb1NxSFVsdnRHblB5RTViTmpGeE4yTnhqNHNUZ0RpQjNkanhyRzRpUTREcUNlVjVr?oc=5",
+      "published_at": "2026-07-07T23:03:20+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFAwenIweTNrQ3AxbExIZHhuQ3hENFR5WTE1N2xrdXRYT0NSZWhrYmV1U1lmb0NIWEZya3lqQ1NVeTRWQjF1cnc1YjBybGtjOUt5WXZUZTgwbVFZeVJYZjRadTlR?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Argentina vs Egypt 3-2: FIFA World Cup 2026 last 16 – as it happened",
-      "source": "Al Jazeera",
-      "published_at": "2026-07-07T21:54:52+00:00",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQ1BpbWdmUjdpVlZRYmNxYXJGcHRQWUhJYmE0Y2FtVHNzbVlwNC1QaHFfSVVRcGZwUDNaS1hFcXBSaUVXV0Ztc1I4QWlqcllGUXE4YjE5dkFJVjN0Z2hTLTQ0cklEQzB1N1BfRzVlYUhMaG9YS09RaC1uVWlnbW81WUNTcTdqUXhIV3gxN1ltZTdpeW50dk9HRTZR0gGfAUFVX3lxTE5NTHVZdGgtbC13bzVFN3I1dnNDdV81M3BfdVBNckVsS2h5YjhDajIxQ1NJS3lxbTJqMTlhRGhlNWNsS3VaMW1PekJCUGgwTGJQcTVzYmVKX2VVN1hwUjk5dDA3R1JyaVJWTlZQNDlnYUN5aXRyMGpuZTNNU19nOUo3NWd4M1VqTV9JZWRxdUIwMnBNUkJJbmIxMUZnYmZzOA?oc=5",
+      "title": "How to buy Switzerland vs. Argentina World Cup quarterfinal tickets",
+      "source": "USA Today",
+      "published_at": "2026-07-07T23:02:42+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQZTNna0xwOUJFRXAydlRTRU5uZUs4bG9sVjNyeDZydTBrMGVYeTVvYUZkU3VzSkMzTWV4d0JRVTBQVWtnbkRDaDRrMWFCU0U3T3lJdTFHNDROelgxOVp5QkQ4X0NEd2tyd0FqMTM5ZmhIbTc5Zk1KMnpaZ2d5bmlfZlJsT0xTdTJDZGNNaHVudE9kR0dKWjVPUnBNLVhuZnNBYlB3TnllcE9YaDF1Y09aMk0zV2xqZWQ2VU1fMjVOMFNUZ1AxVTNMNjd5bjZVRTZwNWg5RzYxdWprRnNqTG1BR1dXbmM?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "Tom Brady compares Argentina's dramatic World Cup rally to Patriots' Super Bowl comeback",
-      "source": "Fox News",
-      "published_at": "2026-07-07T21:50:51+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNLUFla0pFTFVvWDhBbm1ZZWdOcm05M0V3cnZQcmM2bEdqM3pGS1d5UEJraFYzOW1UUVBhdTlTb0w1SmxuUTgtM0FWNUl3UGJqR2NTcjJ4U0RQMWo4RmhocGpZSi1McU4wMGFyUmlHMkxzZ3NDeEY1TnlQSHN4bjVhVjYtWF8xcXVvckwtRHBWTVRuTGRWS0J3Vy1IUUhUOWhXVUhLOGFVa3VRU3AzUlpRRzlja9IBuAFBVV95cUxOeUozclduQVN2ZjJlY2kwQzBqNV9hS0Q2c0VNLVFmZmlFU3dONjFnNkFxV0Z4OUhfX1BwRjVKXzEtTDVqYW9OeDNJclFycVdqaWo1aEE2czR6OXU4cmc0X0l0NU04bGRtSmd4RzRXcHg2eFBjRFNIVE9FR0JyVTlfTERnNHFmRDRDX0VIeXE3RXJObFp2QXdPVklaSWNEN2NUcmxpODF2QlVVLXhSVFNXSjBIR1JwdWxU?oc=5",
+      "title": "Switzerland hold nerve in penalty shootout to sink Colombia and reach World Cup quarter-finals",
+      "source": "The New York Times",
+      "published_at": "2026-07-07T23:01:25+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNN01MNjFGZ0ZIM1B0Q1VQNnRVWkowYXBEWVJNNUR3TnVhNVR5alFocHBOTDR6MlVTczZNc01kNlYzdkxxaVhLUjhhbmhOS2FYekk2QUVqLUtkOWhVQmQwaXRDNDdDemtWckZmWG9FVkJQdXZDVlpCQnlGeUxTUFNYY3J4eDdjVTk2U3hiUzNHcXRSUzdY?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "World Cup 2026: Fox Sports' Thierry Henry and Alexi Lalas get into heated exchange about Folarin Balogun's red card reversal",
+      "title": "World Cup quarterfinals bracket: Full schedule, matchups and road to the final",
       "source": "Yahoo Sports",
-      "published_at": "2026-07-07T21:48:15+00:00",
-      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxONm1aVXcwY19KcVRWSm9HSGdDa1ZBNUw3VVVvUDdWNTg0Z0RCMWE1cmFOU2pyX2VSYV9rSHkyQmUzaUNZb0UzUTE2MUxwYmVQWDQyNGEwcXA5YUNteGtHLTdjb0RiOXZRTDY4c1BDdUhrSVo2OEhveUtGV0N4bzV5aC1pYlA2NjZCNjJqUXlMZTY1Q0FvdlI5TnIxalhQN2hKNmFlRGkwc2g4U2NTT25YWFBweVptbDU0b2dxTVF5cS1NV2lfMVQ2OERKTmg4QUo4Q09Fc1dJS2VFVjFlS0pKWlA4cFM3SERpSmotMUF4ZVNqVzluX2NOMWczRW5tNVJxRm1FU0l2OA?oc=5",
+      "published_at": "2026-07-07T23:00:17+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPbmx2emVQOUlqRVotV2pCQ3JVTl93LXJCMlM2UTBPSzgtYlJQTGNTdXJPNG5rYmk5WktNZF91N081Y0QxNDI4d3NFRE5uRWhnUTVVUHctYmp4NjlBQ3FmRUdxYXU5a08yWlplRjNlQWx1WjBiMmtPc3JBanY0MTJnVzhjUjN5d3hVUG03VGJzaWFSbFdYMzdtUnd5c1dHX1ZTNjV5WXB3QWxUa3FiVzBWckpTakIxSGdWWThScTh4ZEczTndSZ09oLS1LZw?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "All the presidents’ meddling: the Balogun scandal shows how Fifa can break football | Barney Ronay",
-      "source": "The Guardian",
-      "published_at": "2026-07-07T21:35:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNY2NpbHRxODVMcnZpXzJiQmdRTW54cWFweFpWbXU4T0xLZUZlT0dRSWRoVmNpd3JLYlAwNWpuVmsxcDY0MFpiYjI4Ync0Zkdpc25KcHhnUHdJUk4tSlFPSEdNUzR6Q0hBUHNLM2hIODR1Tm11MnV5VzFFcTFmd085VVg5Yi1zdkV0X0lrUDNBQ3BuSDBITGJEN1F6M0FqR1BvRlo0ZFVyUEl4Mi1CeUN2YWFJcno?oc=5",
+      "title": "World Cup 2026 quarterfinal schedule: How U.S. viewers can watch next matches",
+      "source": "The New York Times",
+      "published_at": "2026-07-07T23:00:15+00:00",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPQmF4NEZfS3BGU250MTRHQThpOS1xSFpXLWVXTGlTR3hyQ3R5cnRlNHNFbmxTNmI0OXlMd19qb0daeGw3VjN6NDhiYW9POHdZX3Y5LVkyZGl1ejNlNnBGMU1qbGV4bFNuWmViamFUTnFrV2VXcUNyenlheHR5RzhyQklsc05WbWRPQmxqRWI4OXRvRHJmUEl1MVVld0EzN3JXNklrR0VkSE9Ga2lhSHRYdjFIRFRvUQ?oc=5",
       "lang": "en",
       "image": null
     },
     {
-      "title": "World Cup 2026: The fury and heartbreak of Egypt's stunning World Cup collapse",
-      "source": "BBC",
-      "published_at": "2026-07-07T21:33:21+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8tdzd2YVY1SkFpc29qWFlzanJfUGNjS1F0eUVEMkpraGpmSzI1b3ExVWRXR2F4ZzBRbXQ5U0t0VmRYUjU0ZnBtOEZlSExKYUVGUFJUcmhqeUhDdzJtZHoyeWQzcVRfeUU?oc=5",
-      "lang": "en",
-      "image": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/9b40/live/396b6f30-7a3a-11f1-ab76-d75965dea4d1.jpg"
+      "title": "W杯準々決勝のフランスvsモロッコ、審判団が全員“アルゼンチン人”で物議 仏メディアは批判「FIFAは図々しい」 今大会で単一国籍は初",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-07-07T23:53:27+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBWNjk3RlZsZng4YWd1dTh0cUQ2dEZOdEt5WEVGQ0dVTWdGLUVLZkk5M2dJWHBCZGJsWTdSQzh1WlhxX2Nzb25pWlZVWnhZdlI0YTBQdjREeDB5U2FocmFvc0dyZw?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/07/34dba6f197ce9b3ac6bd72b29a36d384.jpg"
     },
     {
-      "title": "Egypt manager Hassan to switch off World Cup after Argentina ‘injustice’",
-      "source": "The Guardian",
-      "published_at": "2026-07-07T21:22:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQeTVlNmZseGRmeTNHREpjTnIyZmRCYUpYeUJoaV9mMzdSRS1NZ0o1aDF2bGVybWpmem44T3hUNXlPckhkZ0x5UWtDSjYwTVdjYndTUHprSEJQSEo2TVRhNi1tdlNoZjNsZmNNY1AtYmN3RVN4dFlTYmxURlBZaHNWQjhCenBUaEJtUVZUckZLVEtkdERDMGdzeDhDdENTYnpkOFlkbXRzNTJlcU1PbHY4OWV1SzN6ZFhXRUg0?oc=5",
-      "lang": "en",
-      "image": "https://i.guim.co.uk/img/media/91415cdb7b2b6b12ecf81cbd01caffe938bd0008/256_0_3049_2439/master/3049.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=45ddfe5a8a43482d2ea4a0337e9a9214"
+      "title": "公式発表：FIFAワールドカップ2026™準々決勝のスケジュールとVTVでの生中継",
+      "source": "Vietnam.vn",
+      "published_at": "2026-07-07T23:53:01+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPRzZCX2x6Z0Fma3B4TEdXU00xZzItTE52NDdvdGxPcEVVTXREYkRqSDJWd2pKOGJ1MlRSdDdaQ0VkOHlvb3dRWVJvazJUZklhOVFPVURMeGVzRFhZcUlUdUFwVTlNaUFaVWVEUGtrYS1KMmhZMWNRVlZsTE16RHpSSm5HUm01QWxSOV9WSWFLSWFiR05ZR01aTGRneTZwMUkyUFE?oc=5",
+      "lang": "ja",
+      "image": "https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/07/08/1783468111693_lichthidautuketvtv-10363582890315974068965-65405151914630137424607.webp"
     },
     {
-      "title": "Netflix, Disney and YouTube interested in FIFA World Cup U.S. rights, package could reach $2 billion",
-      "source": "CNBC",
-      "published_at": "2026-07-07T21:21:13+00:00",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQS3dCSDBJQ0tsYmVoR0RYQUFxd3hUNVpWMWY4V016T0tMZTVwRzc3c3lFbEwxdnJlV1AyWXZJYk44aHRzR2RmV2JCZEQ4WC1ya0JabFFMUlFQWDEtWGlXM3VxSFdqRVZ1cnNGTllmZk5GSEZTR25IdEVlZ1V4bmVrb0N1NHNfMVA2cE5yZlpiNVLSAZYBQVVfeXFMUHBwVkY5cFdYU3gtbU41MHRQTWNaa2RFZy1yOXR0aHdEcjVsMnFGQ245MlRVN1BJOFJuTmZRS1AxV04zZU1pT3lnV0ZqVkYtOUlfM3ZIWURfTzB0QVpPZVRIbmZOR3pfWlNYNEFVSXpIT0tyT2hxd2hDMG1mRWN3cGlfRndmSWNISlM4Z0dKQ3JwTlQtVzB3?oc=5",
-      "lang": "en",
-      "image": "https://image.cnbcfm.com/api/v1/image/108331208-1783390092617-gettyimages-2284420573-usa_v_belgium_034.jpeg?v=1783390137&w=1920&h=1080"
-    },
-    {
-      "title": "Norway struggling with sickness ahead of England clash in World Cup quarterfinals",
-      "source": "New York Post",
-      "published_at": "2026-07-07T21:15:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOMExMaS1Jamhqa2tCZEszTGJNRDZ1YTVheFJPUVRQWGF5T281eHlqM3o0aDRpOE9BZ3BjMmxxLXVXemgxaVZrbUxySXpmcDBQQ0ROQmZyTEhLZFlJU1dxX01EakI4ODRSeHBPSlRVSFozbm1nNnZvdTMxYndYT3JiVEJZSW5PTTVOMEZDam03Z0xxR0pNQjdqRkRELTRobDRmVWRhRjlScjY?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "Fifa accuses Uefa of hypocrisy in latest war of words over Folarin Balogun decision",
-      "source": "The Guardian",
-      "published_at": "2026-07-07T21:09:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOZ2xYcUdZTElJQ0lRdFBuWktZbVJCc1lfdGxHd2NzSng0bTFFVXlLQndzMjg3MDlFMUR1WDA4cWtrZTVnTVRoazZvbGVXTUtrNU1EenN0R0dlNU90M0dKXzd3VzgwUEhtWDNDcXdTMmJWRXVhSnZjaHBlN3lBbkV2MUFzRzhlSS1jekdtdFhvS01Qa2Nkak5JNXlrN2diYkRBaVJ6OVBudjlrVzRic2k1TGc1OEpucGkzZHI1bw?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "スイスが16強の壁突破、72年ぶりのW杯準々決勝進出！ コロンビアとのPK戦突入の激闘を制す（サッカーキング）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-07-07T22:57:46+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBPQ2VORF9SWTYxQTA3d1dGU3J6YUNILXU0aENRcjBsSzBUcHVhbDZmSGNWd1E0M3dPeHJweGpRVjROd1pBaWJWWEdMNXJuaV8zWTNNcEtBOU0yYUtNMWtwS2ZMT3BDVXhEc0JKNDZwaUJNZHA5NnBiVWIzRFEtekk?oc=5",
+      "title": "【北中米W杯】エンバペvsパラグアイ女性議員の“場外乱闘”が激化「我々はロナウジーニョを監獄に入れた」｜ FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-07-07T23:48:22+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNaVgwZ2pqeUE0MDdJc3otV3dYa0VKRnpzeUJpYkpkOFBkUXNfTVBzT3haTjFORzdQQ1pBYl9janFjMF92ZkFSN1BDdHhYcU8xRnI1ZmNmTmhpUXhTRGtYQ0NrZE91dzBqOEFPZTM2SWoyb3VudVl5eTdOeTltT3c3dkxsUUY5enVMZ1l0Vl9sRFA1MHI1RTY4ZUNKc1JUSlhWd0hxaEpoZVFuMzFoRHkxWjBveVFQNnYtVlpWMEZaOVRYUUJYTjE1MF9FV2dreXpwaC00SGMxZml5VVFSdklWWA?oc=5",
       "lang": "ja",
       "image": null
+    },
+    {
+      "title": "【北中米W杯】エンバペvsパラグアイ女性議員の“場外乱闘”が激化「我々はロナウジーニョを監獄に入れた」｜ FIFAワールドカップ2026（DAZN News）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-07-07T23:45:07+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBINjExemNZZVQ5YzNvSTRQYkZGUnZaTWF4SXltVUdxTHFWR0VKN0tnd1lad1puOUp0VmhfMTFKODU4S2daeWNDUnh2UUEwYTZ6UXE5X25vVmRJUk9qWGoxWC1LbDg5SFVwWWJoTzRseDVpY0pCMjVjbDRyT1Z5RFE?oc=5",
+      "lang": "ja",
+      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260708-00010004-dazn-000-1-view.jpg?exp=10800"
+    },
+    {
+      "title": "アルゼンチン代表で影を潜めるフリアン・アルバレス。スペイン紙「バルセロナが彼を獲得したいなど…今となっては冗談に思える」",
+      "source": "DAZN",
+      "published_at": "2026-07-07T23:44:12+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQaFRORTFucXlCdXVyWl9sU1lsRFRMaElzQ1FkN2llNGo4QlF5ZmQzbUxpY2hnazJTTy1PSTBmOXhhQ3AyeGlKemotODlhd2ZfRi1reGE5NmpJZVJCa0FGWVBfQmp0b0duYUZxWldZVmF2TjVIOXNuMUdHbmRYSWp6TElBdDJGSnZPb2pZa3lpbGdzXzN4Nkw4VXRrY0dkS016c095QVF3NzdFNG01ZDFZOUxma2R0VWNtcnBiUTJjVjRUNURLQ0hKYUFJRUNaaGQxbHJrX3BGZnR3TkJM?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "VARは正確すぎて、2026年のワールドカップを台無しにしてしまうのだろうか？",
+      "source": "Vietnam.vn",
+      "published_at": "2026-07-07T23:38:04+00:00",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5HRXBPSFItejhTcFl4TWUzMGU5cjVmVDNUZmwtd1pYR1Z1bjJBcDM2b3lydmdqdmc1TEtQa2puWDZOV1JCV0pmZ3g5ZVQ3cV93T3p0NG9mc0NwN0J0cW00cU02aXFkV1Y5cWh6R0ZtZlphbkxHRnc4?oc=5",
+      "lang": "ja",
+      "image": "https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/07/08/1783467218884_maradona-1783451571755723507323-2-0-603-962-crop-1783451575777627642254.jpeg"
+    },
+    {
+      "title": "2026年ワールドカップの準々決勝の組み合わせが決定した。",
+      "source": "Vietnam.vn",
+      "published_at": "2026-07-07T23:36:30+00:00",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBtVHhhRnNfVWxKQXYtNWMxaksyZ1lKYU1fZWNwZFdxQ1RmSVdXV0o2WXdCcE80bFhMb2VZNmhuVTJteHpzLWZLRWExUG1zRmJwV1NINXdjYXpWczRlSjhrbnU5WURwSlg2QUpCTjFQNENoLTZWOV9UNV9jTQ?oc=5",
+      "lang": "ja",
+      "image": "https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/07/08/1783466623332_xac-dinh-4-cap-dau-vong-tu-ket-world-cup-2026-647.jpeg"
+    },
+    {
+      "title": "W杯ラウンド16終了でFIFAランキング変動 スイスはイタリア抜き、大幅アップのノルウェーは日本代表と2ランク差 フランスが首位維持（フットボールチャンネル）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-07-07T23:33:22+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9vV2NicVB0aEJlTjhONDRRMERzZGdFSVI4Z0diMDYxclFub0pURDVvOFV4aWg0Z3hxMTFzM0hfSEFleTJJQVd2LUduMnJzaXBLWG1zNzlNVkZTQTJyWTBNMEo5MHVGRkJGMl9mRjFGdW4zakZ1Uzc1SzV0aGhsVFk?oc=5",
+      "lang": "ja",
+      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260708-00942903-footballc-000-1-view.jpg?exp=10800"
+    },
+    {
+      "title": "アルゼンチン、スイスが８強 メッシが９試合連続ゴール―Ｗ杯サッカー",
+      "source": "時事ドットコム",
+      "published_at": "2026-07-07T23:17:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1MeXlYY1o4TXhJMnI1NG9sTkRyYjB3LXAyb2paYmpqRG81MW9IOG1xai03QnpudEx2SUgzVW8yQldhRWhXb3J0c3BVYk9iaEx2c0pFd1lPUHY2ZzlzWHN6cmU3MA?oc=5",
+      "lang": "ja",
+      "image": "https://www.jiji.com/news2/kiji_photos/202607/20260708fl13S_ogp.jpg"
+    },
+    {
+      "title": "コロンビア代表、死闘の末にW杯敗退…選手たちは呆然、PK失敗のD・サンチェスは崩れ落ちる ルイス・ディアスは号泣",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-07-07T23:09:30+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA0ZnVtOWNrZThOaEtOekNXaDFOWkdGTXF1SV81cjRNV1pBZ3lLRHRUWnlnRnotbmhOQk5fQWNFbnBSdEJVS3Utblk5bEZrUmdYS25WNXlvN2FQYmZ1WkpZbDhFTjdqbXk1UTBJTm8wWWpjTlBJNnpIZXZEdjlYdVE?oc=5",
+      "lang": "ja",
+      "image": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260708-00942855-footballc-000-1-view.jpg?exp=10800"
+    },
+    {
+      "title": "ヒョンデ、人型ロボット「アトラス」がFIFAワールドカップ2026でパフォーマンス披露（Car Watch）",
+      "source": "Yahoo!ニュース",
+      "published_at": "2026-07-07T23:09:30+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5uTS1OZVpoTzZNZ3l2SFhuN2NXd1BLTV9HUkxPUFJ5dGo2cFVOcHFfZk1hN19nSUN5WlF1RmszdlR3bzdJRDk2NXNhbXl3MW5McjBSV1VuN3U0TXZmTFFKaTh0eDZZd3NpYUNSWi1IdEdDSGdWMEl6c1k2MnR0R2M?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "アルゼンチン代表、絶体絶命の状況から大逆転でベスト8進出！ スイス代表はPK戦を制してコロンビア代表を下す【北中米W杯／8日結果まとめ】",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-07-07T23:09:22+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA3M3dFcDBsNEh5MzNWM2NGa29wc3MtWjdjVThxWnRJaGs1ZW1vWTZ3MUxGTkhfcUxCUGZldWNWYmJlcjdiWjB6TTFmU2RaRDNtbnlNUFQxUVV5SUhoZmtHVzRuSQ?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【得点ランキング】FIFAワールドカップ2026 北中米W杯 ゴール数一覧",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-07-07T23:06:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBjeFRrdjIyVS1MUHV2QlR4d1dhZ2Z4R2VtNDJVRUtaTHZHbERPR29zWHk2NUY2LXRVQ1VXTUhnSHRxZHExZmt5ZUxudXN2MTVOQ0s5RjRRNUhicEh6bHBrZ05Ydw?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【北中米W杯】激闘は120分間で決着つかず、PK戦の末にスイスがコロンビアを下し準々決勝へ ｜スイスvsコロンビア｜FIFAワールドカップ2026",
+      "source": "DAZN",
+      "published_at": "2026-07-07T23:03:55+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQYjZ2c2N0TDNLVW4zQTcxQnF2Tmlya0VuUXNlSXhtUUZ6aDhXd2VPb3RnN3B1cEM3c3F5eENqTkVQMHhTR2RsdGtVVzBZbG5Ub3R0OG9KcmdVeGdOUFZxUnZsYzR2blUwb3VkLWFvNXdWVWdHTG5vemk1NUxDaGh6d05halRCR0Q5dEYzSGQyZ1p6Q1F0S3dGeEdFWmdWSmZlRmdqWlB2QmZjdFM3Xzdwc2RzbGtPNnlPcjYtb1Zwdk1XOF90b09vOVQteFJQMHU2LTVUNURFU3QwWnlSQlNaYzNoUnM?oc=5",
+      "lang": "ja",
+      "image": null
+    },
+    {
+      "title": "【サッカーワールドカップ】アルゼンチンが逆転勝ち メッシW杯9戦連続得点 スイスも8強",
+      "source": "日本経済新聞",
+      "published_at": "2026-07-07T23:01:37+00:00",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1DU2R2M1M4bi1QVHJfQnVNcUYxc05pclM3T2tSMXVwQzN6ZWVoVDBva28xOS05bWszTTBwUURyUXJyS2dNRHVPN1dkWXowN3dtYkZESVo0N25oQ2xBSnl3dFNKRERXOXgzd2tYRw?oc=5",
+      "lang": "ja",
+      "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3279191008072026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.2&fp-y=0.37&h=630&w=1200&s=603e9dd4da78fcf47e8bdd2b73edeb56"
     },
     {
       "title": "最後のベスト8の切符はスイス代表の手に！ コロンビア代表との激闘をPK 戦で制す",
@@ -178,148 +290,36 @@
       "image": null
     },
     {
-      "title": "【写真・94枚目】【写真ギャラリー】2026.7.6 FIFAワールドカップ2026 決勝トーナメント2回戦（ラウンド16） ポルトガル代表 0－1 スペイン代表",
-      "source": "サッカーキング",
-      "published_at": "2026-07-07T22:28:37+00:00",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPWEZYeEtKalJEZmVndUlkVXVkVUlMNzhHZmlmeENuaWROY0dHc1phRXJseHlkbG1YZlZ1U1pqRjZpOHZuZmFST0paYnJEZFAxQUxDYkkxbDN0VDVwX3Y2LXNJOTBBaDdOYjROSFEwVVdCSXB3Z1pBdHU5eXVGM2NxalExVFJtbERoSC1TTVkyNUZQY3p6dHZwN01vUV9tTU5yeS0wQWcySGJ4dElBMDdXRE9Id2hOQk5FbE1BNEp5dmg3ZTNfR3Bj?oc=5",
+      "title": "スイスが72年ぶりW杯8強! コロンビアとの延長接戦はPK戦で決着…準々決勝で前回王者アルゼンチンと対戦",
+      "source": "gekisaka.jp",
+      "published_at": "2026-07-07T22:56:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1iTDMyazVqeVBrbG04dkFTMDdHY0puV2l0YmFCLUZoaWxxZ3I3VUZJSldFWUM5RC1MUFVSd045RURycTNEMThjdExtUl82bDBEemZfNGJJZ29FUThlZXBxbE9nX1V4Yll3M2d1Skl3bw?oc=5",
       "lang": "ja",
       "image": null
     },
     {
-      "title": "「これがW杯だ」…アルゼンチン劇的逆転勝利に涙のメッシ「このチームが成し遂げたことはクレイジー」（サッカーキング）",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-07-07T22:19:33+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE03NGVtTzJpdFNaSzBEWGF3MDFibFdYTHd6TjN1bmQ1WmdyUFNtdGtyVlNiZ3JobTdCcTdHcU1VdkJqak95WmxuSEhkUGc1UDVxSEEwMU9DTWlubnJtMnpsR0hmbktYMWZCeUlXODlwbGNUUDVNMnNtTVZBREU3TEU?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "次の主役は誰？ 4年後に期待したい若き日本の逸材【DF編（1）】2030年はもっとスーパーな存在に！？ 両利きの怪物",
-      "source": "Yahoo!ニュース",
-      "published_at": "2026-07-07T22:17:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5jNEl5QzFlNWdoNTN6dU1DSkNHa2pBTlVrbDNBNWJINFhPbXZoY2RnS1F5MDliYmNRYUpuUm8yRmVKUklMNk5DeGxuOXZHalpkMjh4aTlvS21RbHI2c2ktUHN2d2hGX2txenJMWWZuQWxlSVZOTlpFMmhRR1d6cVk?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "【ワールドカップ】アフリカ勢は10チーム中９チームが決勝トーナメントと大躍進 背景に欧州育ちの選手たち",
-      "source": "webスポルティーバ",
-      "published_at": "2026-07-07T21:45:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5LSS0zMmRmLXk0WDg4WHhTU1RKaDNQa0lXR1E2bEcxalFrNGdjLTVWTXN1VzgzcjJCQ3A5Um1SZWxNSGFaQUMtTUdmQ2dTbXZrUUZoTW1mVFpyeUNLZUZjS19UZW1vMEtVX0ljUzFBdFE3clBzVTZuTkEtZw?oc=5",
-      "lang": "ja",
-      "image": "https://sportiva.shueisha.co.jp/clm/football/wfootball/2026/images/caboverde_20260706.jpg"
-    },
-    {
-      "title": "開催国に利益なし？ 2026年W杯が露呈させた「FIFAばかり儲ける」現実",
-      "source": "クーリエ・ジャポン",
-      "published_at": "2026-07-07T21:30:16+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE43dFlGamw1QWwtaGgyaUc4R3NzeDA1NmJBTUZ6Q3Qyd3dtVzJPdHNGeGV6SUZ3Qkd0UExVU0M1aEhXb0RrUHdwdW96VmNuT0x5LXUw?oc=5",
-      "lang": "ja",
-      "image": "https://courrier.jp/media/2026/07/08031936/CREATORS-FRONTLINE-1600x900.png"
-    },
-    {
-      "title": "エジプトに劇的逆転勝利のアルゼンチン…歓喜の涙を流したメッシ「感動している。僕たちは絶対にあきらめないんだ」",
-      "source": "DAZN",
-      "published_at": "2026-07-07T21:27:30+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOc1BISVp1em9Dd3dSRlotOE9wbjNlR2dQVF8xTnFQRlcwLXRMaFFKaTJjYUE2VUlpbTFtc3JNbDg0czlua3pEdnltdDN3OGpINVdqbkYxaE01Z3RPaUlMdGZRZnIyQVFtMFZXUUxSQkdVR08yS2pKUHJKWVlFS3MzQVNzV2lpVlZad1h0MlB2NnZTdVFsaXU1WF9tSDZLcmtNdXF3WTFyaldDdGRWY2dUeXpLU1pUNEMxRnBGUk5iYXpDYXlaUlE2aU9TMnItcXZKREE?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "【FIFAワールドカップ2026】決勝トーナメント 日本時間でのキックオフ時間・対戦カード・放送/配信・会場一覧",
-      "source": "DAZN",
-      "published_at": "2026-07-07T21:06:34+00:00",
-      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxOTlpMb084MDFWVE9ocEdHaE03R2VQd1V6ZDVjSFk4enJha2gwMzNnRlcxRlFPUWxudTgzQWFQUmg0ZHFRdmpuY2h4RllvSlIzUWppeExEUk1lTHdIWWYzQ1lIRnZqdm9heUt4V2lkSks3Zl9KOHZSdW9KaHplME5lMkxmMjVESnQ2akdkQmhPbzliN2ZoT21pY25CTm9QbkpqTDYtOTFHOTZmcDcwWlhLZmZQZjhCY1c1OE5SR3IwYWhra0Q3QlgxVktRTDZfVi1iNk0zeWR4WEpjSlVvZlUtdjBFYzhGRllpYWFxZ3ZIeVlma01rbVcyTExaSTgxeWVTd19HTVlR?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "【写真・78枚目】【写真ギャラリー】2026.7.6 FIFAワールドカップ2026 決勝トーナメント2回戦（ラウンド16） ポルトガル代表 0－1 スペイン代表",
-      "source": "サッカーキング",
-      "published_at": "2026-07-07T21:06:29+00:00",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeE1XWUhyQURMVFdQYUtLcUVueXRwU0V1bFVvazNobmc2VzFEcGptSmZLdkNMWjFQcm9mR2RTb3ZYNDdRLVBqWi0yQ3JuM2NOYkdjY3RMdVNGQ2gtZXpCLWN5cURIZ1hxS09rc2M0aXo1QkgzZmlWenB1Z1daVGVWZUtTVmN2OEszc05nYVJMLTJXcDZzMU5EU29sLUw5RC1PY0dQQ0ZWV2lYbWZnNGpDOTNYYzduNVNka0pTdjJhMk81NFdrNVFv?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "エジプト代表監督、アルゼンチン戦での“疑惑”の判定に怒り「不公平」 審判の判断に不満爆発「マーケティング、メッシを残すため」",
+      "title": "W杯ベスト8が出揃う！ 優勝候補フランス代表はモロッコと激突 スペインvsベルギーなど注目カード並ぶ",
       "source": "フットボールチャンネル",
-      "published_at": "2026-07-07T21:05:46+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1MLVRaRVhvVXltOGtTME9wOXJITGktYlYzNFNvM3N1Zm1ZNHN5cnlyOGpRSWt1Wkx2enNNSHpZU1p2Y09MYzVpNWVKMnhJSk5Ja0VhbzlmbUxpNzJXQndabmNqaw?oc=5",
+      "published_at": "2026-07-07T22:54:37+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1rbm9oblMyeXFXbk5FUUhva3AxYy1ZR05hX2xBZ1RlNlFHVEVLOWZKYXI2NS1sOGNtd2FsNWJrUG05V0MxQkxnTm1KV25aeVh5WlR5Szh1MFduS3pXeElIS1JNdw?oc=5",
       "lang": "ja",
       "image": null
     },
     {
-      "title": "毎小ニュース：スポーツ サッカーワールドカップ2026 退場選手、処分猶予で出場",
-      "source": "毎日新聞",
-      "published_at": "2026-07-07T21:04:01+00:00",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5QakU5czQ1dmpNUGptRlZ1VlRmcEQ2eU1KWGtJSTZGZGxVZnhURDR2QlNKTFJrM0RTOTR0UnpIQlItYUJ4NEhjRVFHX0ptdElscnRneVZ6Q3AtUE1oalNNZGFvcEtfTU1CSFVfS0p0bTBIdw?oc=5",
-      "lang": "ja",
-      "image": "https://cdn.mainichi.jp/vol1/2021/02/20/20210220hpr00m070001000q/0c10.jpg?1"
-    },
-    {
-      "title": "次の主役は誰？ 日本代表、4年後に期待したい若き逸材10人【FW編】サッカー日本代表の歴史を繋ぐのは？",
-      "source": "フットボールチャンネル",
-      "published_at": "2026-07-07T21:00:40+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1GR195dlNhbjE0eXlNMmdsa1FoSHFqa2czTHRnVU9mclVLd2VxblhhdWtNby10V1czRzl5VWl0NnFNb0NOVVJ4czZ2QUM4ZGlBc2ZVcjQ4VXlQNE5aZEtZUEpyRQ?oc=5",
-      "lang": "ja",
-      "image": "https://img-footballchannel.com/wordpress/assets/2026/07/20260708_FOCUS_getty.jpg"
-    },
-    {
-      "title": "2026/7/8【三山春秋】熱戦が続くサッカーのワールドカップ…",
-      "source": "上毛新聞電子版",
-      "published_at": "2026-07-07T21:00:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE02dDhIYVkxNjVVQUtwUjZqbzMxMXlGOFZhd3BzU1BLYUdFWV9uZVQ5WGxfaG4wdnJyMjF2dkZiOTJCc2lNM3lPTTNBWjhnWUJTVVZqQlMwZjU?oc=5",
-      "lang": "ja",
-      "image": "https://jomo.ismcdn.jp/mwimgs/1/3/-/img_1321409c2755a5c55a340098bca2bdc9705609.png"
-    },
-    {
-      "title": "【試合速報】2回戦 スイス vs コロンビア｜7月8日（水）5:00｜FIFAワールドカップ（サッカーW杯）2026 北中米大会",
-      "source": "tv-tokyo.co.jp",
-      "published_at": "2026-07-07T20:59:48+00:00",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBfcGYtd1J6OERTNWRGYWs1R2RsRzlmNkc3VlRXWkJJdWVNdk9sZHlMaHhNbjRDM1VLWm0wRVdHWFBPdmtKdElLYWNNazNjMjZtZmI5N3RlbGZjb21RTlI3VUlFYTFOX1ZLVHpuTFpyTQ?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "アルゼンチン代表が劇的逆転も“疑惑の判定”で物議 エジプト紙は怒り「疑わしいフランス人審判コンビ」「不公平な判定」",
+      "title": "スイスが16強の壁突破、72年ぶりのW杯準々決勝進出！ コロンビアとのPK戦突入の激闘を制す（サッカーキング）",
       "source": "Yahoo!ニュース",
-      "published_at": "2026-07-07T20:52:49+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE43ekR6RGdGRFQ0OC1ZYlhvOGFneWJkaU4zeEE0NHdiVnhpMzBrbl9HLWJ5YXZCeE0tem9KNHJzbjBYWXMxdllZN0hVT2c0QzdpMWIxNFRyWG5kbnhNWGNjQW5VYzFLWEdVcF8zVHNRdlZ1TGROTFdWODRfUVlsMlU?oc=5",
+      "published_at": "2026-07-07T22:53:37+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBPQ2VORF9SWTYxQTA3d1dGU3J6YUNILXU0aENRcjBsSzBUcHVhbDZmSGNWd1E0M3dPeHJweGpRVjROd1pBaWJWWEdMNXJuaV8zWTNNcEtBOU0yYUtNMWtwS2ZMT3BDVXhEc0JKNDZwaUJNZHA5NnBiVWIzRFEtekk?oc=5",
       "lang": "ja",
       "image": null
     },
     {
-      "title": "準決勝 | FIFAワールドカップ2026",
-      "source": "web.nhk",
-      "published_at": "2026-07-07T20:21:20+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBHXzAtX2J4S0MwUTZVNnNmSDhhbFN0NzNvTmtmUXNlTTktaHFLQVN2c3YtNXQwc0JwNElvQ1duRkVzbVBGSk9FQk5QbFNuRDBxdHItZVkwMXprajdpdkY4WC10OW0xakREc05GNkZR?oc=5",
-      "lang": "ja",
-      "image": "https://imgu.web.nhk/static/assets/images/tvseries/ts/2282GX5GGP/2282GX5GGP-eyecatch_04e1d0ff07079328b31535491b333ee1.png"
-    },
-    {
-      "title": "【サッカーワールドカップ】アルゼンチンが逆転勝ちで８強入り",
-      "source": "日本経済新聞",
-      "published_at": "2026-07-07T20:12:51+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1DU2R2M1M4bi1QVHJfQnVNcUYxc05pclM3T2tSMXVwQzN6ZWVoVDBva28xOS05bWszTTBwUURyUXJyS2dNRHVPN1dkWXowN3dtYkZESVo0N25oQ2xBSnl3dFNKRERXOXgzd2tYRw?oc=5",
-      "lang": "ja",
-      "image": "https://article-image-ix.nikkei.com/https%3A%2F%2Fimgix-proxy.n8s.jp%2FDSXZQO3279191008072026000000-1.jpg?auto=compress&bg=FFFF&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.2&fp-y=0.37&h=630&w=1200&s=603e9dd4da78fcf47e8bdd2b73edeb56"
-    },
-    {
-      "title": "アルゼンチン、２点差逆転 Ｗ杯サッカー：時事ドットコム",
-      "source": "時事ドットコム",
-      "published_at": "2026-07-07T20:00:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE04OWFqV2J1cktxWjNWVzd6dTB5ejNHUmNjVWJGalUxcThiY1VhaE1Wb1Nfd1JVX2hxNWNrblJYclVJbXpHMDhRcVpLR1E5V1E2S1J2Wnl1ajZEZE5DdmFUdlVtRQ?oc=5",
+      "title": "W杯８強出そろう 欧州６、南米１、アフリカ１ 北中米開催で南米勢は02年日韓大会以来の少なさ",
+      "source": "スポーツブル",
+      "published_at": "2026-07-07T22:51:14+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBRTlMzTmFCU2c1dUVZSy1vNEFCVnNjMXh3VGVGeDBvWjFHcTN4YWhkU21vVURqQkF2SE85TlhOWWp0QUl1czBn?oc=5",
       "lang": "ja",
       "image": null
-    },
-    {
-      "title": "ワールドカップサッカー スイス対コロンビア ライブスコア…ラウンド16",
-      "source": "読売新聞",
-      "published_at": "2026-07-07T19:30:11+00:00",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1Rc01hMU1tMk9INlhzNFM5TlZCT3I2WHFnVDd3OGNFVjBoVEljckhOQ0RQT18zeW50cExvUmo0aGo4bWV1ZHYwV2RSMzRKWTlqZE5UdVdDd0RiODI1QUZ2cmxCdWdhejVXdnBlMUs4dmdaNTZZc081cnBCcw?oc=5",
-      "lang": "ja",
-      "image": "https://www.yomiuri.co.jp/media/2026/06/wc2026-og-live-free.jpg?type=ogpw"
     }
   ]
 }
