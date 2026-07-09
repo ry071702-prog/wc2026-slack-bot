@@ -581,10 +581,10 @@
     "final": true
   },
   "537383": {
-    "home": 0,
+    "home": 1,
     "draw": 0,
     "away": 0,
-    "total": 0,
-    "final": false
+    "total": 1,
+    "final": true
   }
 }
