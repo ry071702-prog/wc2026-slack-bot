@@ -53,6 +53,19 @@ jobs:
           # GITHUB_TOKENによるpushはpages.ymlを自動起動しないため明示的にdispatchする。
           # dispatch は副作用で、GitHub API が一時的に HTTP 500 を返すことがあるため
           # 失敗しても squads ジョブ (データ commit/push は成功済み) は落とさない。
+          #
+          # in-flight ガード (2026-07-12 追加)
+          # pages を無条件 dispatch すると queue が捌けず、キャンセルされた run が
+          # github-pages 環境に waiting のデプロイを残して環境をロックする
+          # (2026-07-09〜07-12 に実際に発生しサイトが3日間更新停止した)
+          # 復旧手順: docs/teardown.md「Pages が詰まったときの復旧」
+          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/pages.yml/runs?per_page=20" \
+            > pages_runs.json || echo '{"workflow_runs":[]}' > pages_runs.json
+          active=$(jq '[.workflow_runs[] | select(.status != "completed")] | length' pages_runs.json)
+          if [ "${active:-0}" -gt 0 ]; then
+            echo "pages already in flight (${active} run(s)); skip dispatch"
+            exit 0
+          fi
           gh workflow run pages.yml || echo "::warning::pages dispatch failed (non-fatal); next run will retry"
         env:
           GH_TOKEN: ${{ github.token }}
