@@ -2,23 +2,30 @@
 <!-- statusline / session-start / /board がこのファイルを読みます。自由に編集してOK。 -->
 
 ## 状態
-進行中 (決勝T本番中・撤収準備)
+進行中 (決勝T本番中・**撤収の用意は完了  実行は 7/20 以降**)
 
 ## いま
 決勝トーナメント本番中 (決勝 = 7/20 04:00 JST、3位決定戦 = 7/19 06:00 JST)  日本は R32 敗退済み (6/29 Brazil 2-1 Japan) のため日本戦演出・スタメン自動投稿はもう発火しない
-Actions の通知系 (notify / digest / enrich) は直近まで全 run success で、Slack 投稿・state コミットとも正常
-**ただし GitHub Pages のデプロイが 2026-07-09 12:23 UTC から停止している** (特設サイトが3日分古い)  原因は特定済み・再発防止コードは投入済み・復旧は手動オペ待ち (下記)
+Actions は全系統 (notify / digest / enrich / pages) が正常稼働に復帰  Pages の3日間停止 (7/09〜7/12) は復旧済みで、サイトも最新に追いついている
+**撤収は「用意だけ」完了した状態**  ワークフローはまだ1本も止めていない (大会運用中のため意図的)  実行は 7/20 の決勝後
 
 ## 次にやること
-- [ ] **[要オペ・最優先] Pages 詰まりの復旧** — `github-pages` 環境に `waiting` のまま残ったデプロイ (id=5376495428 / 2026-07-09T13:08:56Z) が環境をロックし、以後の pages run が全て pending → cancelled  手順は `docs/teardown.md` の「4. Pages が詰まったときの復旧」  復旧しないと決勝までサイトが古いままになる
-- [ ] **[要確認] 外部ディスパッチャの特定** — notify.yml が cron とは別に **5分毎に workflow_dispatch されている** (actor=ry071702-prog)  repo 内・launchd・crontab に該当なし  撤収時に止める必要あり (`docs/teardown.md` の 5)
-- [ ] 7/20 の決勝後に撤収 — `bash scripts/teardown.sh --apply` (手順・チェックリストは `docs/teardown.md`)
+- [ ] **[期限 7/20 決勝後] 撤収を実行する** — `docs/teardown.md` の「1. 7/20 当日にやること」を上から順に実行するだけ  中核は `bash scripts/teardown.sh --apply` (dry-run で確認 → apply → 自動検証で `OK` が出れば完了)
+- [ ] **[撤収に必須] 外部ディスパッチャの特定と停止** — notify.yml が cron とは別に **5分毎に workflow_dispatch されている** (actor=ry071702-prog)  repo 内・launchd・crontab のいずれにも該当なし  **PAT の「最終使用日時が数分前」のトークンを探して revoke するのが最短** (`docs/teardown.md` の 4)
+- [ ] **[撤収に必須] Slack Bot Token の無効化** — workflow を誤って再有効化しても投稿できなくする第二の防壁  Slack App のアーカイブ一発が最短 (`docs/teardown.md` の 5)
 - [ ] 7/20 以降の内定者イベントbot (`~/内定者イベントbot`) への転用方針を決める (材料は下記「転用の材料」)
 
+### 止め忘れると何が起きるか (要点)
+cron の月指定が `6,7` で「年」を指定できないため、**放置すると 2027年6〜7月に再発火する**
+期間ガードが守るのは **Slack 投稿 (notify / digest / announce) だけ**  誤投稿は起きないが、
+**notify の "Hourly enrich dispatch" ステップは期間ガードの外**にあり、notify を止めないと **enrich (ガード無し) が毎時走り続ける** → YouTube クォータ消費 / Slack 読み取り / `data/` へのゴミコミット / pages 再デプロイ
+→ 詳細な影響表は `docs/teardown.md` の 2
+
 ## 完了 (直近)
-- [x] Actions 稼働実態の確認 — notify (5分毎) / digest (日次) / enrich (毎時) は直近 100 run で失敗ゼロ  pages のみ全滅 (2026-07-12)
-- [x] Pages デプロイ停止の原因特定 + 再発防止 — notify.yml の "Trigger site rebuild" に in-flight ガードを追加  実行中/待機中の pages run がある間は dispatch せず、20分以上 pending なら `::warning::` を出す (2026-07-12)
-- [x] 撤収手順の明文化 — `docs/teardown.md` + `scripts/teardown.sh` (dry-run 既定・`--apply` で `gh workflow disable`) を追加 (2026-07-12)
+- [x] **撤収の用意を完成** (2026-07-12) — `scripts/teardown.sh` を GitHub 上の実在 workflow と突き合わせる方式に改修 (リストに無い workflow は警告した上で安全側に倒して停止対象に含める / `--apply` 後に自動検証して止め残しがあれば exit 1 / bash 3.2 互換)  `docs/teardown.md` に「7/20 当日のチェックリスト」「workflow 別の止め忘れ影響」「外部ディスパッチャの追跡手順」「Secrets の判断材料」を追加  dry-run 検証済み (10 workflow 全数カバー確認)
+- [x] Pages 詰まりの復旧 — `github-pages` 環境に `waiting` で残ったデプロイを inactive 化して環境ロックを解除  直近の pages run は全 success でサイトも最新 (2026-07-12)
+- [x] Pages デプロイ停止の原因特定 + 再発防止 — notify / enrich / squads の pages dispatch すべてに in-flight ガードを追加  concurrency group も `pages` → `pages-deploy` に変更して幽霊ロックから脱出 (2026-07-12)
+- [x] Actions 稼働実態の確認 — notify (5分毎) / digest (日次) / enrich (毎時) は直近 100 run で失敗ゼロ (2026-07-12)
 - [x] 決勝T表示の実データ検証 — 組順位シード (12組48チーム)・勝ち上がり文言・FIFAランク・勝率予想バーが実データで正しいことを確認  未確定カード (TBD) はバー非表示で degrade する (2026-07-12、343テスト pass)
 - [x] 決勝T向けに結果通知へ勝ち上がり文言・FIFAランク・組順位を付与し、日本突破の特別演出を追加 (2026-06-23)
 - [x] サイトの試合カードに FIFAランク差ベースの勝率予想バーを表示、rankings.json を出力
