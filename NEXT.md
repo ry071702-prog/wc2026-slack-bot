@@ -10,9 +10,9 @@ Actions は全系統 (notify / digest / enrich / pages) が正常稼働に復帰
 **撤収は「用意だけ」完了した状態**  ワークフローはまだ1本も止めていない (大会運用中のため意図的)  実行は 7/20 の決勝後
 
 ## 次にやること
-- [ ] **[期限 7/20 決勝後] 撤収を実行する** — `docs/teardown.md` の「1. 7/20 当日にやること」を上から順に実行するだけ  中核は `bash scripts/teardown.sh --apply` (dry-run で確認 → apply → 自動検証で `OK` が出れば完了)
-- [ ] **[撤収に必須] 外部ディスパッチャの特定と停止** — notify.yml が cron とは別に **5分毎に workflow_dispatch されている** (actor=ry071702-prog)  repo 内・launchd・crontab のいずれにも該当なし  **PAT の「最終使用日時が数分前」のトークンを探して revoke するのが最短** (`docs/teardown.md` の 4)
-- [ ] **[撤収に必須] Slack Bot Token の無効化** — workflow を誤って再有効化しても投稿できなくする第二の防壁  Slack App のアーカイブ一発が最短 (`docs/teardown.md` の 5)
+- [ ] **[期限 7/20 決勝後] 撤収を実行する** — `docs/teardown.md` の「1. 7/20 当日にやること」を上から順に実行するだけ  中核は `bash scripts/teardown.sh --apply` (dry-run で確認 → apply → 自動検証で `OK` が出れば完了) #急ぎ
+- [ ] **[撤収に必須] 外部ディスパッチャの特定と停止** — notify.yml が cron とは別に **5分毎に workflow_dispatch されている** (actor=ry071702-prog)  repo 内・launchd・crontab のいずれにも該当なし  **PAT の「最終使用日時が数分前」のトークンを探して revoke するのが最短** (`docs/teardown.md` の 4) #急ぎ
+- [ ] **[撤収に必須] Slack Bot Token の無効化** — workflow を誤って再有効化しても投稿できなくする第二の防壁  Slack App のアーカイブ一発が最短 (`docs/teardown.md` の 5) #急ぎ
 - [ ] 7/20 以降の内定者イベントbot (`~/内定者イベントbot`) への転用方針を決める (材料は下記「転用の材料」)
 
 ### 止め忘れると何が起きるか (要点)
