@@ -20,7 +20,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  # 2026-07-12: 旧グループ名 "pages" が GitHub 側で幽霊ロックされ、
+  # 唯一の run でもジョブが起動せず pending のまま詰まる状態に陥った
+  # (デプロイ着手後にキャンセルされた run がグループを掴んだまま解放されなかった)
+  # グループ名を変えて詰まったグループから脱出する
+  group: pages-deploy
   # 進行中の Pages デプロイをキャンセルせず完了させる (キャンセルすると
   # 後続が "in progress deployment" HTTP 400 で落ちて失敗通知が出るため)
   cancel-in-progress: false
