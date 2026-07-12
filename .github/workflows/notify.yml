@@ -56,25 +56,48 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if grep -qE "live_now=[1-9]|result=[1-9]" notify.log; then
-            # pages dispatch は副作用。GitHub API が一時的に HTTP 500 を返すことが
-            # あるため数回リトライし、最終的に失敗しても notify ジョブは落とさない
-            # (通知本体は成功しているため。次回の実行で再度dispatchされる)。
-            dispatched=0
-            for attempt in 1 2 3; do
-              if gh workflow run pages.yml; then
-                echo "pages rebuild dispatched (live/finished matches detected, attempt ${attempt})"
-                dispatched=1
-                break
-              fi
-              echo "pages dispatch attempt ${attempt} failed; retrying in 5s..."
-              sleep 5
-            done
-            if [ "$dispatched" -eq 0 ]; then
-              echo "::warning::pages rebuild dispatch failed after retries (non-fatal); next run will retry"
-            fi
-          else
+          if ! grep -qE "live_now=[1-9]|result=[1-9]" notify.log; then
             echo "no live matches; skip rebuild"
+            exit 0
+          fi
+
+          # in-flight ガード (2026-07-12 追加)
+          # pages は 1回 4〜5分かかる  無条件に dispatch すると queue が捌けず、
+          # 後から来た run が古い pending run をキャンセルし続ける
+          # デプロイ着手後にキャンセルされると github-pages 環境に "waiting" の
+          # デプロイが残って環境がロックされ、以後すべての pages run が pending で詰まる
+          # (2026-07-09〜07-12 に実際に発生し、サイトが3日間更新停止した)
+          # → 実行中/待機中の pages run がある間は dispatch しない
+          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/pages.yml/runs?per_page=20" \
+            > pages_runs.json || echo '{"workflow_runs":[]}' > pages_runs.json
+          active=$(jq '[.workflow_runs[] | select(.status != "completed")] | length' pages_runs.json)
+          if [ "${active:-0}" -gt 0 ]; then
+            since=$(date -u -d '20 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
+            stuck=$(jq --arg since "$since" \
+              '[.workflow_runs[] | select(.status != "completed") | select(.created_at < $since)] | length' \
+              pages_runs.json)
+            if [ "${stuck:-0}" -gt 0 ]; then
+              echo "::warning::pages run が20分以上 pending です (github-pages 環境に waiting のデプロイが残っている可能性)  復旧手順: docs/teardown.md の「Pages が詰まったときの復旧」"
+            fi
+            echo "pages already in flight (${active} run(s)); skip dispatch"
+            exit 0
+          fi
+
+          # pages dispatch は副作用。GitHub API が一時的に HTTP 500 を返すことが
+          # あるため数回リトライし、最終的に失敗しても notify ジョブは落とさない
+          # (通知本体は成功しているため。次回の実行で再度dispatchされる)。
+          dispatched=0
+          for attempt in 1 2 3; do
+            if gh workflow run pages.yml; then
+              echo "pages rebuild dispatched (live/finished matches detected, attempt ${attempt})"
+              dispatched=1
+              break
+            fi
+            echo "pages dispatch attempt ${attempt} failed; retrying in 5s..."
+            sleep 5
+          done
+          if [ "$dispatched" -eq 0 ]; then
+            echo "::warning::pages rebuild dispatch failed after retries (non-fatal); next run will retry"
           fi
 
       # enrich (ハイライト/ニュース/得点詳細) のGitHub cronは間引かれるため、
