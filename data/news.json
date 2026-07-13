@@ -1,19 +1,67 @@
 {
-  "generated_at": "2026-07-13T00:01:41+00:00",
+  "generated_at": "2026-07-13T01:01:34+00:00",
   "articles": [
+    {
+      "title": "FIFA's Four Best Teams Will Make Star-Studded World Cup Semis A Treat For Fans",
+      "source": "FOX Sports",
+      "published_at": "2026-07-13T00:53:10+00:00",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbFZQb1czeXEwYUF6MWlYSDVBY25xcHV4b09jYi1EdkFqOUtPSDU4M0pEN3NsNkE4aDUwSEJDQmxRajVRRV9aNGZjWExBaE5vdVBoYnJpNFFPVlJKX3VJRlQxMmdKTTlCTFVCZDdUNExRSTVvcVZsdk8tRThXT0wtc3lybHFueHhvVmlzT2RwYlZ4dVZiYnBIYUdmdFRLZV9SYk4tcTZnNkY3LVFvYXp1X2dB0gGyAUFVX3lxTFBsRTQwTlpBdmJBVlZLT1h5Sm5nTHFUZTkwNmRmSi1weFFmUFdIcDRXSWhwTndGd1REWmRPOFhBYTg4dWF2d3ZBeDV3MTJiZTc5MzZzZGhSTUZkLTJ0WEdobW9rcVRSeTZ6a243NmRpUnI3YlZraERYck9vVERNOEg3YmR1YjgzUTVYcWhRZkNYaWhsTTFXeTVwdTFkblFWRFVWMDkyRzRWRGtienRfYVFqOEE?oc=5",
+      "lang": "en",
+      "image": "https://a57.foxsports.com/statics.foxsports.com/www.foxsports.com/content/uploads/2026/07/1408/814/artboard-1-77.jpg?ve=1&tl=1"
+    },
+    {
+      "title": "2026 World Cup: FIFA releases last-minute tickets for the final, but the dream will not be cheap",
+      "source": "MARCA",
+      "published_at": "2026-07-13T00:13:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNNzBoUTYtVVg1VDhVdm5CT1hPR0FNXzRpSktsZ0xkMWtENms4YWRRWlk4eDA1TFFyc0VFaEpWYm8tSnZJRl8zSFdFZFE4TW1qMTNFdnpQcFNvdHhNclQxRHJ2ZW1yTTBiMnJUTnJjOHE2b0dkSmo1ZnBNNmZXS0ZLV1VTd3dHWFJjbGFqenFCRGJYRXRaVWRuMGs5aDN0aUgxN0pDOXF4bThQRWJPZ3kyRlE4MWt1aHZGWFN2Y1NHTURpV09XZlB3T2dGT093MWZrdFBqdGVCNUFfQ1hlYWfSAd4BQVVfeXFMTjh4MjhqYjBldkVxQ0JiNTZVdWpMNHBHN19ZcUU5cGd2YWdFWWtpM0VNWkhCUldWdERwWDdNXzI2Z19IT19RcUZ4M3BxUktJMFZ5X1M1anN4bzdudFc2ZG5QX1E0MHY3TUNsdU9SWmIxd05KNzZpYkpsbTVQaHN0Mi15TVl5YUVId0YxdGVOQXZnZzZPazBZNTU5a0ZMRksxd1lTdGRwdFU0MTRNVmt0TjFSZUVBZ1dzMTdXWHN3RVBObGg5S091VjNzcVdTMW9LcUphQkt3d3BEZFM2dUpn?oc=5",
+      "lang": "en",
+      "image": "https://e00-xlk-ue-marca-en.uecdn.es/files/article_main_microformat/uploads/2026/07/13/6a542d27b4740.jpeg"
+    },
+    {
+      "title": "The final remaining World Cup semifinal teams as ranked by FIFA",
+      "source": "Yahoo Sports",
+      "published_at": "2026-07-13T00:00:17+00:00",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNenRpaF9FY0ljWFpEZl9UeDI1YV9aa1BCNU0tTkRDOUNFSFMtUk1hWjlHRzltd1JWRGxkWU9PZ0dLdHVGb3FYbnV6bVhRemJLMG05ZmdYQkRBX24xblhtWXJRel9TZWhpR1F5N1F5WXlFNktpWHdvSFp4ekUwbWhodkNsc3lNd2JlWEVuZg?oc=5",
+      "lang": "en",
+      "image": "https://s.yimg.com/ny/api/res/1.2/5846a.v.0C89D0hXUn2gEA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/usa_today_sports_articles_558/4f1589d0a1c573b096be5a25f7321479"
+    },
+    {
+      "title": "Lone FIFA official made decision to suspend Folarin Balogun’s controversial World Cup red card",
+      "source": "New York Post",
+      "published_at": "2026-07-13T00:00:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQS1dHMmIwNDhENzlmQXN4U1dUQ2pGS2lKekhzbEdhbWYweEk3S0MzRnJHTXFKWW81Tmh1cGVBb09ZcVJUNGRlbUMtWmtKTDdWR3NYUmVUXzQ3ZEI1VEpFcWJ6QnRCUDlobVZtYUxQdjFnc3B3Sl9GRHV0emEtMDBkVTBLN041UUQ4ZUhwVGFHNzNmTnVSR2hYVzhhaEJWTWRnWEN2cE44clhqRk5Kbi1neUtJUEdXTjdC?oc=5",
+      "lang": "en",
+      "image": "https://nypost.com/wp-content/uploads/sites/2/2026/07/newspress-collage-66wsy4kiv-1783900719437.jpg?quality=75&strip=all&1783886392&w=1200"
+    },
+    {
+      "title": "The final remaining World Cup semifinal teams as ranked by FIFA",
+      "source": "Yahoo Sports UK",
+      "published_at": "2026-07-13T00:00:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQZ0xZeUVuNktmTWl4TUdoUTRQQ2lVOEV5WTRlRld5Zmc0S0Z1akFITDJaZmVpc0FzbzBra1RRNHQ1VFVtTm1TekNJcjBCNWZ2dkhIUTRkcThQZ3dpdjZNRHZEQUdyOEhtZHJ0QkotSXhjVk00X08zR0RRSHJqQkthTklURnFmbklzUHd3?oc=5",
+      "lang": "en",
+      "image": "https://s.yimg.com/ny/api/res/1.2/5846a.v.0C89D0hXUn2gEA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/usa_today_sports_articles_558/4f1589d0a1c573b096be5a25f7321479"
+    },
+    {
+      "title": "FIFA World Cup 2026 – How to watch on TV and BBC iPlayer and follow across Radio, BBC Sounds and BBC Sport online",
+      "source": "BBC",
+      "published_at": "2026-07-12T23:56:54+00:00",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOYU5iNmNRLXVXcUtKWHdNUWJYNlpUaVZVWURjWlQyczFQXzAwM2ExUVpwUW40Q3VOUkx4VnZKM2NUTnJpb0hCQ1M4bVVoSlFmUDl3Nkd3Q2JxSHM4eFV5Uno4TzNfMTlNRDNWSDNpd3puOU5wWW5mTnVkQTdyVEpRcGxoOXBQMWl1a1pqRQ?oc=5",
+      "lang": "en",
+      "image": "https://ichef.bbci.co.uk/images/ic/1920x1080/p0mls63d.jpg"
+    },
+    {
+      "title": "Argentina, England set for semifinal match as Kansas City dismantles World Cup infrastructure",
+      "source": "KSHB 41 Kansas City",
+      "published_at": "2026-07-12T23:52:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQU1hGWlNXU2FjV1RQTFh6c0Y3V1NSWHpqa1M3bTlnVUJseUVGR1F4d3JHOFpndUFqRmZyaXRmY0Q2VkFYTlZkb19kSWxjMm1kb1plSXlPcDliZFBlaXJXRldzZUVzR2pGdm1Lc1RzTVJyOXlyTkFPa1VDbXlqYUI0SWdweUV5Wk56MVlEV3otbzJkMmZzQkJ6blFpMTdaSHV4NHZCM2lWYmxEMjFvcElFUEFDYkNMQVM1dGh4YnZ1UXBGNFNuVUZRc2hn?oc=5",
+      "lang": "en",
+      "image": "https://ewscripps.brightspotcdn.com/dims4/default/0aec384/2147483647/strip/true/crop/509x267+0+10/resize/1200x630!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2Fa3%2Fe0%2Fc15f5500445db4847bd163d8895b%2Fscreenshot-2026-07-12-at-5-59-06-pm.png"
+    },
     {
       "title": "What to know about new rules and technology behind the World Cup's most contentious calls",
       "source": "PBS",
       "published_at": "2026-07-12T23:14:18+00:00",
       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNQ1N3bnFDWF81MFBBTmRFbjQ0VzFKX1BZaG5Pd2xUU2ZBVEg0Q1A1Y2ViSVFEQXNKNElLeDEtUnBubTJxT3dWYmY3enFrV1dVMXVySkNzRjFBYUFJbl9OMWtZSFFOcDZ5aDU2TlN5X3QtWDlZVHNPTkdlTU1Cc2cydHd1S0t1LWIyT2s3MXpQd3FZVml3RWNxdFY5bFN1R084UUlndFhVaGUxdFNpbGhWM1RGMTliU1YtUEV0RDhxUXPSAcYBQVVfeXFMTTd1cWx0Q2x3LTk5dXZ3UlJ3b0VlQ0ZzTHVQd2ZZOEhyTmNYVVllNTFLT2RoZFBoc19qUldtS2RUVnh1NDI5eHp1Tk5HVW1vOWRZZW45TUVLakdzdXd6b3ltTzg4R3VLZ3JsNGg3dmQzVURXaWEteFdhQ1RFZjR3bmZqR2VaaE1mWlVGWFJOaXd2YTVJcl9XVFNBYU1SeWlnODZOUDRqem9CNnFiR0FEbk1kSVFZWlFVbldiYndvd2Q2Ym40cTNB?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "At World Cup Ticket Prices, Even Messi Can’t Fill a Stadium",
-      "source": "The New York Times",
-      "published_at": "2026-07-12T22:31:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxORE5yS0RJd0RPSW5uU1ZLRzRJODllQm9Ccm5wRVc2TUNEOFZmeEdOdzlxNGRWaG85SmpHenRvQjZQWWtoUHZMLVc2VHNYbmo0OFdCdnJZNmNXYkJNUUEyWTVOcVpJdDVOajZwQkRVUm1wd202S2prdWxzbVZLa1BUNEpFamxNb3hrWGJ6NFZLVlRXVmRS?oc=5",
       "lang": "en",
       "image": null
     },
@@ -42,20 +90,12 @@
       "image": null
     },
     {
-      "title": "[LIVE^FOOTBALL]FREE]* Zverev vs Sinner 𝐋𝐈𝐕𝐄 Ｆｒｅｅ Ｓｔｒｅａｍ FIFA World Cup July 11, 2026",
-      "source": "Business and Investment Development Agency - CzechInvest",
-      "published_at": "2026-07-12T21:59:47+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitANBVV95cUxQUU1qSzJsdmpuN2pOSE0yRW9LdFAwaVRpRTA0X3QtRHdwNTJYQVlWMzk4N0UzNVNZVlZxbjhneEUtY0tDaHFwUndWQTZMSUIxejZ3N1NVckpwSTBuaDlJRl9pVHBoR3VGb1lQaS1GYlU0b1o2aE1VNFdXYXhJeXlYaE5tY1IyQ3ZlQlBXSWo3dDdwRUZWZmNxU2dqSVRHMHhaQ3NJM2tZTkJ1R3p4UW5wRHk2eTJaVlRIZER4cXBNUDNXNnhFNlB6c0N3MXFncHNyWlBDMkYzT2RoS2RwTTVwd2d0dF9fZHl4UlZJc3JYWkJhdWNiaVFzT2dDUm9UZmYtMEpZM0RuTW5XT0RlQ2tlX0dlcjBSZUdvcEZ3UHh4OHNIVjcyY1pZZ0V3S0ZuTnZla2xZUGYyZ0ZTQzYtVDlnTFpOVHBCUWdWWTkxUzlUd295Ym9WTmdfVjFwYzlFeU4zWVFHLXY5Wmd0X241SWJBbnBtRmNXUjYzeEFQeEx1cGZNYTBhZzBPYTFpSm5PTDYzbXVFbGJ3ZDhPVW9GVWcwQ0ZTX3BmWl9kcUN1WmctY21nTGRU?oc=5",
+      "title": "FIFA World Cup schedule today: Games, kickoff times, livestream info for July 11",
+      "source": "Mashable",
+      "published_at": "2026-07-12T21:42:04+00:00",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPTTZFbGpTNy1SZWMyN016SnhaY3V6ZU9ENVVzUGpPLW80WTFtZFpUY21iM1JWNGJYQW05alVUVHY4a3FOaHVZMlBNbTVaSVZIS1ljNnBUTTR3SHVVd3dJdHVQeU9xOW45QjJuZDlJWmNsMW0xQVJ4Z1RkVlBKa1FaX2FZclZ0MS1UdmlOcmEtM19EMEEzdVE?oc=5",
       "lang": "en",
       "image": null
-    },
-    {
-      "title": "FIFA World Cup 2026 – How to watch on TV and BBC iPlayer and follow across Radio, BBC Sounds and BBC Sport online",
-      "source": "BBC",
-      "published_at": "2026-07-12T21:59:10+00:00",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOYU5iNmNRLXVXcUtKWHdNUWJYNlpUaVZVWURjWlQyczFQXzAwM2ExUVpwUW40Q3VOUkx4VnZKM2NUTnJpb0hCQ1M4bVVoSlFmUDl3Nkd3Q2JxSHM4eFV5Uno4TzNfMTlNRDNWSDNpd3puOU5wWW5mTnVkQTdyVEpRcGxoOXBQMWl1a1pqRQ?oc=5",
-      "lang": "en",
-      "image": "https://ichef.bbci.co.uk/images/ic/1920x1080/p0mls63d.jpg"
     },
     {
       "title": "FIFA weighing expanding 2030 World Cup to 64 teams",
@@ -74,20 +114,20 @@
       "image": null
     },
     {
+      "title": "The Ohio State Of The World Cup? Each Semifinalist As A College Football Powerhouse",
+      "source": "FOX Sports",
+      "published_at": "2026-07-12T20:53:37+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPRGdFVER4cjFITDkyLUhvV2d5N29PYTM0a0VULTZGOFdaMmFaZnJKREkzUDBWWlpCVFF4bXZTRVUtSDZWUnlnaS03Nzg2WUl3RHlqaHZoZE56cXg4ZjZER2VDQkdpYTNQLVk0OFUwd2d3MnEtNVhFMkpVeF81Q05iWUg2bEJWeHk1cm40a2FLOUZPdlNRQWFPSTNUNmhlTmxDN2x0VFlPclRIQ0kzbGc2cDN5Y3VnQ0lXMFIxRUwzc1FQRjlrQmg5cDlCcw?oc=5",
+      "lang": "en",
+      "image": null
+    },
+    {
       "title": "Gianni Infantino says FIFA will examine possibility of 64-team World Cup",
       "source": "ESPN",
       "published_at": "2026-07-12T20:45:00+00:00",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOZm9mb0VrWGJ5cG1vcWlrbWZ0UkllcWZnaklPQjAwcGNBYjFKenFDcGVFbW5RV18wUEVKc09BMDZTblF2akh0NTNLWkp3UG14b3ktM21GZHNDRU13T2MzZmJaWFFMTWNCRl80MEh4cFBLaWZVMTdoM01YUlB5VEVKOXgwVndlYVNGNktMZ2JZRTJWdWZPWGlGQTlKOVpWT1Q0c3NDTl9PcUg?oc=5",
       "lang": "en",
       "image": null
-    },
-    {
-      "title": "England on collision course with Messi and Argentina in World Cup semi-final grudge match",
-      "source": "The Guardian",
-      "published_at": "2026-07-12T20:38:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNdHhFRUIzRUNMWHpkN25UN1FVR3AwVVhSLWxHdHZKNExHUjluWWU3R1RaR0NQbkc4Q2ZaV29ZQk5RQzhYX241aHBVX3duTmVJMU1DcmhSRlRVQ2owclR4MTZfSzhmZkxMZG9MeXJMX05ZLWo3V01aQi1QOUxBNjBDVXNtYkZ5cnpfdTZmOS1Mb0RTbF93aldHNXJOSUtsTDZTUjBqVHFMakFpSFZrZGVValZR?oc=5",
-      "lang": "en",
-      "image": "https://i.guim.co.uk/img/media/c817d50a550c927ce38c8f224d950b0dcb4ce876/387_0_3980_3185/master/3980.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9024b2163db3f6bf7fe7851af7c9c7e0"
     },
     {
       "title": "Diego Forlán Takes Charge of Uruguay After World Cup Disappointment",
@@ -102,30 +142,6 @@
       "source": "ESPN",
       "published_at": "2026-07-12T20:20:00+00:00",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQM2xoZlJCQ3lQNUcyMEdyY3lmdEtVS0NxcTUtV2MwNEdfNUtId3hNdnJuR0pwa1ZKcmlxUmJpRmQ5SGJ0ckR3NHBjcjJOWUppUWduWHVmSjNUVzJQMEZKTmd6UjdZSDUtVmkxa2F4QnVLYUYwdDF0WnktZDdmQmVnc3lTNmpFYmdaVmFXTTZLd2FtNlFVN0NQejI1czNqUTlHQnB0RG1pSVFWWndORmc?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "2026 FIFA World Cup Schedule: Bracket, matches, dates, locations, group tables, results, how to watch",
-      "source": "NBC Sports",
-      "published_at": "2026-07-12T20:15:15+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOOElrQXE0ZlEyU0hSNjZUQUdmTU5KUkdEc0FvN1ZQVWZsZTN3TzBVRGY3MGE4QU42SzVQVEpEZ2Ywdzhja2NzUG1sUWYzSXRyd0FYbGNreVdFZzlrWUZnX2wzRFJIRVB3d0hvMzFMbnEyVnQ1TFFObmlmVXpIQ1BabWEyYkl2ZmtmWVhjQ1Q1S0s3aWRkU2t4OEZtR3ZHbXltZGdERUFFM0J0MXVleDNkTVgwZllFUU1TaHV4TWlKTW83Zw?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "Bellingham's brilliance outweighs brief disagreement with Tuchel",
-      "source": "Reuters",
-      "published_at": "2026-07-12T20:10:23+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOQ3VTQlBJWnJBOXdLcldxOEFLcmRqWVdDS1E3c2w3eXFiVUhmQi02U25NeXdkalNPR0sySXZVVmt6UW10Y0VZT1F4Qm12MEI3N2diTktkZ2RtREY2NE1uRkE4anhabEZBd2lrV2pjVjZjX0lSUTVHQWpLNk1xY3Y2LU5NWTNLbVJCaUxTcTI2OTJoTlF5dlFOXzNnWGxNTWJMQThfSFZka1dvSDlzYkw3X1JrSQ?oc=5",
-      "lang": "en",
-      "image": null
-    },
-    {
-      "title": "Jude Bellingham the GOAT! Gary Lineker claims 2026 World Cup hero could be ‘England's greatest ever footballer’",
-      "source": "Goal.com",
-      "published_at": "2026-07-12T19:45:06+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNN1Mwd3I3ZElIdzFRcjdMa184VUtYY2hGNFJUS01Bay01LW5uMmg5SWlic3BaNWJBTUc4ZzhWcURxVVZNaThIZDJDMm44RGhSVVJteEFKazl4S0N6YWdSNE1nTV9oVWEwY0N3VFlIaDRaRmJkUTZ2emhtdkpRYkpudHNYWi1sYjdacktlUzlnT2doRFk1TXhDZTV1Z09uZDY1SlNxZ1g1UXQxLWd1M3p4VzFVMC1hU3BaZHlic3NwaUZMcWpVWm5wVXV3R0tpaC1jZmVheGJoMFpSbXFaSDJuVlk1bDF2Ukd0aVVtRWo3T2trcDg?oc=5",
       "lang": "en",
       "image": null
     },
@@ -146,20 +162,28 @@
       "image": null
     },
     {
-      "title": "FIFA's top four teams make World Cup semifinals for first time",
-      "source": "ESPN",
-      "published_at": "2026-07-12T19:34:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNeER1U1ZVaFdKeFlQQ181WUdzRzNEM1I1WjRFbl9abHlYY3JhWjdCc3NpYk1sblJnZm9XY2ZYMHBCc084WFg1dDZSRHF3X2pNUlJMcVctMzJ5M1lKa0NnRXVSNkFONDhHbWZVNXdSZ0M3dGtjZGh1QnFPTm1tbURETkdlQnJObTl2ZzZtaVV6cUI5aElCTEE?oc=5",
-      "lang": "en",
-      "image": null
+      "title": "W杯GL敗退のウルグアイ代表、フォルラン氏が暫定監督就任へ ビエルサ後任で“母国の英雄”招聘、U-20代表も兼任か",
+      "source": "フットボールチャンネル",
+      "published_at": "2026-07-13T00:38:46+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB6bzlqSTlHRnBoUFZmV2F1TVRDdndkRlQ4dndrV3RyelhMcUdTRE9xMnRud0RpZDIySWRzd2NySW1CNWhiYzJ4U3pfNmt6TXBRNDFrajI2N2laT25fN0dGUzdFZw?oc=5",
+      "lang": "ja",
+      "image": "https://img-footballchannel.com/wordpress/assets/2026/07/GettyImages-2250155686-1.jpg"
     },
     {
-      "title": "World Cup Expansion? FIFA President Gianni Infantino Says It Will Be 'Examined'",
-      "source": "FOX Sports",
-      "published_at": "2026-07-12T19:30:46+00:00",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPVzlFcTdPcE5kQUFNVzVaY2hKTjA3Vk1vZzVoTk9JM0tmYWliZ3gxTWxSOE5mUlhvcFNXSXNjcFVJa1RjWnBkTmM4ZGktaUw5UVlwT2tTUUNwcUtYV1lkMnhaT0dyU3pELTB4QURNTzRTZ09lbndHWTNKdjNiTkx3VEJfYVVuWEx5bElZcjVadExSd1d2Q1BFZWlHTFFlYktWdDB2WGs0VWJVdG9CRW9SUtIBsAFBVV95cUxNOHVvQV9KR016Wm40aXM2SzJFb0ZtWEt1c3JpYkNuX1dZUUpNVWR1aVE3enFqLVVWckRERVhBcS1XSEladnZ6eGlqR2xRa0FfNnQ1Z3FRX1U5T3UxTkN1dVNxX0Jpc0FsZXh2a21Qem9kYUlESUZrUnpEdFdteDlKdlhZTDkwQ1I4MUdHMng1cnl5eXExMnBpcjkzNUJENjhUbWpidXpJVzNWUDJlVHZnVA?oc=5",
-      "lang": "en",
-      "image": null
+      "title": "スーパーコンピューターの予測によると、2026年ワールドカップの準決勝進出前に優勝する確率はどれくらいだろうか？",
+      "source": "Vietnam.vn",
+      "published_at": "2026-07-13T00:36:44+00:00",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOZWY3NkpXVDFNZ2FjZDlUVW4wNXZ1UE0wNFNIUENBY0prOGRNcnZhRzRkYXh3S19QU3p2QlpZN2ZXWkMzdjNLcXZLaEpvanhsNHc3Qk1tUVN0WTVyaHRaYUFyNktnOUlSU2o4RHZfem1mNnFuTXUxa2x2RXVaVmtEeEhEV3h5RGpzRG9HNy11b0xZUkhmeTUwSUdEZw?oc=5",
+      "lang": "ja",
+      "image": "https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/07/13/1783902516436_du-doan-ty-le-vo-dich-world-cup-2026-theo-sieu-may-tinh-jpg.webp"
+    },
+    {
+      "title": "ネイマールがＷ杯敗退数日後、ベガス開催の国際ポーカー大会に出場 参加料１万ドル支払い",
+      "source": "日刊スポーツ",
+      "published_at": "2026-07-13T00:08:22+00:00",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE53TlMzTXdIcHdlaHRJTmhyU0pLOFFVNFhoZWVIa1pJQnVLMU5LTTg0aEE4bENUTmpiWGNnY01Dakl5ZW05WFMxcjlkOUNtSnh1WGh6MVFJS19QNU9kQmpiNkdkQUZTT19RR0sxUnpIdzJKUi0xMlM1U1FmUHhfSWs?oc=5",
+      "lang": "ja",
+      "image": "https://www.nikkansports.com/soccer/worldcup2026/news/img/202607130000116-w500_0.jpg"
     },
     {
       "title": "【サッカーワールドカップ】スイス初の4強ならず エンボロ退場で逆転機運しぼむ",
@@ -237,9 +261,9 @@
       "title": "ランク上位４チーム独占は初 Ｗ杯サッカー、１５日から準決勝",
       "source": "時事ドットコム",
       "published_at": "2026-07-12T21:35:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBLU2dmTnY0X3RwNGRDTkhQc1ZVbDRnd2FfSW1JVVFobDZibWhYdzN1eWZjOTFBcXVHdHBlWjRlUDkxMVZnZGRKMEY1ZXd3MWVLNUhVbjBfT3N2VlBpeldkbUtpUQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1Wek1kOUpXQ2U2ZVFqemRMbmwzYnJhWGQ3b2FLMm0wQ2NFNXRKQWx3d2I2R21JYWlveEp0Vnhuc09MY2xNU3dpUG1zOWlEX3NaLUtKeEhTRk9BOE5UeHVYTXd2TQ?oc=5",
       "lang": "ja",
-      "image": "https://www.jiji.com/news2/kiji_photos/202607/20260713ds43_o.jpg"
+      "image": null
     },
     {
       "title": "【サッカーW杯】佳境を迎える“得点王争い” メッシ＆エムバペが並ぶ イングランド勢が追いかける 怪物ハーランドの可能性は消滅",
@@ -296,30 +320,6 @@
       "url": "https://news.google.com/rss/articles/CBMi2ARBVV95cUxOTzQzVnRhYnhDOWVxNjRSOGpVbnRUT2pTX3ZPdjM0UEdEc0dNcURRak5HTVdjV09xR1czeGgyLWktNkp5Zm9xT0t1MjVFam5tY0NtWlZLMHFNLW5PYnJFb2JVYUlMNXVJWEFCTWYzM0RNc1JtSktEWC1palB5ZXRWTEZ1VGZ4akE1OEY2U1YtMEJWdXlCQW9NMThVaWxFNjhyb2t3QzNUSVJFbmF1NE04eUFrSHktZTg2eWMxZHBydGp6MllxblFzUFV2N3E3eHdXUTRKekp4S1B1Q2FPR0FEUjBCcnhBSWVNZUlic2JFMndLT0pRbW9lVHk2ZEYxUlllOEFXVUZlZzdkSUlyajNYOWVMMGt2WVNMQlR1ME9FaEVkYWtIR3J2VTRfazhTT21IdGlTUHlKNEZnWE9EQ25wdVVISEV2RXpxZHpRZVp2LTBIZEVsck1uZE83bU1BOVpjQVNmdTZMbTZmM1BqcEdWRjBINHl0ZGZyMFlCN21ZZndFNEJyOTFESWJUSUlxY2hOWTZkSVdpUVRPcWVNVlR4NWFIblE2MmZYSHJObUVuUWdkaW00anM2amZKUmhaUk1leUVLN2oyZjZLUTJiN1ltT2U0cXBjZG5fc2RRU0daby1qbXhrS2NHV2ZWZnB0SEVpTnUyRklaQjJwNWhTLXFVejF2ZHZ3T3NUVExIUGVZYk43WXN5LW1fcE9IT01wYkNjTEJvU1N5N2hCTzYwTDNkYjRuSThucjNpcjJMY24xUnRKM291WVFYS2xjTURkZVNpRlpJT2U3Tkc?oc=5",
       "lang": "ja",
       "image": "https://assets.goal.com/images/v3/getty-2284233328/crop/MM5DGMZZGI5DCOJQHA5G433XMU5DINRQHI4DS===/GettyImages-2284233328.jpg"
-    },
-    {
-      "title": "30年W杯48→64チーム案を検討「間違いなく議論される」FIFAインファンティノ会長明言",
-      "source": "日刊スポーツ",
-      "published_at": "2026-07-12T16:41:53+00:00",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1YMGczX01ZbnhyNHRfaENrN0F0aTZHeU1GWmRjQnd6M0JRS2w4REZ0RGdwaHVBOWV6SXlQQVpKamFVLWtpdlNUUkx6Z2NBQ2ExeHdfanpMamRlcVRRckNzcFJPU2swcXM3QmdnTmlMUE1sMS1JN2N3NlVWa1lQWDA?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "サッカー:FIFA会長、64チーム案「検討課題」 2030年ワールドカップ",
-      "source": "日本経済新聞",
-      "published_at": "2026-07-12T15:35:43+00:00",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5Uc3lTU3hrU010M1NvajdEWFNjTjk5RElCSUM1QUJDSl94R2dfWUgtYllzYTJydDhwLWpPaE9fOUc2R0h6TDZ4R19sT3YybTJ2YWM0ZUIwdTRoZ0ZLZDJsQWFINDJQSjFzWUpCNQ?oc=5",
-      "lang": "ja",
-      "image": null
-    },
-    {
-      "title": "FIFAワールドカップ2026準決勝丨日程・放送予定・ライブ配信・組み合わせ・出場国一覧・見どころ",
-      "source": "olympics.com",
-      "published_at": "2026-07-12T13:47:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNV19CSTk0TW5fbl9HOTRoRHRqVEZGSGpPclZTMWxsc1hFb1ZkRHJib0RTYlp4dExLVm1qV3luaU1JUDk1SVhCUThCNEFwUHdQUjg5SUV4ekFFNVlHeHFHUzRiYTUtQUNlM09RVUE1VFQ4Y0JEQ3VCLVh6enBRd0hpQmpfR1NVOGxsTGY0?oc=5",
-      "lang": "ja",
-      "image": null
     }
   ]
 }
