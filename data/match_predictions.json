@@ -634,6 +634,6 @@
     "draw": 0,
     "away": 4,
     "total": 7,
-    "final": false
+    "final": true
   }
 }
