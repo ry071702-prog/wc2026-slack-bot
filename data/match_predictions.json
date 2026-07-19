@@ -630,10 +630,10 @@
     "final": true
   },
   "537390": {
-    "home": 0,
+    "home": 1,
     "draw": 0,
-    "away": 3,
-    "total": 3,
+    "away": 4,
+    "total": 5,
     "final": false
   }
 }
