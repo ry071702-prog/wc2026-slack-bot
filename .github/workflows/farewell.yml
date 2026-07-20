@@ -1,0 +1,148 @@
+name: Farewell message (one-shot, manual)
+
+# 大会終了時のお別れメッセージを 1 回だけ手動投稿するワークフロー。
+# target=test → #wctest (C0BA5QNQC3W) にプレビュー投稿、target=prod → 本番チャンネル。
+# 期間ガードは持たない (手動 dispatch 専用・cron 無し) ので、誤発火の心配はない。
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "送信先チャンネル (test=#wctest / prod=本番)"
+        required: true
+        default: "test"
+        type: choice
+        options:
+          - test
+          - prod
+
+permissions:
+  contents: read
+
+jobs:
+  farewell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post farewell message
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          # test は #wctest 固定 (test-post.yml と同じ)。prod のみ本番チャンネルへ。
+          SLACK_CHANNEL_ID: >-
+            ${{ inputs.target == 'prod' && secrets.SLACK_CHANNEL_ID || 'C0BA5QNQC3W' }}
+        run: |
+          python - <<'EOF'
+          from src.main import create_slack_client
+
+          SITE_URL = "https://ry071702-prog.github.io/wc2026-slack-bot/"
+
+          payload = {
+              "blocks": [
+                  {
+                      "type": "header",
+                      "text": {
+                          "type": "plain_text",
+                          "text": "🏆 W杯2026、終わっちゃいましたね",
+                          "emoji": True,
+                      },
+                  },
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "6/12、メキシコ×南アフリカのキックオフで始まったこの夏も、"
+                              "今朝の決勝でとうとう幕\n"
+                              "思えば40日間、毎朝みなさんのSlackに通知を送りつけていたわけで "
+                              "「うるさいな」と思いつつ開いてくれた人も、きっといたはず "
+                              "それでも付き合ってくれて、ほんとうにありがとう"
+                          ),
+                      },
+                  },
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "夜中の3時に叩き起こして、すみませんでした\n"
+                              "「今日これ見る」ってスタンプ、地味にめちゃくちゃ嬉しかったです\n"
+                              "結果速報を出すたびに、画面の向こうで誰かがガッツポーズしたり"
+                              "天を仰いだりしてるんだろうな、と想像しながら投稿してました"
+                          ),
+                      },
+                  },
+                  {"type": "divider"},
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "🇯🇵 *日本の夏は、6/15のオランダ戦から*\n"
+                              "ファン・ダイクの壁に挑んで、チュニジア・スウェーデンと競り合って、"
+                              "胸を張ってグループFを突破\n"
+                              "そして R32・6/29のブラジル戦、*1-2* "
+                              "あの終盤の猛攻は、しばらく忘れられません\n"
+                              "勝敗予想ポールでみんなで盛り上がった夜も、ぜんぶ込みで最高の夏でした"
+                          ),
+                      },
+                  },
+                  {"type": "divider"},
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "そして頂点に立ったのは — *スペイン🇪🇸*\n"
+                              "無敵艦隊が、48カ国の頂点まで駆け上がりました おめでとう"
+                          ),
+                      },
+                  },
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "全104試合の記録とトーナメント表は、記念にサイトへ残しておきます\n"
+                              f"→ <{SITE_URL}|wc2026 特設サイト>"
+                          ),
+                      },
+                  },
+                  {"type": "divider"},
+                  {
+                      "type": "section",
+                      "text": {
+                          "type": "mrkdwn",
+                          "text": (
+                              "さて、僕の仕事はここまで\n"
+                              "このメッセージを最後に、そっとログアウトします "
+                              "40日間、みなさんの夏の隣にいられて幸せでした\n"
+                              "また4年後、どこかの夏で ⚽"
+                          ),
+                      },
+                  },
+                  {
+                      "type": "context",
+                      "elements": [
+                          {
+                              "type": "mrkdwn",
+                              "text": "🤖 wc2026-slack-bot ｜ 2026.6.12 → 7.20 ｜ みんなの夏をありがとう",
+                          }
+                      ],
+                  },
+              ]
+          }
+
+          client = create_slack_client(dry_run=False)
+          if not client.send(payload):
+              raise SystemExit("farewell post failed")
+          print("farewell posted")
+          EOF
