@@ -39,25 +39,32 @@ jobs:
           CHANNEL = os.environ["CHANNEL_ID"]
           H = {"Authorization": f"Bearer {TOKEN}"}
           MARK = (
-              "🧪 *[プレビュー] 内定者イベントbot の投稿サンプル*"
-              " — 本番は内定者イベントで自動投稿されます\n\n"
+              "🧪 [プレビュー] 内定者イベントbot の投稿サンプル"
+              " — 本番は内定者イベントで自動投稿されます"
           )
 
           def divided_blocks(text):
-              # 空行区切りの段落を section にし、間に divider(横線)を挟む
+              # 先頭の短い1行は header(大見出し)、以降は section、section 間に divider
               paragraphs = [p for p in text.split("\n\n") if p.strip()]
               blocks = []
               for i, para in enumerate(paragraphs):
-                  if i:
+                  if i == 0 and "\n" not in para and len(para) <= 80:
+                      blocks.append({"type": "header",
+                                     "text": {"type": "plain_text", "text": para, "emoji": True}})
+                      continue
+                  if blocks and blocks[-1]["type"] == "section":
                       blocks.append({"type": "divider"})
                   blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": para}})
               return blocks
 
           def post(text):
+              # MARK は context ブロックで上に添える(本文1行目を見出しに保つため)
+              blocks = [{"type": "context", "elements": [{"type": "mrkdwn", "text": MARK}]}]
+              blocks += divided_blocks(text)
               r = requests.post(
                   "https://slack.com/api/chat.postMessage",
                   headers=H,
-                  json={"channel": CHANNEL, "text": text, "blocks": divided_blocks(text)},
+                  json={"channel": CHANNEL, "text": text, "blocks": blocks},
                   timeout=10,
               ).json()
               if not r.get("ok"):
@@ -75,47 +82,46 @@ jobs:
               if not r.get("ok") and r.get("error") != "already_reacted":
                   print(f"reactions.add {name} skipped: {r.get('error')}")
 
-          # 1) 募集投稿(長め・参加したくなる一言つき)+ RSVP 実リアクション
+          # 1) 募集投稿(1行目=見出し / 要点は太字)+ RSVP 実リアクション
           announcement = (
-              "28卒のみなさん、就活相談会やります！\n\n"
+              "就活相談会、やります！\n\n"
               "去年就活してた内定者が、実際どう動いたか全部話します\n"
               "ESでも面接でも、気になること全部聞いてOKです\n"
-              "参加した人はIS選考免除の特典つき、雑談感覚で大丈夫です\n\n"
-              "8/4(火) 19:00〜20:00\n"
-              "Zoom\n"
-              "締切 8/3(月) 23:59\n\n"
+              "雑談感覚で大丈夫です\n\n"
+              "*8/4(火) 19:00〜20:00*\n"
+              "*Zoom*\n"
+              "*締切 8/3(月) 23:59*\n"
+              "参加した人はIS選考免除の特典つき\n\n"
               "参加できそうなら :raised_hand:、迷ってる人は :thinking_face: だけでもOKです！"
           )
-          ts = post(MARK + announcement)
+          ts = post(announcement)
           react(ts, "raised_hand")
           react(ts, "thinking_face")
 
-          # 2) リマインド(短く)
+          # 2) リマインド(短く・締切を太字)
           reminder = (
               "「28卒向けオンライン就活相談会 (8/4)」まだ受付中です！\n\n"
-              "8/4(火) 19:00\n"
-              "Zoom\n"
-              "2026/08/03 09:00 まで\n\n"
+              "8/4(火) 19:00／Zoom\n"
+              "*締切 2026/08/03 09:00*\n\n"
               "行けそうなら :raised_hand:、迷ってたら :thinking_face: だけでもOKです！"
           )
-          post(MARK + reminder)
+          post(reminder)
 
           # 3) 結果発表(もっと短く)
           result = (
               "「28卒向けオンライン就活相談会 (8/4)」しめきりました！\n\n"
               "3名集まりました、当日たのしみにしてます"
           )
-          post(MARK + result)
+          post(result)
 
-          # 4) 一覧(超簡潔・名前/日時/場所/人数だけ)
+          # 4) 一覧(超簡潔・見出し+太字タイトル+人数)
           weekly = (
               "今週〜来週にあるイベントです\n\n"
-              "■ 28卒向けオンライン就活相談会 (8/7)\n"
-              "8/7(金) 19:00\n"
-              "Zoom\n"
+              "*28卒向けオンライン就活相談会 (8/7)*\n"
+              "8/7(金) 19:00／Zoom\n"
               ":raised_hand: 1名　:thinking_face: 0名"
           )
-          post(MARK + weekly)
+          post(weekly)
 
           print("event-bot preview posted (4 messages)")
           EOF
