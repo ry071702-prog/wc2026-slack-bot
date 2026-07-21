@@ -1,0 +1,102 @@
+name: Event-bot preview to #wctest (manual)
+
+# 内定者イベントbot (別リポジトリ naitei-event-bot) の投稿サンプルを、
+# WC bot のトークンを借りて #wctest に流し「見た目」を確認する一発ワークフロー。
+# 同一ワークスペースなので chat.postMessage / reactions.add がそのまま通る。
+# 送信先は #wctest (C0BA5QNQC3W) 固定・本番チャンネルには絶対に出さない。
+# これはあくまで文面プレビュー (対話機能= /event・集計・DM承認 は含まない)。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post event-bot samples to #wctest
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          CHANNEL_ID: C0BA5QNQC3W
+        run: |
+          python - <<'EOF'
+          import os
+          import requests
+
+          TOKEN = os.environ["SLACK_BOT_TOKEN"]
+          CHANNEL = os.environ["CHANNEL_ID"]
+          H = {"Authorization": f"Bearer {TOKEN}"}
+          MARK = (
+              "🧪 *[プレビュー] 内定者イベントbot の投稿サンプル*"
+              " — 本番は内定者イベントで自動投稿されます\n\n"
+          )
+
+          def post(text):
+              r = requests.post(
+                  "https://slack.com/api/chat.postMessage",
+                  headers=H, json={"channel": CHANNEL, "text": text}, timeout=10,
+              ).json()
+              if not r.get("ok"):
+                  raise SystemExit(f"chat.postMessage failed: {r.get('error')}")
+              print(f"posted ts={r.get('ts')}")
+              return r.get("ts")
+
+          def react(ts, name):
+              r = requests.post(
+                  "https://slack.com/api/reactions.add",
+                  headers=H,
+                  json={"channel": CHANNEL, "timestamp": ts, "name": name},
+                  timeout=10,
+              ).json()
+              if not r.get("ok") and r.get("error") != "already_reacted":
+                  print(f"reactions.add {name} skipped: {r.get('error')}")
+
+          # 1) 参加者が最初に見る「イベント告知」+ RSVP 絵文字の種付け
+          announcement = (
+              ":mega: *【28卒向け】内定者が伝授!! オンライン就活相談会*\n\n"
+              "内定者が、自分たちの就活のリアルをまるっと共有する相談会を開きます\n"
+              "「実際どう動いた?」「ES はどう書いた?」を、生の声で聞ける60分です\n\n"
+              ":calendar: 8/4(火) 19:00〜20:00\n"
+              ":round_pushpin: オンライン (Zoom)\n"
+              ":dart: 対象: 28卒のみなさん\n"
+              ":sparkles: 参加者には IS 選考免除の特典あり\n"
+              ":hourglass_flowing_sand: 参加締切: 8/3(月) 23:59\n\n"
+              "参加する方は :raised_hand:、迷っている方は :thinking_face: でリアクションしてください"
+          )
+          ts = post(MARK + announcement)
+          react(ts, "raised_hand")
+          react(ts, "thinking_face")
+
+          # 2) 締切時の「結果発表」(チャンネル版・実テンプレート)
+          result = (
+              "「28卒向けオンライン就活相談会 (8/4)」の参加締切になりました。\n"
+              "開催日時: 8/4(火) 19:00\n"
+              "参加締切: 2026/08/03 09:00\n"
+              "今回は参加 3名・未定 1名の見込みです"
+          )
+          post(MARK + result)
+
+          # 3) 「週次イベント一覧」(実テンプレート)
+          weekly = (
+              ":loudspeaker: 近日開催のイベント一覧\n\n"
+              "• 28卒向けオンライン就活相談会 (8/7)\n"
+              "  📅 8/7(金) 19:00 ・ 📍 Zoom ・ ⏰ 締切 2026/08/04 00:00\n"
+              "  💬 第2回 就活相談会\n"
+              "  ✋ 参加 1名 ・ 🤔 未定 0名"
+          )
+          post(MARK + weekly)
+
+          print("event-bot preview posted (3 messages)")
+          EOF
