@@ -43,10 +43,22 @@ jobs:
               " — 本番は内定者イベントで自動投稿されます\n\n"
           )
 
+          def divided_blocks(text):
+              # 空行区切りの段落を section にし、間に divider(横線)を挟む
+              paragraphs = [p for p in text.split("\n\n") if p.strip()]
+              blocks = []
+              for i, para in enumerate(paragraphs):
+                  if i:
+                      blocks.append({"type": "divider"})
+                  blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": para}})
+              return blocks
+
           def post(text):
               r = requests.post(
                   "https://slack.com/api/chat.postMessage",
-                  headers=H, json={"channel": CHANNEL, "text": text}, timeout=10,
+                  headers=H,
+                  json={"channel": CHANNEL, "text": text, "blocks": divided_blocks(text)},
+                  timeout=10,
               ).json()
               if not r.get("ok"):
                   raise SystemExit(f"chat.postMessage failed: {r.get('error')}")
