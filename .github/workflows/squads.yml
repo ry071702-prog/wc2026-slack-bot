@@ -1,9 +1,8 @@
 name: Build squads (manual)
 
 on:
+  # 大会終了(2026-07-20)につき cron 撤去 (残すと2027-06-11に再発火するため)。手動実行のみ残す
   workflow_dispatch:
-  schedule:
-    - cron: "10 0 11 6 *"  # 2026-06-11 9:10 JST 残り10カ国の再取得 (クォータリセット後)
 
 permissions:
   contents: write

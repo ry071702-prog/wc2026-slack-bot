@@ -9,9 +9,7 @@ on:
       - "scripts/**"
       - "src/**"
       - "data/**"
-  schedule:
-    - cron: "0 21 * 6,7 *"
-    - cron: "0 9 * 6,7 *"
+  # 大会終了(2026-07-20)につき cron 撤去 (残すと2027年6〜7月に再発火するため)。push と手動実行のみ残す
   workflow_dispatch:
 
 permissions:

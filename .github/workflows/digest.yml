@@ -1,8 +1,7 @@
 name: World Cup daily digest
 
 on:
-  schedule:
-    - cron: "30 0 * 6,7 *"
+  # 大会終了(2026-07-20)につき cron 撤去 (残すと2027年6〜7月に再発火するため)。手動実行のみ残す
   workflow_dispatch:
 
 permissions:
