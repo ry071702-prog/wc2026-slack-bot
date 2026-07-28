@@ -2,21 +2,19 @@
 <!-- statusline / session-start / /board がこのファイルを読みます。自由に編集してOK。 -->
 
 ## 状態
-進行中 (決勝T本番中・**撤収の用意は完了  実行は 7/20 以降**)
+撤収ほぼ完了 (**workflow 全停止済 + cron 全撤去済**  残りは PAT revoke と Slack Token 無効化の2点)
 
 ## いま
-決勝トーナメント本番中 (決勝 = 7/20 04:00 JST、3位決定戦 = 7/19 06:00 JST)  日本は R32 敗退済み (6/29 Brazil 2-1 Japan) のため日本戦演出・スタメン自動投稿はもう発火しない
-Actions は全系統 (notify / digest / enrich / pages) が正常稼働に復帰  Pages の3日間停止 (7/09〜7/12) は復旧済みで、サイトも最新に追いついている
-**撤収は「用意だけ」完了した状態**  ワークフローはまだ1本も止めていない (大会運用中のため意図的)  実行は 7/20 の決勝後
+大会終了 (決勝 7/20)  撤収は実行済み: 全10 workflow が `disabled_manually` (7/22)、外部ディスパッチャの発火も workflow 無効化により 7/22 14:50 JST で停止 (無効化された workflow は dispatch を受け付けない)
+さらに第二の防壁として **全6本の cron を schedule ごと撤去** (d9e18a1, 2026-07-23)  誰かが workflow を再有効化しても 2027年に再発火しない
 
 ## 次にやること
-- [ ] **[期限 7/20 決勝後] 撤収を実行する** — `docs/teardown.md` の「1. 7/20 当日にやること」を上から順に実行するだけ  中核は `bash scripts/teardown.sh --apply` (dry-run で確認 → apply → 自動検証で `OK` が出れば完了) #急ぎ
-- [ ] **[撤収に必須] 外部ディスパッチャの特定と停止** — notify.yml が cron とは別に **5分毎に workflow_dispatch されている** (actor=ry071702-prog)  repo 内・launchd・crontab のいずれにも該当なし  **PAT の「最終使用日時が数分前」のトークンを探して revoke するのが最短** (`docs/teardown.md` の 4) #急ぎ
-- [ ] **[撤収に必須] Slack Bot Token の無効化** — workflow を誤って再有効化しても投稿できなくする第二の防壁  Slack App のアーカイブ一発が最短 (`docs/teardown.md` の 5) #急ぎ
-- [ ] 7/20 以降の内定者イベントbot (`~/内定者イベントbot`) への転用方針を決める (材料は下記「転用の材料」)
+- [ ] **外部ディスパッチャの PAT を revoke** — 発火自体は止まっているが発生源の PAT は生きている可能性  github.com/settings/tokens で「最終使用 7/22」のトークンを探して revoke すれば完全決着 (`docs/teardown.md` の 4)  ※全repo横断のコード検索でも dispatch 元は見つからず (2026-07-27)  ローカル/repo外の PAT 利用が濃厚
+- [x] **Slack Secrets の削除** (確認 2026-07-27) — `SLACK_BOT_TOKEN` / `SLACK_WEBHOOK_URL` は repo Secrets から削除済み  誤って再有効化しても投稿不能  Slack App 自体のアーカイブ (`docs/teardown.md` の 5) は任意の仕上げ
+- [ ] 内定者イベントbot (`~/内定者イベントbot`) への転用方針を決める (材料は下記「転用の材料」)
 
-### 止め忘れると何が起きるか (要点)
-cron の月指定が `6,7` で「年」を指定できないため、**放置すると 2027年6〜7月に再発火する**
+### 止め忘れると何が起きるか (要点  ※cron は d9e18a1 で全撤去済み・以下は経緯の記録)
+cron の月指定が `6,7` で「年」を指定できないため、**放置すると 2027年6〜7月に再発火する** (→ 撤去で解消)
 期間ガードが守るのは **Slack 投稿 (notify / digest / announce) だけ**  誤投稿は起きないが、
 **notify の "Hourly enrich dispatch" ステップは期間ガードの外**にあり、notify を止めないと **enrich (ガード無し) が毎時走り続ける** → YouTube クォータ消費 / Slack 読み取り / `data/` へのゴミコミット / pages 再デプロイ
 → 詳細な影響表は `docs/teardown.md` の 2
