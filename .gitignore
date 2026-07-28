@@ -1,5 +1,8 @@
 .env
 .venv/
+# 退避名 (.venv.py39.bak 等) も弾く。`.venv/` だけでは接尾辞つきに当たらず、
+# Stop hook の自動 WIP コミットに venv 一式が巻き込まれる
+.venv.*
 __pycache__/
 *.py[cod]
 .pytest_cache/
